@@ -1,0 +1,33 @@
+{% trans_default_domain 'FOSUserBundle' %}
+
+{% block errorMessage %}
+    {% if invalid_username is defined %}
+        {% include 'VanioUserBundle:partials:alert.html.twig' with {
+            type: 'danger',
+            message: vanio_user.email_only
+                ? 'resetting.request.invalid_email'|trans({'%email%': invalid_username})
+                : 'resetting.request.invalid_username'|trans({'%username%': invalid_username})
+        } %}
+    {% endif %}
+{% endblock %}
+
+{% block form %}
+    <form action="{{ path('fos_user_resetting_send_email') }}" method="POST" {% block resetFormAttributes %}class="fos_user_resetting_request"{% endblock %}>
+        {% block formFields %}
+            <div class="form-group">
+                <label for="resetLogin">{{ vanio_user.email_only ? 'resetting.request.email'|trans : 'resetting.request.username'|trans }}</label>
+                <input
+                    id="resetLogin"
+                    class="form-control"
+                    type="{{ vanio_user.email_only ? 'email' : 'text' }}"
+                    name="username"
+                    required
+                    oninvalid="this.setCustomValidity(this.getAttribute('data-validation-message'))"
+                    oninput="setCustomValidity('')"
+                    data-validation-message="{{ vanio_user.email_only ? 'fos_user.email.blank'|trans({}, 'validators') : 'fos_user.username.blank'|trans({}, 'validators') }}"
+                >
+            </div>
+            <button class="btn btn-primary">{{ 'resetting.request.submit'|trans }}</button>
+        {% endblock %}
+    </form>
+{% endblock %}

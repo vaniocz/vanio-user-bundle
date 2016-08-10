@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" version="1.2">
+    <file source-language="en" target-language="cs" datatype="plaintext" original="file.ext">
+        <header>
+            <tool tool-id="symfony" tool-name="Symfony"/>
+        </header>
+
+        <body>
+            <trans-unit id="5b6de175902556c2454057d4bfb166c7" resname="security.login.logged_in_as">
+                <source>security.login.logged_in_as</source>
+                <target><![CDATA[Přihlášený uživatel: <a href="%profileUrl%">%username%</a>]]></target>
+            </trans-unit>
+
+            <trans-unit id="b08994ba10eaa9682c363cfb7cc28c96" resname="security.login.email">
+                <source>security.login.email</source>
+                <target>E-mail</target>
+            </trans-unit>
+
+            <trans-unit id="9a1f0c344544eb529d9d2a3a66ded6ac" resname="security.login.social_authentication">
+                <source>security.login.social_authentication</source>
+                <target>Přihlásit pomocí:</target>
+            </trans-unit>
+
+            <trans-unit id="c7d9862a20daeb28585fa2f04264594f" resname="security.login.forgot_password">
+                <source>security.login.forgot_password</source>
+                <target><![CDATA[Zapomněli jste heslo? <a href="%url%">Nastavte si nové</a>.]]></target>
+            </trans-unit>
+
+            <trans-unit id="b14077c66592de913333d28df0e5823c" resname="security.login.register">
+                <source>security.login.register</source>
+                <target><![CDATA[Pokud zde ještě nemáte vytvořený účet, <a href="%url%">registrujte se</a>.]]></target>
+            </trans-unit>
+
+            <trans-unit id="8d543f6cacc48d5fe141b8ce306fc6d8" resname="security.unactivated_account">
+                <source>security.unactivated_account</source>
+                <target>
+                    <![CDATA[
+                        Tento účet ještě nebyl aktivován.<br>
+                        <a href="%confirmationUrl%">Požádat o nový aktivační e-mail</a>.
+                    ]]>
+                </target>
+            </trans-unit>
+
+            <trans-unit id="5a0e51b7877e7da3db9ef847073e0ec7" resname="security.social_authentication.text">
+                <source>security.social_authentication.text</source>
+                <target>nebo</target>
+            </trans-unit>
+
+            <trans-unit id="c1703c7b625280b4bd521c936e97a0cf" resname="security.flash.login_needed">
+                <source>security.flash.login_needed</source>
+                <target>Pro vstup na tuto stránku se musíte přihlásit.</target>
+            </trans-unit>
+
+            <trans-unit id="698484f4cb5da8124912e8588a40378c" resname="security.flash.logged_out">
+                <source>security.flash.logged_out</source>
+                <target>Byli jste úspěšně odhlášeni.</target>
+            </trans-unit>
+
+            <trans-unit id="e8e8fdd084884c24cb8468ee11fc0799" resname="security.flash.logged_in">
+                <source>security.flash.logged_in</source>
+                <target>Byli jste úspěšně přihlášeni.</target>
+            </trans-unit>
+
+            <trans-unit id="7191267a902c12b51985dbbb43ab65a2" resname="registration.social_authentication">
+                <source>registration.social_authentication</source>
+                <target>Registrovat pomocí:</target>
+            </trans-unit>
+
+            <trans-unit id="156a18702e3ebaecba11c1e1e6e1b34c" resname="registration.existing_account_with_same_email">
+                <source>registration.existing_account_with_same_email</source>
+                <target>
+                    <![CDATA[
+                        Uživatel s tímto e-mailem je již zaregistrovaný.<br>
+                        Jedná-li se o Váš účet, <a href="%loginUrl%">přihlašte se</a>.
+                    ]]>
+                </target>
+            </trans-unit>
+
+            <trans-unit id="e7261702a3ca2ed4b52b25c8eeb2ab89" resname="registration.existing_unactivated_account_with_same_email">
+                <source>registration.existing_unactivated_account_with_same_email</source>
+                <target>
+                    <![CDATA[
+                        Uživatel s tímto e-mailem je již zaregistrovaný, ale jeho účet ještě nebyl aktivován.<br>
+                        <a href="%confirmationUrl%">Požádat o nový aktivační e-mail</a>.
+                    ]]>
+                </target>
+            </trans-unit>
+
+            <trans-unit id="0c9f9767e2879974e1857a9a5252d7fb" resname="registration.existing_account_with_same_username_but_different_email">
+                <source>registration.existing_account_with_same_username_but_different_email</source>
+                <target>
+                    <![CDATA[
+                        Toto uživatelské jméno je již zaregistrované s jiným e-mailem.<br>
+                        Jedná-li se o Váš účet, <a href="%loginUrl%">přihlašte se</a>.
+                    ]]>
+                </target>
+            </trans-unit>
+
+            <trans-unit id="250e03315af38752b535f3e6eb748de3" resname="registration.flash.confirmed">
+                <source>registration.flash.confirmed</source>
+                <target>Váš účet byl úspěšně aktivován.</target>
+            </trans-unit>
+
+            <trans-unit id="44e7a601f8d8bfde7c799399055bb11e" resname="registration.flash.confirmation_token_not_found">
+                <source>registration.flash.confirmation_token_not_found</source>
+                <target>Uživatel byl již pravděpodobně aktivován.</target>
+            </trans-unit>
+
+            <trans-unit id="d93c59a44f869890bf12adbe2dc05e05" resname="registration.flash.already_confirmed">
+                <source>registration.flash.already_confirmed</source>
+                <target>Váš účet je již aktivován.</target>
+            </trans-unit>
+
+            <trans-unit id="a9d009552a51cc61de9137024e1e8c98" resname="registration.flash.user_not_found">
+                <source>registration.flash.user_not_found</source>
+                <target>Uživatel s daným e-mailem neexistuje.</target>
+            </trans-unit>
+
+            <trans-unit id="90997929bcfdafefc75086643afea54d" resname="registration.email.subject">
+                <source>registration.email.subject</source>
+                <target>Vítejte, nový uživateli!</target>
+            </trans-unit>
+
+            <trans-unit id="9671dfcb489e04d7ece6c484bf2d92d9" resname="registration.email.message">
+                <source>registration.email.message</source>
+                <target>
+                    <![CDATA[
+                        <h1>Dobrý den, nový uživateli</h1>
+                        <p>Pro dokončení Vaší registrace klikněte na <a href="%confirmationUrl%">tento odkaz</a>.</p>
+                    ]]>
+                </target>
+            </trans-unit>
+
+            <trans-unit id="39342d44f3897af79f489d7988490d93" resname="resetting.request.email">
+                <source>resetting.request.email</source>
+                <target>E-mail</target>
+            </trans-unit>
+
+            <trans-unit id="2db4fe3a605402190b2c9055ea498dcc" resname="resetting.request.invalid_email">
+                <source>resetting.request.invalid_email</source>
+                <target>Uživatel s e-mailem "%email%" neexistuje.</target>
+            </trans-unit>
+
+            <trans-unit id="c8b570e62a9c4cdabf72cbc2153bf53b" resname="resetting.flash.confirmation_token_not_found">
+                <source>resetting.flash.confirmation_token_not_found</source>
+                <target>Tento odkaz pro nastavení nového hesla byl již pravděpodobně použit.</target>
+            </trans-unit>
+
+            <trans-unit id="f96be8411b3b48e5a82ee13dd33afeb4" resname="resetting.email.message">
+                <source>resetting.email.message</source>
+                <target>
+                    <![CDATA[
+                        <h1>Dobrý den</h1>
+                        <p>Pro nastavení nového hesla klikněte na <a href="%confirmationUrl%">tento odkaz</a>.</p>
+                    ]]>
+                </target>
+            </trans-unit>
+
+            <trans-unit id="7f57ab23cc8ceae48066b00e34f6deb6" resname="profile.show.edit">
+                <source>profile.show.edit</source>
+                <target>Upravit</target>
+            </trans-unit>
+
+            <trans-unit id="ce63e87d2e398cfa7b827e6a946ab596" resname="profile.show.change_password">
+                <source>profile.show.change_password</source>
+                <target>Změnit heslo</target>
+            </trans-unit>
+
+            <trans-unit id="62dd5b80e69908635237bb1cac15470b" resname="profile.edit.submit">
+                <source>profile.edit.submit</source>
+                <target>Uložit</target>
+            </trans-unit>
+        </body>
+    </file>
+</xliff>

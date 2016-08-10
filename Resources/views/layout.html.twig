@@ -1,0 +1,33 @@
+{% trans_default_domain 'FOSUserBundle' %}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+</head>
+<body>
+    <p>
+        {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
+            {{ 'layout.logged_in_as'|trans({'%username%': app.user.username, '%profileUrl%': path('fos_user_profile_show')})|raw }} |
+            <a href="{{ path('fos_user_security_logout') }}">{{ 'layout.logout'|trans }}</a>
+        {% else %}
+            <a href="{{ path('fos_user_registration_register') }}">{{ 'layout.register'|trans }}</a> |
+            <a href="{{ path('fos_user_security_login') }}">{{ 'layout.login'|trans }}</a>
+        {% endif %}
+    </p>
+
+    {% if app.request.hasPreviousSession %}
+        {% for type, messages in app.session.flashbag.all() %}
+            {% for message in messages %}
+                {% include 'VanioUserBundle:partials:alert.html.twig' with {
+                    message: message is instance of('Vanio\\WebBundle\\Translation\\FlashMessage')
+                        ? message.message|trans(message.parameters, message.domain, message.locale)
+                        : message
+                } %}
+            {% endfor %}
+        {% endfor %}
+    {% endif %}
+
+    {% block fos_user_content %}{% endblock %}
+</body>
+</html>

@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<routes xmlns="http://besim.pl/schema/i18n_routing" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://besim.pl/schema/i18n_routing http://besim.pl/schema/i18n_routing/routing-1.0.xsd">
+    <route id="fos_user_security_login" methods="GET POST">
+        <locale key="en">/login</locale>
+        <locale key="cs">/prihlaseni</locale>
+        <default key="_controller">FOSUserBundle:Security:login</default>
+    </route>
+
+    <route id="fos_user_security_check" methods="POST">
+        <locale key="en">/login-check</locale>
+        <locale key="cs">/kontrola-prihlaseni</locale>
+        <default key="_controller">FOSUserBundle:Security:check</default>
+    </route>
+
+    <route id="fos_user_security_logout" methods="GET POST">
+        <locale key="en">/logout</locale>
+        <locale key="cs">/odhlasit</locale>
+        <default key="_controller">FOSUserBundle:Security:logout</default>
+    </route>
+</routes>

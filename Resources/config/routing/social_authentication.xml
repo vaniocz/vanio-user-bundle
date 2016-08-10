@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<routes xmlns="http://symfony.com/schema/routing" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/routing http://symfony.com/schema/routing/routing-1.0.xsd">
+    <route id="hwi_oauth_connect" path="/login/connect">
+        <default key="_controller">VanioUserBundle:Connect:connect</default>
+    </route>
+
+    <import resource="." type="resource_owners" prefix="login_check"/>
+    <import resource="@HWIOAuthBundle/Resources/config/routing/redirect.xml" prefix="/login"/>
+    <import resource="@HWIOAuthBundle/Resources/config/routing/connect.xml"/>
+</routes>

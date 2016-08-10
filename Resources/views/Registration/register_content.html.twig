@@ -1,0 +1,41 @@
+{% trans_default_domain 'FOSUserBundle' %}
+
+{% block errorMessage %}
+    {% set message = null %}
+
+    {% for error in form.email.vars.errors|merge(form.username.vars.errors ?? []) %}
+        {% if error.messageTemplate in ['fos_user.email.already_used', 'fos_user.username.already_used'] %}
+            {% if error.messageTemplate == 'fos_user.email.already_used' %}
+                {% set user = find_user(form.email.vars.value) %}
+                {% set message = user.enabled
+                    ? 'registration.existing_account_with_same_email'|trans({'%loginUrl%': path('fos_user_security_login')})
+                    : 'registration.existing_unactivated_account_with_same_email'|trans({'%confirmationUrl%': path('fos_user_send_confirmation', {email: user.email})})
+                %}
+            {% elseif not message and form.username is defined and find_user(form.username.vars.value).enabled ?? false %}
+                {% set message = 'registration.existing_account_with_same_username_but_different_email'|trans({'%loginUrl%': path('fos_user_security_login')}) %}
+            {% endif %}
+        {% endif %}
+    {% endfor %}
+
+    {% if message %}
+        {% include 'VanioUserBundle:partials:alert.html.twig' with {type: 'warning'} %}
+    {% endif %}
+{% endblock %}
+
+{% block socialAuthentication %}
+    {% if vanio_user.social_authentication %}
+        <div class="social-authentication">
+            <p>{{ 'registration.social_authentication'|trans }}</p>
+            {% include 'VanioUserBundle:Security:social_authentication.html.twig' %}
+        </div>
+    {% endif %}
+{% endblock %}
+
+{% block form %}
+    {{ form_start(form, {method: 'POST', action: path('fos_user_registration_register'), attr: {class: 'fos_user_registration_register'}}) }}
+        {% block formFields %}
+            {{ form_widget(form) }}
+            <button class="btn btn-primary">{{ 'registration.submit'|trans }}</button>
+        {% endblock %}
+    {{ form_end(form) }}
+{% endblock %}

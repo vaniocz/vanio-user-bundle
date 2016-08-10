@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" version="1.2">
+    <file source-language="en" target-language="cs" datatype="plaintext" original="file.ext">
+        <header>
+            <tool tool-id="symfony" tool-name="Symfony"/>
+        </header>
+
+        <body>
+            <trans-unit id="7671f96a71c023b06041d9c412d3e06a" resname="header.connecting">
+                <source>header.connecting</source>
+                <target>Propojení účtu</target>
+            </trans-unit>
+
+            <trans-unit id="7afd19e1c55aaed41757eab6c4c5641c" resname="header.success">
+                <source>header.success</source>
+                <target>Váš %name% účet byl úspěšně propojen.</target>
+            </trans-unit>
+
+            <trans-unit id="8105cf10af232721ecb0ed06a57afb90" resname="header.register">
+                <source>header.register</source>
+                <target>Registrace pomocí účtu "%name%"</target>
+            </trans-unit>
+
+            <trans-unit id="f88e6ab53a3fcf0da27f88e8e48eed92" resname="header.registration_success">
+                <source>header.registration_success</source>
+                <target>Registrace proběhla úspěšně.</target>
+            </trans-unit>
+
+            <trans-unit id="9f0bca62454f785ece5eff0170ce50cd" resname="connect.confirm.cancel">
+                <source>connect.confirm.cancel</source>
+                <target>Zrušit</target>
+            </trans-unit>
+            <trans-unit id="f0326464021bdf71152fc8435222ae36" resname="connect.confirm.submit">
+                <source>connect.confirm.submit</source>
+                <target>Propojit účet</target>
+            </trans-unit>
+
+            <trans-unit id="71649f61354743ad377352a129bff293" resname="connect.confirm.text">
+                <source>connect.confirm.text</source>
+                <target>Jste si jistí, že chcete propojit Váš %service% účet "%name%" se svým stávajícím účtem?</target>
+            </trans-unit>
+
+            <trans-unit id="ab7b4a4e7df830b97bfbc69fcdce8ab0" resname="connect.registration.cancel">
+                <source>connect.registration.cancel</source>
+                <target>Zrušit</target>
+            </trans-unit>
+
+            <trans-unit id="8e923840df7d6444d6c82d0e1398a7e3" resname="connect.registration.submit">
+                <source>connect.registration.submit</source>
+                <target>Registrovat se</target>
+            </trans-unit>
+
+            <trans-unit id="9573fa9a2b3af507440228486abf08bd" resname="connect.account_connected">
+                <source>connect.account_connected</source>
+                <target>Váš účet byl úspěšně propojen.</target>
+            </trans-unit>
+        </body>
+    </file>
+</xliff>

@@ -1,0 +1,8 @@
+<?xml version="1.0"?>
+<routes xmlns="http://symfony.com/schema/routing" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/routing http://symfony.com/schema/routing/routing-1.0.xsd">
+    <import resource="@FOSUserBundle/Resources/config/routing/all.xml"/>
+
+    <route id="fos_user_send_confirmation" path="/register/send-confirmation/{email}">
+        <default key="_controller">FOSUserBundle:Registration:sendConfirmation</default>
+    </route>
+</routes>

@@ -1,0 +1,10 @@
+{% trans_default_domain 'FOSUserBundle' %}
+
+<p>
+    {% for owner in hwi_oauth_resource_owners() %}
+        <a class="btn btn-{{ owner }}" href="{{ hwi_oauth_login_url(owner) }}">
+            <i class="fa fa-{{ owner }}" aria-hidden="true"></i> {{ "owner.#{owner}"|trans({}, 'HWIOAuthBundle') }}
+        </a>
+    {% endfor %}
+</p>
+<p>{{ 'security.social_authentication.text'|trans }}</p>

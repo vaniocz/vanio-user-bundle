@@ -1,0 +1,80 @@
+{% trans_default_domain 'FOSUserBundle' %}
+
+{% block errorMessage %}
+    {% if error %}
+        {% if error.messageKey == 'Account is disabled.' %}
+            {% set message = 'security.unactivated_account'|trans({'%confirmationUrl%': path('fos_user_send_confirmation', {email: error.user.email})}, 'FOSUserBundle') %}
+        {% else %}
+            {% set message = error.messageKey|trans(error.messageData, 'security') %}
+        {% endif %}
+
+        {% include 'VanioUserBundle:partials:alert.html.twig' with {type: 'danger'} %}
+    {% endif %}
+{% endblock %}
+
+{% block socialAuthentication %}
+    {% if vanio_user.social_authentication %}
+        <div class="social-authentication">
+            <p>{{ 'security.login.social_authentication'|trans }}</p>
+            {% include 'VanioUserBundle:Security:social_authentication.html.twig' %}
+        </div>
+    {% endif %}
+{% endblock %}
+
+{% block form %}
+    <form action="{{ path('fos_user_security_check') }}" method="POST" {% block loginFormAttributes %}class="fos_user_security_login"{% endblock %}>
+        <input type="hidden" name="_csrf_token" value="{{ csrf_token }}">
+
+        {% if vanio_user.pass_target_path.enabled %}
+            {% set targetPath = target_path() %}
+
+            {% if targetPath %}
+                <input type="hidden" name="{{ vanio_user.pass_target_path.target_path_parameter }}" value="{{ targetPath }}">
+            {% endif %}
+        {% endif %}
+
+        {% block formFields %}
+            <div class="form-group">
+                <label for="loginUsername">{{ vanio_user.email_only ? 'security.login.email'|trans : 'security.login.username'|trans }}</label>
+                <input
+                    id="loginUsername"
+                    class="form-control"
+                    type="{{ vanio_user.email_only ? 'email' : 'text' }}"
+                    name="_username"
+                    value="{{ last_username }}"
+                    required
+                    oninvalid="this.setCustomValidity(this.getAttribute('data-validation-message'))"
+                    oninput="setCustomValidity('')"
+                    data-validation-message="{{ vanio_user.email_only ? 'fos_user.email.blank'|trans({}, 'validators') : 'fos_user.username.blank'|trans({}, 'validators') }}"
+                >
+            </div>
+
+            <div class="form-group">
+                <label for="loginPassword">{{ 'security.login.password'|trans }}</label>
+                <input
+                    id="loginPassword"
+                    class="form-control"
+                    type="password"
+                    name="_password"
+                    required
+                    oninvalid="this.setCustomValidity(this.getAttribute('data-validation-message'))"
+                    oninput="setCustomValidity('')"
+                    data-validation-message="{{ 'fos_user.password.blank'|trans({}, 'validators') }}"
+                >
+            </div>
+
+            <div class="checkbox">
+                <label><input type="checkbox" name="_remember_me">{{ 'security.login.remember_me'|trans }}</label>
+            </div>
+
+            <button class="btn btn-primary">{{ 'security.login.submit'|trans }}</button>
+        {% endblock %}
+    </form>
+{% endblock %}
+
+{% block footer %}
+    <div class="login-footer">
+        <p>{{ 'security.login.forgot_password'|trans({'%url%': path('fos_user_resetting_request')})|raw }}</p>
+        <p>{{ 'security.login.register'|trans({'%url%': path('fos_user_registration_register')})|raw }}</p>
+    </div>
+{% endblock %}

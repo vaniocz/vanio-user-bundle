@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" version="1.2">
+    <file source-language="en" target-language="en" datatype="plaintext" original="file.ext">
+        <header>
+            <tool tool-id="symfony" tool-name="Symfony"/>
+        </header>
+
+        <body>
+            <trans-unit id="f88e6ab53a3fcf0da27f88e8e48eed92" resname="header.registration_success">
+                <source>header.registration_success</source>
+                <target>Registration was successful.</target>
+            </trans-unit>
+
+            <trans-unit id="bf55f309b85a3b1b59440587b3282e07" resname="owner.facebook">
+                <source>owner.facebook</source>
+                <target>Facebook</target>
+            </trans-unit>
+
+            <trans-unit id="9573fa9a2b3af507440228486abf08bd" resname="connect.account_connected">
+                <source>connect.account_connected</source>
+                <target>Your account has been successfully connected.</target>
+            </trans-unit>
+        </body>
+    </file>
+</xliff>

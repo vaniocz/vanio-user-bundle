@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<routes xmlns="http://besim.pl/schema/i18n_routing" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://besim.pl/schema/i18n_routing http://besim.pl/schema/i18n_routing/routing-1.0.xsd">
+    <route id="hwi_oauth_connect">
+        <locale key="en">/login/connect</locale>
+        <locale key="cs">/prihlaseni/propojit</locale>
+        <default key="_controller">VanioUserBundle:Connect:connect</default>
+    </route>
+
+    <import resource="." type="resource_owners">
+        <locale key="en">/login_check</locale>
+        <locale key="cs">/kontrola_prihlaseni</locale>
+    </import>
+
+    <import resource="@HWIOAuthBundle/Resources/config/routing/redirect.xml">
+        <locale key="en">/login</locale>
+        <locale key="cs">/prihlaseni</locale>
+    </import>
+
+    <route id="hwi_oauth_connect_registration">
+        <locale key="en">/sign-up/connect/{key}</locale>
+        <locale key="cs">/registrace/propojit/{key}</locale>
+        <default key="_controller">HWIOAuthBundle:Connect:registration</default>
+    </route>
+
+    <route id="hwi_oauth_connect_service">
+        <locale key="en">/login/connect/{service}</locale>
+        <locale key="cs">/prihlaseni/propojit/{service}</locale>
+        <default key="_controller">HWIOAuthBundle:Connect:connectService</default>
+    </route>
+</routes>

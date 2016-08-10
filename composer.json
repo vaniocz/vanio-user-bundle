@@ -1,0 +1,54 @@
+{
+    "name": "vanio/vanio-user-bundle",
+    "description": "Symfony2 Bundle integrating FOSUserBundle and HWIOAuthBundle with some additional features and sane defaults",
+    "keywords": ["user", "bundle", "oauth"],
+    "type": "symfony-bundle",
+    "homepage": "https://github.com/vaniocz/vanio-user-bundle",
+    "license": "MIT",
+    "authors": [
+        {"name": "Marek Štípek", "email": "marek.stipek@vanio.cz"}
+    ],
+    "repositories": [{
+        "url": "https://github.com/maryo/HWIOAuthBundle.git",
+        "type": "git"
+    }],
+    "require": {
+        "php": ">=7.0",
+        "friendsofsymfony/user-bundle": "^2.0@dev",
+        "vanio/stdlib": "^0.1@dev",
+        "vanio/vanio-web-bundle": "^0.1@dev"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^5.5",
+        "symfony/console": "^3.0",
+        "symfony/validator": "^3.0",
+        "symfony/framework-bundle": "^3.0",
+        "symfony/swiftmailer-bundle": "^2.3",
+        "doctrine/doctrine-bundle": "^1.6.4",
+        "hwi/oauth-bundle": "^0.5@dev",
+        "vanio/coding-standards": "^0.1@dev"
+    },
+    "suggest": {
+        "hwi/oauth-bundle": "For social authentication."
+    },
+    "autoload": {
+        "psr-4": {"Vanio\\UserBundle\\": ""},
+        "exclude-from-classmap": ["/Tests/", "**/Tests/"]
+    },
+    "autoload-dev": {
+        "psr-4": {"Vanio\\UserBundle\\Tests\\": "Tests/"},
+        "classmap": ["AppKernel.php"]
+    },
+    "scripts": {
+        "test": "\"vendor/bin/phpunit\"",
+        "lint": "\"vendor/bin/phpcs\" --standard=vendor/vanio/coding-standards/ruleset.xml --extensions=php --encoding=utf-8 --ignore=var,vendor,AppKernel.php .",
+        "fix": "\"vendor/bin/phpcbf\" --standard=vendor/vanio/coding-standards/ruleset.xml --extensions=php --encoding=utf-8 --no-patch --ignore=vendor,var,AppKernel.php .",
+        "dump-translations": "php console translation:update --dump-messages --output-format=xlf cs && php console translation:update --dump-messages --output-format=xlf en",
+        "update-translations": "php console translation:update --force --output-format=xlf cs && php console translation:update --force --output-format=xlf en"
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "0.1.x-dev"
+        }
+    }
+}

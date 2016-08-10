@@ -1,0 +1,3 @@
+<div class="alert alert-{{ type ?? 'info' }}" role="alert">
+    {% if message matches '~<(a|b|i|br|strong)\\b~' %}{{ message|raw }}{% else %}{{ message }}{% endif %}
+</div>

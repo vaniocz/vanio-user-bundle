@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" version="1.2">
+    <file source-language="en" target-language="cs" datatype="plaintext" original="file.ext">
+        <header>
+            <tool tool-id="symfony" tool-name="Symfony"/>
+        </header>
+
+        <body>
+            <trans-unit id="f32367407a7012240c23975102b71953" resname="fos_user.email.social_already_used">
+                <source>fos_user.email.social_already_used</source>
+                <target>Tento e-mail je již zaregistrovaný. Nejprve se přihlašte, potom můžete účty propojit.</target>
+            </trans-unit>
+        </body>
+    </file>
+</xliff>

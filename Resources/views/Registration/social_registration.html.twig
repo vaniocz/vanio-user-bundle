@@ -1,0 +1,21 @@
+{% trans_default_domain 'HWIOAuthBundle' %}
+
+{% block header %}
+    <h3>{{ 'header.register'|trans({'%name%': userInformation.realName}) }}</h3>
+{% endblock %}
+
+{% block profilePicture %}
+    {% if userInformation.profilePicture is not empty %}
+        <img src="{{ userInformation.profilePicture }}">
+    {% endif %}
+{% endblock %}
+
+{% block form %}
+    {{ form_start(form, {action: path('hwi_oauth_connect_registration', {key: key}), attr: {class: 'hwi_oauth_registration_register'}}) }}
+        {% block formFields %}
+            {{ form_widget(form) }}
+            <button class="btn btn-primary">{{ 'connect.registration.submit'|trans }}</button>
+            <a class="btn" href="{{ path('fos_user_registration_register') }}">{{ 'connect.registration.cancel'|trans }}</a>
+        {% endblock %}
+    {{ form_end(form) }}
+{% endblock %}

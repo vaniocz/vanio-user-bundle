@@ -1,0 +1,68 @@
+<?xml version="1.0"?>
+<container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+    <parameters>
+        <parameter key="hwi_oauth.registration.form.factory.class">FOS\UserBundle\Form\Factory\FormFactory</parameter>
+        <parameter key="vanio_user.security.authentication_entry_point.class">Vanio\UserBundle\Security\AuthenticationEntryPoint</parameter>
+        <parameter key="vanio_user.security.authentication_failure_handler.class">Vanio\UserBundle\Security\AuthenticationFailureHandler</parameter>
+        <parameter key="vanio_user.security.authentication_success_handler.class">Vanio\UserBundle\Security\AuthenticationSuccessHandler</parameter>
+        <parameter key="vanio_user.security.redirect_on_registration_success.class">Vanio\UserBundle\Security\RedirectOnRegistrationSuccess</parameter>
+        <parameter key="vanio_user.security.target_path_resolver.class">Vanio\UserBundle\Security\TargetPathResolver</parameter>
+        <parameter key="vanio_user.form.registration_form_type.class">Vanio\UserBundle\Form\RegistrationFormType</parameter>
+        <parameter key="vanio_user.form.profile_form_type.class">Vanio\UserBundle\Form\ProfileFormType</parameter>
+        <parameter key="vanio_user.routing.router.class">Vanio\UserBundle\Routing\Router</parameter>
+        <parameter key="vanio_user.templating.user_extension.class">Vanio\UserBundle\Templating\UserExtension</parameter>
+    </parameters>
+
+    <services>
+        <service id="hwi_oauth.registration.form.factory" class="%hwi_oauth.registration.form.factory.class%">
+            <argument type="service" id="form.factory"/>
+            <argument>%vanio_user.social_registration_form.name%</argument>
+            <argument>%vanio_user.social_registration_form.type%</argument>
+            <argument>%vanio_user.social_registration_form.validation_groups%</argument>
+        </service>
+
+        <service id="vanio_user.security.authentication_entry_point" class="%vanio_user.security.authentication_entry_point.class%" abstract="true" public="false">
+            <argument type="service" id="vanio_user.security.authentication_entry_point.inner"/>
+            <argument type="service" id="vanio_user.security.target_path_resolver"/>
+            <argument>%vanio_user%</argument>
+        </service>
+
+        <service id="vanio_user.security.redirect_on_registration_success" class="%vanio_user.security.redirect_on_registration_success.class%" abstract="true">
+            <argument type="service" id="security.http_utils"/>
+            <argument>%vanio_user.registration_target_path%</argument>
+        </service>
+
+        <service id="vanio_user.security.target_path_resolver" class="%vanio_user.security.target_path_resolver.class%">
+            <argument type="service" id="router"/>
+            <argument type="service" id="security.http_utils"/>
+            <argument>%vanio_user.pass_target_path%</argument>
+        </service>
+
+        <service id="vanio_user.form.registration_form_type" class="%vanio_user.form.registration_form_type.class%">
+            <argument>%vanio_user.email_only%</argument>
+            <tag name="form.type"/>
+        </service>
+
+        <service id="vanio_user.form.profile_form_type" class="%vanio_user.form.profile_form_type.class%">
+            <argument>%vanio_user.email_only%</argument>
+            <tag name="form.type"/>
+        </service>
+
+        <service id="vanio_user.routing.router" class="%vanio_user.routing.router.class%" abstract="true" public="false">
+            <argument type="service" id="vanio_user.routing.router.inner"/>
+            <argument type="service" id="request_stack"/>
+
+            <call method="setTargetPathResolver">
+                <argument type="service" id="vanio_user.security.target_path_resolver"/>
+            </call>
+        </service>
+
+        <service id="vanio_user.templating.user_extension" class="%vanio_user.templating.user_extension.class%" public="false">
+            <argument type="service" id="fos_user.user_manager"/>
+            <argument type="service" id="vanio_user.security.target_path_resolver"/>
+            <argument type="service" id="request_stack"/>
+            <argument>%vanio_user%</argument>
+            <tag name="twig.extension"/>
+        </service>
+    </services>
+</container>

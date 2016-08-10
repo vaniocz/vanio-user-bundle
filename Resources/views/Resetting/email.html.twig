@@ -1,0 +1,11 @@
+{% extends 'VanioUserBundle::email.html.twig' %}
+
+{% trans_default_domain 'FOSUserBundle' %}
+
+{% block subject %}
+    {{ 'resetting.email.subject'|trans({'%username%': user.username}) }}
+{% endblock %}
+
+{% block content %}
+    {{ 'resetting.email.message'|trans({'%username%': user.email, '%confirmationUrl%': confirmationUrl})|raw }}
+{% endblock %}

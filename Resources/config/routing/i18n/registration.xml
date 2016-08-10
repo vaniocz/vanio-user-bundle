@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<routes xmlns="http://besim.pl/schema/i18n_routing" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://besim.pl/schema/i18n_routing http://besim.pl/schema/i18n_routing/routing-1.0.xsd">
+    <route id="fos_user_registration_register" path="/" methods="GET POST">
+        <default key="_controller">FOSUserBundle:Registration:register</default>
+    </route>
+
+    <route id="fos_user_registration_check_email" methods="GET">
+        <locale key="en">/check-email</locale>
+        <locale key="cs">/kontrola-emailu</locale>
+        <default key="_controller">FOSUserBundle:Registration:checkEmail</default>
+    </route>
+
+    <route id="fos_user_registration_confirm" methods="GET">
+        <locale key="en">/confirm/{token}</locale>
+        <locale key="cs">/potvrdit/{token}</locale>
+        <default key="_controller">FOSUserBundle:Registration:confirm</default>
+    </route>
+
+    <route id="fos_user_registration_confirmed" methods="GET">
+        <locale key="en">/confirmed</locale>
+        <locale key="cs">/potvrzeno</locale>
+        <default key="_controller">FOSUserBundle:Registration:confirmed</default>
+    </route>
+</routes>

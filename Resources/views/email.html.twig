@@ -1,0 +1,9 @@
+{% block subject %}{% endblock %}
+
+{% block body_text %}
+    {{ block('body_html')|html_to_text|raw }}
+{% endblock %}
+
+{% block body_html %}
+    {% block content %}{% endblock %}
+{% endblock %}
