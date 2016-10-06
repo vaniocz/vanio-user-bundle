@@ -18,8 +18,8 @@ class UserExtension extends \Twig_Extension implements \Twig_Extension_GlobalsIn
     /** @var RequestStack */
     private $requestStack;
 
-    /** @var CsrfTokenManagerInterface */
-    private $tokenManager;
+    /** @var CsrfTokenManagerInterface|null */
+    private $csrfTokenManager;
 
     /** @var array */
     private $config;
@@ -28,13 +28,13 @@ class UserExtension extends \Twig_Extension implements \Twig_Extension_GlobalsIn
         UserManagerInterface $userManager,
         TargetPathResolver $targetPathResolver,
         RequestStack $requestStack,
-        CsrfTokenManagerInterface $tokenManager,
+        CsrfTokenManagerInterface $tokenManager = null,
         array $config
     ) {
         $this->userManager = $userManager;
         $this->targetPathResolver = $targetPathResolver;
         $this->requestStack = $requestStack;
-        $this->tokenManager = $tokenManager;
+        $this->csrfTokenManager = $tokenManager;
         $this->config = $config;
     }
 
@@ -60,9 +60,18 @@ class UserExtension extends \Twig_Extension implements \Twig_Extension_GlobalsIn
         return 'vanio_user_extension';
     }
 
-    public function getCsrfToken(string $tokenId = 'authenticate'): string
+    /**
+     * @param string $tokenId
+     * @return string
+     * @throws \LogicException
+     */
+    public function getCsrfToken(string $tokenId): string
     {
-        return $this->tokenManager->getToken($tokenId);
+        if (!$this->csrfTokenManager) {
+            throw new \LogicException('CSRF token manager is not available. Is CSRF protection enabled?');
+        }
+
+        return $this->csrfTokenManager->getToken($tokenId);
     }
 
     /**

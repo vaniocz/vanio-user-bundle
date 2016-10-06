@@ -61,7 +61,7 @@
             <argument type="service" id="fos_user.user_manager"/>
             <argument type="service" id="vanio_user.security.target_path_resolver"/>
             <argument type="service" id="request_stack"/>
-            <argument type="service" id="security.csrf.token_manager"/>
+            <argument type="service" id="security.csrf.token_manager" on-invalid="null"/>
             <argument>%vanio_user%</argument>
             <tag name="twig.extension"/>
         </service>

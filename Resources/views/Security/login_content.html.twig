@@ -23,7 +23,7 @@
 
 {% block form %}
     <form action="{{ path('fos_user_security_check') }}" method="POST" {% block loginFormAttributes %}class="fos_user_security_login"{% endblock %}>
-        <input type="hidden" name="_csrf_token" value="{{ csrf_token }}">
+        <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
 
         {% if vanio_user.pass_target_path.enabled %}
             {% set targetPath = target_path() %}
@@ -41,7 +41,7 @@
                     class="form-control"
                     type="{{ vanio_user.email_only ? 'email' : 'text' }}"
                     name="_username"
-                    value="{{ last_username }}"
+                    value="{{ app.request.session.get('_security.last_username') }}"
                     required
                     oninvalid="this.setCustomValidity(this.getAttribute('data-validation-message'))"
                     oninput="setCustomValidity('')"
