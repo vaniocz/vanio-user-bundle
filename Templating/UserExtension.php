@@ -4,6 +4,7 @@ namespace Vanio\UserBundle\Templating;
 use FOS\UserBundle\Model\UserInterface;
 use FOS\UserBundle\Model\UserManagerInterface;
 use Symfony\Component\HttpFoundation\RequestStack;
+use Symfony\Component\Security\Csrf\CsrfTokenManagerInterface;
 use Vanio\UserBundle\Security\TargetPathResolver;
 
 class UserExtension extends \Twig_Extension implements \Twig_Extension_GlobalsInterface
@@ -17,6 +18,9 @@ class UserExtension extends \Twig_Extension implements \Twig_Extension_GlobalsIn
     /** @var RequestStack */
     private $requestStack;
 
+    /** @var CsrfTokenManagerInterface */
+    private $tokenManager;
+
     /** @var array */
     private $config;
 
@@ -24,11 +28,13 @@ class UserExtension extends \Twig_Extension implements \Twig_Extension_GlobalsIn
         UserManagerInterface $userManager,
         TargetPathResolver $targetPathResolver,
         RequestStack $requestStack,
+        CsrfTokenManagerInterface $tokenManager,
         array $config
     ) {
         $this->userManager = $userManager;
         $this->targetPathResolver = $targetPathResolver;
         $this->requestStack = $requestStack;
+        $this->tokenManager = $tokenManager;
         $this->config = $config;
     }
 
@@ -38,6 +44,7 @@ class UserExtension extends \Twig_Extension implements \Twig_Extension_GlobalsIn
     public function getFunctions(): array
     {
         return [
+            new \Twig_SimpleFunction('csrf_token', [$this, 'getCsrfToken']),
             new \Twig_SimpleFunction('find_user', [$this, 'findUser']),
             new \Twig_SimpleFunction('target_path', [$this, 'resolveTargetPath']),
         ];
@@ -51,6 +58,11 @@ class UserExtension extends \Twig_Extension implements \Twig_Extension_GlobalsIn
     public function getName(): string
     {
         return 'vanio_user_extension';
+    }
+
+    public function getCsrfToken(string $tokenId = 'authenticate'): string
+    {
+        return $this->tokenManager->getToken($tokenId);
     }
 
     /**
