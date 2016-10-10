@@ -32,10 +32,12 @@
 {% endblock %}
 
 {% block form %}
-    {{ form_start(form, {method: 'POST', action: path('fos_user_registration_register'), attr: {class: 'fos_user_registration_register'}}) }}
+    {{ form_start(form, {method: 'POST', action: path('fos_user_registration_register'), attr: formAttributes ?? {class: 'fos_user_registration_register'}}) }}
         {% block formFields %}
             {{ form_widget(form) }}
-            <button class="btn btn-primary">{{ 'registration.submit'|trans }}</button>
+            <div class="form-buttons">
+                <button class="btn btn-primary">{{ 'registration.submit'|trans }}</button>
+            </div>
         {% endblock %}
     {{ form_end(form) }}
 {% endblock %}
