@@ -12,15 +12,6 @@
     {% endif %}
 {% endblock %}
 
-{% block socialAuthentication %}
-    {% if vanio_user.social_authentication %}
-        <div class="social-authentication">
-            <p>{{ 'security.login.social_authentication'|trans }}</p>
-            {% include 'VanioUserBundle:Security:social_authentication.html.twig' %}
-        </div>
-    {% endif %}
-{% endblock %}
-
 {% block form %}
     <form action="{{ path('fos_user_security_check') }}" method="POST" {% block formAttributes %}class="fos_user_security_login"{% endblock %}>
         <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
@@ -32,6 +23,15 @@
                 <input type="hidden" name="{{ vanio_user.pass_target_path.target_path_parameter }}" value="{{ targetPath }}">
             {% endif %}
         {% endif %}
+
+        {% block socialAuthentication %}
+            {% if vanio_user.social_authentication %}
+                <div class="social-authentication form-header">
+                    <p>{{ 'security.login.social_authentication'|trans }}</p>
+                    {% include 'VanioUserBundle:Security:social_authentication.html.twig' %}
+                </div>
+            {% endif %}
+        {% endblock %}
 
         {% block formFields %}
             <div class="form-group">
@@ -71,12 +71,12 @@
                 <button class="btn btn-primary">{{ 'security.login.submit'|trans }}</button>
             </div>
         {% endblock %}
-    </form>
-{% endblock %}
 
-{% block footer %}
-    <div class="login-footer">
-        <p>{{ 'security.login.forgot_password'|trans({'%url%': path('fos_user_resetting_request')})|raw }}</p>
-        <p>{{ 'security.login.register'|trans({'%url%': path('fos_user_registration_register')})|raw }}</p>
-    </div>
+        {% block formFooter %}
+            <div class="login-footer form-footer">
+                <p>{{ 'security.login.forgot_password'|trans({'%url%': path('fos_user_resetting_request')})|raw }}</p>
+                <p>{{ 'security.login.register'|trans({'%url%': path('fos_user_registration_register')})|raw }}</p>
+            </div>
+        {% endblock %}
+    </form>
 {% endblock %}

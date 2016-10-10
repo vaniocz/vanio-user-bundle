@@ -22,17 +22,17 @@
     {% endif %}
 {% endblock %}
 
-{% block socialAuthentication %}
-    {% if vanio_user.social_authentication %}
-        <div class="social-authentication">
-            <p>{{ 'registration.social_authentication'|trans }}</p>
-            {% include 'VanioUserBundle:Security:social_authentication.html.twig' %}
-        </div>
-    {% endif %}
-{% endblock %}
-
 {% block form %}
-    {{ form_start(form, {method: 'POST', action: path('fos_user_registration_register'), attr: formAttributes ?? {class: 'fos_user_registration_register'}}) }}
+    {{ form_start(form, {attr: formAttributes ?? {class: 'fos_user_registration_register'}}) }}
+        {% block socialAuthentication %}
+            {% if vanio_user.social_authentication %}
+                <div class="social-authentication form-header">
+                    <p>{{ 'registration.social_authentication'|trans }}</p>
+                    {% include 'VanioUserBundle:Security:social_authentication.html.twig' %}
+                </div>
+            {% endif %}
+        {% endblock %}
+
         {% block formFields %}
             {{ form_widget(form) }}
             <div class="form-buttons">

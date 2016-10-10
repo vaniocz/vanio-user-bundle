@@ -1,7 +1,7 @@
 {% trans_default_domain 'FOSUserBundle' %}
 
 {% block form %}
-    {{ form_start(form, {action: path('fos_user_profile_edit'), attr: {class: 'fos_user_profile_edit' }}) }}
+    {{ form_start(form, {attr: formAttributes ?? {class: 'fos_user_profile_edit'}}) }}
         {% block formFields %}
             {{ form_widget(form) }}
             <div class="form-buttons">
