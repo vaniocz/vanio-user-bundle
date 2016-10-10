@@ -12,7 +12,7 @@
 {% endblock %}
 
 {% block form %}
-    <form action="{{ path('fos_user_resetting_send_email') }}" method="POST" {% block resetFormAttributes %}class="fos_user_resetting_request"{% endblock %}>
+    <form action="{{ path('fos_user_resetting_send_email') }}" method="POST" {% block formAttributes %}class="fos_user_resetting_request"{% endblock %}>
         {% block formFields %}
             <div class="form-group">
                 <label for="resetLogin">{{ vanio_user.email_only ? 'resetting.request.email'|trans : 'resetting.request.username'|trans }}</label>
