@@ -170,6 +170,16 @@
                 <source>profile.edit.submit</source>
                 <target>Uložit</target>
             </trans-unit>
+
+            <trans-unit id="f7441d6fc3ca6f9e711033e201c9c272" resname="change_password.submit">
+                <source>change_password.submit</source>
+                <target>Změnit heslo</target>
+            </trans-unit>
+
+            <trans-unit id="f0f733a6b67cc3a9a32c9c633ecf1775" resname="form.new_password_confirmation">
+                <source>form.new_password_confirmation</source>
+                <target>Nové heslo (znovu)</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>

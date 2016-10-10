@@ -14,7 +14,7 @@
     {{ form_start(form, {attr: formAttributes ?? {class: 'hwi_oauth_registration_register'}}) }}
         {% block formFields %}
             {{ form_widget(form) }}
-            <div class="form-buttons">
+            <div class="form-buttons form-group">
                 <button class="btn btn-primary">{{ 'connect.registration.submit'|trans }}</button>
                 <a class="btn" href="{{ path('fos_user_registration_register') }}">{{ 'connect.registration.cancel'|trans }}</a>
             </div>

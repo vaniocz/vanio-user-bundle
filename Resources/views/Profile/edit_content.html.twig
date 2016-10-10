@@ -4,7 +4,7 @@
     {{ form_start(form, {attr: formAttributes ?? {class: 'fos_user_profile_edit'}}) }}
         {% block formFields %}
             {{ form_widget(form) }}
-            <div class="form-buttons">
+            <div class="form-buttons form-group">
                 <button class="btn btn-primary">{{ 'profile.edit.submit'|trans }}</button>
             </div>
         {% endblock %}
