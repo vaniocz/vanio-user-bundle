@@ -7,6 +7,8 @@
         <locale key="cs">/registrace</locale>
     </import>
 
+    <import resource="@VanioUserBundle/Resources/config/routing/i18n/confirmation.xml" type="be_simple_i18n"/>
+
     <import resource="@VanioUserBundle/Resources/config/routing/i18n/resetting.xml" type="be_simple_i18n">
         <locale key="en">/forgotten-password</locale>
         <locale key="cs">/zapomenute-heslo</locale>

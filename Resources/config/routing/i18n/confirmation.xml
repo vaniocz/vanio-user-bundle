@@ -1,0 +1,8 @@
+<?xml version="1.0"?>
+<routes xmlns="http://besim.pl/schema/i18n_routing" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://besim.pl/schema/i18n_routing http://besim.pl/schema/i18n_routing/routing-1.0.xsd">
+    <route id="fos_user_send_confirmation">
+        <locale key="en">/registration/send-confirmation/{email}</locale>
+        <locale key="cs">/registrace/overeni/{email}</locale>
+        <default key="_controller">FOSUserBundle:Registration:sendConfirmation</default>
+    </route>
+</routes>
