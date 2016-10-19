@@ -16,7 +16,7 @@
             {{ form_widget(form) }}
             <div class="form-buttons form-group">
                 <button class="btn btn-primary">{{ 'connect.registration.submit'|trans }}</button>
-                <a class="btn" href="{{ path('fos_user_registration_register') }}">{{ 'connect.registration.cancel'|trans }}</a>
+                <a class="btn btn-default" href="{{ path('fos_user_registration_register') }}">{{ 'connect.registration.cancel'|trans }}</a>
             </div>
         {% endblock %}
     {{ form_end(form) }}
