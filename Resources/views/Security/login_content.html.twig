@@ -44,7 +44,7 @@
                     value="{{ app.request.session.get('_security.last_username') }}"
                     required
                     oninvalid="this.setCustomValidity(this.getAttribute('data-validation-message'))"
-                    oninput="setCustomValidity('')"
+                    oninput="this.setCustomValidity('')"
                     data-validation-message="{{ vanio_user.email_only ? 'fos_user.email.blank'|trans({}, 'validators') : 'fos_user.username.blank'|trans({}, 'validators') }}"
                 >
             </div>
@@ -58,7 +58,7 @@
                     name="_password"
                     required
                     oninvalid="this.setCustomValidity(this.getAttribute('data-validation-message'))"
-                    oninput="setCustomValidity('')"
+                    oninput="this.setCustomValidity('')"
                     data-validation-message="{{ 'fos_user.password.blank'|trans({}, 'validators') }}"
                 >
             </div>
