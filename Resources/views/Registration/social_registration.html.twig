@@ -11,7 +11,7 @@
 {% endblock %}
 
 {% block form %}
-    {{ form_start(form, {attr: formAttributes ?? {class: 'hwi_oauth_registration_register'}}) }}
+    {{ form_start(form, {action: path('hwi_oauth_connect_registration', {key: key}), attr: formAttributes ?? {class: 'hwi_oauth_registration_register'}}) }}
         {% block formFields %}
             {{ form_widget(form) }}
             <div class="form-buttons form-group">
