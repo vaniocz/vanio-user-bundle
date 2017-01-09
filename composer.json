@@ -14,7 +14,7 @@
     }],
     "require": {
         "php": ">=7.0",
-        "friendsofsymfony/user-bundle": "^2.0@dev",
+        "friendsofsymfony/user-bundle": "dev-master#c0ba63245f4155b3bc7060298089c2bf806cc002",
         "vanio/stdlib": "^0.1@dev",
         "vanio/vanio-web-bundle": "^0.1@dev"
     },
@@ -22,6 +22,7 @@
         "phpunit/phpunit": "^5.5",
         "symfony/console": "^3.0",
         "symfony/validator": "^3.0",
+        "symfony/asset": "^3.0",
         "symfony/framework-bundle": "^3.0",
         "symfony/swiftmailer-bundle": "^2.3",
         "doctrine/doctrine-bundle": "^1.6.4",
