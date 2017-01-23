@@ -4,6 +4,10 @@
         <default key="_controller">VanioUserBundle:Connect:connect</default>
     </route>
 
+    <route id="hwi_oauth_disconnect" path="/login/disconnect/{service}">
+        <default key="_controller">VanioUserBundle:Connect:disconnect</default>
+    </route>
+
     <import resource="." type="resource_owners" prefix="login_check"/>
     <import resource="@HWIOAuthBundle/Resources/config/routing/redirect.xml" prefix="/login"/>
     <import resource="@HWIOAuthBundle/Resources/config/routing/connect.xml"/>

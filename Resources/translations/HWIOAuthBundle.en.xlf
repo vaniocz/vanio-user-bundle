@@ -16,9 +16,34 @@
                 <target>Facebook</target>
             </trans-unit>
 
+            <trans-unit id="e6983f2e3e963b0c2815a70c8eba1c17" resname="connect.connections.connect">
+                <source>connect.connections.connect</source>
+                <target>Propojit</target>
+            </trans-unit>
+
+            <trans-unit id="82734cb17b4afa732d8e59bbdd9de4cd" resname="connect.connections.disconnect">
+                <source>connect.connections.disconnect</source>
+                <target>Odpojit</target>
+            </trans-unit>
+
+            <trans-unit id="12c4b04f822808f0d9c12a7aaaf55ec9" resname="connect.connections.disconnect_confirmation">
+                <source>connect.connections.disconnect_confirmation</source>
+                <target>Do you really want to disconnect %service% account?</target>
+            </trans-unit>
+
+            <trans-unit id="b71f1dac5c2fd22aecf22d0981477927" resname="connect.connections.cannot_disconnect">
+                <source>connect.connections.cannot_disconnect</source>
+                <target>Cannot disconnect %service% account you are currently logged in with in case of empty password.</target>
+            </trans-unit>
+
             <trans-unit id="9573fa9a2b3af507440228486abf08bd" resname="connect.account_connected">
                 <source>connect.account_connected</source>
                 <target>Your account has been successfully connected.</target>
+            </trans-unit>
+
+            <trans-unit id="c5b64a6dd6cfa2cc2d5b225cb3caa37e" resname="connect.account_disconnected">
+                <source>connect.account_disconnected</source>
+                <target>Your account has been successfully disconnected.</target>
             </trans-unit>
         </body>
     </file>

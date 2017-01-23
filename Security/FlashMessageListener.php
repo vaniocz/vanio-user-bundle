@@ -11,6 +11,7 @@ use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Security\Http\Event\InteractiveLoginEvent;
 use Symfony\Component\Security\Http\SecurityEvents;
+use Vanio\UserBundle\VanioUserEvents;
 use Vanio\WebBundle\Translation\FlashMessage;
 
 /**
@@ -40,9 +41,13 @@ class FlashMessageListener implements EventSubscriberInterface
             FOSUserEvents::REGISTRATION_CONFIRMED => 'onRegistrationConfirmed',
             'hwi_oauth.registration.success' => 'onRegistrationSuccess',
             'hwi_oauth.connect.confirmed' => 'onConnectConfirmed',
+            VanioUserEvents::ACCOUNT_DISCONNECTED => 'onAccountDisconnected',
         ];
     }
 
+    /**
+     * @internal
+     */
     public function onInteractiveLogin(InteractiveLoginEvent $event)
     {
         if (!$this->skipNextLoginMessage) {
@@ -51,6 +56,9 @@ class FlashMessageListener implements EventSubscriberInterface
         }
     }
 
+    /**
+     * @internal
+     */
     public function onRegistrationConfirmed(FilterUserResponseEvent $event)
     {
         $response = $event->getResponse();
@@ -63,6 +71,9 @@ class FlashMessageListener implements EventSubscriberInterface
         }
     }
 
+    /**
+     * @internal
+     */
     public function onRegistrationSuccess(FormEvent $event)
     {
         $response = $event->getResponse();
@@ -76,11 +87,22 @@ class FlashMessageListener implements EventSubscriberInterface
         }
     }
 
+    /**
+     * @internal
+     */
     public function onConnectConfirmed(GetResponseUserEvent $event)
     {
         if ($event->getResponse() instanceof RedirectResponse) {
             $this->addFlashMessage(FlashMessage::TYPE_SUCCESS, 'connect.account_connected', [], 'HWIOAuthBundle');
         }
+    }
+
+    /**
+     * @internal
+     */
+    public function onAccountDisconnected()
+    {
+        $this->addFlashMessage(FlashMessage::TYPE_SUCCESS, 'connect.account_disconnected', [], 'HWIOAuthBundle');
     }
 
     private function addFlashMessage(string $type, string $message, array $parameters = [], $domain = 'FOSUserBundle')

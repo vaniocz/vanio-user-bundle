@@ -1,0 +1,29 @@
+{% trans_default_domain 'HWIOAuthBundle' %}
+
+{% set authenticatedOwner = app.token.resourceOwnerName ?? null %}
+
+{% for owner, property in resourceOwnerProperties %}
+    <div class="social-account">
+        {% set value = attribute(app.user, property) %}
+        <i class="social-account-icon fa fa-{{ owner }}" aria-hidden="true"></i> {{ "owner.#{owner}"|trans }}
+
+        {% if value %}
+            <a
+                class="btn btn-danger"
+
+                {% if owner == authenticatedOwner and not app.user.password %}
+                    title="{{ 'connect.connections.cannot_disconnect'|trans }}"
+                    data-toggle="tooltip"
+                    disabled
+                {% else %}
+                    href="{{ path('hwi_oauth_disconnect', {service: owner}) }}"
+                    data-component-confirm="{{ 'connect.connections.disconnect_confirmation'|trans({'%service%': "owner.#{owner}"|trans}) }}"
+                {% endif %}
+            >
+                {{ 'connect.connections.disconnect'|trans }}
+            </a>
+        {% else %}
+            <a class="btn btn-primary" href="{{ hwi_oauth_login_url(owner) }}">{{ 'connect.connections.connect'|trans }}</a>
+        {% endif %}
+    </div>
+{% endfor %}

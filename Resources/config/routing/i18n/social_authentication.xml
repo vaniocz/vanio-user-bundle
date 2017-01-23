@@ -27,4 +27,10 @@
         <locale key="cs">/prihlaseni/propojit/{service}</locale>
         <default key="_controller">HWIOAuthBundle:Connect:connectService</default>
     </route>
+
+    <route id="hwi_oauth_disconnect">
+        <locale key="en">/login/disconnect/{service}</locale>
+        <locale key="cs">/prihlaseni/odpojit/{service}</locale>
+        <default key="_controller">VanioUserBundle:Connect:disconnect</default>
+    </route>
 </routes>

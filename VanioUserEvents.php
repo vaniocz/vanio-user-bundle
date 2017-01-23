@@ -10,4 +10,11 @@ class VanioUserEvents
      * @Event("FOS\UserBundle\Event\FormEvent")
      */
     const REGISTRATION_CONFIRMATION_REQUESTED = 'fos_user.registration.confirmation_requested';
+
+    /**
+     * The ACCOUNT_DISCONNECTED event occurs after user successfully disconnected social account.
+     *
+     * @Event("HWI\Bundle\OAuthBundle\Event\FilterUserResponseEvent")
+     */
+    const ACCOUNT_DISCONNECTED = 'hwi_oauth.account_disconnected';
 }
