@@ -2,8 +2,10 @@
 use Symfony\Bundle\FrameworkBundle\Kernel\MicroKernelTrait;
 use Symfony\Component\Config\Loader\LoaderInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
+use Symfony\Component\DependencyInjection\Definition;
 use Symfony\Component\HttpKernel\Kernel;
 use Symfony\Component\Routing\RouteCollectionBuilder;
+use Vanio\UserBundle\Tests\Fixtures\DummyUserManager;
 
 class AppKernel extends Kernel
 {
@@ -42,6 +44,7 @@ class AppKernel extends Kernel
 
     protected function configureContainer(ContainerBuilder $container, LoaderInterface $loader)
     {
+        $container->setDefinition('dummy_user_manager', new Definition(DummyUserManager::class));
         $container->loadFromExtension('framework', [
             'secret' => 'secret',
             'form' => null,
@@ -54,8 +57,9 @@ class AppKernel extends Kernel
             ],
         ]);
         $container->loadFromExtension('fos_user', [
-            'db_driver' => 'propel',
+            'db_driver' => 'custom',
             'user_class' => 'user_class',
+            'service' => ['user_manager' => 'dummy_user_manager'],
             'use_flash_notifications' => false,
         ]);
     }

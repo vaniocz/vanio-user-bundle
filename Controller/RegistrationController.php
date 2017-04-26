@@ -18,6 +18,7 @@ class RegistrationController extends BaseRegistrationController
     use RefererHelperTrait;
 
     /**
+     * @phpcsSuppress SlevomatCodingStandard.TypeHints.TypeHintDeclaration.MissingParameterTypeHint
      * @param Request $request
      * @param string $token
      * @return Response
@@ -59,9 +60,9 @@ class RegistrationController extends BaseRegistrationController
         return $this->redirectToReferer();
     }
 
-    private function addFlashMessage(string $type, string $message, array $parameters = [], $domain = 'FOSUserBundle')
+    private function addFlashMessage(string $type, string $message, array $parameters = [])
     {
-        $this->addFlash($type, new FlashMessage($message, $parameters, $domain));
+        $this->addFlash($type, new FlashMessage($message, $parameters, 'FOSUserBundle'));
     }
 
     private function eventDispatcher(): EventDispatcherInterface

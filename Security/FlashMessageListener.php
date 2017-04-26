@@ -105,8 +105,12 @@ class FlashMessageListener implements EventSubscriberInterface
         $this->addFlashMessage(FlashMessage::TYPE_SUCCESS, 'connect.account_disconnected', [], 'HWIOAuthBundle');
     }
 
-    private function addFlashMessage(string $type, string $message, array $parameters = [], $domain = 'FOSUserBundle')
-    {
+    private function addFlashMessage(
+        string $type,
+        string $message,
+        array $parameters = [],
+        string $domain = 'FOSUserBundle'
+    ) {
         $this->session->getFlashBag()->add($type, new FlashMessage($message, $parameters, $domain));
     }
 }

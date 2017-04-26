@@ -29,11 +29,20 @@ class Router implements RouterInterface
         $this->targetPathResolver = $targetPathResolver;
     }
 
+    /**
+     * @param string $pathinfo
+     */
     public function match($pathinfo): array
     {
         return $this->router->match($pathinfo);
     }
 
+    /**
+     * @param string $name
+     * @param array $parameters
+     * @param int $referenceType
+     * @return string
+     */
     public function generate($name, $parameters = [], $referenceType = self::ABSOLUTE_PATH): string
     {
         if ($this->targetPathResolver && $name === 'fos_user_security_login') {

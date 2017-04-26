@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<ruleset name="Vanio Dependency Injection Extra Bundle Ruleset">
+    <rule ref="vendor/vanio/coding-standards/ruleset.xml">
+        <exclude name="SlevomatCodingStandard.Classes.ClassConstantVisibility"/>
+        <exclude name="SlevomatCodingStandard.TypeHints.NullableTypeForNullDefaultValue"/>
+    </rule>
+
+    <rule ref="SlevomatCodingStandard.TypeHints.TypeHintDeclaration">
+        <properties>
+            <property name="enableNullableTypeHints" value="false"/>
+            <property name="enableVoidTypeHint" value="false"/>
+        </properties>
+    </rule>
+
+    <rule ref="SlevomatCodingStandard.TypeHints.TypeHintDeclaration.MissingParameterTypeHint">
+        <exclude-pattern>Model/EmailOnlyUser.php</exclude-pattern>
+        <exclude-pattern>Routing/Router.php</exclude-pattern>
+        <exclude-pattern>Tests/Fixtures/DummyUserManager</exclude-pattern>
+    </rule>
+</ruleset>

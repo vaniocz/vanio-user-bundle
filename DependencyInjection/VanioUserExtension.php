@@ -60,6 +60,11 @@ class VanioUserExtension extends Extension implements PrependExtensionInterface
             'firewall_name' => $config['firewall_name'],
             'social_authentication' => $config['social_authentication'],
         ]);
+
+        if (!$container->hasExtension('hwi_oauth')) {
+            return;
+        }
+
         $container->prependExtensionConfig('hwi_oauth', ['firewall_names' => [$config['firewall_name']]]);
         $container->setParameter(
             'vanio_user.resource_owner_properties',

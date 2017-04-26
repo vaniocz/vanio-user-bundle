@@ -32,7 +32,7 @@ class ConnectController extends BaseConnectController
      * @throws NotFoundHttpException
      * @throws AccessDeniedException
      */
-    public function connectionsAction()
+    public function connectionsAction(): Response
     {
         if (!$this->getParameter('hwi_oauth.connect')) {
             throw new NotFoundHttpException;

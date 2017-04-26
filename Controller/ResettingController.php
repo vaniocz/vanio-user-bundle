@@ -13,6 +13,7 @@ class ResettingController extends BaseResettingController
     use RefererHelperTrait;
 
     /**
+     * @phpcsSuppress SlevomatCodingStandard.TypeHints.TypeHintDeclaration.MissingParameterTypeHint
      * @param Request $request
      * @param string $token
      * @return Response
