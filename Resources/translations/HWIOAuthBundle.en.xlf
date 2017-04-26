@@ -16,6 +16,16 @@
                 <target>Facebook</target>
             </trans-unit>
 
+            <trans-unit id="70e650d3610ffe0d067cf4f6b07bb686" resname="owner.google">
+                <source>owner.google</source>
+                <target>Google+</target>
+            </trans-unit>
+
+            <trans-unit id="be6a499c4ff28d402b2f7e4524df0577" resname="owner.twitter">
+                <source>owner.twitter</source>
+                <target>Twitter</target>
+            </trans-unit>
+
             <trans-unit id="e6983f2e3e963b0c2815a70c8eba1c17" resname="connect.connections.connect">
                 <source>connect.connections.connect</source>
                 <target>Propojit</target>
