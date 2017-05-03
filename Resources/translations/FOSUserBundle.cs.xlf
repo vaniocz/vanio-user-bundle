@@ -11,9 +11,19 @@
                 <target><![CDATA[Přihlášený uživatel: <a href="%profileUrl%">%username%</a>]]></target>
             </trans-unit>
 
-            <trans-unit id="b08994ba10eaa9682c363cfb7cc28c96" resname="security.login.email">
-                <source>security.login.email</source>
+            <trans-unit id="277830322d96f313459b21981dca7a28" resname="security.login.username.label">
+                <source>security.login.username.label</source>
+                <target>Uživatelské jméno</target>
+            </trans-unit>
+
+            <trans-unit id="8a410c13a3d5cf9a91d68d7660a0e45a" resname="security.login.email.label">
+                <source>security.login.email.label</source>
                 <target>E-mail</target>
+            </trans-unit>
+
+            <trans-unit id="4fd6d929076381500256f83ae097793e" resname="security.login.password.label">
+                <source>security.login.password.label</source>
+                <target>Heslo</target>
             </trans-unit>
 
             <trans-unit id="9a1f0c344544eb529d9d2a3a66ded6ac" resname="security.login.social_authentication">

@@ -35,36 +35,59 @@
 
         {% block formFields %}
             <div class="form-group">
-                <label class="control-label" for="loginUsername">{{ vanio_user.email_only ? 'security.login.email'|trans : 'security.login.username'|trans }}</label>
+                {% set property = vanio_user.email_only ? 'email' : 'username' %}
+                {% set addon = is_translated("security.login.#{property}.addon", 'FOSUserBundle') ? "security.login.#{property}.addon"|trans|raw : null %}
+                <label class="control-label" for="loginUsername">{{ "security.login.#{property}.label"|trans }}</label>
+
+                {% if addon %}
+                    <div class="input-group"><span class="input-group-addon">{{ addon|raw }}</span>
+                {% endif %}
+
                 <input
                     id="loginUsername"
                     class="form-control"
                     type="{{ vanio_user.email_only ? 'email' : 'text' }}"
                     name="_username"
                     value="{{ app.request.session.get('_security.last_username') }}"
+                    {% if is_translated("security.login.#{property}.placeholder", 'FOSUserBundle') %} placeholder="{{ "security.login.#{property}.placeholder"|trans }}"{% endif %}
                     required
                     oninvalid="this.setCustomValidity(this.getAttribute('data-validation-message'))"
                     oninput="this.setCustomValidity('')"
-                    data-validation-message="{{ vanio_user.email_only ? 'fos_user.email.blank'|trans({}, 'validators') : 'fos_user.username.blank'|trans({}, 'validators') }}"
+                    data-validation-message="{{ "fos_users.#{property}.blank"|trans({}, 'validators') }}"
                 >
+
+                {% if addon %}
+                    </div>
+                {% endif %}
             </div>
 
             <div class="form-group">
-                <label class="control-label" for="loginPassword">{{ 'security.login.password'|trans }}</label>
+                {% set addon = is_translated('security.login.password.addon', 'FOSUserBundle') ? 'security.login.password.addon'|trans|raw : null %}
+                <label class="control-label" for="loginPassword">{{ 'security.login.password.label'|trans }}</label>
+
+                {% if addon %}
+                    <div class="input-group"><span class="input-group-addon">{{ addon|raw }}</span>
+                {% endif %}
+
                 <input
                     id="loginPassword"
                     class="form-control"
                     type="password"
                     name="_password"
+                    {% if is_translated("security.login.password.placeholder", 'FOSUserBundle') %} placeholder="{{ "security.login.password.placeholder"|trans }}"{% endif %}
                     required
                     oninvalid="this.setCustomValidity(this.getAttribute('data-validation-message'))"
                     oninput="this.setCustomValidity('')"
                     data-validation-message="{{ 'fos_user.password.blank'|trans({}, 'validators') }}"
                 >
+
+                {% if addon %}
+                    </div>
+                {% endif %}
             </div>
 
             <div class="checkbox">
-                <label><input type="checkbox" name="_remember_me">{{ 'security.login.remember_me'|trans }}</label>
+                <label><input type="checkbox" name="_remember_me">{{ 'security.login.remember_me'|trans }}<span></span></label>
             </div>
 
             <div class="form-buttons form-group">
