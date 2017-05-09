@@ -141,8 +141,13 @@
                 </target>
             </trans-unit>
 
-            <trans-unit id="39342d44f3897af79f489d7988490d93" resname="resetting.request.email">
-                <source>resetting.request.email</source>
+            <trans-unit id="07af50186ae5dbce04eea9812a34c9e2" resname="resetting.request.username.label">
+                <source>resetting.request.username.label</source>
+                <target>Username or email address</target>
+            </trans-unit>
+
+            <trans-unit id="1dc25dfa1a04e027bd6f8f93977c2181" resname="resetting.request.email.label">
+                <source>resetting.request.email.label</source>
                 <target>Email</target>
             </trans-unit>
 

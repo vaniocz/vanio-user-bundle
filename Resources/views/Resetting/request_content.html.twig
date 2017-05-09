@@ -15,18 +15,31 @@
     <form action="{{ path('fos_user_resetting_send_email') }}" method="POST" {% block formAttributes %}class="fos_user_resetting_request"{% endblock %}>
         {% block formFields %}
             <div class="form-group">
-                <label for="resetLogin">{{ vanio_user.email_only ? 'resetting.request.email'|trans : 'resetting.request.username'|trans }}</label>
+                {% set property = vanio_user.email_only ? 'email' : 'username' %}
+                {% set addon = is_translated("resetting.request.#{property}.addon", 'FOSUserBundle') ? "resetting.request.#{property}.addon"|trans|raw : null %}
+                <label class="control-label" for="resetLogin">{{ "resetting.request.#{property}.label"|trans }}</label>
+
+                {% if addon %}
+                    <div class="input-group"><span class="input-group-addon">{{ addon|raw }}</span>
+                {% endif %}
+
                 <input
                     id="resetLogin"
                     class="form-control"
                     type="{{ vanio_user.email_only ? 'email' : 'text' }}"
                     name="username"
+                    {% if is_translated("resetting.request.#{property}.placeholder", 'FOSUserBundle') %} placeholder="{{ "resetting.request.#{property}.placeholder"|trans }}"{% endif %}
                     required
                     oninvalid="this.setCustomValidity(this.getAttribute('data-validation-message'))"
                     oninput="this.setCustomValidity('')"
-                    data-validation-message="{{ vanio_user.email_only ? 'fos_user.email.blank'|trans({}, 'validators') : 'fos_user.username.blank'|trans({}, 'validators') }}"
+                    data-validation-message="{{ "fos_user.#{property}.blank"|trans({}, 'validators') }}"
                 >
+
+                {% if addon %}
+                    </div>
+                {% endif %}
             </div>
+
             <div class="form-buttons form-group">
                 <button class="btn btn-primary">{{ 'resetting.request.submit'|trans }}</button>
             </div>

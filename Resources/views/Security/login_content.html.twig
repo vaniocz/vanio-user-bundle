@@ -53,7 +53,7 @@
                     required
                     oninvalid="this.setCustomValidity(this.getAttribute('data-validation-message'))"
                     oninput="this.setCustomValidity('')"
-                    data-validation-message="{{ "fos_users.#{property}.blank"|trans({}, 'validators') }}"
+                    data-validation-message="{{ "fos_user.#{property}.blank"|trans({}, 'validators') }}"
                 >
 
                 {% if addon %}
