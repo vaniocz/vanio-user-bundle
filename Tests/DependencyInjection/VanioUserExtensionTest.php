@@ -28,7 +28,7 @@ class VanioUserExtensionTest extends KernelTestCase
             'social_registration_form' => [
                 'type' => SocialRegistrationFormType::class,
                 'name' => 'hwi_oauth_registration_form',
-                'validation_groups' => ['SocialRegistration'],
+                'validation_groups' => ['Profile', 'SocialRegistration'],
             ],
         ], $config);
     }

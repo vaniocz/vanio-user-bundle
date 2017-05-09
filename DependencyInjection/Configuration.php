@@ -40,7 +40,7 @@ class Configuration implements ConfigurationInterface
                         ->scalarNode('name')->defaultValue('hwi_oauth_registration_form')->end()
                         ->arrayNode('validation_groups')
                             ->prototype('scalar')->end()
-                            ->defaultValue(['SocialRegistration'])
+                            ->defaultValue(['Profile', 'SocialRegistration'])
                         ->end()
                     ->end()
                 ->end()

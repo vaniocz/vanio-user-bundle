@@ -1,8 +1,10 @@
 {% trans_default_domain 'FOSUserBundle' %}
 
 {% block content %}
-    {% if not vanio_user.email_only %}<p>{{ 'profile.show.username'|trans }}: {{ user.username }}</p>{% endif %}
-    <p>{{ 'profile.show.email'|trans }}: {{ user.email }}</p>
+    <div class="fos_user_user_show">
+        {% if not vanio_user.email_only %}<p class="username"><span class="term">{{ 'profile.show.username'|trans }}:</span> <span class="description">{{ user.username }}</span></p>{% endif %}
+        <p class="email"><span class="term">{{ 'profile.show.email'|trans }}:</span> <span class="description">{{ user.email }}</span></p>
+    </div>
 {% endblock %}
 
 {% block links %}
