@@ -5,6 +5,7 @@ use FOS\UserBundle\Model\UserInterface;
 use HWI\Bundle\OAuthBundle\Controller\ConnectController as BaseConnectController;
 use HWI\Bundle\OAuthBundle\Event\FilterUserResponseEvent;
 use HWI\Bundle\OAuthBundle\Security\Core\Authentication\Token\OAuthToken;
+use HWI\Bundle\OAuthBundle\Security\Core\Exception\AccountNotLinkedException;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -13,6 +14,7 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
+use Symfony\Component\Security\Core\Security;
 use Vanio\UserBundle\Security\FosubUserProvider;
 use Vanio\UserBundle\VanioUserEvents;
 use Vanio\WebBundle\Request\RefererHelperTrait;
@@ -64,6 +66,21 @@ class ConnectController extends BaseConnectController
         }
 
         return $response;
+    }
+
+    /**
+     * @param Request $request
+     * @return \Exception|string
+     */
+    protected function getErrorForRequest(Request $request)
+    {
+        $error = parent::getErrorForRequest($request);
+
+        if ($error && !$error instanceof AccountNotLinkedException && $request->hasSession()) {
+            $request->getSession()->set(Security::AUTHENTICATION_ERROR, $error);
+        }
+
+        return $error;
     }
 
     /**

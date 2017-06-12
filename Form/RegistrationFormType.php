@@ -21,6 +21,13 @@ class RegistrationFormType extends AbstractType
         if ($options['email_only']) {
             $builder->remove('username');
         }
+
+        if (method_exists($options['data_class'], 'setName')) {
+            $builder->add('name', null, [
+                'label' => 'form.name',
+                'translation_domain' => 'FOSUserBundle',
+            ]);
+        }
     }
 
     public function configureOptions(OptionsResolver $resolver)

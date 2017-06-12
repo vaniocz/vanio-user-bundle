@@ -48,7 +48,7 @@
                     class="form-control"
                     type="{{ vanio_user.email_only ? 'email' : 'text' }}"
                     name="_username"
-                    value="{{ app.request.session.get('_security.last_username') }}"
+                    value="{{ last_username }}"
                     {% if is_translated("security.login.#{property}.placeholder", 'FOSUserBundle') %} placeholder="{{ "security.login.#{property}.placeholder"|trans }}"{% endif %}
                     required
                     oninvalid="this.setCustomValidity(this.getAttribute('data-validation-message'))"

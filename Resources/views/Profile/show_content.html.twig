@@ -3,6 +3,7 @@
 {% block content %}
     <div class="fos_user_user_show">
         {% if not vanio_user.email_only %}<p class="username"><span class="term">{{ 'profile.show.username'|trans }}:</span> <span class="description">{{ user.username }}</span></p>{% endif %}
+        {% if user.name is defined %}<p class="name"><span class="term">{{ 'profile.show.name'|trans }}:</span> <span class="description">{{ user.name }}</span></p>{% endif %}
         <p class="email"><span class="term">{{ 'profile.show.email'|trans }}:</span> <span class="description">{{ user.email }}</span></p>
     </div>
 {% endblock %}

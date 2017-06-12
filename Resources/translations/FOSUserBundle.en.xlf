@@ -171,6 +171,11 @@
                 </target>
             </trans-unit>
 
+            <trans-unit id="1d223f31894aea9dbbf56ba6d1d69cc2" resname="profile.show.name">
+                <source>profile.show.name</source>
+                <target>Name</target>
+            </trans-unit>
+
             <trans-unit id="7f57ab23cc8ceae48066b00e34f6deb6" resname="profile.show.edit">
                 <source>profile.show.edit</source>
                 <target>Edit</target>
@@ -179,6 +184,11 @@
             <trans-unit id="ce63e87d2e398cfa7b827e6a946ab596" resname="profile.show.change_password">
                 <source>profile.show.change_password</source>
                 <target>Change password</target>
+            </trans-unit>
+
+            <trans-unit id="ee3d884be66c934bd01359f85484d78d" resname="form.name">
+                <source>form.name</source>
+                <target>Name</target>
             </trans-unit>
         </body>
     </file>
