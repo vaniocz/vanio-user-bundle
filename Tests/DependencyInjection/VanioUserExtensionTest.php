@@ -11,7 +11,7 @@ class VanioUserExtensionTest extends KernelTestCase
         static::bootKernel();
         $config = static::$kernel->getContainer()->getParameter('vanio_user');
 
-        $this->assertSame([
+        $this->assertEquals([
             'firewall_name' => 'main',
             'social_authentication' => false,
             'email_only' => false,
@@ -28,7 +28,7 @@ class VanioUserExtensionTest extends KernelTestCase
             'social_registration_form' => [
                 'type' => SocialRegistrationFormType::class,
                 'name' => 'hwi_oauth_registration_form',
-                'validation_groups' => ['Profile', 'SocialRegistration'],
+                'validation_groups' => ['Profile', 'SocialRegistration', 'Default'],
             ],
         ], $config);
     }
