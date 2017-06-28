@@ -6,6 +6,16 @@
         </header>
 
         <body>
+            <trans-unit id="b8b6ac8d097e37ccbe2f3914944655b4" resname="user.name.blank">
+                <source>user.name.blank</source>
+                <target>Enter your name.</target>
+            </trans-unit>
+
+            <trans-unit id="9fcd7fc0b138074db6ffaaa75c7b9c79" resname="user.name.long">
+                <source>user.name.long</source>
+                <target>The name is too long. Maximal length is {{ limit }} characters.</target>
+            </trans-unit>
+
             <trans-unit id="f32367407a7012240c23975102b71953" resname="fos_user.email.social_already_used">
                 <source>fos_user.email.social_already_used</source>
                 <target>This email is already registered. You have to log in before connecting with the account.</target>

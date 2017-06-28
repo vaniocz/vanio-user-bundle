@@ -186,6 +186,11 @@
                 <target>Změnit heslo</target>
             </trans-unit>
 
+            <trans-unit id="profile.show.connect" resname="profile.show.connect">
+                <source>profile.show.connect</source>
+                <target>Propojení účtu</target>
+            </trans-unit>
+
             <trans-unit id="62dd5b80e69908635237bb1cac15470b" resname="profile.edit.submit">
                 <source>profile.edit.submit</source>
                 <target>Uložit</target>

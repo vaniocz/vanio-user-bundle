@@ -186,6 +186,11 @@
                 <target>Change password</target>
             </trans-unit>
 
+            <trans-unit id="profile.show.connect" resname="profile.show.connect">
+                <source>profile.show.connect</source>
+                <target>Account connections</target>
+            </trans-unit>
+
             <trans-unit id="ee3d884be66c934bd01359f85484d78d" resname="form.name">
                 <source>form.name</source>
                 <target>Name</target>

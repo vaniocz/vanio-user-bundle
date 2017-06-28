@@ -16,7 +16,7 @@ class VanioUserExtension extends Extension implements PrependExtensionInterface
     public function load(array $configs, ContainerBuilder $container)
     {
         $config = $this->processConfiguration(new Configuration, $configs);
-        $loader = new XmlFileLoader($container, new FileLocator(__DIR__ . '/../Resources/config'));
+        $loader = new XmlFileLoader($container, new FileLocator(sprintf('%s/../Resources/config', __DIR__)));
         $loader->load('config.xml');
         $container->setParameter('vanio_user', $config);
         $container->setParameter('vanio_user.db_driver', $container->getParameter('fos_user.storage'));
@@ -70,6 +70,9 @@ class VanioUserExtension extends Extension implements PrependExtensionInterface
             'vanio_user.resource_owner_properties',
             $this->processExtensionConfig($container, 'hwi_oauth')['fosub']['properties'] ?? []
         );
+        $container->prependExtensionConfig('twig', [
+            'paths' => [sprintf('%s/../Resources/views', __DIR__) => 'HWIOAuth'],
+        ]);
     }
 
     private function prependSecurityConfig(ContainerBuilder $container, array $config)

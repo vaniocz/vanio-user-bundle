@@ -19,13 +19,19 @@
     <route id="hwi_oauth_connect_registration">
         <locale key="en">/sign-up/connect/{key}</locale>
         <locale key="cs">/registrace/propojit/{key}</locale>
-        <default key="_controller">HWIOAuthBundle:Connect:registration</default>
+        <default key="_controller">VanioUserBundle:Connect:registration</default>
     </route>
 
     <route id="hwi_oauth_connect_service">
         <locale key="en">/login/connect/{service}</locale>
         <locale key="cs">/prihlaseni/propojit/{service}</locale>
-        <default key="_controller">HWIOAuthBundle:Connect:connectService</default>
+        <default key="_controller">VanioUserBundle:Connect:connectService</default>
+    </route>
+
+    <route id="hwi_oauth_connections">
+        <locale key="en">/profile/account-connections</locale>
+        <locale key="cs">/profil/propojeni-uctu</locale>
+        <default key="_controller">VanioUserBundle:Connect:connections</default>
     </route>
 
     <route id="hwi_oauth_disconnect">

@@ -8,7 +8,22 @@
         <default key="_controller">VanioUserBundle:Connect:disconnect</default>
     </route>
 
+    <route id="hwi_oauth_connect_service" path="/service/{service}">
+        <default key="_controller">VanioUserBundle:Connect:connectService</default>
+    </route>
+
+    <route id="hwi_oauth_connect_registration" path="/registration/{key}">
+        <default key="_controller">VanioUserBundle:Connect:registration</default>
+    </route>
+
+    <route id="hwi_oauth_connect_registration" path="/registration/{key}">
+        <default key="_controller">VanioUserBundle:Connect:registration</default>
+    </route>
+
+    <route id="hwi_oauth_connections" path="/profile/connections">
+        <default key="_controller">VanioUserBundle:Connect:connections</default>
+    </route>
+
     <import resource="." type="resource_owners" prefix="login_check"/>
     <import resource="@HWIOAuthBundle/Resources/config/routing/redirect.xml" prefix="/login"/>
-    <import resource="@HWIOAuthBundle/Resources/config/routing/connect.xml"/>
 </routes>

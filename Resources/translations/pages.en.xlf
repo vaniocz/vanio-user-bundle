@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" version="1.2">
+    <file source-language="en" target-language="en" datatype="plaintext" original="file.ext">
+        <header>
+            <tool tool-id="symfony" tool-name="Symfony"/>
+        </header>
+
+        <body>
+            <trans-unit id="f35b96ae8498bfea6e4f916b40f3ef3e" resname="fos_user_security_login">
+                <source>fos_user_security_login</source>
+                <target>Login</target>
+            </trans-unit>
+
+            <trans-unit id="267c312d8f9065349208190843a42a06" resname="fos_user_security_logout">
+                <source>fos_user_security_logout</source>
+                <target>Logout</target>
+            </trans-unit>
+
+            <trans-unit id="f12c0235b5259e65efbf82c067d0ac07" resname="fos_user_registration_register">
+                <source>fos_user_registration_register</source>
+                <target>Registration</target>
+            </trans-unit>
+
+            <trans-unit id="8f8a45208224f02035b8fbb1f9f8cccf" resname="fos_user_registration_check_email">
+                <source>fos_user_registration_check_email</source>
+                <target>Registration</target>
+            </trans-unit>
+
+            <trans-unit id="7e7c7abb985a6bcd77c36d37ca158813" resname="fos_user_registration_confirmed">
+                <source>fos_user_registration_confirmed</source>
+                <target>Registration confirmed</target>
+            </trans-unit>
+
+            <trans-unit id="04c0d749d14f6a38876b0b3144c8fc9a" resname="fos_user_resetting_request">
+                <source>fos_user_resetting_request</source>
+                <target>Forgotten password</target>
+            </trans-unit>
+
+            <trans-unit id="85b0ffb30e53e086f29d20a3a619be6d" resname="fos_user_resetting_check_email">
+                <source>fos_user_resetting_check_email</source>
+                <target>Forgotten password</target>
+            </trans-unit>
+
+            <trans-unit id="8213277017b4ebc45beb1877a8b5c4c8" resname="fos_user_resetting_reset">
+                <source>fos_user_resetting_reset</source>
+                <target>Change password</target>
+            </trans-unit>
+
+            <trans-unit id="7e461acb2aa955d0f1b4b826b1bf4da8" resname="fos_user_profile_show">
+                <source>fos_user_profile_show</source>
+                <target>My profile</target>
+            </trans-unit>
+
+            <trans-unit id="0cb30a592a4b65ebe8e7784cfcc93393" resname="fos_user_profile_edit">
+                <source>fos_user_profile_edit</source>
+                <target>Edit profile</target>
+            </trans-unit>
+
+            <trans-unit id="e6dc44f597cb6840a4f0a2d72c9c5b7b" resname="fos_user_change_password">
+                <source>fos_user_change_password</source>
+                <target>Change password</target>
+            </trans-unit>
+
+            <trans-unit id="adaa8ffd7eb9a69bedeb56ae367c1fcc" resname="hwi_oauth_connect_service">
+                <source>hwi_oauth_connect_service</source>
+                <target>Connect account</target>
+            </trans-unit>
+
+            <trans-unit id="0f6df638a3b4e02a6727dbd30daf5943" resname="hwi_oauth_connect_registration">
+                <source>hwi_oauth_connect_registration</source>
+                <target>Registration</target>
+            </trans-unit>
+
+            <trans-unit id="554d66318b0a777824a5b59b93ccf8b2" resname="hwi_oauth_connections">
+                <source>hwi_oauth_connections</source>
+                <target>Account connections</target>
+            </trans-unit>
+        </body>
+    </file>
+</xliff>

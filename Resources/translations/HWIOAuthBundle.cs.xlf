@@ -79,6 +79,11 @@
                 <source>connect.account_disconnected</source>
                 <target>Váš účet byl úspěšně odpojen.</target>
             </trans-unit>
+
+            <trans-unit id="8916428483a2bfb07db65636a5adf3b3" resname="connect.social_account_not_connected">
+                <source>connect.social_account_not_connected</source>
+                <target>Váš %service% účet není propojen. Přihlaště se pomocí jiné metody nebo požádejte administrátora o založení nového účtu.</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>

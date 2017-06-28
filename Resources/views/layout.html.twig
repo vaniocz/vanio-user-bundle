@@ -1,5 +1,4 @@
 {% trans_default_domain 'FOSUserBundle' %}
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -11,7 +10,10 @@
             {{ 'layout.logged_in_as'|trans({'%username%': app.user.username, '%profileUrl%': path('fos_user_profile_show')})|raw }} |
             <a href="{{ path('fos_user_security_logout') }}">{{ 'layout.logout'|trans }}</a>
         {% else %}
-            <a href="{{ path('fos_user_registration_register') }}">{{ 'layout.register'|trans }}</a> |
+            {% if route_exists('fos_user_registration_register') %}
+                <a href="{{ path('fos_user_registration_register') }}">{{ 'layout.register'|trans }}</a> |
+            {% endif %}
+
             <a href="{{ path('fos_user_security_login') }}">{{ 'layout.login'|trans }}</a>
         {% endif %}
     </p>
@@ -19,7 +21,7 @@
     {% if app.request.hasPreviousSession %}
         {% for type, messages in app.session.flashbag.all() %}
             {% for message in messages %}
-                {% include 'VanioUserBundle:partials:alert.html.twig' with {
+                {% include '@VanioUser/partials/alert.html.twig' with {
                     message: message is instance of('Vanio\\WebBundle\\Translation\\FlashMessage')
                         ? message.message|trans(message.parameters, message.domain, message.locale)
                         : message
@@ -28,6 +30,8 @@
         {% endfor %}
     {% endif %}
 
-    {% block fos_user_content %}{% endblock %}
+    {% block fos_user_content %}
+        {% block hwi_oauth_content %}{% endblock %}
+    {% endblock %}
 </body>
 </html>

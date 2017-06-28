@@ -64,6 +64,10 @@ class AppKernel extends Kernel
             ],
         ]);
         $container->loadFromExtension('fos_user', [
+            'from_email' => [
+                'address' => 'webmaster@example.com',
+                'sender_name' => 'webmaster',
+            ],
             'db_driver' => 'custom',
             'user_class' => 'user_class',
             'service' => ['user_manager' => 'dummy_user_manager'],

@@ -8,7 +8,7 @@
             {% set message = error.messageKey|trans(error.messageData, 'security') %}
         {% endif %}
 
-        {% include 'VanioUserBundle:partials:alert.html.twig' with {type: 'danger'} %}
+        {% include '@VanioUser/partials/alert.html.twig' with {type: 'danger'} %}
     {% endif %}
 {% endblock %}
 
@@ -28,7 +28,7 @@
             {% if vanio_user.social_authentication %}
                 <div class="social-authentication form-header">
                     <p>{{ 'security.login.social_authentication'|trans }}</p>
-                    {% include 'VanioUserBundle:Security:social_authentication.html.twig' %}
+                    {% include '@VanioUser/Security/social_authentication.html.twig' %}
                 </div>
             {% endif %}
         {% endblock %}
@@ -98,7 +98,10 @@
         {% block formFooter %}
             <div class="login-footer form-footer">
                 <p>{{ 'security.login.forgot_password'|trans({'%url%': path('fos_user_resetting_request')})|raw }}</p>
-                <p>{{ 'security.login.register'|trans({'%url%': path('fos_user_registration_register')})|raw }}</p>
+
+                {% if route_exists('fos_user_registration_register') %}
+                    <p>{{ 'security.login.register'|trans({'%url%': path('fos_user_registration_register')})|raw }}</p>
+                {% endif %}
             </div>
         {% endblock %}
     </form>

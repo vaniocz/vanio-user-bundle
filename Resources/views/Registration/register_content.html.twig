@@ -18,7 +18,7 @@
     {% endfor %}
 
     {% if message %}
-        {% include 'VanioUserBundle:partials:alert.html.twig' with {type: 'warning'} %}
+        {% include '@VanioUser/partials/alert.html.twig' with {type: 'warning'} %}
     {% endif %}
 {% endblock %}
 
@@ -28,7 +28,7 @@
             {% if vanio_user.social_authentication %}
                 <div class="social-authentication form-header">
                     <p>{{ 'registration.social_authentication'|trans }}</p>
-                    {% include 'VanioUserBundle:Security:social_authentication.html.twig' %}
+                    {% include '@VanioUser/Security/social_authentication.html.twig' %}
                 </div>
             {% endif %}
         {% endblock %}

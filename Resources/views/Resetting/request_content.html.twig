@@ -2,7 +2,7 @@
 
 {% block errorMessage %}
     {% if invalid_username is defined %}
-        {% include 'VanioUserBundle:partials:alert.html.twig' with {
+        {% include '@VanioUser/partials/alert.html.twig' with {
             type: 'danger',
             message: vanio_user.email_only
                 ? 'resetting.request.invalid_email'|trans({'%email%': invalid_username})

@@ -55,6 +55,11 @@
                 <source>connect.account_disconnected</source>
                 <target>Your account has been successfully disconnected.</target>
             </trans-unit>
+
+            <trans-unit id="8916428483a2bfb07db65636a5adf3b3" resname="connect.social_account_not_connected">
+                <source>connect.social_account_not_connected</source>
+                <target>Your %service% account is not connected. Log in using another method or ask administrator for creating a new account.</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>
