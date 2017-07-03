@@ -13,7 +13,7 @@
 
             <trans-unit id="267c312d8f9065349208190843a42a06" resname="fos_user_security_logout">
                 <source>fos_user_security_logout</source>
-                <target>Logout</target>
+                <target>Log out</target>
             </trans-unit>
 
             <trans-unit id="f12c0235b5259e65efbf82c067d0ac07" resname="fos_user_registration_register">
