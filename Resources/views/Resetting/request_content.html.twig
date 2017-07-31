@@ -12,7 +12,7 @@
 {% endblock %}
 
 {% block form %}
-    <form action="{{ path('fos_user_resetting_send_email') }}" method="POST" {% block formAttributes %}class="fos_user_resetting_request"{% endblock %}>
+    <form action="{{ path('fos_user_resetting_send_email') }}" method="POST" {% block formAttributes %}class="fos_user_resetting_request" data-component-native-validation{% endblock %}>
         {% block formFields %}
             <div class="form-group">
                 {% set property = vanio_user.email_only ? 'email' : 'username' %}
