@@ -71,6 +71,11 @@
                 <target>Byli jste úspěšně přihlášeni.</target>
             </trans-unit>
 
+            <trans-unit id="c814b83245643739e3ca3363ce5bcaab" resname="security.flash.first_logged_in">
+                <source>security.flash.first_logged_in</source>
+                <target>Byli jste úspěšně přihlášeni.</target>
+            </trans-unit>
+
             <trans-unit id="7191267a902c12b51985dbbb43ab65a2" resname="registration.social_authentication">
                 <source>registration.social_authentication</source>
                 <target>Registrovat pomocí:</target>

@@ -9,6 +9,7 @@ use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
+use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Security\Http\Event\InteractiveLoginEvent;
 use Symfony\Component\Security\Http\SecurityEvents;
 use Vanio\UserBundle\VanioUserEvents;
@@ -37,7 +38,7 @@ class FlashMessageListener implements EventSubscriberInterface
     public static function getSubscribedEvents(): array
     {
         return [
-            SecurityEvents::INTERACTIVE_LOGIN => 'onInteractiveLogin',
+            SecurityEvents::INTERACTIVE_LOGIN => ['onInteractiveLogin', PHP_INT_MAX],
             FOSUserEvents::REGISTRATION_CONFIRMED => 'onRegistrationConfirmed',
             'hwi_oauth.registration.success' => 'onRegistrationSuccess',
             'hwi_oauth.connect.confirmed' => 'onConnectConfirmed',
@@ -50,10 +51,16 @@ class FlashMessageListener implements EventSubscriberInterface
      */
     public function onInteractiveLogin(InteractiveLoginEvent $event)
     {
-        if (!$this->skipNextLoginMessage) {
-            $this->addFlashMessage(FlashMessage::TYPE_SUCCESS, 'security.flash.logged_in');
-            $this->skipNextLoginMessage = false;
+        if ($this->skipNextLoginMessage) {
+            return;
         }
+
+        $user = $event->getAuthenticationToken()->getUser();
+        $message = $user instanceof UserInterface && !$user->getLastLogin()
+            ? 'security.flash.first_logged_in'
+            : 'security.flash.logged_in';
+        $this->addFlashMessage(FlashMessage::TYPE_SUCCESS, $message);
+        $this->skipNextLoginMessage = false;
     }
 
     /**
