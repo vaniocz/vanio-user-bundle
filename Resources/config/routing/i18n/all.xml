@@ -5,6 +5,7 @@
     <import resource="@VanioUserBundle/Resources/config/routing/i18n/registration.xml" type="be_simple_i18n">
         <locale key="en">/registration</locale>
         <locale key="cs">/registrace</locale>
+        <locale key="ru">/registratsiya</locale>
     </import>
 
     <import resource="@VanioUserBundle/Resources/config/routing/i18n/confirmation.xml" type="be_simple_i18n"/>
@@ -12,15 +13,18 @@
     <import resource="@VanioUserBundle/Resources/config/routing/i18n/resetting.xml" type="be_simple_i18n">
         <locale key="en">/forgotten-password</locale>
         <locale key="cs">/zapomenute-heslo</locale>
+        <locale key="ru">/zabyl-parol</locale>
     </import>
 
     <import resource="@VanioUserBundle/Resources/config/routing/i18n/profile.xml" type="be_simple_i18n">
         <locale key="en">/profile</locale>
         <locale key="cs">/profil</locale>
+        <locale key="ru">/profilya</locale>
     </import>
 
     <import resource="@VanioUserBundle/Resources/config/routing/i18n/change_password.xml" type="be_simple_i18n">
         <locale key="en">/profile</locale>
         <locale key="cs">/profil</locale>
+        <locale key="ru">/profilya</locale>
     </import>
 </routes>
