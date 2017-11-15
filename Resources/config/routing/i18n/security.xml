@@ -3,18 +3,21 @@
     <route id="fos_user_security_login" methods="GET POST">
         <locale key="en">/login</locale>
         <locale key="cs">/prihlaseni</locale>
+        <locale key="ru">/avtorizovatsya</locale>
         <default key="_controller">FOSUserBundle:Security:login</default>
     </route>
 
     <route id="fos_user_security_check" methods="POST">
         <locale key="en">/login-check</locale>
         <locale key="cs">/kontrola-prihlaseni</locale>
+        <locale key="ru">/proverit-avtorizovatsya</locale>
         <default key="_controller">FOSUserBundle:Security:check</default>
     </route>
 
     <route id="fos_user_security_logout" methods="GET POST">
         <locale key="en">/logout</locale>
         <locale key="cs">/odhlasit</locale>
+        <locale key="ru">/vyyti</locale>
         <default key="_controller">FOSUserBundle:Security:logout</default>
     </route>
 </routes>
