@@ -3,6 +3,7 @@
     <route id="fos_user_send_confirmation">
         <locale key="en">/registration/send-confirmation/{email}</locale>
         <locale key="cs">/registrace/overeni/{email}</locale>
+        <locale key="ru">/registratsiya/proverit/{email}</locale>
         <default key="_controller">FOSUserBundle:Registration:sendConfirmation</default>
     </route>
 </routes>

@@ -3,40 +3,47 @@
     <route id="hwi_oauth_connect">
         <locale key="en">/login/connect</locale>
         <locale key="cs">/prihlaseni/propojit</locale>
+        <locale key="ru">/avtorizovatsya/soyedinyat</locale>
         <default key="_controller">VanioUserBundle:Connect:connect</default>
     </route>
 
     <import resource="." type="resource_owners">
         <locale key="en">/login_check</locale>
         <locale key="cs">/kontrola_prihlaseni</locale>
+        <locale key="ru">/proverit_avtorizovatsya</locale>
     </import>
 
     <import resource="@HWIOAuthBundle/Resources/config/routing/redirect.xml">
         <locale key="en">/login</locale>
         <locale key="cs">/prihlaseni</locale>
+        <locale key="ru">/avtorizovatsya</locale>
     </import>
 
     <route id="hwi_oauth_connect_registration">
         <locale key="en">/sign-up/connect/{key}</locale>
         <locale key="cs">/registrace/propojit/{key}</locale>
+        <locale key="ru">/registratsiya/soyedinyat/{key}</locale>
         <default key="_controller">VanioUserBundle:Connect:registration</default>
     </route>
 
     <route id="hwi_oauth_connect_service">
         <locale key="en">/login/connect/{service}</locale>
         <locale key="cs">/prihlaseni/propojit/{service}</locale>
+        <locale key="ru">/avtorizovatsya/soyedinyat/{service}</locale>
         <default key="_controller">VanioUserBundle:Connect:connectService</default>
     </route>
 
     <route id="hwi_oauth_connections">
         <locale key="en">/profile/account-connections</locale>
         <locale key="cs">/profil/propojeni-uctu</locale>
+        <locale key="ru">/profilya/soyedinyat-schet</locale>
         <default key="_controller">VanioUserBundle:Connect:connections</default>
     </route>
 
     <route id="hwi_oauth_disconnect">
         <locale key="en">/login/disconnect/{service}</locale>
         <locale key="cs">/prihlaseni/odpojit/{service}</locale>
+        <locale key="ru">/avtorizovatsya/otklyuchat/{service}</locale>
         <default key="_controller">VanioUserBundle:Connect:disconnect</default>
     </route>
 </routes>
