@@ -6,21 +6,27 @@
 
     <route id="fos_user_registration_check_email" methods="GET">
         <locale key="en">/check-email</locale>
+        <locale key="de">/email-uberprufen</locale>
         <locale key="cs">/kontrola-emailu</locale>
+        <locale key="sk">/kontrola-emailu</locale>
         <locale key="ru">/proverit-email</locale>
         <default key="_controller">FOSUserBundle:Registration:checkEmail</default>
     </route>
 
     <route id="fos_user_registration_confirm" methods="GET">
         <locale key="en">/confirm/{token}</locale>
+        <locale key="de">/bestatigen/{token}</locale>
         <locale key="cs">/potvrdit/{token}</locale>
+        <locale key="sk">/potvrdit/{token}</locale>
         <locale key="ru">/podtverdit/{token}</locale>
         <default key="_controller">FOSUserBundle:Registration:confirm</default>
     </route>
 
     <route id="fos_user_registration_confirmed" methods="GET">
         <locale key="en">/confirmed</locale>
+        <locale key="de">/bestatigt</locale>
         <locale key="cs">/potvrzeno</locale>
+        <locale key="sk">/potvrdene</locale>
         <locale key="ru">/podtverdil</locale>
         <default key="_controller">FOSUserBundle:Registration:confirmed</default>
     </route>
