@@ -6,7 +6,9 @@
 
     <route id="fos_user_profile_edit" methods="GET POST">
         <locale key="en">/edit</locale>
+        <locale key="de">/bearbeiten</locale>
         <locale key="cs">/editace</locale>
+        <locale key="sk">/editacia</locale>
         <locale key="ru">/redaktirovat</locale>
         <default key="_controller">FOSUserBundle:Profile:edit</default>
     </route>
