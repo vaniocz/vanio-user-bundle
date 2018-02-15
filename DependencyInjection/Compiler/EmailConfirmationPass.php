@@ -18,10 +18,6 @@ class EmailConfirmationPass implements CompilerPassInterface
             ->getDefinition('fos_user.listener.email_confirmation')
             ->clearTags()
             ->addTag('kernel.event_listener', [
-                'event' => FOSUserEvents::REGISTRATION_SUCCESS,
-                'method' => 'onRegistrationSuccess',
-            ])
-            ->addTag('kernel.event_listener', [
                 'event' => VanioUserEvents::REGISTRATION_CONFIRMATION_REQUESTED,
                 'method' => 'onRegistrationSuccess',
             ]);
