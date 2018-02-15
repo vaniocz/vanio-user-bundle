@@ -2,6 +2,7 @@
 namespace Vanio\UserBundle\Security;
 
 use FOS\UserBundle\Event\FormEvent as FOSUserFormEvent;
+use FOS\UserBundle\FOSUserEvents;
 use HWI\Bundle\OAuthBundle\Event\FormEvent as HWIOAuthFormEvent;
 use HWI\Bundle\OAuthBundle\HWIOAuthEvents;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
@@ -11,15 +12,23 @@ use Vanio\UserBundle\VanioUserEvents;
 /**
  * Sends confirmation emails upon successful registration.
  */
-class SocialEmailConfirmationListener implements EventSubscriberInterface
+class EmailConfirmationListener implements EventSubscriberInterface
 {
     public static function getSubscribedEvents(): array
     {
-        return [HWIOAuthEvents::REGISTRATION_SUCCESS => 'onRegistrationSuccess'];
+        return [
+            HWIOAuthEvents::REGISTRATION_SUCCESS => 'onRegistrationSuccess',
+            FOSUserEvents::REGISTRATION_SUCCESS => 'onRegistrationSuccess',
+        ];
     }
 
+    /**
+     * @param HWIOAuthFormEvent|FOSUserFormEvent $event
+     * @param string $eventName
+     * @param EventDispatcherInterface $eventDispatcher
+     */
     public function onRegistrationSuccess(
-        HWIOAuthFormEvent $event,
+        $event,
         string $eventName,
         EventDispatcherInterface $eventDispatcher
     ) {
