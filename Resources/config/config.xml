@@ -7,6 +7,7 @@
         <parameter key="vanio_user.security.authentication_entry_point.class">Vanio\UserBundle\Security\AuthenticationEntryPoint</parameter>
         <parameter key="vanio_user.security.authentication_failure_handler.class">Vanio\UserBundle\Security\AuthenticationFailureHandler</parameter>
         <parameter key="vanio_user.security.authentication_success_handler.class">Vanio\UserBundle\Security\AuthenticationSuccessHandler</parameter>
+        <parameter key="vanio_user.security.email_confirmation_listener.class">Vanio\UserBundle\Security\EmailConfirmationListener</parameter>
         <parameter key="vanio_user.security.redirect_on_registration_success.class">Vanio\UserBundle\Security\RedirectOnRegistrationSuccess</parameter>
         <parameter key="vanio_user.security.target_path_resolver.class">Vanio\UserBundle\Security\TargetPathResolver</parameter>
         <parameter key="vanio_user.form.registration_form_type.class">Vanio\UserBundle\Form\RegistrationFormType</parameter>
@@ -27,6 +28,10 @@
             <argument type="service" id="vanio_user.security.authentication_entry_point.inner"/>
             <argument type="service" id="vanio_user.security.target_path_resolver"/>
             <argument>%vanio_user%</argument>
+        </service>
+
+        <service id="vanio_user.security.email_confirmation_listener" class="%vanio_user.security.email_confirmation_listener.class%">
+            <tag name="kernel.event_subscriber"/>
         </service>
 
         <service id="vanio_user.security.redirect_on_registration_success" class="%vanio_user.security.redirect_on_registration_success.class%" abstract="true">

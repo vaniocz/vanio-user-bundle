@@ -1,16 +1,11 @@
 <?xml version="1.0"?>
 <container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
     <parameters>
-        <parameter key="vanio_user.security.social_email_confirmation_listener.class">Vanio\UserBundle\Security\SocialEmailConfirmationListener</parameter>
         <parameter key="vanio_user.form.social_registration_form_type.class">Vanio\UserBundle\Form\SocialRegistrationFormType</parameter>
         <parameter key="vanio_user.routing.resource_owners_loader.class">Vanio\UserBundle\Routing\ResourceOwnersLoader</parameter>
     </parameters>
 
     <services>
-        <service id="vanio_user.security.social_email_confirmation_listener" class="%vanio_user.security.social_email_confirmation_listener.class%">
-            <tag name="kernel.event_subscriber"/>
-        </service>
-
         <service id="vanio_user.form.social_registration_form_type" class="%vanio_user.form.social_registration_form_type.class%">
             <argument>%fos_user.registration.confirmation.enabled%</argument>
             <tag name="form.type"/>
