@@ -141,7 +141,7 @@
                 <target>
                     <![CDATA[
                         <h1>Hello new user</h1>
-                        <p>To finish activating your account - please visit <a href="{{ confirmationUrl }}">this link</a>.</p>
+                        <p>To finish activating your account - please visit <a href="%confirmationUrl%">this link</a>.</p>
                     ]]>
                 </target>
             </trans-unit>
