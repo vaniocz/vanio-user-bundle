@@ -75,8 +75,9 @@ class RegistrationController extends BaseRegistrationController
             $httpUtils = $this->get('security.http_utils');
             $response = $this->container->get('http_kernel')->handle(
                 $httpUtils->createRequest($request, 'fos_user_security_logout'),
-                HttpKernelInterface::SUB_REQUEST
+                HttpKernelInterface::MASTER_REQUEST
             );
+            $this->container->get('session')->getFlashBag()->clear();
 
             $this->userManager()->deleteUser($user);
             $this->addFlashMessage(FlashMessage::TYPE_SUCCESS, 'unregister.success');
