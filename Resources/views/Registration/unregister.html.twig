@@ -1,0 +1,11 @@
+{% extends '@VanioUser/layout.html.twig' %}
+
+{% block fos_user_content %}
+    <p><strong>{{ 'unregister.question'|trans }}</strong></p>
+
+    {% include '@VanioUser/partials/alert.html.twig' with {type: 'danger', message: 'unregister.warning'|trans} %}
+
+    <form method="post">
+        <input type="submit" class="btn btn-primary" value="{{ 'unregister.button'|trans }}">
+    </form>
+{% endblock %}

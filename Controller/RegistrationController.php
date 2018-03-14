@@ -60,6 +60,19 @@ class RegistrationController extends BaseRegistrationController
         return $this->redirectToReferer();
     }
 
+    public function unregisterAction(Request $request)
+    {
+        if ($request->isMethod('POST')) {
+            $user = $this->getUser();
+            $this->userManager()->deleteUser($user);
+            $this->addFlashMessage(FlashMessage::TYPE_SUCCESS, 'unregister.success');
+
+            return $this->redirectToRoute('fos_user_security_logout');
+        }
+
+        return $this->render('@VanioUser/Registration/unregister.html.twig');
+    }
+
     private function addFlashMessage(string $type, string $message, array $parameters = [])
     {
         $this->addFlash($type, new FlashMessage($message, $parameters, 'FOSUserBundle'));

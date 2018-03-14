@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" version="1.2">
+    <file source-language="en" target-language="cs" datatype="plaintext" original="file.ext">
+        <header>
+            <tool tool-id="symfony" tool-name="Symfony"/>
+        </header>
+
+        <body>
+            <trans-unit id="340006e9-565b-4990-abc4-b790689d00ee" resname="unregister.success">
+                <source>unregister.success</source>
+                <target>Váš uživatelský účet byl úspěšně smazán.</target>
+            </trans-unit>
+        </body>
+    </file>
+</xliff>
