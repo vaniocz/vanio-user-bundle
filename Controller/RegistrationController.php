@@ -9,7 +9,9 @@ use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\Form\Extension\Core\Type\FormType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Symfony\Component\HttpKernel\HttpKernel;
 use Symfony\Component\HttpKernel\HttpKernelInterface;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 use Symfony\Component\Security\Http\HttpUtils;
@@ -72,12 +74,11 @@ class RegistrationController extends BaseRegistrationController
         }
 
         if ($request->isMethod('POST')) {
-            $httpUtils = $this->get('security.http_utils');
-            $response = $this->container->get('http_kernel')->handle(
-                $httpUtils->createRequest($request, 'fos_user_security_logout'),
+            $response = $this->httpKernel()->handle(
+                $this->httpUtils()->createRequest($request, 'fos_user_security_logout'),
                 HttpKernelInterface::MASTER_REQUEST
             );
-            $this->container->get('session')->getFlashBag()->clear();
+            $this->session()->getFlashBag()->clear();
 
             $this->userManager()->deleteUser($user);
             $this->addFlashMessage(FlashMessage::TYPE_SUCCESS, 'unregister.success');
@@ -101,5 +102,20 @@ class RegistrationController extends BaseRegistrationController
     private function userManager(): UserManagerInterface
     {
         return $this->get('fos_user.user_manager');
+    }
+
+    private function httpUtils(): HttpUtils
+    {
+        return $this->get('security.http_utils');
+    }
+
+    private function httpKernel(): HttpKernel
+    {
+        return $this->get('http_kernel');
+    }
+
+    private function session(): Session
+    {
+        return $this->get('session');
     }
 }
