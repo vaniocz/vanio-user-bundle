@@ -3,12 +3,14 @@ namespace Vanio\UserBundle\Controller;
 
 use FOS\UserBundle\Controller\RegistrationController as BaseRegistrationController;
 use FOS\UserBundle\Event\FormEvent;
+use FOS\UserBundle\Model\UserInterface;
 use FOS\UserBundle\Model\UserManagerInterface;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\Form\Extension\Core\Type\FormType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 use Vanio\UserBundle\VanioUserEvents;
 use Vanio\WebBundle\Request\RefererHelperTrait;
 use Vanio\WebBundle\Translation\FlashMessage;
@@ -60,10 +62,14 @@ class RegistrationController extends BaseRegistrationController
         return $this->redirectToReferer();
     }
 
-    public function unregisterAction(Request $request)
+    public function unregisterAction(Request $request): Response
     {
+        $user = $this->getUser();
+        if (!is_object($user) || !$user instanceof UserInterface) {
+            throw new AccessDeniedException('This user does not have access to this section.');
+        }
+
         if ($request->isMethod('POST')) {
-            $user = $this->getUser();
             $this->userManager()->deleteUser($user);
             $this->addFlashMessage(FlashMessage::TYPE_SUCCESS, 'unregister.success');
 
