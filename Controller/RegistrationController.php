@@ -10,7 +10,9 @@ use Symfony\Component\Form\Extension\Core\Type\FormType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Symfony\Component\HttpKernel\HttpKernelInterface;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
+use Symfony\Component\Security\Http\HttpUtils;
 use Vanio\UserBundle\VanioUserEvents;
 use Vanio\WebBundle\Request\RefererHelperTrait;
 use Vanio\WebBundle\Translation\FlashMessage;
@@ -70,10 +72,16 @@ class RegistrationController extends BaseRegistrationController
         }
 
         if ($request->isMethod('POST')) {
+            $httpUtils = $this->get('security.http_utils');
+            $response = $this->container->get('http_kernel')->handle(
+                $httpUtils->createRequest($request, 'fos_user_security_logout'),
+                HttpKernelInterface::SUB_REQUEST
+            );
+
             $this->userManager()->deleteUser($user);
             $this->addFlashMessage(FlashMessage::TYPE_SUCCESS, 'unregister.success');
 
-            return $this->redirectToRoute('fos_user_security_logout');
+            return $response;
         }
 
         return $this->render('@VanioUser/Registration/unregister.html.twig');
