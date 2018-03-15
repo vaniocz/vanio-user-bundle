@@ -78,10 +78,13 @@ class RegistrationController extends BaseRegistrationController
                 $this->httpUtils()->createRequest($request, 'fos_user_security_logout'),
                 HttpKernelInterface::MASTER_REQUEST
             );
-            $this->session()->getFlashBag()->clear();
+
+            if ($request->getSession()) {
+                $request->getSession()->getFlashBag()->clear();
+            }
 
             $this->userManager()->deleteUser($user);
-            $this->addFlashMessage(FlashMessage::TYPE_SUCCESS, 'unregister.success');
+            $this->addFlashMessage(FlashMessage::TYPE_SUCCESS, 'unregister.flash.success');
 
             return $response;
         }
@@ -112,10 +115,5 @@ class RegistrationController extends BaseRegistrationController
     private function httpKernel(): HttpKernel
     {
         return $this->get('http_kernel');
-    }
-
-    private function session(): Session
-    {
-        return $this->get('session');
     }
 }

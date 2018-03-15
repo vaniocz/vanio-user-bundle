@@ -215,6 +215,26 @@
                 <source>form.name</source>
                 <target>Jméno</target>
             </trans-unit>
+
+            <trans-unit id="21ed81c6-d5d1-4c4e-b6a8-c7d8b5fb5e31" resname="unregister.question">
+                <source>unregister.question</source>
+                <target>Opravdu si přejete smazat svůj uživatelský účet?</target>
+            </trans-unit>
+
+            <trans-unit id="4735117d-994b-4718-89f9-49f2f81618d5" resname="unregister.warning">
+                <source>unregister.warning</source>
+                <target>Upozornění: tato akce je nevratná!</target>
+            </trans-unit>
+
+            <trans-unit id="80e27722-a736-4cff-a70f-10f81f214ed8" resname="unregister.button">
+                <source>unregister.button</source>
+                <target>Smazat účet</target>
+            </trans-unit>
+
+            <trans-unit id="340006e9-565b-4990-abc4-b790689d00ee" resname="unregister.flash.success">
+                <source>unregister.flash.success</source>
+                <target>Váš uživatelský účet byl úspěšně smazán.</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>
