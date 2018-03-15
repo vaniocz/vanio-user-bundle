@@ -75,6 +75,11 @@
                 <source>hwi_oauth_connections</source>
                 <target>Propojení účtu</target>
             </trans-unit>
+
+            <trans-unit id="7843726d-b11b-4659-9f15-f1bedcc9888b" resname="vanio_user_unregister">
+                <source>vanio_user_unregister</source>
+                <target>Smazání účtu</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>

@@ -200,6 +200,26 @@
                 <source>form.name</source>
                 <target>Name</target>
             </trans-unit>
+
+            <trans-unit id="11a38858-aa2f-4ca0-a7e4-eb9be06f2d61" resname="unregister.question">
+                <source>unregister.question</source>
+                <target>Do you really want to delete your user account?</target>
+            </trans-unit>
+
+            <trans-unit id="65ee4257-203e-4668-95fb-ec388326d53c" resname="unregister.warning">
+                <source>unregister.warning</source>
+                <target>Warning: this action is irreversible!</target>
+            </trans-unit>
+
+            <trans-unit id="205b7863-f0f1-4cc5-851a-b2cb30d56c0d" resname="unregister.button">
+                <source>unregister.button</source>
+                <target>Unregister</target>
+            </trans-unit>
+
+            <trans-unit id="5032e8dc-3548-42e1-abcb-fabe7cf3e382" resname="unregister.flash.success">
+                <source>unregister.flash.success</source>
+                <target>Your user account has been successfully deleted.</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>

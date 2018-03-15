@@ -75,6 +75,11 @@
                 <source>hwi_oauth_connections</source>
                 <target>Account connections</target>
             </trans-unit>
+
+            <trans-unit id="02b64d61-6fd5-47da-a2ca-5da6d83b2f59" resname="vanio_user_unregister">
+                <source>vanio_user_unregister</source>
+                <target>Unregister</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>
