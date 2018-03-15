@@ -5,7 +5,7 @@
         <locale key="de">/registrierung-stornieren</locale>
         <locale key="cs">/smazat-ucet</locale>
         <locale key="sk">/zmazat-ucet</locale>
-        <locale key="ru">/razregistrirovat</locale>
+        <locale key="ru">/udalit-akkaunt</locale>
         <default key="_controller">VanioUserBundle:Registration:unregister</default>
     </route>
 </routes>
