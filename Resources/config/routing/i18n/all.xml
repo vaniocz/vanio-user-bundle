@@ -10,6 +10,8 @@
         <locale key="ru">/registratsiya</locale>
     </import>
 
+    <import resource="@VanioUserBundle/Resources/config/routing/i18n/unregister.xml" type="be_simple_i18n"/>
+
     <import resource="@VanioUserBundle/Resources/config/routing/i18n/confirmation.xml" type="be_simple_i18n"/>
 
     <import resource="@VanioUserBundle/Resources/config/routing/i18n/resetting.xml" type="be_simple_i18n">
