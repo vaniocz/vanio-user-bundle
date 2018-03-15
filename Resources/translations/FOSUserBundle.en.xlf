@@ -201,8 +201,8 @@
                 <target>Name</target>
             </trans-unit>
 
-            <trans-unit id="11a38858-aa2f-4ca0-a7e4-eb9be06f2d61" resname="unregister.question">
-                <source>unregister.question</source>
+            <trans-unit id="9758f993042aaa5fe314232d700ee905" resname="unregister.heading">
+                <source>unregister.heading</source>
                 <target>Do you really want to delete your user account?</target>
             </trans-unit>
 

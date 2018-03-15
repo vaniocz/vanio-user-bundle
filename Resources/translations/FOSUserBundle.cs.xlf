@@ -216,8 +216,8 @@
                 <target>Jméno</target>
             </trans-unit>
 
-            <trans-unit id="21ed81c6-d5d1-4c4e-b6a8-c7d8b5fb5e31" resname="unregister.question">
-                <source>unregister.question</source>
+            <trans-unit id="9758f993042aaa5fe314232d700ee905" resname="unregister.heading">
+                <source>unregister.heading</source>
                 <target>Opravdu si přejete smazat svůj uživatelský účet?</target>
             </trans-unit>
 
