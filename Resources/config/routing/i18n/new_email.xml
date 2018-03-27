@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<routes xmlns="http://besim.pl/schema/i18n_routing" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://besim.pl/schema/i18n_routing http://besim.pl/schema/i18n_routing/routing-1.0.xsd">
+    <route id="vanio_user_new_email_confirm" methods="GET POST">
+        <locale key="en">/confirm-new-email</locale>
+        <locale key="de">/confirm-new-email</locale>
+        <locale key="cs">/potvrdit-novy-email</locale>
+        <locale key="sk">/potvrdit-novy-email</locale>
+        <locale key="ru">/confirm-new-email</locale>
+        <default key="_controller">VanioUserBundle:NewEmail:confirm</default>
+    </route>
+</routes>

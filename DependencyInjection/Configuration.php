@@ -1,6 +1,8 @@
 <?php
 namespace Vanio\UserBundle\DependencyInjection;
 
+use FOS\UserBundle\Util\LegacyFormHelper;
+use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
 use Vanio\UserBundle\Form\SocialRegistrationFormType;
@@ -10,8 +12,9 @@ class Configuration implements ConfigurationInterface
     public function getConfigTreeBuilder(): TreeBuilder
     {
         $treeBuilder = new TreeBuilder;
+        $rootNode = $treeBuilder->root('vanio_user');
         /* @noinspection PhpUndefinedMethodInspection */
-        $treeBuilder->root('vanio_user')
+        $rootNode
             ->children()
                 ->scalarNode('firewall_name')->defaultNull()->end()
                 ->booleanNode('email_only')->defaultFalse()->end()
@@ -46,6 +49,46 @@ class Configuration implements ConfigurationInterface
                 ->end()
             ->end();
 
+        $this->addNewEmailSection($rootNode);
+
         return $treeBuilder;
+    }
+
+    private function addNewEmailSection(ArrayNodeDefinition $node)
+    {
+        $node
+            ->children()
+                ->arrayNode('new_email')
+                    ->addDefaultsIfNotSet()
+                    ->canBeUnset()
+                    ->children()
+                        ->arrayNode('confirmation')
+                            ->addDefaultsIfNotSet()
+                            ->children()
+                                ->booleanNode('enabled')->defaultFalse()->end()
+                                ->scalarNode('template')->defaultValue('@VanioUser/NewEmail/email.txt.twig')->end()
+                                ->arrayNode('from_email')
+                                    ->canBeUnset()
+                                    ->children()
+                                        ->scalarNode('address')->isRequired()->cannotBeEmpty()->end()
+                                        ->scalarNode('sender_name')->isRequired()->cannotBeEmpty()->end()
+                                    ->end()
+                                ->end()
+                            ->end()
+                        ->end()
+                        ->arrayNode('form')
+                            ->addDefaultsIfNotSet()
+                            ->children()
+                                ->scalarNode('type')->defaultValue(LegacyFormHelper::getType('Vanio\UserBundle\Form\Type\NewEmailFormType'))->end()
+                                ->scalarNode('name')->defaultValue('vanio_user_new_email_form')->end()
+                                ->arrayNode('validation_groups')
+                                    ->prototype('scalar')->end()
+                                    ->defaultValue(array('NewEmail', 'Default'))
+                                ->end()
+                            ->end()
+                        ->end()
+                    ->end()
+                ->end()
+            ->end();
     }
 }

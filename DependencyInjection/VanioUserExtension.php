@@ -46,6 +46,10 @@ class VanioUserExtension extends Extension implements PrependExtensionInterface
                 ->setAbstract(false)
                 ->addTag('kernel.event_subscriber');
         }
+
+        if ($config['new_email']['confirmation']['enabled']) {
+            $this->loadNewEmail($config['new_email'], $container, $loader, $config['from_email']);
+        }
     }
 
     public function prepend(ContainerBuilder $container)
@@ -108,8 +112,55 @@ class VanioUserExtension extends Extension implements PrependExtensionInterface
             'change_password' => [
                 'form' => ['type' => ChangePasswordFormType::class],
             ],
-            'service' => ['mailer' => 'fos_user.mailer.twig_swift'],
+            'service' => ['mailer' => 'vanio_user.mailer.twig_swift'],
         ]);
+    }
+
+    private function loadNewEmail(array $config, ContainerBuilder $container, XmlFileLoader $loader, array $fromEmail)
+    {
+        $loader->load('new_email_confirmation.xml');
+
+        if (isset($config['confirmation']['from_email'])) {
+            // overwrite the global one
+            $fromEmail = $config['confirmation']['from_email'];
+            unset($config['confirmation']['from_email']);
+        }
+        $container->setParameter('vanio_user.new_email.confirmation.from_email', [$fromEmail['address'] => $fromEmail['sender_name']]);
+
+        $this->remapParametersNamespaces($config, $container, array(
+            'confirmation' => 'fos_user.registration.confirmation.%s',
+        //    'form' => 'fos_user.registration.form.%s',
+        ));
+    }
+
+    protected function remapParameters(array $config, ContainerBuilder $container, array $map)
+    {
+        foreach ($map as $name => $paramName) {
+            if (array_key_exists($name, $config)) {
+                $container->setParameter($paramName, $config[$name]);
+            }
+        }
+    }
+
+    protected function remapParametersNamespaces(array $config, ContainerBuilder $container, array $namespaces)
+    {
+        foreach ($namespaces as $ns => $map) {
+            if ($ns) {
+                if (!array_key_exists($ns, $config)) {
+                    continue;
+                }
+                $namespaceConfig = $config[$ns];
+            } else {
+                $namespaceConfig = $config;
+            }
+            if (is_array($map)) {
+                $this->remapParameters($namespaceConfig, $container, $map);
+            } else {
+                foreach ($namespaceConfig as $name => $value) {
+                    $container->setParameter(sprintf($map, $name), $value);
+                }
+            }
+        }
     }
 
     /**

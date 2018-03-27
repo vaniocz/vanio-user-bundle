@@ -3,4 +3,5 @@
     <import resource="@FOSUserBundle/Resources/config/routing/all.xml"/>
     <import resource="@VanioUserBundle/Resources/config/routing/confirmation.xml"/>
     <import resource="@VanioUserBundle/Resources/config/routing/unregister.xml"/>
+    <import resource="@VanioUserBundle/Resources/config/routing/new_email.xml"/>
 </routes>
