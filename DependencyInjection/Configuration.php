@@ -5,6 +5,7 @@ use FOS\UserBundle\Util\LegacyFormHelper;
 use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
+use Vanio\UserBundle\Form\ChangeEmailFormType;
 use Vanio\UserBundle\Form\SocialRegistrationFormType;
 
 class Configuration implements ConfigurationInterface
@@ -58,15 +59,15 @@ class Configuration implements ConfigurationInterface
     {
         $node
             ->children()
-                ->arrayNode('new_email')
+                ->arrayNode('change_email')
                     ->addDefaultsIfNotSet()
                     ->canBeUnset()
                     ->children()
                         ->arrayNode('confirmation')
                             ->addDefaultsIfNotSet()
                             ->children()
-                                ->booleanNode('enabled')->defaultFalse()->end()
-                                ->scalarNode('template')->defaultValue('@VanioUser/NewEmail/email.txt.twig')->end()
+                                ->booleanNode('enabled')->defaultNull()->end()
+                                ->scalarNode('template')->defaultValue('@VanioUser/ChangeEmail/email.html.twig')->end()
                                 ->arrayNode('from_email')
                                     ->canBeUnset()
                                     ->children()
@@ -79,11 +80,11 @@ class Configuration implements ConfigurationInterface
                         ->arrayNode('form')
                             ->addDefaultsIfNotSet()
                             ->children()
-                                ->scalarNode('type')->defaultValue(LegacyFormHelper::getType('Vanio\UserBundle\Form\Type\NewEmailFormType'))->end()
-                                ->scalarNode('name')->defaultValue('vanio_user_new_email_form')->end()
+                                ->scalarNode('type')->defaultValue(ChangeEmailFormType::class)->end()
+                                ->scalarNode('name')->defaultValue('vanio_user_change_email_form')->end()
                                 ->arrayNode('validation_groups')
                                     ->prototype('scalar')->end()
-                                    ->defaultValue(array('NewEmail', 'Default'))
+                                    ->defaultValue(array('ChangeEmail', 'Default'))
                                 ->end()
                             ->end()
                         ->end()

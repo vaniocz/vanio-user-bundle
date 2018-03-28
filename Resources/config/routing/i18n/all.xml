@@ -37,7 +37,7 @@
         <locale key="ru">/moy-profayl</locale>
     </import>
 
-    <import resource="@VanioUserBundle/Resources/config/routing/i18n/new_email.xml" type="be_simple_i18n">
+    <import resource="@VanioUserBundle/Resources/config/routing/i18n/change_email.xml" type="be_simple_i18n">
         <locale key="en">/my-profile</locale>
         <locale key="de">/mein-profil</locale>
         <locale key="cs">/muj-profil</locale>

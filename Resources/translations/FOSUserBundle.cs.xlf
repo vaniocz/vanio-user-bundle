@@ -235,6 +235,31 @@
                 <source>unregister.flash.success</source>
                 <target>Váš uživatelský účet byl úspěšně smazán.</target>
             </trans-unit>
+
+            <trans-unit id="eae852cf-677f-43f0-87d0-3b394ed26b2f" resname="change_email.email.subject">
+                <source>change_email.email.subject</source>
+                <target>Změna e-mailu</target>
+            </trans-unit>
+
+            <trans-unit id="c24b7703-e8d6-425b-a309-b95aa4d8ab09" resname="change_email.email.message">
+                <source>change_email.email.message</source>
+                <target>
+                    <![CDATA[
+                        <h1>Dobrý den,</h1>
+                        <p>Pro potvrzení změny Vašeho e-mailu klikněte na <a href="%confirmationUrl%">tento odkaz</a>.</p>
+                    ]]>
+                </target>
+            </trans-unit>
+
+            <trans-unit id="bb324bb7-ef92-45f7-806b-019b31d57305" resname="change_email.flash.confirmation_required">
+                <source>change_email.flash.confirmation_required</source>
+                <target>Změnu e-mailu je nutné potvrdit odkazem, který jsme vám zaslali na nový e-mail. Dokud změnu nepotvrdíte, bude platit váš původní e-mail. Děkujeme za pochopení.</target>
+            </trans-unit>
+
+            <trans-unit id="75f055c0-1247-47d7-8e18-d206966e1b94" resname="change_email.flash.success">
+                <source>change_email.flash.success</source>
+                <target>Váš e-mail byl úspěšně změněn. Nyní již můžete pro přihlášení použít svůj nový e-mail.</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>

@@ -47,8 +47,12 @@ class VanioUserExtension extends Extension implements PrependExtensionInterface
                 ->addTag('kernel.event_subscriber');
         }
 
-        if ($config['new_email']['confirmation']['enabled']) {
-            $this->loadNewEmail($config['new_email'], $container, $loader, $config['from_email']);
+        $changeEmailEnabled = isset($config['change_email']['confirmation']['enabled'])
+            ? $config['change_email']['confirmation']['enabled']
+            : $container->getParameter('fos_user.registration.confirmation.enabled');
+
+        if ($changeEmailEnabled) {
+            $this->loadChangeEmail($config['change_email'], $container, $loader);
         }
     }
 
@@ -116,20 +120,24 @@ class VanioUserExtension extends Extension implements PrependExtensionInterface
         ]);
     }
 
-    private function loadNewEmail(array $config, ContainerBuilder $container, XmlFileLoader $loader, array $fromEmail)
+    private function loadChangeEmail(array $config, ContainerBuilder $container, XmlFileLoader $loader)
     {
-        $loader->load('new_email_confirmation.xml');
+        $loader->load('change_email_confirmation.xml');
 
         if (isset($config['confirmation']['from_email'])) {
             // overwrite the global one
-            $fromEmail = $config['confirmation']['from_email'];
+            $fromEmail = [
+                $config['confirmation']['from_email']['address'] => $config['confirmation']['from_email']['sender_name'],
+            ];
             unset($config['confirmation']['from_email']);
+        } else {
+            $fromEmail = $container->getParameter('fos_user.registration.confirmation.from_email');
         }
-        $container->setParameter('vanio_user.new_email.confirmation.from_email', [$fromEmail['address'] => $fromEmail['sender_name']]);
+        $container->setParameter('vanio_user.change_email.confirmation.from_email', $fromEmail);
 
         $this->remapParametersNamespaces($config, $container, array(
-            'confirmation' => 'fos_user.registration.confirmation.%s',
-        //    'form' => 'fos_user.registration.form.%s',
+            'confirmation' => 'vanio_user.change_email.confirmation.%s',
+            'form' => 'vanio_user.change_email.form.%s',
         ));
     }
 

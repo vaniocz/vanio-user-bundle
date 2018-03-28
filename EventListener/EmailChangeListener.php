@@ -1,15 +1,15 @@
 <?php
 namespace Vanio\UserBundle\EventListener;
 
-use FOS\UserBundle\Event\FilterUserResponseEvent;
 use FOS\UserBundle\Event\FormEvent;
 use FOS\UserBundle\Event\GetResponseUserEvent;
 use FOS\UserBundle\FOSUserEvents;
-use FOS\UserBundle\Model\UserManagerInterface;
 use FOS\UserBundle\Util\TokenGeneratorInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
+use Symfony\Component\HttpFoundation\Session\Session;
 use Vanio\UserBundle\Mailer\TwigSwiftMailer;
 use Vanio\UserBundle\Model\User;
+use Vanio\WebBundle\Translation\FlashMessage;
 
 class EmailChangeListener implements EventSubscriberInterface
 {
@@ -22,14 +22,14 @@ class EmailChangeListener implements EventSubscriberInterface
     /** @var TwigSwiftMailer */
     private $mailer;
 
-    /** @var UserManagerInterface */
-    private $userManager;
+    /** @var Session */
+    private $session;
 
-    public function __construct(TokenGeneratorInterface $tokenGenerator, TwigSwiftMailer $mailer, UserManagerInterface $userManager)
+    public function __construct(TokenGeneratorInterface $tokenGenerator, TwigSwiftMailer $mailer, Session $session)
     {
         $this->tokenGenerator = $tokenGenerator;
         $this->mailer = $mailer;
-        $this->userManager = $userManager;
+        $this->session = $session;
     }
 
     public static function getSubscribedEvents(): array
@@ -37,7 +37,6 @@ class EmailChangeListener implements EventSubscriberInterface
         return [
             FOSUserEvents::PROFILE_EDIT_INITIALIZE => 'onProfileEditInitialize',
             FOSUserEvents::PROFILE_EDIT_SUCCESS => 'onProfileEditSuccess',
-            FOSUserEvents::PROFILE_EDIT_COMPLETED => 'onProfileEditCompleted',
         ];
     }
 
@@ -53,16 +52,14 @@ class EmailChangeListener implements EventSubscriberInterface
 
         if ($user->getEmail() !== $this->oldEmail) {
             $user->requestNewEmail($user->getEmail(), $this->tokenGenerator->generateToken());
+            $user->setEmail($this->oldEmail);
 
-            $this->mailer->sendNewEmailConfirmationMessage($user);
+            $this->mailer->sendChangeEmailConfirmationMessage($user);
+
+            $this->session->getFlashBag()->add(
+                FlashMessage::TYPE_WARNING,
+                new FlashMessage('change_email.flash.confirmation_required', [], 'FOSUserBundle')
+            );
         }
-    }
-
-    public function onProfileEditCompleted(FilterUserResponseEvent $event)
-    {
-        $user = $event->getUser();
-        $user->setEmail($this->oldEmail);
-
-        $this->userManager->updateUser($user);
     }
 }

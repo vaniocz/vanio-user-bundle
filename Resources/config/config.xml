@@ -15,7 +15,7 @@
         <parameter key="vanio_user.routing.router.class">Vanio\UserBundle\Routing\Router</parameter>
         <parameter key="vanio_user.templating.user_extension.class">Vanio\UserBundle\Templating\UserExtension</parameter>
         <parameter key="vanio_user.listener.email_change.class">Vanio\UserBundle\EventListener\EmailChangeListener</parameter>
-        <parameter key="vanio_user.new_email.confirmation.template">@VanioUser/NewEmail/email.txt.twig</parameter>
+        <parameter key="vanio_user.change_email.confirmation.template">@VanioUser/ChangeEmail/email.html.twig</parameter>
     </parameters>
 
     <services>
@@ -83,12 +83,12 @@
                 <argument key="template" type="collection">
                     <argument key="confirmation">%fos_user.registration.confirmation.template%</argument>
                     <argument key="resetting">%fos_user.resetting.email.template%</argument>
-                    <argument key="new_email">%vanio_user.new_email.confirmation.template%</argument>
+                    <argument key="change_email">%vanio_user.change_email.confirmation.template%</argument>
                 </argument>
                 <argument key="from_email" type="collection">
                     <argument key="confirmation">%fos_user.registration.confirmation.from_email%</argument>
                     <argument key="resetting">%fos_user.resetting.email.from_email%</argument>
-                    <argument key="new_email">%fos_user.registration.confirmation.from_email%</argument>
+                    <argument key="change_email">%vanio_user.change_email.confirmation.from_email%</argument>
                 </argument>
             </argument>
         </service>
@@ -97,7 +97,7 @@
             <tag name="kernel.event_subscriber" />
             <argument type="service" id="fos_user.util.token_generator" />
             <argument type="service" id="fos_user.mailer" />
-            <argument type="service" id="fos_user.user_manager" />
+            <argument type="service" id="session" />
         </service>
     </services>
 </container>
