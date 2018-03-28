@@ -1,5 +1,5 @@
 <?php
-namespace Vanio\UserBundle\EventListener;
+namespace Vanio\UserBundle\Security;
 
 use FOS\UserBundle\Event\FormEvent;
 use FOS\UserBundle\Event\GetResponseUserEvent;
