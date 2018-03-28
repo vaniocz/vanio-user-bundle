@@ -80,6 +80,11 @@
                 <source>vanio_user_unregister</source>
                 <target>Unregister</target>
             </trans-unit>
+
+            <trans-unit id="6bc7e5ef-14aa-4217-9f90-c81674188ca2" resname="vanio_user_change_email_confirm">
+                <source>vanio_user_change_email_confirm</source>
+                <target>Confirm e-mail change</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>

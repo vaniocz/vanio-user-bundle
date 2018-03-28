@@ -19,7 +19,7 @@ class ChangeEmailFormType extends AbstractType
         }
 
         $builder->add('password', PasswordType::class, [
-            'label' => 'form.current_password',
+            'label' => 'form.password',
             'translation_domain' => 'FOSUserBundle',
             'mapped' => false,
             'constraints' => new UserPassword($constraintsOptions),

@@ -220,6 +220,41 @@
                 <source>unregister.flash.success</source>
                 <target>Your user account has been successfully deleted.</target>
             </trans-unit>
+
+            <trans-unit id="d76884ee-474a-4f73-984e-234315e16d07" resname="change_email.email.subject">
+                <source>change_email.email.subject</source>
+                <target>Change E-mail</target>
+            </trans-unit>
+
+            <trans-unit id="e345b278-fa5d-42dc-a773-23d64a59911f" resname="change_email.email.message">
+                <source>change_email.email.message</source>
+                <target>
+                    <![CDATA[
+                        <h1>Hello,</h1>
+                        <p>To confirm change of your e-mail please visit <a href="%confirmationUrl%">this link</a>.</p>
+                    ]]>
+                </target>
+            </trans-unit>
+
+            <trans-unit id="561b58ed-bdec-433b-b22a-ed2723ffdbaf" resname="change_email.flash.confirmation_required">
+                <source>change_email.flash.confirmation_required</source>
+                <target>You need to confirm change of e-mail with a link which was sent to your new e-mail address. Until you confirm the change, your original e-mail will be valid. Thank you for understanding.</target>
+            </trans-unit>
+
+            <trans-unit id="28bbe2c3-f167-485c-9fb6-2231361cef6f" resname="change_email.flash.success">
+                <source>change_email.flash.success</source>
+                <target>Your e-mail has been changed. You can now login with the new e-mail.</target>
+            </trans-unit>
+
+            <trans-unit id="2ea430be-7f8d-4cbd-9be0-12053583f839" resname="change_email.form.info">
+                <source>change_email.form.info</source>
+                <target>To complete change of e-mail, please input your password.</target>
+            </trans-unit>
+
+            <trans-unit id="c2271ac2-5023-410a-b2ac-6523456d08e7" resname="change_email.form.submit">
+                <source>change_email.form.submit</source>
+                <target>Confirm</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>

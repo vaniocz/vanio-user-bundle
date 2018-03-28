@@ -260,6 +260,16 @@
                 <source>change_email.flash.success</source>
                 <target>Váš e-mail byl úspěšně změněn. Nyní již můžete pro přihlášení použít svůj nový e-mail.</target>
             </trans-unit>
+
+            <trans-unit id="b200d73e-c632-4f7c-9669-4ed1750abcaa" resname="change_email.form.info">
+                <source>change_email.form.info</source>
+                <target>Pro dokončení změny e-mailu zadejte, prosím, své uživatelské heslo.</target>
+            </trans-unit>
+
+            <trans-unit id="20a1b4f9-223e-40ff-8f4f-9b7c6f81a6da" resname="change_email.form.submit">
+                <source>change_email.form.submit</source>
+                <target>Potvrdit</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>

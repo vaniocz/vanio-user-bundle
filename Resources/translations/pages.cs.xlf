@@ -80,6 +80,11 @@
                 <source>vanio_user_unregister</source>
                 <target>Smazání účtu</target>
             </trans-unit>
+
+            <trans-unit id="d93fabc1-a22c-4991-bc5b-d30fc4ed7938" resname="vanio_user_change_email_confirm">
+                <source>vanio_user_change_email_confirm</source>
+                <target>Potvrzení změny e-mailu</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>

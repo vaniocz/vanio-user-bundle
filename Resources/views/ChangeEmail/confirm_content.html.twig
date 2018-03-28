@@ -1,12 +1,16 @@
 {% trans_default_domain 'FOSUserBundle' %}
 
+{% block info %}
+    <p>{{ 'change_email.form.info'|trans }}</p>
+{% endblock %}
+
 {% block form %}
     {{ form_start(form, {attr: formAttributes ?? {class: 'fos_user_change_password'}}) }}
         {% block formFields %}
             {{ form_widget(form) }}
 
             <div class="form-buttons form-group">
-                <button class="btn btn-primary">{{ 'change_email.submit'|trans }}</button>
+                <button class="btn btn-primary">{{ 'change_email.form.submit'|trans }}</button>
             </div>
         {% endblock %}
     {{ form_end(form) }}
