@@ -50,12 +50,12 @@ class Configuration implements ConfigurationInterface
                 ->end()
             ->end();
 
-        $this->addNewEmailSection($rootNode);
+        $this->addChangeEmailSection($rootNode);
 
         return $treeBuilder;
     }
 
-    private function addNewEmailSection(ArrayNodeDefinition $node)
+    private function addChangeEmailSection(ArrayNodeDefinition $node)
     {
         $node
             ->children()

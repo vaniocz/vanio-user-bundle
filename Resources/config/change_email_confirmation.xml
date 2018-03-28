@@ -1,30 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
     <parameters>
-        <parameter key="vanio_user.mailer.twig_swift.class">Vanio\UserBundle\Mailer\TwigSwiftMailer</parameter>
         <parameter key="vanio_user.listener.email_change.class">Vanio\UserBundle\Security\EmailChangeListener</parameter>
-        <parameter key="vanio_user.change_email.confirmation.template">@VanioUser/ChangeEmail/email.html.twig</parameter>
     </parameters>
 
     <services>
-        <service id="vanio_user.mailer.twig_swift" class="%vanio_user.mailer.twig_swift.class%" public="false">
-            <argument type="service" id="mailer" />
-            <argument type="service" id="router" />
-            <argument type="service" id="twig" />
-            <argument type="collection">
-                <argument key="template" type="collection">
-                    <argument key="confirmation">%fos_user.registration.confirmation.template%</argument>
-                    <argument key="resetting">%fos_user.resetting.email.template%</argument>
-                    <argument key="change_email">%vanio_user.change_email.confirmation.template%</argument>
-                </argument>
-                <argument key="from_email" type="collection">
-                    <argument key="confirmation">%fos_user.registration.confirmation.from_email%</argument>
-                    <argument key="resetting">%fos_user.resetting.email.from_email%</argument>
-                    <argument key="change_email">%vanio_user.change_email.confirmation.from_email%</argument>
-                </argument>
-            </argument>
-        </service>
-
         <service id="vanio_user.listener.email_change" class="%vanio_user.listener.email_change.class%">
             <argument type="service" id="fos_user.util.token_generator" />
             <argument type="service" id="fos_user.mailer" />
