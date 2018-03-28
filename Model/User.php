@@ -13,19 +13,19 @@ abstract class User extends BaseUser
 
     /**
      * @var string|null
-     * @ORM\Column
+     * @ORM\Column(type="string", nullable=true)
      */
     protected $newEmail;
 
     /**
      * @var string|null
-     * @ORM\Column
+     * @ORM\Column(type="string", nullable=true)
      */
     protected $newEmailConfirmationToken;
 
     /**
      * @var \DateTime|null
-     * @ORM\Column
+     * @ORM\Column(type="datetime", nullable=true)
      */
     protected $newEmailRequestedAt;
 

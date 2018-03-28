@@ -11,7 +11,7 @@ use Vanio\UserBundle\Mailer\TwigSwiftMailer;
 use Vanio\UserBundle\Model\User;
 use Vanio\WebBundle\Translation\FlashMessage;
 
-class EmailChangeListener implements EventSubscriberInterface
+class EmailChangeConfirmationListener implements EventSubscriberInterface
 {
     /** @var string|null */
     private $oldEmail;
