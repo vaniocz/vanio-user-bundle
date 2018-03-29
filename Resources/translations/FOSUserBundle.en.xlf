@@ -191,7 +191,7 @@
                 <target>Change password</target>
             </trans-unit>
 
-            <trans-unit id="profile.show.connect" resname="profile.show.connect">
+            <trans-unit id="44f4ce5248b1ad6ec3cda82c37e59183" resname="profile.show.connect">
                 <source>profile.show.connect</source>
                 <target>Account connections</target>
             </trans-unit>
@@ -206,27 +206,27 @@
                 <target>Do you really want to delete your user account?</target>
             </trans-unit>
 
-            <trans-unit id="65ee4257-203e-4668-95fb-ec388326d53c" resname="unregister.warning">
+            <trans-unit id="a1d4244256e481dccf528e0271c30040" resname="unregister.warning">
                 <source>unregister.warning</source>
                 <target>Warning: this action is irreversible!</target>
             </trans-unit>
 
-            <trans-unit id="205b7863-f0f1-4cc5-851a-b2cb30d56c0d" resname="unregister.button">
+            <trans-unit id="5cd58ecbea52a898012e5afade3a2810" resname="unregister.button">
                 <source>unregister.button</source>
                 <target>Unregister</target>
             </trans-unit>
 
-            <trans-unit id="5032e8dc-3548-42e1-abcb-fabe7cf3e382" resname="unregister.flash.success">
+            <trans-unit id="7a0a17cd91f6e5123ab92eacdcfc8a7d" resname="unregister.flash.success">
                 <source>unregister.flash.success</source>
                 <target>Your user account has been successfully deleted.</target>
             </trans-unit>
 
-            <trans-unit id="d76884ee-474a-4f73-984e-234315e16d07" resname="change_email.email.subject">
+            <trans-unit id="3470151e8308ec57df38a6d06951ebf8" resname="change_email.email.subject">
                 <source>change_email.email.subject</source>
                 <target>Change E-mail</target>
             </trans-unit>
 
-            <trans-unit id="e345b278-fa5d-42dc-a773-23d64a59911f" resname="change_email.email.message">
+            <trans-unit id="0310a79b7ef80ff6f532142667aafdd5" resname="change_email.email.message">
                 <source>change_email.email.message</source>
                 <target>
                     <![CDATA[
@@ -236,22 +236,22 @@
                 </target>
             </trans-unit>
 
-            <trans-unit id="561b58ed-bdec-433b-b22a-ed2723ffdbaf" resname="change_email.flash.confirmation_required">
+            <trans-unit id="24fc0a17001a2b77bad25169f478c9eb" resname="change_email.flash.confirmation_required">
                 <source>change_email.flash.confirmation_required</source>
                 <target>You need to confirm change of e-mail with a link which was sent to your new e-mail address. Until you confirm the change, your original e-mail will be valid. Thank you for understanding.</target>
             </trans-unit>
 
-            <trans-unit id="28bbe2c3-f167-485c-9fb6-2231361cef6f" resname="change_email.flash.success">
+            <trans-unit id="809812cf7d17f0015b24e3d0d0ff1948" resname="change_email.flash.success">
                 <source>change_email.flash.success</source>
                 <target>Your e-mail has been changed. You can now login with the new e-mail.</target>
             </trans-unit>
 
-            <trans-unit id="2ea430be-7f8d-4cbd-9be0-12053583f839" resname="change_email.form.info">
+            <trans-unit id="36958b7863986614b3ed76e1adb02965" resname="change_email.form.info">
                 <source>change_email.form.info</source>
                 <target>To complete change of e-mail, please input your password.</target>
             </trans-unit>
 
-            <trans-unit id="c2271ac2-5023-410a-b2ac-6523456d08e7" resname="change_email.form.submit">
+            <trans-unit id="4a41e1db27d22ac5962a9a3301b64241" resname="change_email.form.submit">
                 <source>change_email.form.submit</source>
                 <target>Confirm</target>
             </trans-unit>

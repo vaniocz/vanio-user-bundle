@@ -76,12 +76,12 @@
                 <target>Propojení účtu</target>
             </trans-unit>
 
-            <trans-unit id="7843726d-b11b-4659-9f15-f1bedcc9888b" resname="vanio_user_unregister">
+            <trans-unit id="bfc9d9ae245e49f518bf4c7309deee3f" resname="vanio_user_unregister">
                 <source>vanio_user_unregister</source>
                 <target>Smazání účtu</target>
             </trans-unit>
 
-            <trans-unit id="d93fabc1-a22c-4991-bc5b-d30fc4ed7938" resname="vanio_user_change_email_confirm">
+            <trans-unit id="011fbe9202fa712f1f991ffbceeb1780" resname="vanio_user_change_email_confirm">
                 <source>vanio_user_change_email_confirm</source>
                 <target>Potvrzení změny e-mailu</target>
             </trans-unit>
