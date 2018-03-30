@@ -9,17 +9,20 @@ class TwigSwiftMailer extends BaseTwigSwiftMailer
 {
     public function sendChangeEmailConfirmationMessage(User $user)
     {
-        $template = $this->parameters['template']['change_email'];
-        $url = $this->router->generate(
+        $confirmationUrl = $this->router->generate(
             'vanio_user_change_email_confirm',
             ['token' => $user->getNewEmailConfirmationToken()],
             UrlGeneratorInterface::ABSOLUTE_URL
         );
-        $context = [
+        $data = [
             'user' => $user,
-            'confirmationUrl' => $url,
+            'confirmationUrl' => $confirmationUrl,
         ];
-
-        $this->sendMessage($template, $context, $this->parameters['from_email']['change_email'], (string) $user->getNewEmail());
+        $this->sendMessage(
+            $this->parameters['template']['change_email'],
+            $data,
+            $this->parameters['from_email']['change_email'],
+            (string) $user->getNewEmail()
+        );
     }
 }

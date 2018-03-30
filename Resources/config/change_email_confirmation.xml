@@ -6,10 +6,10 @@
 
     <services>
         <service id="vanio_user.listener.email_change_confirmation_listener" class="%vanio_user.listener.email_change_confirmation_listener.class%">
-            <argument type="service" id="fos_user.util.token_generator" />
-            <argument type="service" id="fos_user.mailer" />
-            <argument type="service" id="session" />
-            <tag name="kernel.event_subscriber" />
+            <argument type="service" id="fos_user.util.token_generator"/>
+            <argument type="service" id="fos_user.mailer"/>
+            <argument type="service" id="session"/>
+            <tag name="kernel.event_subscriber"/>
         </service>
     </services>
 </container>

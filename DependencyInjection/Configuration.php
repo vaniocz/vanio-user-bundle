@@ -13,9 +13,7 @@ class Configuration implements ConfigurationInterface
     public function getConfigTreeBuilder(): TreeBuilder
     {
         $treeBuilder = new TreeBuilder;
-        $rootNode = $treeBuilder->root('vanio_user');
-        /* @noinspection PhpUndefinedMethodInspection */
-        $rootNode
+        $treeBuilder->root('vanio_user')
             ->children()
                 ->scalarNode('firewall_name')->defaultNull()->end()
                 ->booleanNode('email_only')->defaultFalse()->end()
@@ -48,17 +46,6 @@ class Configuration implements ConfigurationInterface
                         ->end()
                     ->end()
                 ->end()
-            ->end();
-
-        $this->addChangeEmailSection($rootNode);
-
-        return $treeBuilder;
-    }
-
-    private function addChangeEmailSection(ArrayNodeDefinition $node)
-    {
-        $node
-            ->children()
                 ->arrayNode('change_email')
                     ->addDefaultsIfNotSet()
                     ->canBeUnset()
@@ -84,12 +71,14 @@ class Configuration implements ConfigurationInterface
                                 ->scalarNode('name')->defaultValue('vanio_user_change_email_form')->end()
                                 ->arrayNode('validation_groups')
                                     ->prototype('scalar')->end()
-                                    ->defaultValue(array('ChangeEmail', 'Default'))
+                                    ->defaultValue(['ChangeEmail', 'Default'])
                                 ->end()
                             ->end()
                         ->end()
                     ->end()
                 ->end()
             ->end();
+
+        return $treeBuilder;
     }
 }
