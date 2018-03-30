@@ -256,6 +256,11 @@
                 <target>Změnu e-mailu je nutné potvrdit odkazem, který jsme vám zaslali na nový e-mail. Dokud změnu nepotvrdíte, bude platit váš původní e-mail. Děkujeme za pochopení.</target>
             </trans-unit>
 
+            <trans-unit id="dde6715373995d67e12c88aba1d84765" resname="change_email.flash.confirmation_token_not_found">
+                <source>change_email.flash.confirmation_token_not_found</source>
+                <target>E-mail byl již pravděpodobně změnen nebo došlo k novému požadavku pro změnu e-mailu. V případě nového požadavku použijte odkaz z nového e-mailu.</target>
+            </trans-unit>
+
             <trans-unit id="809812cf7d17f0015b24e3d0d0ff1948" resname="change_email.flash.success">
                 <source>change_email.flash.success</source>
                 <target>Váš e-mail byl úspěšně změněn. Nyní již můžete pro přihlášení použít svůj nový e-mail.</target>

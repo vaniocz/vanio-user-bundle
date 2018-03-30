@@ -76,15 +76,17 @@
         </service>
 
         <service id="vanio_user.mailer.twig_swift" class="%vanio_user.mailer.twig_swift.class%" public="false">
-            <argument type="service" id="mailer" />
-            <argument type="service" id="router" />
-            <argument type="service" id="twig" />
+            <argument type="service" id="mailer"/>
+            <argument type="service" id="router"/>
+            <argument type="service" id="twig"/>
+
             <argument type="collection">
                 <argument key="template" type="collection">
                     <argument key="confirmation">%fos_user.registration.confirmation.template%</argument>
                     <argument key="resetting">%fos_user.resetting.email.template%</argument>
                     <argument key="change_email">%vanio_user.change_email.confirmation.template%</argument>
                 </argument>
+
                 <argument key="from_email" type="collection">
                     <argument key="confirmation">%fos_user.registration.confirmation.from_email%</argument>
                     <argument key="resetting">%fos_user.resetting.email.from_email%</argument>

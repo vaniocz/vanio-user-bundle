@@ -47,8 +47,11 @@ class EmailChangeConfirmationListener implements EventSubscriberInterface
 
     public function onProfileEditSuccess(FormEvent $event)
     {
-        /** @var User $user */
         $user = $event->getForm()->getData();
+
+        if (!$user instanceof User) {
+            return;
+        }
 
         if ($user->getEmail() !== $this->oldEmail) {
             $user->requestNewEmail($user->getEmail(), $this->tokenGenerator->generateToken());
@@ -56,10 +59,8 @@ class EmailChangeConfirmationListener implements EventSubscriberInterface
 
             $this->mailer->sendChangeEmailConfirmationMessage($user);
 
-            $this->session->getFlashBag()->add(
-                FlashMessage::TYPE_WARNING,
-                new FlashMessage('change_email.flash.confirmation_required', [], 'FOSUserBundle')
-            );
+            $flashMessage = new FlashMessage('change_email.flash.confirmation_required', [], 'FOSUserBundle');
+            $this->session->getFlashBag()->add(FlashMessage::TYPE_WARNING, $flashMessage);
         }
     }
 }

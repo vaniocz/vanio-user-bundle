@@ -3,27 +3,25 @@ namespace Vanio\UserBundle\Controller;
 
 use FOS\UserBundle\Model\UserManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 use Vanio\DiExtraBundle\Controller;
 use Vanio\UserBundle\Form\ChangeEmailFormType;
 use Vanio\UserBundle\Model\User;
+use Vanio\WebBundle\Request\RefererHelperTrait;
 use Vanio\WebBundle\Translation\FlashMessage;
 
 class ChangeEmailController extends Controller
 {
+    use RefererHelperTrait;
+
     public function confirmAction(Request $request, string $token)
     {
-        /** @var TokenStorageInterface $tokenStorage */
-        $tokenStorage = $this->get('security.token_storage');
-        /** @var UserManagerInterface $userManager */
-        $userManager = $this->get('fos_user.user_manager');
+        $user = $this->userManager()->findUserBy(['newEmailConfirmationToken' => $token]);
 
-        /** @var User $user */
-        $user = $userManager->findUserBy(['newEmailConfirmationToken' => $token]);
+        if (!$user || !$user instanceof User) {
+            $this->addFlashMessage(FlashMessage::TYPE_DANGER, 'change_email.flash.confirmation_token_not_found');
 
-        if (null === $user) {
-            throw new NotFoundHttpException(sprintf('The user with "confirmation token" does not exist for value "%s"', $token));
+            return $this->redirectToReferer();
         }
 
         $form = $this->createForm(ChangeEmailFormType::class, $user);
@@ -32,13 +30,10 @@ class ChangeEmailController extends Controller
         if ($form->isSubmitted() && $form->isValid()) {
             $user->setEmail($user->getNewEmail());
             $user->removeNewEmailRequest();
+            $this->userManager()->updateUser($user);
 
-            $userManager->updateUser($user);
-
-            $flashMessage = new FlashMessage('change_email.flash.success', [], 'FOSUserBundle');
-            $this->addFlash(FlashMessage::TYPE_SUCCESS, $flashMessage);
-
-            $tokenStorage->setToken();
+            $this->addFlashMessage(FlashMessage::TYPE_SUCCESS, 'change_email.flash.success');
+            $this->tokenStorage()->setToken(null);
 
             return $this->redirectToRoute('fos_user_security_login');
         }
@@ -47,5 +42,20 @@ class ChangeEmailController extends Controller
             'token' => $token,
             'form' => $form->createView(),
         ]);
+    }
+
+    private function addFlashMessage(string $type, string $message, array $parameters = [])
+    {
+        $this->addFlash($type, new FlashMessage($message, $parameters, 'FOSUserBundle'));
+    }
+
+    private function tokenStorage(): TokenStorageInterface
+    {
+        return $this->get('security.token_storage');
+    }
+
+    private function userManager(): UserManagerInterface
+    {
+        return $this->get('fos_user.user_manager');
     }
 }

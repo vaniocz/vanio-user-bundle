@@ -241,6 +241,11 @@
                 <target>You need to confirm change of e-mail with a link which was sent to your new e-mail address. Until you confirm the change, your original e-mail will be valid. Thank you for understanding.</target>
             </trans-unit>
 
+            <trans-unit id="dde6715373995d67e12c88aba1d84765" resname="change_email.flash.confirmation_token_not_found">
+                <source>change_email.flash.confirmation_token_not_found</source>
+                <target>E-mail was probably already changed or you have requested a new e-mail change. Use link from new e-mail in case of the new request.</target>
+            </trans-unit>
+
             <trans-unit id="809812cf7d17f0015b24e3d0d0ff1948" resname="change_email.flash.success">
                 <source>change_email.flash.success</source>
                 <target>Your e-mail has been changed. You can now login with the new e-mail.</target>
