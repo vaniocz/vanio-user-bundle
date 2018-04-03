@@ -18,7 +18,7 @@ class ChangeEmailController extends Controller
     {
         $user = $this->userManager()->findUserBy(['newEmailConfirmationToken' => $token]);
 
-        if (!$user || !$user instanceof User) {
+        if (!is_a($user, User::class, true)) {
             $this->addFlashMessage(FlashMessage::TYPE_DANGER, 'change_email.flash.confirmation_token_not_found');
 
             return $this->redirectToReferer();

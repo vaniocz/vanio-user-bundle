@@ -5,6 +5,7 @@
             <option name="fields">name</option>
             <option name="errorPath">name</option>
             <option name="message">fos_group.name.already_used</option>
+
             <option name="groups">
                 <value>Registration</value>
             </option>

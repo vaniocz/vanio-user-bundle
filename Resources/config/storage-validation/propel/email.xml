@@ -4,6 +4,7 @@
         <constraint name="Propel\PropelBundle\Validator\Constraints\UniqueObject">
             <option name="fields">email_canonical</option>
             <option name="message">fos_user.email.already_used</option>
+
             <option name="groups">
                 <value>Registration</value>
                 <value>Profile</value>
@@ -14,6 +15,7 @@
             <option name="fields">emailCanonical</option>
             <option name="errorPath">email</option>
             <option name="message">fos_user.email.social_already_used</option>
+
             <option name="groups">
                 <value>SocialRegistration</value>
             </option>

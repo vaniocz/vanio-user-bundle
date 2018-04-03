@@ -50,7 +50,10 @@ class EmailChangeConfirmationListener implements EventSubscriberInterface
         $user = $event->getForm()->getData();
 
         if (!$user instanceof User) {
-            return;
+            throw new \LogicException(sprintf(
+                'Your User class needs to extend "%s" class when email change confirmation is enabled.',
+                User::class
+            ));
         }
 
         if ($user->getEmail() !== $this->oldEmail) {

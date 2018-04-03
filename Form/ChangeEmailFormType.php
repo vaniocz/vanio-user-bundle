@@ -10,7 +10,7 @@ class ChangeEmailFormType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $constraintsOptions = ['message' => 'vanio_user.password.invalid'];
+        $constraintsOptions = ['message' => 'fos_user.current_password.invalid'];
 
         if (is_array($options['validation_groups']) && $options['validation_groups']) {
             $constraintsOptions['groups'] = [reset($options['validation_groups'])];

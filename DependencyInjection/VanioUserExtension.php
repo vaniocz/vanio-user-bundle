@@ -47,11 +47,10 @@ class VanioUserExtension extends Extension implements PrependExtensionInterface
                 ->addTag('kernel.event_subscriber');
         }
 
-        $changeEmailEnabled = isset($config['change_email']['confirmation']['enabled'])
-            ? $config['change_email']['confirmation']['enabled']
-            : $container->getParameter('fos_user.registration.confirmation.enabled');
+        $isChangeEmailConfirmationEnabled = $config['change_email']['confirmation']['enabled']
+            ?? $container->getParameter('fos_user.registration.confirmation.enabled');
 
-        if ($changeEmailEnabled) {
+        if ($isChangeEmailConfirmationEnabled) {
             $this->loadChangeEmail($config['change_email'], $container, $loader);
         }
     }
@@ -125,50 +124,14 @@ class VanioUserExtension extends Extension implements PrependExtensionInterface
         $loader->load('change_email_confirmation.xml');
 
         if (isset($config['confirmation']['from_email'])) {
-            // overwrite the global one
-            $fromEmail = [
-                $config['confirmation']['from_email']['address'] => $config['confirmation']['from_email']['sender_name'],
-            ];
+            $fromEmail = $config['confirmation']['from_email'];
+            $fromEmail = [$fromEmail['address'] => $fromEmail['sender_name']];
             unset($config['confirmation']['from_email']);
         } else {
             $fromEmail = $container->getParameter('fos_user.registration.confirmation.from_email');
         }
+
         $container->setParameter('vanio_user.change_email.confirmation.from_email', $fromEmail);
-
-        $this->remapParametersNamespaces($config, $container, array(
-            'confirmation' => 'vanio_user.change_email.confirmation.%s',
-            'form' => 'vanio_user.change_email.form.%s',
-        ));
-    }
-
-    protected function remapParameters(array $config, ContainerBuilder $container, array $map)
-    {
-        foreach ($map as $name => $paramName) {
-            if (array_key_exists($name, $config)) {
-                $container->setParameter($paramName, $config[$name]);
-            }
-        }
-    }
-
-    protected function remapParametersNamespaces(array $config, ContainerBuilder $container, array $namespaces)
-    {
-        foreach ($namespaces as $ns => $map) {
-            if ($ns) {
-                if (!array_key_exists($ns, $config)) {
-                    continue;
-                }
-                $namespaceConfig = $config[$ns];
-            } else {
-                $namespaceConfig = $config;
-            }
-            if (is_array($map)) {
-                $this->remapParameters($namespaceConfig, $container, $map);
-            } else {
-                foreach ($namespaceConfig as $name => $value) {
-                    $container->setParameter(sprintf($map, $name), $value);
-                }
-            }
-        }
     }
 
     /**

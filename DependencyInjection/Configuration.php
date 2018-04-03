@@ -1,7 +1,6 @@
 <?php
 namespace Vanio\UserBundle\DependencyInjection;
 
-use FOS\UserBundle\Util\LegacyFormHelper;
 use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
@@ -13,13 +12,28 @@ class Configuration implements ConfigurationInterface
     public function getConfigTreeBuilder(): TreeBuilder
     {
         $treeBuilder = new TreeBuilder;
-        $treeBuilder->root('vanio_user')
+        $root = $treeBuilder->root('vanio_user');
+        $root
             ->children()
                 ->scalarNode('firewall_name')->defaultNull()->end()
                 ->booleanNode('email_only')->defaultFalse()->end()
                 ->booleanNode('custom_storage_validation')->defaultFalse()->end()
                 ->booleanNode('use_flash_notifications')->defaultTrue()->end()
                 ->scalarNode('registration_target_path')->defaultNull()->end()
+                ->booleanNode('social_authentication')->defaultNull()->end()
+            ->end();
+        $this
+            ->addPassTargetPathSection($root)
+            ->addSocialRegistrationSection($root)
+            ->addChangeEmailSection($root);
+
+        return $treeBuilder;
+    }
+
+    private function addPassTargetPathSection(ArrayNodeDefinition $root): self
+    {
+        $root
+            ->children()
                 ->arrayNode('pass_target_path')
                     ->canBeEnabled()
                     ->children()
@@ -33,7 +47,15 @@ class Configuration implements ConfigurationInterface
                         ->end()
                     ->end()
                 ->end()
-                ->booleanNode('social_authentication')->defaultNull()->end()
+            ->end();
+
+        return $this;
+    }
+
+    private function addSocialRegistrationSection(ArrayNodeDefinition $root): self
+    {
+        $root
+            ->children()
                 ->arrayNode('social_registration_form')
                     ->addDefaultsIfNotSet()
                     ->fixXmlConfig('validation_group')
@@ -43,9 +65,25 @@ class Configuration implements ConfigurationInterface
                         ->arrayNode('validation_groups')
                             ->prototype('scalar')->end()
                             ->defaultValue(['Profile', 'SocialRegistration', 'Default'])
+                            ->beforeNormalization()
+                                ->ifTrue(function ($value) {
+                                    return !is_array($value);
+                                })
+                                ->then(function ($value) {
+                                    return [$value];
+                                })
+                            ->end()
                         ->end()
                     ->end()
                 ->end()
+            ->end();
+        return $this;
+    }
+
+    private function addChangeEmailSection(ArrayNodeDefinition $root): self
+    {
+        $root
+            ->children()
                 ->arrayNode('change_email')
                     ->addDefaultsIfNotSet()
                     ->canBeUnset()
@@ -72,6 +110,14 @@ class Configuration implements ConfigurationInterface
                                 ->arrayNode('validation_groups')
                                     ->prototype('scalar')->end()
                                     ->defaultValue(['ChangeEmail', 'Default'])
+                                    ->beforeNormalization()
+                                        ->ifTrue(function ($value) {
+                                            return !is_array($value);
+                                        })
+                                        ->then(function ($value) {
+                                            return [$value];
+                                        })
+                                    ->end()
                                 ->end()
                             ->end()
                         ->end()
@@ -79,6 +125,6 @@ class Configuration implements ConfigurationInterface
                 ->end()
             ->end();
 
-        return $treeBuilder;
+        return $this;
     }
 }
