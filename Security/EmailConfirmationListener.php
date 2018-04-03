@@ -18,7 +18,7 @@ class EmailConfirmationListener implements EventSubscriberInterface
     {
         return [
             FOSUserEvents::REGISTRATION_SUCCESS => 'onRegistrationSuccess',
-            HWIOAuthEvents::REGISTRATION_SUCCESS => 'onRegistrationSuccess',
+            'hwi_oauth.registration.success' => 'onRegistrationSuccess',
         ];
     }
 
