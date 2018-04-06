@@ -3,7 +3,6 @@ namespace Vanio\UserBundle\Controller;
 
 use FOS\UserBundle\Model\UserManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 use Vanio\DiExtraBundle\Controller;
 use Vanio\UserBundle\Form\ChangeEmailFormType;
 use Vanio\UserBundle\Model\User;
@@ -16,6 +15,7 @@ class ChangeEmailController extends Controller
 
     public function confirmAction(Request $request, string $token)
     {
+        /** @var User $user */
         $user = $this->userManager()->findUserBy(['newEmailConfirmationToken' => $token]);
 
         if (!is_a($user, User::class, true)) {
@@ -33,7 +33,6 @@ class ChangeEmailController extends Controller
             $this->userManager()->updateUser($user);
 
             $this->addFlashMessage(FlashMessage::TYPE_SUCCESS, 'change_email.flash.success');
-            $this->tokenStorage()->setToken(null);
 
             return $this->redirectToRoute('fos_user_security_login');
         }
@@ -47,11 +46,6 @@ class ChangeEmailController extends Controller
     private function addFlashMessage(string $type, string $message, array $parameters = [])
     {
         $this->addFlash($type, new FlashMessage($message, $parameters, 'FOSUserBundle'));
-    }
-
-    private function tokenStorage(): TokenStorageInterface
-    {
-        return $this->get('security.token_storage');
     }
 
     private function userManager(): UserManagerInterface

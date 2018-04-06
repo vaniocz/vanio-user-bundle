@@ -1,6 +1,10 @@
 <?xml version="1.0"?>
 <doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
     <mapped-superclass name="Vanio\UserBundle\Model\User">
+        <field name="newEmail" column="new_email" type="string" length="180" nullable="true" />
+        <field name="newEmailConfirmationToken" column="new_email_confirmation_token" type="string" length="180" unique="true" nullable="true" />
+        <field name="newEmailRequestedAt" column="new_email_requested_at" type="datetime" nullable="true" />
+
         <attribute-overrides>
             <attribute-override name="password">
                 <field nullable="true"/>
