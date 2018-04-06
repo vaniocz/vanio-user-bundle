@@ -34,7 +34,7 @@ class ChangeEmailController extends Controller
 
             $this->addFlashMessage(FlashMessage::TYPE_SUCCESS, 'change_email.flash.success');
 
-            return $this->redirectToRoute('fos_user_security_login');
+            return $this->redirectToRoute($this->getParameter('vanio_user.pass_target_path.default_target_path'));
         }
 
         return $this->render('@VanioUser/ChangeEmail/confirm.html.twig', [

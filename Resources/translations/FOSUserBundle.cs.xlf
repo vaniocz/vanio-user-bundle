@@ -263,7 +263,7 @@
 
             <trans-unit id="809812cf7d17f0015b24e3d0d0ff1948" resname="change_email.flash.success">
                 <source>change_email.flash.success</source>
-                <target>Váš e-mail byl úspěšně změněn. Nyní již můžete pro přihlášení použít svůj nový e-mail.</target>
+                <target>Váš e-mail byl úspěšně změněn.</target>
             </trans-unit>
 
             <trans-unit id="36958b7863986614b3ed76e1adb02965" resname="change_email.form.info">
