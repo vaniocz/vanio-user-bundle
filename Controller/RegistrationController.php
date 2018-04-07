@@ -69,7 +69,7 @@ class RegistrationController extends BaseRegistrationController
     {
         $user = $this->getUser();
 
-        if (!is_a($user, UserInterface::class, true)) {
+        if (!is_a($user, UserInterface::class)) {
             throw new AccessDeniedException('This user does not have access to this section.');
         }
 
