@@ -18,10 +18,8 @@ class UserPasswordValidator extends ConstraintValidator
     public function validate($password, Constraint $constraint)
     {
         if (!$constraint instanceof UserPassword) {
-            throw new UnexpectedTypeException($constraint, __NAMESPACE__.'\UserPassword');
-        }
-
-        if (null === $password || '' === $password) {
+            throw new UnexpectedTypeException($constraint, __NAMESPACE__ . '\UserPassword');
+        } elseif ($password === null || $password === '') {
             $this->context->addViolation($constraint->message);
 
             return;
