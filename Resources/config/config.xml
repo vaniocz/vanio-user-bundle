@@ -15,6 +15,7 @@
         <parameter key="vanio_user.routing.router.class">Vanio\UserBundle\Routing\Router</parameter>
         <parameter key="vanio_user.templating.user_extension.class">Vanio\UserBundle\Templating\UserExtension</parameter>
         <parameter key="vanio_user.mailer.twig_swift.class">Vanio\UserBundle\Mailer\TwigSwiftMailer</parameter>
+        <parameter key="vanio_user.validator.user_password_validator.class">Vanio\UserBundle\Validator\UserPasswordValidator</parameter>
         <parameter key="vanio_user.change_email.confirmation.template">@VanioUser/ChangeEmail/email.html.twig</parameter>
     </parameters>
 
@@ -93,6 +94,11 @@
                     <argument key="change_email">%vanio_user.change_email.confirmation.from_email%</argument>
                 </argument>
             </argument>
+        </service>
+
+        <service id="vanio_user.validator.user_password_validator" class="%vanio_user.validator.user_password_validator.class%" public="false">
+            <argument type="service" id="security.encoder_factory" />
+            <tag name="validator.constraint_validator" alias="vanio_user.validator.user_password" />
         </service>
     </services>
 </container>
