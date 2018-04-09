@@ -97,8 +97,8 @@
         </service>
 
         <service id="vanio_user.validator.user_password_validator" class="%vanio_user.validator.user_password_validator.class%" public="false">
-            <argument type="service" id="security.encoder_factory" />
-            <tag name="validator.constraint_validator" alias="vanio_user.validator.user_password" />
+            <argument type="service" id="security.encoder_factory"/>
+            <tag name="validator.constraint_validator" alias="vanio_user.validator.user_password"/>
         </service>
     </services>
 </container>
