@@ -191,7 +191,7 @@
                 <target>Změnit heslo</target>
             </trans-unit>
 
-            <trans-unit id="profile.show.connect" resname="profile.show.connect">
+            <trans-unit id="44f4ce5248b1ad6ec3cda82c37e59183" resname="profile.show.connect">
                 <source>profile.show.connect</source>
                 <target>Propojení účtu</target>
             </trans-unit>
@@ -221,19 +221,59 @@
                 <target>Opravdu si přejete smazat svůj uživatelský účet?</target>
             </trans-unit>
 
-            <trans-unit id="4735117d-994b-4718-89f9-49f2f81618d5" resname="unregister.warning">
+            <trans-unit id="a1d4244256e481dccf528e0271c30040" resname="unregister.warning">
                 <source>unregister.warning</source>
                 <target>Upozornění: tato akce je nevratná!</target>
             </trans-unit>
 
-            <trans-unit id="80e27722-a736-4cff-a70f-10f81f214ed8" resname="unregister.button">
+            <trans-unit id="5cd58ecbea52a898012e5afade3a2810" resname="unregister.button">
                 <source>unregister.button</source>
                 <target>Smazat účet</target>
             </trans-unit>
 
-            <trans-unit id="340006e9-565b-4990-abc4-b790689d00ee" resname="unregister.flash.success">
+            <trans-unit id="7a0a17cd91f6e5123ab92eacdcfc8a7d" resname="unregister.flash.success">
                 <source>unregister.flash.success</source>
                 <target>Váš uživatelský účet byl úspěšně smazán.</target>
+            </trans-unit>
+
+            <trans-unit id="3470151e8308ec57df38a6d06951ebf8" resname="change_email.email.subject">
+                <source>change_email.email.subject</source>
+                <target>Změna e-mailu</target>
+            </trans-unit>
+
+            <trans-unit id="0310a79b7ef80ff6f532142667aafdd5" resname="change_email.email.message">
+                <source>change_email.email.message</source>
+                <target>
+                    <![CDATA[
+                        <h1>Dobrý den,</h1>
+                        <p>Pro potvrzení změny Vašeho e-mailu klikněte na <a href="%confirmationUrl%">tento odkaz</a>.</p>
+                    ]]>
+                </target>
+            </trans-unit>
+
+            <trans-unit id="24fc0a17001a2b77bad25169f478c9eb" resname="change_email.flash.confirmation_required">
+                <source>change_email.flash.confirmation_required</source>
+                <target>Změnu e-mailu je nutné potvrdit odkazem, který jsme vám zaslali na nový e-mail. Dokud změnu nepotvrdíte, bude platit váš původní e-mail. Děkujeme za pochopení.</target>
+            </trans-unit>
+
+            <trans-unit id="dde6715373995d67e12c88aba1d84765" resname="change_email.flash.confirmation_token_not_found">
+                <source>change_email.flash.confirmation_token_not_found</source>
+                <target>E-mail byl již pravděpodobně změnen nebo došlo k novému požadavku pro změnu e-mailu. V případě nového požadavku použijte odkaz z nového e-mailu.</target>
+            </trans-unit>
+
+            <trans-unit id="809812cf7d17f0015b24e3d0d0ff1948" resname="change_email.flash.success">
+                <source>change_email.flash.success</source>
+                <target>Váš e-mail byl úspěšně změněn.</target>
+            </trans-unit>
+
+            <trans-unit id="36958b7863986614b3ed76e1adb02965" resname="change_email.form.info">
+                <source>change_email.form.info</source>
+                <target>Pro dokončení změny e-mailu zadejte, prosím, své uživatelské heslo.</target>
+            </trans-unit>
+
+            <trans-unit id="4a41e1db27d22ac5962a9a3301b64241" resname="change_email.form.submit">
+                <source>change_email.form.submit</source>
+                <target>Potvrdit</target>
             </trans-unit>
         </body>
     </file>

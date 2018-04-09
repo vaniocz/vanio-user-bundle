@@ -128,7 +128,7 @@ class ConnectController extends BaseConnectController
      */
     private function disconnect(Request $request, UserInterface $user, string $service): Response
     {
-        $token = $this->getTokenStorage()->getToken();
+        $token = $this->tokenStorage()->getToken();
         $event = new FilterUserResponseEvent($user, $request, $this->redirectToReferer('fos_user_profile_show'));
 
         if ($token instanceof OAuthToken && $token->getResourceOwnerName() === $service) {
@@ -142,11 +142,11 @@ class ConnectController extends BaseConnectController
                 $this->getParameter('vanio_user.firewall_name'),
                 $user->getRoles()
             );
-            $this->getTokenStorage()->setToken($token);
+            $this->tokenStorage()->setToken($token);
         }
 
-        if ($this->getFosubUserProvider()->disconnectService($user, $service)) {
-            $this->getEventDispatcher()->dispatch(VanioUserEvents::ACCOUNT_DISCONNECTED, $event);
+        if ($this->fosubUserProvider()->disconnectService($user, $service)) {
+            $this->eventDispatcher()->dispatch(VanioUserEvents::ACCOUNT_DISCONNECTED, $event);
         }
 
         return $event->getResponse();
@@ -168,17 +168,17 @@ class ConnectController extends BaseConnectController
         $this->addFlash($type, new FlashMessage($message, $parameters, 'HWIOAuthBundle'));
     }
 
-    private function getFosubUserProvider(): FosubUserProvider
+    private function fosubUserProvider(): FosubUserProvider
     {
         return $this->get('hwi_oauth.user.provider.fosub_bridge');
     }
 
-    private function getTokenStorage(): TokenStorageInterface
+    private function tokenStorage(): TokenStorageInterface
     {
         return $this->get('security.token_storage');
     }
 
-    private function getEventDispatcher(): EventDispatcherInterface
+    private function eventDispatcher(): EventDispatcherInterface
     {
         return $this->get('event_dispatcher');
     }

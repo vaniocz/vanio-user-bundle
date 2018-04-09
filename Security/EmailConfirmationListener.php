@@ -4,7 +4,6 @@ namespace Vanio\UserBundle\Security;
 use FOS\UserBundle\Event\FormEvent as FOSUserFormEvent;
 use FOS\UserBundle\FOSUserEvents;
 use HWI\Bundle\OAuthBundle\Event\FormEvent as HWIOAuthFormEvent;
-use HWI\Bundle\OAuthBundle\HWIOAuthEvents;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Vanio\UserBundle\VanioUserEvents;

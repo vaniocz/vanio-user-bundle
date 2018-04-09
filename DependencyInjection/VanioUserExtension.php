@@ -46,6 +46,13 @@ class VanioUserExtension extends Extension implements PrependExtensionInterface
                 ->setAbstract(false)
                 ->addTag('kernel.event_subscriber');
         }
+
+        $isChangeEmailConfirmationEnabled = $config['change_email']['confirmation']['enabled']
+            ?? $container->getParameter('fos_user.registration.confirmation.enabled');
+
+        if ($isChangeEmailConfirmationEnabled) {
+            $this->loadChangeEmail($config['change_email'], $container, $loader);
+        }
     }
 
     public function prepend(ContainerBuilder $container)
@@ -108,8 +115,23 @@ class VanioUserExtension extends Extension implements PrependExtensionInterface
             'change_password' => [
                 'form' => ['type' => ChangePasswordFormType::class],
             ],
-            'service' => ['mailer' => 'fos_user.mailer.twig_swift'],
+            'service' => ['mailer' => 'vanio_user.mailer.twig_swift'],
         ]);
+    }
+
+    private function loadChangeEmail(array $config, ContainerBuilder $container, XmlFileLoader $loader)
+    {
+        $loader->load('change_email_confirmation.xml');
+
+        if (isset($config['confirmation']['from_email'])) {
+            $fromEmail = $config['confirmation']['from_email'];
+            $fromEmail = [$fromEmail['address'] => $fromEmail['sender_name']];
+            unset($config['confirmation']['from_email']);
+        } else {
+            $fromEmail = $container->getParameter('fos_user.registration.confirmation.from_email');
+        }
+
+        $container->setParameter('vanio_user.change_email.confirmation.from_email', $fromEmail);
     }
 
     /**

@@ -56,7 +56,7 @@ class FlashMessageListener implements EventSubscriberInterface
         }
 
         $user = $event->getAuthenticationToken()->getUser();
-        $message = $user instanceof UserInterface && !$user->getLastLogin()
+        $message = is_a($user, UserInterface::class) && !$user->getLastLogin()
             ? 'security.flash.first_logged_in'
             : 'security.flash.logged_in';
         $this->addFlashMessage(FlashMessage::TYPE_SUCCESS, $message);
