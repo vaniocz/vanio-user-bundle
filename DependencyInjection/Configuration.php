@@ -121,6 +121,7 @@ class Configuration implements ConfigurationInterface
                                 ->end()
                             ->end()
                         ->end()
+                        ->scalarNode('target_path')->defaultValue('/')->end()
                     ->end()
                 ->end()
             ->end();
