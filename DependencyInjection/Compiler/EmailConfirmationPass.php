@@ -1,7 +1,6 @@
 <?php
 namespace Vanio\UserBundle\DependencyInjection\Compiler;
 
-use FOS\UserBundle\FOSUserEvents;
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Vanio\UserBundle\VanioUserEvents;

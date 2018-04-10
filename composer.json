@@ -22,8 +22,9 @@
         "symfony/framework-bundle": "^3.0",
         "symfony/swiftmailer-bundle": "^2.3",
         "doctrine/doctrine-bundle": "^1.6.4",
-        "hwi/oauth-bundle": "dev-master",
-        "vanio/coding-standards": "^0.1"
+        "hwi/oauth-bundle": "^0.6.2",
+        "vanio/coding-standards": "^0.1",
+        "php-http/mock-client": "^1.1"
     },
     "suggest": {
         "hwi/oauth-bundle": "For social authentication."
@@ -40,7 +41,7 @@
         "test": "\"vendor/bin/phpunit\"",
         "lint": "\"vendor/bin/phpcs\" --standard=ruleset.xml --extensions=php --encoding=utf-8 --ignore=var,vendor,AppKernel.php .",
         "fix": "\"vendor/bin/phpcbf\" --standard=ruleset.xml --extensions=php --encoding=utf-8 --no-patch --ignore=vendor,var,AppKernel.php .",
-        "dump-translations": "php console translation:update --dump-messages --output-format=xlf cs && php console translation:update --dump-messages --output-format=xlf en",
+        "dump-translations": "php console translation:updat     e --dump-messages --output-format=xlf cs && php console translation:update --dump-messages --output-format=xlf en",
         "update-translations": "php console translation:update --force --output-format=xlf cs && php console translation:update --force --output-format=xlf en"
     },
     "minimum-stability": "dev",

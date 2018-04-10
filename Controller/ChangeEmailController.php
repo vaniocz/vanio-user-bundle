@@ -2,17 +2,18 @@
 namespace Vanio\UserBundle\Controller;
 
 use FOS\UserBundle\Model\UserManagerInterface;
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Security\Http\HttpUtils;
-use Vanio\DiExtraBundle\Controller;
 use Vanio\UserBundle\Form\ChangeEmailFormType;
 use Vanio\UserBundle\Model\User;
 use Vanio\WebBundle\Translation\FlashMessage;
 
 class ChangeEmailController extends Controller
 {
-    public function confirmAction(Request $request, string $token)
+    public function confirmAction(Request $request, string $token): Response
     {
         /** @var User $user */
         $user = $this->userManager()->findUserBy(['newEmailConfirmationToken' => $token]);
