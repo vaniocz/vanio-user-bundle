@@ -261,6 +261,11 @@
                 <target>E-mail byl již pravděpodobně změnen nebo došlo k novému požadavku pro změnu e-mailu. V případě nového požadavku použijte odkaz z nového e-mailu.</target>
             </trans-unit>
 
+            <trans-unit id="43e72e358d7a967b86c4f3ff1dfdc695" resname="change_email.flash.email_already_used">
+                <source>change_email.flash.email_already_used</source>
+                <target>Tento e-mail jste si již nastavili u jiného uživatele.</target>
+            </trans-unit>
+
             <trans-unit id="809812cf7d17f0015b24e3d0d0ff1948" resname="change_email.flash.success">
                 <source>change_email.flash.success</source>
                 <target>Váš e-mail byl úspěšně změněn.</target>
