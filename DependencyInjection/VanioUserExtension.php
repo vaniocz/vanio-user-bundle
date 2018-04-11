@@ -16,21 +16,20 @@ class VanioUserExtension extends Extension implements PrependExtensionInterface
     public function load(array $configs, ContainerBuilder $container)
     {
         $config = $this->processConfiguration(new Configuration, $configs);
+        $config['db_driver'] = $container->getParameter('fos_user.storage');
+        $confirmation = &$config['change_email']['confirmation'];
+        $confirmation['from_email'] = isset($confirmation['from_email'])
+            ? [$confirmation['from_email']['address'] => $confirmation['from_email']['sender_name']]
+            : $container->getParameter('fos_user.registration.confirmation.from_email');
+
+        if ($confirmation['enabled'] === null) {
+            $confirmation['enabled'] = $container->getParameter('fos_user.registration.confirmation.enabled');
+        }
+
         $loader = new XmlFileLoader($container, new FileLocator(sprintf('%s/../Resources/config', __DIR__)));
         $loader->load('config.xml');
-        $container->setParameter('vanio_user', $config);
-        $container->setParameter('vanio_user.db_driver', $container->getParameter('fos_user.storage'));
         $container->setParameter('fos_user.storage', 'custom');
-
-        foreach ($config as $key => $value) {
-            $container->setParameter("vanio_user.$key", $value);
-
-            if (is_array($value)) {
-                foreach ($value as $k => $v) {
-                    $container->setParameter("vanio_user.$key.$k", $v);
-                }
-            }
-        }
+        $this->setContainerRecursiveParameter($container, 'vanio_user', $config);
 
         if ($config['use_flash_notifications']) {
             $loader->load('flash_notifications.xml');
@@ -47,11 +46,11 @@ class VanioUserExtension extends Extension implements PrependExtensionInterface
                 ->addTag('kernel.event_subscriber');
         }
 
-        $isChangeEmailConfirmationEnabled = $config['change_email']['confirmation']['enabled']
-            ?? $container->getParameter('fos_user.registration.confirmation.enabled');
-
-        if ($isChangeEmailConfirmationEnabled) {
-            $this->loadChangeEmail($config['change_email'], $container, $loader);
+        if ($confirmation['enabled']) {
+            $container
+                ->getDefinition('vanio_user.security.email_change_confirmation_listener')
+                ->setAbstract(false)
+                ->addTag('kernel.event_subscriber');
         }
     }
 
@@ -119,21 +118,6 @@ class VanioUserExtension extends Extension implements PrependExtensionInterface
         ]);
     }
 
-    private function loadChangeEmail(array $config, ContainerBuilder $container, XmlFileLoader $loader)
-    {
-        $loader->load('change_email_confirmation.xml');
-
-        if (isset($config['confirmation']['from_email'])) {
-            $fromEmail = $config['confirmation']['from_email'];
-            $fromEmail = [$fromEmail['address'] => $fromEmail['sender_name']];
-            unset($config['confirmation']['from_email']);
-        } else {
-            $fromEmail = $container->getParameter('fos_user.registration.confirmation.from_email');
-        }
-
-        $container->setParameter('vanio_user.change_email.confirmation.from_email', $fromEmail);
-    }
-
     /**
      * @param ContainerBuilder $container
      * @return string
@@ -161,5 +145,16 @@ class VanioUserExtension extends Extension implements PrependExtensionInterface
             $extension->getConfiguration([], $container),
             $container->getExtensionConfig($name)
         );
+    }
+
+    private function setContainerRecursiveParameter(ContainerBuilder $container, string $name, $value): void
+    {
+        $container->setParameter($name, $value);
+
+        if (is_array($value)) {
+            foreach ($value as $k => $v) {
+                $this->setContainerRecursiveParameter($container, "$name.$k", $v);
+            }
+        }
     }
 }

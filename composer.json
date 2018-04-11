@@ -20,7 +20,7 @@
         "symfony/validator": "^3.0",
         "symfony/asset": "^3.0",
         "symfony/framework-bundle": "^3.0",
-        "symfony/swiftmailer-bundle": "^2.3",
+        "symfony/swiftmailer-bundle": "^2.3.9",
         "doctrine/doctrine-bundle": "^1.6.4",
         "hwi/oauth-bundle": "^0.6.2",
         "vanio/coding-standards": "^0.1",

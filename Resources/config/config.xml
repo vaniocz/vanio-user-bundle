@@ -7,6 +7,7 @@
         <parameter key="vanio_user.security.authentication_entry_point.class">Vanio\UserBundle\Security\AuthenticationEntryPoint</parameter>
         <parameter key="vanio_user.security.authentication_failure_handler.class">Vanio\UserBundle\Security\AuthenticationFailureHandler</parameter>
         <parameter key="vanio_user.security.authentication_success_handler.class">Vanio\UserBundle\Security\AuthenticationSuccessHandler</parameter>
+        <parameter key="vanio_user.security.email_change_confirmation_listener.class">Vanio\UserBundle\Security\EmailChangeConfirmationListener</parameter>
         <parameter key="vanio_user.security.email_confirmation_listener.class">Vanio\UserBundle\Security\EmailConfirmationListener</parameter>
         <parameter key="vanio_user.security.redirect_on_registration_success.class">Vanio\UserBundle\Security\RedirectOnRegistrationSuccess</parameter>
         <parameter key="vanio_user.security.target_path_resolver.class">Vanio\UserBundle\Security\TargetPathResolver</parameter>
@@ -16,7 +17,6 @@
         <parameter key="vanio_user.templating.user_extension.class">Vanio\UserBundle\Templating\UserExtension</parameter>
         <parameter key="vanio_user.mailer.twig_swift.class">Vanio\UserBundle\Mailer\TwigSwiftMailer</parameter>
         <parameter key="vanio_user.validator.user_password_validator.class">Vanio\UserBundle\Validator\UserPasswordValidator</parameter>
-        <parameter key="vanio_user.change_email.confirmation.template">@VanioUser/ChangeEmail/email.html.twig</parameter>
     </parameters>
 
     <services>
@@ -31,6 +31,12 @@
             <argument type="service" id="vanio_user.security.authentication_entry_point.inner"/>
             <argument type="service" id="vanio_user.security.target_path_resolver"/>
             <argument>%vanio_user%</argument>
+        </service>
+
+        <service id="vanio_user.security.email_change_confirmation_listener" class="%vanio_user.security.email_change_confirmation_listener.class%" abstract="true">
+            <argument type="service" id="fos_user.util.token_generator"/>
+            <argument type="service" id="fos_user.mailer"/>
+            <argument type="service" id="session"/>
         </service>
 
         <service id="vanio_user.security.email_confirmation_listener" class="%vanio_user.security.email_confirmation_listener.class%">
@@ -80,6 +86,7 @@
             <argument type="service" id="mailer"/>
             <argument type="service" id="router"/>
             <argument type="service" id="twig"/>
+            <tag name="fos_user.requires_swift"/>
 
             <argument type="collection">
                 <argument key="template" type="collection">
