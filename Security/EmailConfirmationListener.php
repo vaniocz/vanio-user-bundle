@@ -13,6 +13,9 @@ use Vanio\UserBundle\VanioUserEvents;
  */
 class EmailConfirmationListener implements EventSubscriberInterface
 {
+    /**
+     * @return string[]
+     */
     public static function getSubscribedEvents(): array
     {
         return [
@@ -22,6 +25,7 @@ class EmailConfirmationListener implements EventSubscriberInterface
     }
 
     /**
+     * @internal
      * @param HWIOAuthFormEvent|FOSUserFormEvent $event
      * @param string $eventName
      * @param EventDispatcherInterface $eventDispatcher

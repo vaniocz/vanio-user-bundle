@@ -53,10 +53,6 @@ class ConnectController extends BaseConnectController
         return parent::registrationAction($request, $key);
     }
 
-    /**
-     * @throws NotFoundHttpException
-     * @throws AccessDeniedException
-     */
     public function connectionsAction(): Response
     {
         if (!$this->getParameter('hwi_oauth.connect') || !$this->routeExists('fos_user_profile_show')) {
@@ -70,10 +66,6 @@ class ConnectController extends BaseConnectController
         ]);
     }
 
-    /**
-     * @throws NotFoundHttpException
-     * @throws AccessDeniedException
-     */
     public function disconnectAction(Request $request, string $service): Response
     {
         if (!$this->getParameter('hwi_oauth.connect')) {
@@ -108,7 +100,7 @@ class ConnectController extends BaseConnectController
 
     /**
      * @param string $view
-     * @param array $parameters
+     * @param mixed[] $parameters
      * @param Response|null $response
      * @return Response
      * @phpcsSuppress SlevomatCodingStandard.TypeHints.TypeHintDeclaration.MissingParameterTypeHint
@@ -122,10 +114,6 @@ class ConnectController extends BaseConnectController
         return parent::render($view, $parameters, $response);
     }
 
-    /**
-     * @throws NotFoundHttpException
-     * @throws AccessDeniedException
-     */
     private function disconnect(Request $request, UserInterface $user, string $service): Response
     {
         $token = $this->tokenStorage()->getToken();
@@ -163,6 +151,11 @@ class ConnectController extends BaseConnectController
         return true;
     }
 
+    /**
+     * @param string $type
+     * @param string $message
+     * @param mixed[] $parameters
+     */
     private function addFlashMessage(string $type, string $message, array $parameters = [])
     {
         $this->addFlash($type, new FlashMessage($message, $parameters, 'HWIOAuthBundle'));

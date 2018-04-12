@@ -10,6 +10,10 @@ use Symfony\Component\Security\Core\User\UserInterface;
 
 class ChangePasswordFormType extends AbstractType
 {
+    /**
+     * @param FormBuilderInterface $builder
+     * @param mixed[] $options
+     */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder->addEventListener(FormEvents::PRE_SET_DATA, [$this, 'onPreSetData']);

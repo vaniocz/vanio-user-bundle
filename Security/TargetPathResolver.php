@@ -18,7 +18,7 @@ class TargetPathResolver
     /** @var RouterInterface */
     private $router;
 
-    /** @var array */
+    /** @var mixed[] */
     private $options = [
         'target_path_parameter' => '_target_path',
         'default_target_path' => '/',
@@ -26,6 +26,11 @@ class TargetPathResolver
         'ignored_route_prefixes' => [],
     ];
 
+    /**
+     * @param RouterInterface $urlGenerator
+     * @param HttpUtils $httpUtils
+     * @param mixed[] $options
+     */
     public function __construct(RouterInterface $urlGenerator, HttpUtils $httpUtils, array $options = [])
     {
         $this->router = $urlGenerator;

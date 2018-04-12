@@ -30,7 +30,7 @@ class Configuration implements ConfigurationInterface
         return $treeBuilder;
     }
 
-    private function addPassTargetPathSection(ArrayNodeDefinition $root)
+    private function addPassTargetPathSection(ArrayNodeDefinition $root): self
     {
         $root
             ->children()
@@ -52,7 +52,7 @@ class Configuration implements ConfigurationInterface
         return $this;
     }
 
-    private function addSocialRegistrationSection(ArrayNodeDefinition $root)
+    private function addSocialRegistrationSection(ArrayNodeDefinition $root): self
     {
         $root
             ->children()
@@ -81,7 +81,7 @@ class Configuration implements ConfigurationInterface
         return $this;
     }
 
-    private function addChangeEmailSection(ArrayNodeDefinition $root)
+    private function addChangeEmailSection(ArrayNodeDefinition $root): self
     {
         $root
             ->children()

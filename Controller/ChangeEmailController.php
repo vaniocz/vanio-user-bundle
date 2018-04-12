@@ -51,6 +51,11 @@ class ChangeEmailController extends Controller
         );
     }
 
+    /**
+     * @param string $type
+     * @param string $message
+     * @param mixed[] $parameters
+     */
     private function addFlashMessage(string $type, string $message, array $parameters = [])
     {
         $this->addFlash($type, new FlashMessage($message, $parameters, 'FOSUserBundle'));

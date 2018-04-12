@@ -8,6 +8,10 @@
     "authors": [
         {"name": "Marek Štípek", "email": "marek.stipek@vanio.cz"}
     ],
+    "repositories": [{
+        "type": "git",
+        "url": "https://github.com/maryo/coding-standard"
+    }],
     "require": {
         "php": "^7.0",
         "friendsofsymfony/user-bundle": "^2.0.1",
@@ -24,7 +28,9 @@
         "doctrine/doctrine-bundle": "^1.6.4",
         "hwi/oauth-bundle": "^0.6.2",
         "vanio/coding-standards": "^0.1",
-        "php-http/mock-client": "^1.1"
+        "php-http/mock-client": "^1.1",
+        "slevomat/coding-standard": "^3.3.1",
+        "squizlabs/php_codesniffer": "3.1.0 as 3.0.x-dev"
     },
     "suggest": {
         "hwi/oauth-bundle": "For social authentication."
@@ -39,8 +45,8 @@
     },
     "scripts": {
         "test": "\"vendor/bin/phpunit\"",
-        "lint": "\"vendor/bin/phpcs\" --standard=ruleset.xml --extensions=php --encoding=utf-8 --ignore=var,vendor,AppKernel.php .",
-        "fix": "\"vendor/bin/phpcbf\" --standard=ruleset.xml --extensions=php --encoding=utf-8 --no-patch --ignore=vendor,var,AppKernel.php .",
+        "lint": "\"vendor/bin/phpcs\" -s --extensions=php --ignore=var,vendor,AppKernel.php .",
+        "fix": "\"vendor/bin/phpcbf\" --extensions=php --ignore=vendor,var,AppKernel.php .",
         "dump-translations": "php console translation:updat     e --dump-messages --output-format=xlf cs && php console translation:update --dump-messages --output-format=xlf en",
         "update-translations": "php console translation:update --force --output-format=xlf cs && php console translation:update --force --output-format=xlf en"
     },

@@ -22,14 +22,20 @@ class AuthenticationEntryPoint implements AuthenticationEntryPointInterface
     /** @var TargetPathResolver */
     private $targetPathResolver;
 
-    /** @var array */
+    /** @var mixed[] */
     private $options;
 
+    /**
+     * @param AuthenticationEntryPointInterface $authenticationEntryPoint
+     * @param TargetPathResolver $targetPathResolver
+     * @param mixed[] $options
+     */
     public function __construct(
         AuthenticationEntryPointInterface $authenticationEntryPoint,
         TargetPathResolver $targetPathResolver,
         array $options
-    ) {
+    )
+    {
         $this->authenticationEntryPoint = $authenticationEntryPoint;
         $this->targetPathResolver = $targetPathResolver;
         $this->options = $options + [
@@ -38,8 +44,10 @@ class AuthenticationEntryPoint implements AuthenticationEntryPointInterface
         ];
     }
 
-    public function start(Request $request, AuthenticationException $authenticationException = null): Response
-    {
+    public function start(
+        Request $request,
+        AuthenticationException $authenticationException = null
+    ): Response {
         $response = $this->authenticationEntryPoint->start($request, $authenticationException);
 
         if (($this->options['pass_target_path']['enabled'] ?? false) && $response instanceof RedirectResponse) {

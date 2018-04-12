@@ -32,6 +32,9 @@ class EmailChangeConfirmationListener implements EventSubscriberInterface
         $this->session = $session;
     }
 
+    /**
+     * @return string[]
+     */
     public static function getSubscribedEvents(): array
     {
         return [
@@ -40,11 +43,17 @@ class EmailChangeConfirmationListener implements EventSubscriberInterface
         ];
     }
 
+    /**
+     * @internal
+     */
     public function onProfileEditInitialize(GetResponseUserEvent $event)
     {
         $this->oldEmail = $event->getUser()->getEmail();
     }
 
+    /**
+     * @internal
+     */
     public function onProfileEditSuccess(FormEvent $event)
     {
         $user = $event->getForm()->getData();

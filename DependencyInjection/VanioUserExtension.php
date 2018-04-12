@@ -13,6 +13,10 @@ use Vanio\UserBundle\Form\RegistrationFormType;
 
 class VanioUserExtension extends Extension implements PrependExtensionInterface
 {
+    /**
+     * @param mixed[] $configs
+     * @param ContainerBuilder $container
+     */
     public function load(array $configs, ContainerBuilder $container)
     {
         $config = $this->processConfiguration(new Configuration, $configs);
@@ -81,6 +85,10 @@ class VanioUserExtension extends Extension implements PrependExtensionInterface
         ]);
     }
 
+    /**
+     * @param ContainerBuilder $container
+     * @param mixed[] $config
+     */
     private function prependSecurityConfig(ContainerBuilder $container, array $config)
     {
         $container->prependExtensionConfig('security', [
@@ -95,6 +103,10 @@ class VanioUserExtension extends Extension implements PrependExtensionInterface
         ]);
     }
 
+    /**
+     * @param ContainerBuilder $container
+     * @param mixed[] $config
+     */
     private function prependFosUserConfig(ContainerBuilder $container, array $config)
     {
         $container->prependExtensionConfig('fos_user', [
@@ -118,11 +130,6 @@ class VanioUserExtension extends Extension implements PrependExtensionInterface
         ]);
     }
 
-    /**
-     * @param ContainerBuilder $container
-     * @return string
-     * @throws \LogicException
-     */
     private function autodetectFirewallName(ContainerBuilder $container): string
     {
         $securityConfig = $this->processExtensionConfig($container, 'security');
@@ -136,6 +143,9 @@ class VanioUserExtension extends Extension implements PrependExtensionInterface
         throw new \LogicException('Unable to autodetect firewall name. Have you properly configured security extension?');
     }
 
+    /**
+     * @return mixed[]
+     */
     private function processExtensionConfig(ContainerBuilder $container, string $name): array
     {
         /** @var Extension $extension */
@@ -147,7 +157,12 @@ class VanioUserExtension extends Extension implements PrependExtensionInterface
         );
     }
 
-    private function setContainerRecursiveParameter(ContainerBuilder $container, string $name, $value): void
+    /**
+     * @param ContainerBuilder $container
+     * @param string $name
+     * @param mixed $value
+     */
+    private function setContainerRecursiveParameter(ContainerBuilder $container, string $name, $value)
     {
         $container->setParameter($name, $value);
 

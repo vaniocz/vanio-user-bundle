@@ -12,18 +12,33 @@ class DummyUserManager implements UserManagerInterface
     public function deleteUser(UserInterface $user)
     {}
 
+    /**
+     * @param mixed[] $criteria
+     */
     public function findUserBy(array $criteria)
     {}
 
+    /**
+     * @param mixed $username
+     */
     public function findUserByUsername($username)
     {}
 
+    /**
+     * @param mixed $email
+     */
     public function findUserByEmail($email)
     {}
 
+    /**
+     * @param mixed $usernameOrEmail
+     */
     public function findUserByUsernameOrEmail($usernameOrEmail)
     {}
 
+    /**
+     * @param mixed $token
+     */
     public function findUserByConfirmationToken($token)
     {}
 

@@ -16,6 +16,10 @@ class RegistrationFormType extends AbstractType
         $this->emailOnly = $emailOnly;
     }
 
+    /**
+     * @param FormBuilderInterface $builder
+     * @param mixed[] $options
+     */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         if ($options['email_only']) {

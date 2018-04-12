@@ -35,6 +35,9 @@ class FlashMessageListener implements EventSubscriberInterface
         $this->session = $session;
     }
 
+    /**
+     * @return mixed[]
+     */
     public static function getSubscribedEvents(): array
     {
         return [
@@ -112,6 +115,12 @@ class FlashMessageListener implements EventSubscriberInterface
         $this->addFlashMessage(FlashMessage::TYPE_SUCCESS, 'connect.account_disconnected', [], 'HWIOAuthBundle');
     }
 
+    /**
+     * @param string $type
+     * @param string $message
+     * @param mixed[] $parameters
+     * @param string $domain
+     */
     private function addFlashMessage(
         string $type,
         string $message,
