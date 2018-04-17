@@ -39,7 +39,7 @@
     },
     "scripts": {
         "test": "\"vendor/bin/phpunit\"",
-        "lint": "\"vendor/bin/phpcs\" -s .",
+        "lint": "\"vendor/bin/phpcs\" -s -vv .",
         "fix": "\"vendor/bin/phpcbf\" .",
         "dump-translations": "php console translation:update --dump-messages --output-format=xlf cs && php console translation:update --dump-messages --output-format=xlf en",
         "update-translations": "php console translation:update --force --output-format=xlf cs && php console translation:update --force --output-format=xlf en"
