@@ -22,9 +22,14 @@ class AuthenticationEntryPoint implements AuthenticationEntryPointInterface
     /** @var TargetPathResolver */
     private $targetPathResolver;
 
-    /** @var array */
+    /** @var mixed[] */
     private $options;
 
+    /**
+     * @param AuthenticationEntryPointInterface $authenticationEntryPoint
+     * @param TargetPathResolver $targetPathResolver
+     * @param mixed[] $options
+     */
     public function __construct(
         AuthenticationEntryPointInterface $authenticationEntryPoint,
         TargetPathResolver $targetPathResolver,

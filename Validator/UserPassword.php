@@ -2,8 +2,6 @@
 namespace Vanio\UserBundle\Validator;
 
 use Symfony\Component\Validator\Constraint;
-use Symfony\Component\Validator\Exception\InvalidArgumentException;
-use Symfony\Component\Validator\Exception\MissingOptionsException;
 use Vanio\UserBundle\Model\User;
 
 /**
@@ -12,23 +10,24 @@ use Vanio\UserBundle\Model\User;
  */
 class UserPassword extends Constraint
 {
+    /** @var string */
     public $message = 'This value should be the user\'s current password.';
+
+    /** @var string */
     public $service = 'vanio_user.validator.user_password';
 
     /** @var User */
     public $user;
 
-    public function __construct($options = null)
-    {
-        parent::__construct($options);
-    }
-
-    public function validatedBy()
+    public function validatedBy(): string
     {
         return $this->service;
     }
 
-    public function getRequiredOptions()
+    /**
+     * @return string[]
+     */
+    public function getRequiredOptions(): array
     {
         return ['user'];
     }

@@ -52,7 +52,9 @@ class RegistrationController extends BaseRegistrationController
             $this->eventDispatcher()->dispatch(VanioUserEvents::REGISTRATION_CONFIRMATION_REQUESTED, $event);
 
             if (!$response = $event->getResponse()) {
-                throw new \LogicException('You need to enable email confirmation inside your "fos_user" configuration.');
+                throw new \LogicException(
+                    'You need to enable email confirmation inside your "fos_user" configuration.'
+                );
             }
 
             $this->userManager()->updateUser($user);
@@ -92,6 +94,11 @@ class RegistrationController extends BaseRegistrationController
         return $this->render('@VanioUser/Registration/unregister.html.twig');
     }
 
+    /**
+     * @param string $type
+     * @param string $message
+     * @param mixed[] $parameters
+     */
     private function addFlashMessage(string $type, string $message, array $parameters = [])
     {
         $this->addFlash($type, new FlashMessage($message, $parameters, 'FOSUserBundle'));

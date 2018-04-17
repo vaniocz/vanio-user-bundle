@@ -21,6 +21,9 @@ class RedirectOnRegistrationSuccess implements EventSubscriberInterface
         $this->targetPath = $targetPath;
     }
 
+    /**
+     * @return mixed[]
+     */
     public static function getSubscribedEvents(): array
     {
         return [
@@ -32,6 +35,7 @@ class RedirectOnRegistrationSuccess implements EventSubscriberInterface
     }
 
     /**
+     * @internal
      * @param FormEvent|GetResponseUserEvent $event
      */
     public function onRegistrationSuccess($event)

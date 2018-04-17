@@ -30,7 +30,9 @@ class Router implements RouterInterface
     }
 
     /**
+     * @phpcsSuppress SlevomatCodingStandard.TypeHints.TypeHintDeclaration.MissingParameterTypeHint
      * @param string $pathinfo
+     * @return string[]
      */
     public function match($pathinfo): array
     {
@@ -38,8 +40,9 @@ class Router implements RouterInterface
     }
 
     /**
+     * @phpcsSuppress SlevomatCodingStandard.TypeHints.TypeHintDeclaration.MissingParameterTypeHint
      * @param string $name
-     * @param array $parameters
+     * @param string[] $parameters
      * @param int $referenceType
      * @return string
      */

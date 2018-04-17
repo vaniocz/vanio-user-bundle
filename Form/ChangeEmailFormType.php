@@ -8,6 +8,10 @@ use Vanio\UserBundle\Validator\UserPassword;
 
 class ChangeEmailFormType extends AbstractType
 {
+    /**
+     * @param FormBuilderInterface $builder
+     * @param mixed[] $options
+     */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $constraintsOptions = [

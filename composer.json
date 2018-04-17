@@ -20,10 +20,11 @@
         "symfony/validator": "^3.0",
         "symfony/asset": "^3.0",
         "symfony/framework-bundle": "^3.0",
-        "symfony/swiftmailer-bundle": "^2.3",
+        "symfony/swiftmailer-bundle": "^2.3.9",
         "doctrine/doctrine-bundle": "^1.6.4",
-        "hwi/oauth-bundle": "dev-master",
-        "vanio/coding-standards": "^0.1"
+        "hwi/oauth-bundle": "^0.6.2",
+        "php-http/mock-client": "^1.1",
+        "vanio/coding-standards": "^0.2"
     },
     "suggest": {
         "hwi/oauth-bundle": "For social authentication."
@@ -38,8 +39,8 @@
     },
     "scripts": {
         "test": "\"vendor/bin/phpunit\"",
-        "lint": "\"vendor/bin/phpcs\" --standard=ruleset.xml --extensions=php --encoding=utf-8 --ignore=var,vendor,AppKernel.php .",
-        "fix": "\"vendor/bin/phpcbf\" --standard=ruleset.xml --extensions=php --encoding=utf-8 --no-patch --ignore=vendor,var,AppKernel.php .",
+        "lint": "\"vendor/bin/phpcs\" -s .",
+        "fix": "\"vendor/bin/phpcbf\" .",
         "dump-translations": "php console translation:update --dump-messages --output-format=xlf cs && php console translation:update --dump-messages --output-format=xlf en",
         "update-translations": "php console translation:update --force --output-format=xlf cs && php console translation:update --force --output-format=xlf en"
     },
@@ -47,7 +48,7 @@
     "prefer-stable": true,
     "extra": {
         "branch-alias": {
-            "dev-master": "0.2.x-dev"
+            "dev-master": "0.3.x-dev"
         }
     }
 }

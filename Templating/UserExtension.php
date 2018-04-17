@@ -21,9 +21,16 @@ class UserExtension extends \Twig_Extension implements \Twig_Extension_GlobalsIn
     /** @var CsrfTokenManagerInterface|null */
     private $csrfTokenManager;
 
-    /** @var array */
+    /** @var mixed[] */
     private $config;
 
+    /**
+     * @param UserManagerInterface $userManager
+     * @param TargetPathResolver $targetPathResolver
+     * @param RequestStack $requestStack
+     * @param CsrfTokenManagerInterface|null $tokenManager
+     * @param mixed[] $config
+     */
     public function __construct(
         UserManagerInterface $userManager,
         TargetPathResolver $targetPathResolver,
@@ -50,6 +57,9 @@ class UserExtension extends \Twig_Extension implements \Twig_Extension_GlobalsIn
         ];
     }
 
+    /**
+     * @return mixed[]
+     */
     public function getGlobals(): array
     {
         return ['vanio_user' => $this->config];
@@ -60,11 +70,6 @@ class UserExtension extends \Twig_Extension implements \Twig_Extension_GlobalsIn
         return 'vanio_user_extension';
     }
 
-    /**
-     * @param string $tokenId
-     * @return string
-     * @throws \LogicException
-     */
     public function getCsrfToken(string $tokenId): string
     {
         if (!$this->csrfTokenManager) {

@@ -13,6 +13,11 @@ class AuthenticationSuccessHandler extends DefaultAuthenticationSuccessHandler
     /** @var TargetPathResolver */
     private $targetPathResolver;
 
+    /**
+     * @param HttpUtils $httpUtils
+     * @param mixed[] $options
+     * @param TargetPathResolver $targetPathResolver
+     */
     public function __construct(HttpUtils $httpUtils, array $options, TargetPathResolver $targetPathResolver)
     {
         parent::__construct($httpUtils, $options);

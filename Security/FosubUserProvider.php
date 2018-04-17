@@ -7,9 +7,6 @@ use Symfony\Component\PropertyAccess\PropertyAccess;
 
 class FosubUserProvider extends BaseFosubUserProvider
 {
-    /**
-     * @throws \RuntimeException
-     */
     public function disconnectService(UserInterface $user, string $service): bool
     {
         if (!$property = $this->properties[$service] ?? null) {

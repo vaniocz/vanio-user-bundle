@@ -16,6 +16,10 @@ class ProfileFormType extends AbstractType
         $this->emailOnly = $emailOnly;
     }
 
+    /**
+     * @param FormBuilderInterface $builder
+     * @param mixed[] $options
+     */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder->remove('current_password');

@@ -13,6 +13,9 @@ use Vanio\UserBundle\VanioUserEvents;
  */
 class EmailConfirmationListener implements EventSubscriberInterface
 {
+    /**
+     * @return string[]
+     */
     public static function getSubscribedEvents(): array
     {
         return [
@@ -22,6 +25,7 @@ class EmailConfirmationListener implements EventSubscriberInterface
     }
 
     /**
+     * @internal
      * @param HWIOAuthFormEvent|FOSUserFormEvent $event
      * @param string $eventName
      * @param EventDispatcherInterface $eventDispatcher
@@ -38,7 +42,9 @@ class EmailConfirmationListener implements EventSubscriberInterface
             $eventDispatcher->dispatch(VanioUserEvents::REGISTRATION_CONFIRMATION_REQUESTED, $confirmationEvent);
 
             if (!$response = $confirmationEvent->getResponse()) {
-                throw new \RuntimeException('You need to enable email confirmation inside your fos_user configuration.');
+                throw new \RuntimeException(
+                    'You need to enable email confirmation inside your fos_user configuration.'
+                );
             }
 
             $event->setResponse($response);
