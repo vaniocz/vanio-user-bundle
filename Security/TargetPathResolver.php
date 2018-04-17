@@ -54,11 +54,7 @@ class TargetPathResolver
 
         if ($route === 'fos_user_security_login') {
             return $this->resolveTargetPathFromParameterValue($request);
-        }
-
-        $queryString = $request->getQueryString();
-
-        if (
+        } elseif (
             $route === null
             || !$request->isMethod('GET')
             || in_array($route, $this->options['ignored_routes'])
@@ -67,6 +63,7 @@ class TargetPathResolver
             return null;
         }
 
+        $queryString = $request->getQueryString();
         $targetPath = rawurldecode($request->getPathInfo() . ($queryString === null ? '' : '?' . $queryString));
         $absoluteBaseUrl = $request->getSchemeAndHttpHost() . $request->getBaseUrl();
         $defaultTargetPath = $this->httpUtils->generateUri($request, $this->options['default_target_path']);

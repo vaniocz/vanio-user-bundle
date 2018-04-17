@@ -42,7 +42,9 @@ class EmailConfirmationListener implements EventSubscriberInterface
             $eventDispatcher->dispatch(VanioUserEvents::REGISTRATION_CONFIRMATION_REQUESTED, $confirmationEvent);
 
             if (!$response = $confirmationEvent->getResponse()) {
-                throw new \RuntimeException('You need to enable email confirmation inside your fos_user configuration.');
+                throw new \RuntimeException(
+                    'You need to enable email confirmation inside your fos_user configuration.'
+                );
             }
 
             $event->setResponse($response);

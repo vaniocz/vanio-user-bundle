@@ -140,7 +140,9 @@ class VanioUserExtension extends Extension implements PrependExtensionInterface
             }
         }
 
-        throw new \LogicException('Unable to autodetect firewall name. Have you properly configured security extension?');
+        throw new \LogicException(
+            'Unable to autodetect firewall name. Have you properly configured security extension?'
+        );
     }
 
     /**
