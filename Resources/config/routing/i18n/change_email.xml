@@ -1,11 +1,11 @@
 <?xml version="1.0"?>
 <routes xmlns="http://besim.pl/schema/i18n_routing" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://besim.pl/schema/i18n_routing http://besim.pl/schema/i18n_routing/routing-1.0.xsd">
     <route id="vanio_user_change_email_confirm" methods="GET POST">
-        <locale key="en">/confirm-change-email</locale>
-        <locale key="de">/bestatigen-email-anderung</locale>
-        <locale key="cs">/potvrdit-zmenu-emailu</locale>
-        <locale key="sk">/potvrdit-zmenu-emailu</locale>
-        <locale key="ru">/podtverdit-izmeneniye-elektronnoy-pochty</locale>
+        <locale key="en">/confirm-change-email/{token}</locale>
+        <locale key="de">/bestatigen-email-anderung/{token}</locale>
+        <locale key="cs">/potvrdit-zmenu-emailu/{token}</locale>
+        <locale key="sk">/potvrdit-zmenu-emailu/{token}</locale>
+        <locale key="ru">/podtverdit-izmeneniye-elektronnoy-pochty/{token}</locale>
         <default key="_controller">VanioUserBundle:ChangeEmail:confirm</default>
     </route>
 </routes>

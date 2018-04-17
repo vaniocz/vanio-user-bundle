@@ -7,6 +7,7 @@ use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Security\Http\HttpUtils;
+use Symfony\Component\Validator\Validator\ValidatorInterface;
 use Vanio\UserBundle\Form\ChangeEmailFormType;
 use Vanio\UserBundle\Model\User;
 use Vanio\WebBundle\Translation\FlashMessage;
@@ -22,6 +23,12 @@ class ChangeEmailController extends Controller
             $this->addFlashMessage(FlashMessage::TYPE_DANGER, 'change_email.flash.confirmation_token_not_found');
 
             return $this->createRedirectResponse($request);
+        } elseif (!$this->validateNewEmail($user)) {
+            $user->removeNewEmailRequest();
+            $this->userManager()->updateUser($user);
+            $this->addFlashMessage(FlashMessage::TYPE_DANGER, 'change_email.flash.email_already_used');
+
+            return $this->createRedirectResponse($request);
         }
 
         $form = $this->createForm(ChangeEmailFormType::class, $user);
@@ -31,7 +38,6 @@ class ChangeEmailController extends Controller
             $user->setEmail($user->getNewEmail());
             $user->removeNewEmailRequest();
             $this->userManager()->updateUser($user);
-
             $this->addFlashMessage(FlashMessage::TYPE_SUCCESS, 'change_email.flash.success');
 
             return $this->createRedirectResponse($request);
@@ -61,6 +67,16 @@ class ChangeEmailController extends Controller
         $this->addFlash($type, new FlashMessage($message, $parameters, 'FOSUserBundle'));
     }
 
+    private function validateNewEmail(User $user): bool
+    {
+        $email = $user->getEmail();
+        $user->setEmail($user->getNewEmail());
+        $errors = $this->validator()->validate($user, null, ['Profile']);
+        $user->setEmail($email);
+
+        return !count($errors);
+    }
+
     private function userManager(): UserManagerInterface
     {
         return $this->get('fos_user.user_manager');
@@ -69,5 +85,10 @@ class ChangeEmailController extends Controller
     private function httpUtils(): HttpUtils
     {
         return $this->get('security.http_utils');
+    }
+
+    private function validator(): ValidatorInterface
+    {
+        return $this->get('validator');
     }
 }
