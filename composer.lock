@@ -5523,12 +5523,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/squizlabs/PHP_CodeSniffer.git",
-                "reference": "35ca0c90cd4c691b8826a4fc7bf2f10cd3e5e3e8"
+                "reference": "23134b67bef075872896c4cb9630e1c404580d37"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/squizlabs/PHP_CodeSniffer/zipball/35ca0c90cd4c691b8826a4fc7bf2f10cd3e5e3e8",
-                "reference": "35ca0c90cd4c691b8826a4fc7bf2f10cd3e5e3e8",
+                "url": "https://api.github.com/repos/squizlabs/PHP_CodeSniffer/zipball/23134b67bef075872896c4cb9630e1c404580d37",
+                "reference": "23134b67bef075872896c4cb9630e1c404580d37",
                 "shasum": ""
             },
             "require": {
@@ -5566,7 +5566,7 @@
                 "phpcs",
                 "standards"
             ],
-            "time": "2018-04-17T04:09:28+00:00"
+            "time": "2018-04-17T22:41:38+00:00"
         },
         {
             "name": "swiftmailer/swiftmailer",
@@ -5989,16 +5989,17 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/vaniocz/coding-standards.git",
-                "reference": "2fdddfc16df91563b5d02d7830e015b1a40d0ee6"
+                "reference": "26032ec124ccf642e8c2bf2f4751cfe08dfd94a8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/vaniocz/coding-standards/zipball/2fdddfc16df91563b5d02d7830e015b1a40d0ee6",
-                "reference": "2fdddfc16df91563b5d02d7830e015b1a40d0ee6",
+                "url": "https://api.github.com/repos/vaniocz/coding-standards/zipball/26032ec124ccf642e8c2bf2f4751cfe08dfd94a8",
+                "reference": "26032ec124ccf642e8c2bf2f4751cfe08dfd94a8",
                 "shasum": ""
             },
             "require": {
                 "escapestudios/symfony2-coding-standard": "^3.1",
+                "php": "^7.0",
                 "slevomat/coding-standard": "~4.0.0",
                 "squizlabs/php_codesniffer": "3.x-dev"
             },
@@ -6030,7 +6031,7 @@
                 "coding standards",
                 "conventions"
             ],
-            "time": "2018-04-17T14:45:26+00:00"
+            "time": "2018-04-17T22:41:42+00:00"
         },
         {
             "name": "webmozart/assert",
