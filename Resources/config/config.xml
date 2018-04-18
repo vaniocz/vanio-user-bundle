@@ -39,9 +39,7 @@
             <argument type="service" id="session"/>
         </service>
 
-        <service id="vanio_user.security.email_confirmation_listener" class="%vanio_user.security.email_confirmation_listener.class%">
-            <tag name="kernel.event_subscriber"/>
-        </service>
+        <service id="vanio_user.security.email_confirmation_listener" class="%vanio_user.security.email_confirmation_listener.class%" abstract="true"/>
 
         <service id="vanio_user.security.redirect_on_registration_success" class="%vanio_user.security.redirect_on_registration_success.class%" abstract="true">
             <argument type="service" id="security.http_utils"/>
