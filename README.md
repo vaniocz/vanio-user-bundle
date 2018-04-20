@@ -11,7 +11,7 @@ Installation can be done as usually using composer.
 `composer require vanio/vanio-user-bundle`
 
 You can also install HWIOAuthBundle optionally if you want to support authentication via social accounts.
-`composer require hwi/oauth-bundle`
+`composer require php-http/socket-client php-http/httplug-bundle hwi/oauth-bundle`
 
 Next step is to register this bundle as well as bundles it depends on inside your `AppKernel`.
 ```php
@@ -27,6 +27,7 @@ class AppKernel extends Kernel
         $bundles = [
             // ...
             new FOS\UserBundle\FOSUserBundle,
+            new Http\HttplugBundle\HttplugBundle, // Optional, dependency of HWIOAuthBundle
             new HWI\Bundle\OAuthBundle\HWIOAuthBundle, // Optional
             new Vanio\UserBundle\VanioUserBundle,
             new Vanio\UserBundle\VanioWebBundle,
