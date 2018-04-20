@@ -6,6 +6,6 @@
         <locale key="cs">/registrace/overeni/{email}</locale>
         <locale key="sk">/registracia/overenie/{email}</locale>
         <locale key="ru">/registratsiya/proverit/{email}</locale>
-        <default key="_controller">FOSUserBundle:Registration:sendConfirmation</default>
+        <default key="_controller">fos_user.registration.controller:sendConfirmationAction</default>
     </route>
 </routes>

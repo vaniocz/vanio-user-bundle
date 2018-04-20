@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <routes xmlns="http://besim.pl/schema/i18n_routing" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://besim.pl/schema/i18n_routing http://besim.pl/schema/i18n_routing/routing-1.0.xsd">
     <route id="fos_user_registration_register" path="/" methods="GET POST">
-        <default key="_controller">FOSUserBundle:Registration:register</default>
+        <default key="_controller">fos_user.registration.controller:registerAction</default>
     </route>
 
     <route id="fos_user_registration_check_email" methods="GET">
@@ -10,7 +10,7 @@
         <locale key="cs">/kontrola-emailu</locale>
         <locale key="sk">/kontrola-emailu</locale>
         <locale key="ru">/proverit-email</locale>
-        <default key="_controller">FOSUserBundle:Registration:checkEmail</default>
+        <default key="_controller">fos_user.registration.controller:checkEmailAction</default>
     </route>
 
     <route id="fos_user_registration_confirm" methods="GET">
@@ -19,7 +19,7 @@
         <locale key="cs">/potvrdit/{token}</locale>
         <locale key="sk">/potvrdit/{token}</locale>
         <locale key="ru">/podtverdit/{token}</locale>
-        <default key="_controller">FOSUserBundle:Registration:confirm</default>
+        <default key="_controller">fos_user.registration.controller:confirmAction</default>
     </route>
 
     <route id="fos_user_registration_confirmed" methods="GET">
@@ -28,6 +28,6 @@
         <locale key="cs">/potvrzeno</locale>
         <locale key="sk">/potvrdene</locale>
         <locale key="ru">/podtverdil</locale>
-        <default key="_controller">FOSUserBundle:Registration:confirmed</default>
+        <default key="_controller">fos_user.registration.controller:confirmedAction</default>
     </route>
 </routes>

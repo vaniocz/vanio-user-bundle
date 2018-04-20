@@ -6,7 +6,7 @@
         <locale key="cs">/prihlaseni</locale>
         <locale key="sk">/prihlasenie</locale>
         <locale key="ru">/avtorizovatsya</locale>
-        <default key="_controller">FOSUserBundle:Security:login</default>
+        <default key="_controller">fos_user.security.controller:loginAction</default>
     </route>
 
     <route id="fos_user_security_check" methods="POST">
@@ -15,7 +15,7 @@
         <locale key="cs">/kontrola-prihlaseni</locale>
         <locale key="sk">/kontrola-prihlasenie</locale>
         <locale key="ru">/proverit-avtorizovatsya</locale>
-        <default key="_controller">FOSUserBundle:Security:check</default>
+        <default key="_controller">fos_user.security.controller:checkAction</default>
     </route>
 
     <route id="fos_user_security_logout" methods="GET POST">
@@ -24,6 +24,6 @@
         <locale key="cs">/odhlasit</locale>
         <locale key="sk">/odhlasit-sa</locale>
         <locale key="ru">/vyyti</locale>
-        <default key="_controller">FOSUserBundle:Security:logout</default>
+        <default key="_controller">fos_user.security.controller:logoutAction</default>
     </route>
 </routes>

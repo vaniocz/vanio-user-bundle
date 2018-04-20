@@ -7,6 +7,7 @@ use Symfony\Component\HttpKernel\Bundle\Bundle;
 use Vanio\UserBundle\DependencyInjection\Compiler\EmailConfirmationPass;
 use Vanio\UserBundle\DependencyInjection\Compiler\EntryPointPass;
 use Vanio\UserBundle\DependencyInjection\Compiler\FlashNotificationsPass;
+use Vanio\UserBundle\DependencyInjection\Compiler\OverrideFosUserBundleControllersPass;
 use Vanio\UserBundle\DependencyInjection\Compiler\PassTargetPathPass;
 use Vanio\UserBundle\DependencyInjection\Compiler\ValidationPass;
 
@@ -19,6 +20,7 @@ class VanioUserBundle extends Bundle
             ->addCompilerPass(new EmailConfirmationPass)
             ->addCompilerPass(new EntryPointPass)
             ->addCompilerPass(new FlashNotificationsPass)
+            ->addCompilerPass(new OverrideFosUserBundleControllersPass)
             ->addCompilerPass(new PassTargetPathPass)
             ->addCompilerPass(new ValidationPass);
 

@@ -10,7 +10,7 @@
     ],
     "require": {
         "php": "^7.0",
-        "friendsofsymfony/user-bundle": "^2.0.1",
+        "friendsofsymfony/user-bundle": "^2.1.2",
         "vanio/stdlib": "^0.1",
         "vanio/vanio-web-bundle": "~0.2"
     },
