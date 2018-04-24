@@ -83,7 +83,7 @@
 
             <trans-unit id="011fbe9202fa712f1f991ffbceeb1780" resname="vanio_user_change_email_confirm">
                 <source>vanio_user_change_email_confirm</source>
-                <target>Confirm e-mail change</target>
+                <target>Confirmation of the e-mail change</target>
             </trans-unit>
         </body>
     </file>
