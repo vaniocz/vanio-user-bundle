@@ -223,7 +223,7 @@
 
             <trans-unit id="3470151e8308ec57df38a6d06951ebf8" resname="change_email.email.subject">
                 <source>change_email.email.subject</source>
-                <target>Change E-mail</target>
+                <target>Confirmation of the e-mail change</target>
             </trans-unit>
 
             <trans-unit id="0310a79b7ef80ff6f532142667aafdd5" resname="change_email.email.message">
@@ -231,7 +231,7 @@
                 <target>
                     <![CDATA[
                         <h1>Hello,</h1>
-                        <p>To confirm change of your e-mail please visit <a href="%confirmationUrl%">this link</a>.</p>
+                        <p>please confirm the e-mail change by clicking <a href="%confirmationUrl%">this link</a>.</p>
                     ]]>
                 </target>
             </trans-unit>
@@ -243,7 +243,7 @@
 
             <trans-unit id="dde6715373995d67e12c88aba1d84765" resname="change_email.flash.confirmation_token_not_found">
                 <source>change_email.flash.confirmation_token_not_found</source>
-                <target>E-mail was probably already changed or you have requested a new e-mail change. Use link from new e-mail in case of the new request.</target>
+                <target>E-mail address might have already been changed or a new change request has been carried out. In case of the new request please use the link from the new e-mail.</target>
             </trans-unit>
 
             <trans-unit id="43e72e358d7a967b86c4f3ff1dfdc695" resname="change_email.flash.email_already_used">
@@ -253,12 +253,12 @@
 
             <trans-unit id="809812cf7d17f0015b24e3d0d0ff1948" resname="change_email.flash.success">
                 <source>change_email.flash.success</source>
-                <target>Your e-mail has been successfully changed.</target>
+                <target>Your e-mail address has been successfully changed.</target>
             </trans-unit>
 
             <trans-unit id="36958b7863986614b3ed76e1adb02965" resname="change_email.form.info">
                 <source>change_email.form.info</source>
-                <target>To complete change of e-mail, please input your password.</target>
+                <target>Please enter your user password to complete the e-mail change.</target>
             </trans-unit>
 
             <trans-unit id="4a41e1db27d22ac5962a9a3301b64241" resname="change_email.form.submit">

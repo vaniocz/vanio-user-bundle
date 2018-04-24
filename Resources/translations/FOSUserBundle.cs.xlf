@@ -258,7 +258,7 @@
 
             <trans-unit id="dde6715373995d67e12c88aba1d84765" resname="change_email.flash.confirmation_token_not_found">
                 <source>change_email.flash.confirmation_token_not_found</source>
-                <target>E-mail byl již pravděpodobně změnen nebo došlo k novému požadavku pro změnu e-mailu. V případě nového požadavku použijte odkaz z nového e-mailu.</target>
+                <target>E-mail byl již pravděpodobně změněn nebo došlo k novému požadavku pro změnu e-mailu. V případě nového požadavku použijte odkaz z nového e-mailu.</target>
             </trans-unit>
 
             <trans-unit id="43e72e358d7a967b86c4f3ff1dfdc695" resname="change_email.flash.email_already_used">
