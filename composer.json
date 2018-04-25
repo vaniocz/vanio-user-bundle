@@ -44,10 +44,5 @@
         "update-translations": "php console translation:update --force --output-format=xlf cs && php console translation:update --force --output-format=xlf en"
     },
     "minimum-stability": "dev",
-    "prefer-stable": true,
-    "extra": {
-        "branch-alias": {
-            "dev-master": "0.2.x-dev"
-        }
-    }
+    "prefer-stable": true
 }
