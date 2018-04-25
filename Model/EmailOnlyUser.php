@@ -6,6 +6,14 @@ abstract class EmailOnlyUser extends User
     /** @var string */
     protected $username = 'username'; // Fulfills username NotBlank constraint
 
+    public function jsonSerialize(): array
+    {
+        $data = parent::jsonSerialize();
+        unset($data['username']);
+
+        return $data;
+    }
+
     /**
      * @param string $email
      * @return $this

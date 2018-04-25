@@ -20,6 +20,7 @@ use Vanio\WebBundle\Translation\FlashMessage;
 
 class RegistrationController extends BaseRegistrationController
 {
+    use ResponseFormatTrait;
     use RefererHelperTrait;
 
     /**

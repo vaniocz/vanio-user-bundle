@@ -3,7 +3,7 @@ namespace Vanio\UserBundle\Model;
 
 use FOS\UserBundle\Model\User as BaseUser;
 
-abstract class User extends BaseUser
+abstract class User extends BaseUser implements \JsonSerializable
 {
     const ROLE_ADMIN = 'ROLE_ADMIN';
 
@@ -50,5 +50,14 @@ abstract class User extends BaseUser
         $this->newEmail = null;
         $this->newEmailConfirmationToken = null;
         $this->newEmailRequestedAt = null;
+    }
+
+    public function jsonSerialize(): array
+    {
+        return [
+            'id' => $this->id,
+            'username' => $this->username,
+            'email' => $this->email,
+        ];
     }
 }
