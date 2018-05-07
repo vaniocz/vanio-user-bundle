@@ -29,7 +29,7 @@ class EmailConfirmationListener implements EventSubscriberInterface
     /**
      * @internal
      */
-    public function onRegistrationInitialize(GetResponseUserEvent $event)
+    public function onRegistrationInitialize(GetResponseUserEvent $event): void
     {
         $event->getUser()->setEnabled(false);
     }
@@ -44,7 +44,7 @@ class EmailConfirmationListener implements EventSubscriberInterface
         $event,
         string $eventName,
         EventDispatcherInterface $eventDispatcher
-    ) {
+    ): void {
         $form = $event->getForm();
 
         if (!$form->getData()->isEnabled()) {

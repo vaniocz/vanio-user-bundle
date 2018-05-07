@@ -24,7 +24,7 @@ class Router implements RouterInterface
         $this->requestStack = $requestStack;
     }
 
-    public function setTargetPathResolver(TargetPathResolver $targetPathResolver)
+    public function setTargetPathResolver(TargetPathResolver $targetPathResolver): void
     {
         $this->targetPathResolver = $targetPathResolver;
     }
@@ -64,7 +64,7 @@ class Router implements RouterInterface
         return $this->router->getRouteCollection();
     }
 
-    public function setContext(RequestContext $context)
+    public function setContext(RequestContext $context): void
     {
         $this->router->setContext($context);
     }

@@ -7,7 +7,7 @@ use Vanio\UserBundle\Model\User;
 
 class TwigSwiftMailer extends BaseTwigSwiftMailer
 {
-    public function sendChangeEmailConfirmationMessage(User $user)
+    public function sendChangeEmailConfirmationMessage(User $user): void
     {
         $confirmationUrl = $this->router->generate(
             'vanio_user_change_email_confirm',

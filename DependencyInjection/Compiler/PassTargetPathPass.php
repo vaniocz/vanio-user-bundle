@@ -7,7 +7,7 @@ use Symfony\Component\DependencyInjection\Reference;
 
 class PassTargetPathPass implements CompilerPassInterface
 {
-    public function process(ContainerBuilder $container)
+    public function process(ContainerBuilder $container): void
     {
         if (!$container->getParameter('vanio_user.pass_target_path.enabled')) {
             return;

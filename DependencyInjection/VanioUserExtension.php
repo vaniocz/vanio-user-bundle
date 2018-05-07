@@ -18,7 +18,7 @@ class VanioUserExtension extends Extension implements PrependExtensionInterface
      * @param mixed[] $configs
      * @param ContainerBuilder $container
      */
-    public function load(array $configs, ContainerBuilder $container)
+    public function load(array $configs, ContainerBuilder $container): void
     {
         $config = $this->processConfiguration(new Configuration, $configs);
         $config['db_driver'] = $container->getParameter('fos_user.storage');
@@ -55,7 +55,7 @@ class VanioUserExtension extends Extension implements PrependExtensionInterface
         }
     }
 
-    public function prepend(ContainerBuilder $container)
+    public function prepend(ContainerBuilder $container): void
     {
         $config = $this->processExtensionConfig($container, 'vanio_user');
         $this->prependSecurityConfig($container, $config);
@@ -86,7 +86,7 @@ class VanioUserExtension extends Extension implements PrependExtensionInterface
      * @param ContainerBuilder $container
      * @param mixed[] $config
      */
-    private function prependSecurityConfig(ContainerBuilder $container, array $config)
+    private function prependSecurityConfig(ContainerBuilder $container, array $config): void
     {
         $container->prependExtensionConfig('security', [
             'encoders' => [UserInterface::class => 'bcrypt'],
@@ -104,7 +104,7 @@ class VanioUserExtension extends Extension implements PrependExtensionInterface
      * @param ContainerBuilder $container
      * @param mixed[] $config
      */
-    private function prependFosUserConfig(ContainerBuilder $container, array $config)
+    private function prependFosUserConfig(ContainerBuilder $container, array $config): void
     {
         $container->prependExtensionConfig('fos_user', [
             'firewall_name' => $config['firewall_name'],
@@ -162,7 +162,7 @@ class VanioUserExtension extends Extension implements PrependExtensionInterface
      * @param string $name
      * @param mixed $value
      */
-    private function setContainerRecursiveParameter(ContainerBuilder $container, string $name, $value)
+    private function setContainerRecursiveParameter(ContainerBuilder $container, string $name, $value): void
     {
         $container->setParameter($name, $value);
 

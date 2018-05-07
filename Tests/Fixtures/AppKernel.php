@@ -43,10 +43,10 @@ class AppKernel extends Kernel
         return __DIR__ . '/../../var/logs';
     }
 
-    protected function configureRoutes(RouteCollectionBuilder $routes)
+    protected function configureRoutes(RouteCollectionBuilder $routes): void
     {}
 
-    protected function configureContainer(ContainerBuilder $container, LoaderInterface $loader)
+    protected function configureContainer(ContainerBuilder $container, LoaderInterface $loader): void
     {
         $container->setDefinition('dummy_user_manager', new Definition(DummyUserManager::class));
         $container->loadFromExtension('framework', [

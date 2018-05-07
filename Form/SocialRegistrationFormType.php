@@ -25,7 +25,7 @@ class SocialRegistrationFormType extends AbstractType
      * @param FormBuilderInterface $builder
      * @param mixed[] $options
      */
-    public function buildForm(FormBuilderInterface $builder, array $options)
+    public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
             ->remove('plainPassword')
@@ -38,7 +38,7 @@ class SocialRegistrationFormType extends AbstractType
         }
     }
 
-    public function configureOptions(OptionsResolver $resolver)
+    public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver
             ->setDefault('email_confirmation', $this->emailConfirmation)
@@ -50,7 +50,7 @@ class SocialRegistrationFormType extends AbstractType
         return RegistrationFormType::class;
     }
 
-    public function onPreSetData(FormEvent $event)
+    public function onPreSetData(FormEvent $event): void
     {
         /** @var UserInterface $user */
         if ($user = $event->getData()) {
@@ -63,7 +63,7 @@ class SocialRegistrationFormType extends AbstractType
      *
      * @param FormEvent $event
      */
-    public function onPostSubmit(FormEvent $event)
+    public function onPostSubmit(FormEvent $event): void
     {
         /** @var UserInterface $user */
         if ($user = $event->getData()) {

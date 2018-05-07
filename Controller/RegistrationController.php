@@ -18,10 +18,8 @@ use Symfony\Component\HttpKernel\HttpKernel;
 use Symfony\Component\HttpKernel\HttpKernelInterface;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 use Symfony\Component\Security\Http\Firewall\LogoutListener;
-use Symfony\Component\Security\Http\HttpUtils;
 use Vanio\UserBundle\VanioUserEvents;
 use Vanio\WebBundle\Request\RefererHelperTrait;
-use Vanio\WebBundle\Translation\FlashMessage;
 
 class RegistrationController extends BaseRegistrationController
 {
@@ -105,16 +103,6 @@ class RegistrationController extends BaseRegistrationController
         return $this->render('@VanioUser/Registration/unregister.html.twig');
     }
 
-    /**
-     * @param string $type
-     * @param string $message
-     * @param mixed[] $parameters
-     */
-    private function addFlashMessage(string $type, string $message, array $parameters = [])
-    {
-        $this->addFlash($type, new FlashMessage($message, $parameters, 'FOSUserBundle'));
-    }
-
     private function eventDispatcher(): EventDispatcherInterface
     {
         return $this->get('event_dispatcher');
@@ -128,11 +116,6 @@ class RegistrationController extends BaseRegistrationController
     private function httpKernel(): HttpKernel
     {
         return $this->get('http_kernel');
-    }
-
-    private function httpUtils(): HttpUtils
-    {
-        return $this->get('security.http_utils');
     }
 
     private function logoutListener(): LogoutListener

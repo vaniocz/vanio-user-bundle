@@ -13,7 +13,7 @@ class ResettingFormType extends AbstractType
      * @param FormBuilderInterface $builder
      * @param mixed[] $options
      */
-    public function buildForm(FormBuilderInterface $builder, array $options)
+    public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         if ($options['format'] !== 'html') {
             $builder
@@ -25,7 +25,7 @@ class ResettingFormType extends AbstractType
         }
     }
 
-    public function configureOptions(OptionsResolver $resolver)
+    public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver
             ->setDefault('format', 'html')

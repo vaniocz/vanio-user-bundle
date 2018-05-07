@@ -44,11 +44,7 @@ class TargetPathResolver
         ]);
     }
 
-    /**
-     * @param Request $request
-     * @return string|null
-     */
-    public function resolveTargetPath(Request $request)
+    public function resolveTargetPath(Request $request): ?string
     {
         $route = $request->attributes->get('_route');
 
@@ -72,11 +68,7 @@ class TargetPathResolver
         return $targetPath === $defaultTargetPath ? null : $targetPath;
     }
 
-    /**
-     * @param Request $request
-     * @return string|null
-     */
-    public function resolveTargetPathFromParameterValue(Request $request)
+    public function resolveTargetPathFromParameterValue(Request $request): ?string
     {
         $absoluteBaseUrl = $request->getSchemeAndHttpHost() . $request->getBaseUrl();
         $targetPath = $request->get($this->targetPathParameter());

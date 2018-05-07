@@ -8,7 +8,6 @@ use FOS\UserBundle\Event\GetResponseNullableUserEvent;
 use FOS\UserBundle\Event\GetResponseUserEvent;
 use FOS\UserBundle\Event\UserEvent;
 use FOS\UserBundle\FOSUserEvents;
-use Http\Client\Common\Exception\HttpClientNotFoundException;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Translation\TranslatorInterface;
@@ -78,7 +77,7 @@ class ApiResponseListener implements EventSubscriberInterface
     /**
      * @internal
      */
-    public function onRegistrationConfirm(GetResponseUserEvent $event)
+    public function onRegistrationConfirm(GetResponseUserEvent $event): void
     {
         if ($event->getUser()) {
             $this->respondWithOkResponse($event);
@@ -93,7 +92,7 @@ class ApiResponseListener implements EventSubscriberInterface
     /**
      * @internal
      */
-    public function onResettingSendEmailInitialize(GetResponseNullableUserEvent $event)
+    public function onResettingSendEmailInitialize(GetResponseNullableUserEvent $event): void
     {
         $property = $this->emailOnly ? 'email' : 'username';
         $username = $event->getRequest()->request->get('username');
@@ -116,16 +115,17 @@ class ApiResponseListener implements EventSubscriberInterface
     /**
      * @internal
      */
-    public function onResettingResetRequest(GetResponseUserEvent $event)
+    public function onResettingResetRequest(GetResponseUserEvent $event): void
     {
         if (!$event->getUser()->isAccountNonLocked()) {
+            //@TODO
         }
     }
 
     /**
      * @internal
      */
-    public function onGroupDeleteCompleted(FilterGroupResponseEvent $event)
+    public function onGroupDeleteCompleted(FilterGroupResponseEvent $event): void
     {
         $response = $event->getResponse();
         $this->respondWithOkResponse($event);
@@ -139,7 +139,7 @@ class ApiResponseListener implements EventSubscriberInterface
     /**
      * @internal
      */
-    public function onRegistrationConfirmationRequest(GetResponseNullableUserEvent $event)
+    public function onRegistrationConfirmationRequest(GetResponseNullableUserEvent $event): void
     {
         if (!$event->getUser()) {
             $this->respondWithNotFoundResponse(
@@ -157,7 +157,7 @@ class ApiResponseListener implements EventSubscriberInterface
     /**
      * @internal
      */
-    public function onResettingResetFailure(GetResponseNullableUserEvent $event)
+    public function onResettingResetFailure(GetResponseNullableUserEvent $event): void
     {
         $this->respondWithNotFoundResponse(
             $event,
@@ -168,7 +168,7 @@ class ApiResponseListener implements EventSubscriberInterface
     /**
      * @internal
      */
-    public function onChangeEmailInitialize(GetResponseNullableUserEvent $event)
+    public function onChangeEmailInitialize(GetResponseNullableUserEvent $event): void
     {
         if (!$event->getUser() instanceof User) {
             $this->respondWithNotFoundResponse(
@@ -181,7 +181,7 @@ class ApiResponseListener implements EventSubscriberInterface
     /**
      * @internal
      */
-    public function onChangeEmailFailure(FilterUserResponseEvent $event)
+    public function onChangeEmailFailure(FilterUserResponseEvent $event): void
     {
         $this->respondWithNotFoundResponse($event, $this->translateErrorMessage('change_email.email_already_used'));
     }
@@ -190,7 +190,7 @@ class ApiResponseListener implements EventSubscriberInterface
      * @internal
      * @param FilterGroupResponseEvent|FormEvent|GetResponseUserEvent $event
      */
-    public function respondWithOkResponse($event)
+    public function respondWithOkResponse($event): void
     {
         $this->respondWithSuccessResponse($event, 200);
     }
@@ -199,12 +199,12 @@ class ApiResponseListener implements EventSubscriberInterface
      * @internal
      * @param FormEvent|GetResponseUserEvent $event
      */
-    public function respondWithCreatedResponse($event)
+    public function respondWithCreatedResponse($event): void
     {
         $this->respondWithSuccessResponse($event, 201);
     }
 
-    private function respondWithUnprocessableEntityResponse(GetResponseUserEvent $event, string $error)
+    private function respondWithUnprocessableEntityResponse(GetResponseUserEvent $event, string $error): void
     {
         $format = $event->getRequest()->getRequestFormat();
 
@@ -224,7 +224,7 @@ class ApiResponseListener implements EventSubscriberInterface
      * @param GetResponseUserEvent|FilterUserResponseEvent $event
      * @param string $error
      */
-    private function respondWithNotFoundResponse(UserEvent $event, string $error)
+    private function respondWithNotFoundResponse(UserEvent $event, string $error): void
     {
         $format = $event->getRequest()->getRequestFormat();
 
@@ -244,7 +244,7 @@ class ApiResponseListener implements EventSubscriberInterface
      * @param FilterGroupResponseEvent|FormEvent|GetResponseUserEvent $event
      * @param int $statusCode
      */
-    private function respondWithSuccessResponse($event, int $statusCode)
+    private function respondWithSuccessResponse($event, int $statusCode): void
     {
         $format = $event->getRequest()->getRequestFormat();
 

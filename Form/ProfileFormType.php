@@ -20,7 +20,7 @@ class ProfileFormType extends AbstractType
      * @param FormBuilderInterface $builder
      * @param mixed[] $options
      */
-    public function buildForm(FormBuilderInterface $builder, array $options)
+    public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder->remove('current_password');
 
@@ -36,7 +36,7 @@ class ProfileFormType extends AbstractType
         }
     }
 
-    public function configureOptions(OptionsResolver $resolver)
+    public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver
             ->setDefault('email_only', $this->emailOnly)

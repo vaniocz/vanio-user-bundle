@@ -5,7 +5,6 @@ use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\HttpKernel\Exception\UnsupportedMediaTypeHttpException;
-use Twig\Error\Error;
 use Twig\Error\LoaderError;
 use Twig\Error\RuntimeError;
 use Vanio\WebBundle\Serializer\UnsupportedFormatException;
@@ -18,8 +17,9 @@ trait ResponseFormatTrait
      * @param mixed[] $parameters
      * @param Response|null $response
      * @return Response
+     * @phpcsSuppress SlevomatCodingStandard.TypeHints.TypeHintDeclaration.MissingParameterTypeHint
      */
-    protected function render($view, array $parameters = [], Response $response = null): Response
+    protected function render($view, array $parameters = [], ?Response $response = null): Response
     {
         $format = $this->requestStack()->getCurrentRequest()->getRequestFormat();
         $view = str_replace('.html.twig', '', $view);
@@ -30,7 +30,7 @@ trait ResponseFormatTrait
             try {
                 $viewResponse = parent::render($view, $parameters, $response);
                 break;
-            } catch (\Exception $e) {
+            } catch (\Throwable $e) {
                 if ($e instanceof RuntimeError && $e->getPrevious() instanceof UnsupportedFormatException) {
                     throw new UnsupportedMediaTypeHttpException($e->getPrevious()->getMessage(), $e);
                 } elseif (!$e instanceof LoaderError && !$e->getPrevious() instanceof LoaderError) {

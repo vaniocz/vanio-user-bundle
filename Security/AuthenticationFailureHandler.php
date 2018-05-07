@@ -26,12 +26,12 @@ class AuthenticationFailureHandler extends DefaultAuthenticationFailureHandler
         return $response;
     }
 
-    public function setTargetPathResolver(TargetPathResolver $targetPathResolver)
+    public function setTargetPathResolver(TargetPathResolver $targetPathResolver): void
     {
         $this->targetPathResolver = $targetPathResolver;
     }
 
-    private function passTargetPath(Request $request, Response $response)
+    private function passTargetPath(Request $request, Response $response): void
     {
         if ($targetPath = $this->targetPathResolver->resolveTargetPathFromParameterValue($request)) {
             $targetUri = (new Uri($response->headers->get('Location')))->withAppendedQuery([

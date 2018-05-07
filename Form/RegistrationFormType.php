@@ -21,7 +21,7 @@ class RegistrationFormType extends AbstractType
      * @param FormBuilderInterface $builder
      * @param mixed[] $options
      */
-    public function buildForm(FormBuilderInterface $builder, array $options)
+    public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         if ($options['email_only']) {
             $builder->remove('username');
@@ -44,7 +44,7 @@ class RegistrationFormType extends AbstractType
         }
     }
 
-    public function configureOptions(OptionsResolver $resolver)
+    public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver
             ->setDefaults([

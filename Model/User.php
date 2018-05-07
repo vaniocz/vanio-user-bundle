@@ -5,53 +5,44 @@ use FOS\UserBundle\Model\User as BaseUser;
 
 abstract class User extends BaseUser implements \JsonSerializable
 {
-    const ROLE_ADMIN = 'ROLE_ADMIN';
+    public const ROLE_ADMIN = 'ROLE_ADMIN';
 
-    /**
-     * @var string|null
-     */
+    /** @var string|null */
     protected $newEmail;
 
-    /**
-     * @var string|null
-     */
+    /** @var string|null */
     protected $newEmailConfirmationToken;
 
-    /**
-     * @var \DateTime|null
-     */
+    /** @var \DateTime|null */
     protected $newEmailRequestedAt;
 
-    /**
-     * @return string|null
-     */
-    public function getNewEmail()
+    public function getNewEmail(): ?string
     {
         return $this->newEmail;
     }
 
-    /**
-     * @return string|null
-     */
-    public function getNewEmailConfirmationToken()
+    public function getNewEmailConfirmationToken(): ?string
     {
         return $this->newEmailConfirmationToken;
     }
 
-    public function requestNewEmail(string $email, string $confirmationToken)
+    public function requestNewEmail(string $email, string $confirmationToken): void
     {
         $this->newEmail = $email;
         $this->newEmailConfirmationToken = $confirmationToken;
         $this->newEmailRequestedAt = new \DateTime;
     }
 
-    public function removeNewEmailRequest()
+    public function removeNewEmailRequest(): void
     {
         $this->newEmail = null;
         $this->newEmailConfirmationToken = null;
         $this->newEmailRequestedAt = null;
     }
 
+    /**
+     * @return mixed[]
+     */
     public function jsonSerialize(): array
     {
         $data = [

@@ -17,13 +17,13 @@ class ChangePasswordFormType extends AbstractType
      * @param FormBuilderInterface $builder
      * @param mixed[] $options
      */
-    public function buildForm(FormBuilderInterface $builder, array $options)
+    public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         if ($options['format'] !== 'html') {
             $builder
                 ->remove('current_password')
                 ->remove('plainPassword')
-                ->add('currentPassword', PasswordType::class, array(
+                ->add('currentPassword', PasswordType::class, [
                     'mapped' => false,
                     'translation_domain' => 'FOSUserBundle',
                     'constraints' => new UserPassword([
@@ -32,7 +32,7 @@ class ChangePasswordFormType extends AbstractType
                             ? reset($options['validation_groups'])
                             : null,
                     ]),
-                ))
+                ])
                 ->add('newPassword', PasswordType::class, [
                     'property_path' => 'plainPassword',
                     'translation_domain' => 'FOSUserBundle',
@@ -47,7 +47,7 @@ class ChangePasswordFormType extends AbstractType
         return BaseChangePasswordFormType::class;
     }
 
-    public function configureOptions(OptionsResolver $resolver)
+    public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver
             ->setDefault('format', 'html')
@@ -57,7 +57,7 @@ class ChangePasswordFormType extends AbstractType
     /**
      * @internal
      */
-    public function onPreSetData(FormEvent $event)
+    public function onPreSetData(FormEvent $event): void
     {
         /** @var UserInterface|null $user */
         $user = $event->getData();

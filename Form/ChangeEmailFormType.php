@@ -14,7 +14,7 @@ class ChangeEmailFormType extends AbstractType
      * @param FormBuilderInterface $builder
      * @param mixed[] $options
      */
-    public function buildForm(FormBuilderInterface $builder, array $options)
+    public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder->addEventListener(FormEvents::PRE_SET_DATA, [$this, 'onPreSetData']);
     }
@@ -22,7 +22,7 @@ class ChangeEmailFormType extends AbstractType
     /**
      * @internal
      */
-    public function onPreSetData(FormEvent $event)
+    public function onPreSetData(FormEvent $event): void
     {
         if (!$user = $event->getData()) {
             return;

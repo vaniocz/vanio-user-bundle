@@ -6,6 +6,9 @@ abstract class EmailOnlyUser extends User
     /** @var string */
     protected $username = 'username'; // Fulfills username NotBlank constraint
 
+    /**
+     * @return mixed[]
+     */
     public function jsonSerialize(): array
     {
         $data = parent::jsonSerialize();
@@ -17,6 +20,7 @@ abstract class EmailOnlyUser extends User
     /**
      * @param string $email
      * @return $this
+     * @phpcsSuppress SlevomatCodingStandard.TypeHints.TypeHintDeclaration.MissingParameterTypeHint
      */
     public function setEmail($email): self
     {
@@ -29,6 +33,7 @@ abstract class EmailOnlyUser extends User
     /**
      * @param string $emailCanonical
      * @return $this
+     * @phpcsSuppress SlevomatCodingStandard.TypeHints.TypeHintDeclaration.MissingParameterTypeHint
      */
     public function setEmailCanonical($emailCanonical): self
     {
@@ -42,6 +47,7 @@ abstract class EmailOnlyUser extends User
      * @internal
      * @param string $username
      * @return $this
+     * @phpcsSuppress SlevomatCodingStandard.TypeHints.TypeHintDeclaration.MissingParameterTypeHint
      */
     public function setUsername($username): self
     {
@@ -52,6 +58,7 @@ abstract class EmailOnlyUser extends User
      * @internal
      * @param string $usernameCanonical
      * @return $this
+     * @phpcsSuppress SlevomatCodingStandard.TypeHints.TypeHintDeclaration.MissingParameterTypeHint
      */
     public function setUsernameCanonical($usernameCanonical): self
     {

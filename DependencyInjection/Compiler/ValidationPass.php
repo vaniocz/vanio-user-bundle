@@ -6,7 +6,7 @@ use Symfony\Component\DependencyInjection\ContainerBuilder;
 
 class ValidationPass implements CompilerPassInterface
 {
-    public function process(ContainerBuilder $container)
+    public function process(ContainerBuilder $container): void
     {
         $storage = $container->getParameter('vanio_user.db_driver');
         $container->setParameter('fos_user.storage', $storage);

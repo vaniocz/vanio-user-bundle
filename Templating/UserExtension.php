@@ -37,7 +37,7 @@ class UserExtension extends \Twig_Extension implements \Twig_Extension_GlobalsIn
         UserManagerInterface $userManager,
         TargetPathResolver $targetPathResolver,
         RequestStack $requestStack,
-        CsrfTokenManagerInterface $tokenManager = null,
+        ?CsrfTokenManagerInterface $tokenManager = null,
         array $config
     ) {
         $this->userManager = $userManager;
@@ -82,19 +82,12 @@ class UserExtension extends \Twig_Extension implements \Twig_Extension_GlobalsIn
         return $this->csrfTokenManager->getToken($tokenId);
     }
 
-    /**
-     * @param string $usernameOrEmail
-     * @return UserInterface|null
-     */
-    public function findUser(string $usernameOrEmail)
+    public function findUser(string $usernameOrEmail): ?UserInterface
     {
         return $this->userManager->findUserByUsernameOrEmail($usernameOrEmail);
     }
 
-    /**
-     * @return string|null
-     */
-    public function targetPath()
+    public function targetPath(): ?string
     {
         $request = $this->requestStack->getCurrentRequest();
 

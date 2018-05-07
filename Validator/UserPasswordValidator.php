@@ -20,7 +20,7 @@ class UserPasswordValidator extends ConstraintValidator
      * @param mixed $password
      * @param Constraint $constraint
      */
-    public function validate($password, Constraint $constraint)
+    public function validate($password, Constraint $constraint): void
     {
         if (!$constraint instanceof UserPassword) {
             throw new UnexpectedTypeException($constraint, sprintf('%s\UserPassword', __NAMESPACE__));

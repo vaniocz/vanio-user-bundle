@@ -13,7 +13,7 @@ use Vanio\UserBundle\DependencyInjection\Compiler\ValidationPass;
 
 class VanioUserBundle extends Bundle
 {
-    public function build(ContainerBuilder $container)
+    public function build(ContainerBuilder $container): void
     {
         $container
             ->addCompilerPass(new EmailConfirmationPass)
@@ -29,10 +29,7 @@ class VanioUserBundle extends Bundle
         }
     }
 
-    /**
-     * @return string|null
-     */
-    public function getParent()
+    public function getParent(): string
     {
         return 'FOSUserBundle';
     }

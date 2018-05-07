@@ -104,7 +104,7 @@ class ConnectController extends BaseConnectController
      * @return Response
      * @phpcsSuppress SlevomatCodingStandard.TypeHints.TypeHintDeclaration.MissingParameterTypeHint
      */
-    protected function render($view, array $parameters = [], Response $response = null): Response
+    protected function render($view, array $parameters = [], ?Response $response = null): Response
     {
         if (preg_match('~HWIOAuthBundle::?(.*\.html\.twig)$~', $view, $matches)) {
             $view = sprintf('@HWIOAuth/%s', strtr($matches[1], ':', '/'));
@@ -155,7 +155,7 @@ class ConnectController extends BaseConnectController
      * @param string $message
      * @param mixed[] $parameters
      */
-    private function addFlashMessage(string $type, string $message, array $parameters = [])
+    private function addFlashMessage(string $type, string $message, array $parameters = []): void
     {
         $this->addFlash($type, new FlashMessage($message, $parameters, 'HWIOAuthBundle'));
     }

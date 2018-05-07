@@ -42,7 +42,7 @@ class EmailChangeConfirmationListener implements EventSubscriberInterface
     /**
      * @internal
      */
-    public function onProfileEditInitialize(GetResponseUserEvent $event)
+    public function onProfileEditInitialize(GetResponseUserEvent $event): void
     {
         $this->oldEmail = $event->getUser()->getEmail();
     }
@@ -53,8 +53,11 @@ class EmailChangeConfirmationListener implements EventSubscriberInterface
      * @param string $eventName
      * @param EventDispatcherInterface $eventDispatcher
      */
-    public function onProfileEditSuccess(FormEvent $event, string $eventName, EventDispatcherInterface $eventDispatcher)
-    {
+    public function onProfileEditSuccess(
+        FormEvent $event,
+        string $eventName,
+        EventDispatcherInterface $eventDispatcher
+    ): void {
         $user = $event->getForm()->getData();
 
         if (!$user instanceof User) {

@@ -38,7 +38,7 @@ class RedirectOnRegistrationSuccess implements EventSubscriberInterface
      * @internal
      * @param FormEvent|GetResponseUserEvent $event
      */
-    public function onRegistrationSuccess($event)
+    public function onRegistrationSuccess($event): void
     {
         if (!$event->getResponse()) {
             $event->setResponse($this->httpUtils->createRedirectResponse($event->getRequest(), $this->targetPath));

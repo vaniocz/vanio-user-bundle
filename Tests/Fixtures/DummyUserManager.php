@@ -6,57 +6,57 @@ use FOS\UserBundle\Model\UserManagerInterface;
 
 class DummyUserManager implements UserManagerInterface
 {
-    public function createUser()
+    public function createUser(): void
     {}
 
-    public function deleteUser(UserInterface $user)
+    public function deleteUser(UserInterface $user): void
     {}
 
     /**
      * @param mixed[] $criteria
      */
-    public function findUserBy(array $criteria)
+    public function findUserBy(array $criteria): void
     {}
 
     /**
      * @param mixed $username
      */
-    public function findUserByUsername($username)
+    public function findUserByUsername($username): void
     {}
 
     /**
      * @param mixed $email
      */
-    public function findUserByEmail($email)
+    public function findUserByEmail($email): void
     {}
 
     /**
      * @param mixed $usernameOrEmail
      */
-    public function findUserByUsernameOrEmail($usernameOrEmail)
+    public function findUserByUsernameOrEmail($usernameOrEmail): void
     {}
 
     /**
      * @param mixed $token
      */
-    public function findUserByConfirmationToken($token)
+    public function findUserByConfirmationToken($token): void
     {}
 
-    public function findUsers()
+    public function findUsers(): void
     {}
 
-    public function getClass()
+    public function getClass(): void
     {}
 
-    public function reloadUser(UserInterface $user)
+    public function reloadUser(UserInterface $user): void
     {}
 
-    public function updateUser(UserInterface $user)
+    public function updateUser(UserInterface $user): void
     {}
 
-    public function updateCanonicalFields(UserInterface $user)
+    public function updateCanonicalFields(UserInterface $user): void
     {}
 
-    public function updatePassword(UserInterface $user)
+    public function updatePassword(UserInterface $user): void
     {}
 }

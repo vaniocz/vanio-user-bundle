@@ -42,7 +42,7 @@ class AuthenticationEntryPoint implements AuthenticationEntryPointInterface
         ];
     }
 
-    public function start(Request $request, AuthenticationException $authenticationException = null): Response
+    public function start(Request $request, ?AuthenticationException $authenticationException = null): Response
     {
         $response = $this->authenticationEntryPoint->start($request, $authenticationException);
 
@@ -57,7 +57,7 @@ class AuthenticationEntryPoint implements AuthenticationEntryPointInterface
         return $response;
     }
 
-    private function passTargetPath(Request $request, Response $response)
+    private function passTargetPath(Request $request, Response $response): void
     {
         if ($targetPath = $this->targetPathResolver->resolveTargetPath($request)) {
             $targetUri = (new Uri($response->headers->get('Location')))->withAppendedQuery([
@@ -67,7 +67,7 @@ class AuthenticationEntryPoint implements AuthenticationEntryPointInterface
         }
     }
 
-    private function notify(Request $request)
+    private function notify(Request $request): void
     {
         $session = $request->getSession();
 

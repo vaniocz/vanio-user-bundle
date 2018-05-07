@@ -7,7 +7,7 @@ use Vanio\UserBundle\VanioUserEvents;
 
 class EmailConfirmationPass implements CompilerPassInterface
 {
-    public function process(ContainerBuilder $container)
+    public function process(ContainerBuilder $container): void
     {
         if (!$container->getParameter('fos_user.registration.confirmation.enabled')) {
             return;

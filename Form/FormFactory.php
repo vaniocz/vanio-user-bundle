@@ -19,6 +19,10 @@ class FormFactory implements FactoryInterface
         $this->requestStack = $requestStack;
     }
 
+    /**
+     * @param mixed[] $options
+     * @return FormInterface
+     */
     public function createForm(array $options = []): FormInterface
     {
         return $this->formFactory->createForm($options + [

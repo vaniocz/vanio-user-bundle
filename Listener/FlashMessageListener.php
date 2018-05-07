@@ -4,7 +4,6 @@ namespace Vanio\UserBundle\Listener;
 use FOS\UserBundle\Event\FilterUserResponseEvent;
 use FOS\UserBundle\Event\GetResponseNullableUserEvent;
 use FOS\UserBundle\Event\GetResponseUserEvent as FosUserGetResponseUserEvent;
-use FOS\UserBundle\Event\GetResponseUserEvent;
 use FOS\UserBundle\Event\UserEvent;
 use FOS\UserBundle\FOSUserEvents;
 use FOS\UserBundle\Model\User;
@@ -76,7 +75,7 @@ class FlashMessageListener implements EventSubscriberInterface
     /**
      * @internal
      */
-    public function onKernelRequest(GetResponseEvent $event)
+    public function onKernelRequest(GetResponseEvent $event): void
     {
         $this->disconnectApiFlashBag($event->getRequest());
     }
@@ -84,7 +83,7 @@ class FlashMessageListener implements EventSubscriberInterface
     /**
      * @internal
      */
-    public function onInteractiveLogin(InteractiveLoginEvent $event)
+    public function onInteractiveLogin(InteractiveLoginEvent $event): void
     {
         $this->disconnectApiFlashBag($event->getRequest());
 
@@ -103,7 +102,7 @@ class FlashMessageListener implements EventSubscriberInterface
     /**
      * @internal
      */
-    public function onImplicitLogin(UserEvent $event)
+    public function onImplicitLogin(UserEvent $event): void
     {
         $this->disconnectApiFlashBag($event->getRequest());
     }
@@ -111,7 +110,7 @@ class FlashMessageListener implements EventSubscriberInterface
     /**
      * @internal
      */
-    public function onRegistrationConfirm(FosUserGetResponseUserEvent $event)
+    public function onRegistrationConfirm(FosUserGetResponseUserEvent $event): void
     {
         if (!$event->getUser()) {
             $this->addFlashMessage(FlashMessage::TYPE_DANGER, 'registration.confirmation_token_not_found');
@@ -121,7 +120,7 @@ class FlashMessageListener implements EventSubscriberInterface
     /**
      * @internal
      */
-    public function onRegistrationConfirmed(FilterUserResponseEvent $event)
+    public function onRegistrationConfirmed(FilterUserResponseEvent $event): void
     {
         if (!$event->getResponse()->isRedirection($this->urlGenerator->generate('fos_user_registration_confirmed'))) {
             $this->addFlashMessage(FlashMessage::TYPE_SUCCESS, 'registration.flash.confirmed');
@@ -131,7 +130,7 @@ class FlashMessageListener implements EventSubscriberInterface
     /**
      * @internal
      */
-    public function onResettingSendEmailInitialize(GetResponseNullableUserEvent $event)
+    public function onResettingSendEmailInitialize(GetResponseNullableUserEvent $event): void
     {
         if ($event->getUser()) {
             return;
@@ -152,7 +151,7 @@ class FlashMessageListener implements EventSubscriberInterface
     /**
      * @internal
      */
-    public function onRegistrationConfirmationRequest(GetResponseNullableUserEvent $event)
+    public function onRegistrationConfirmationRequest(GetResponseNullableUserEvent $event): void
     {
         if (!$event->getUser()) {
             $this->addFlashMessage(FlashMessage::TYPE_DANGER, 'registration.user_not_found');
@@ -164,7 +163,7 @@ class FlashMessageListener implements EventSubscriberInterface
     /**
      * @internal
      */
-    public function onResettingResetFailure()
+    public function onResettingResetFailure(): void
     {
         $this->addFlashMessage(FlashMessage::TYPE_DANGER, 'resetting.confirmation_token_not_found');
     }
@@ -172,7 +171,7 @@ class FlashMessageListener implements EventSubscriberInterface
     /**
      * @internal
      */
-    public function onChangeEmailConfirmationSent()
+    public function onChangeEmailConfirmationSent(): void
     {
         $this->addFlashMessage(FlashMessage::TYPE_WARNING, 'change_email.flash.confirmation_required');
     }
@@ -180,7 +179,7 @@ class FlashMessageListener implements EventSubscriberInterface
     /**
      * @internal
      */
-    public function onChangeEmailInitialize(GetResponseNullableUserEvent $event)
+    public function onChangeEmailInitialize(GetResponseNullableUserEvent $event): void
     {
         if (!$event->getUser() instanceof UserInterface) {
             $this->addFlashMessage(FlashMessage::TYPE_DANGER, 'change_email.confirmation_token_not_found');
@@ -190,7 +189,7 @@ class FlashMessageListener implements EventSubscriberInterface
     /**
      * @internal
      */
-    public function onChangeEmailFailure()
+    public function onChangeEmailFailure(): void
     {
         $this->addFlashMessage(FlashMessage::TYPE_DANGER, 'change_email.email_already_used');
     }
@@ -198,7 +197,7 @@ class FlashMessageListener implements EventSubscriberInterface
     /**
      * @internal
      */
-    public function onChangeEmailCompleted()
+    public function onChangeEmailCompleted(): void
     {
         $this->addFlashMessage(FlashMessage::TYPE_SUCCESS, 'change_email.flash.success');
     }
@@ -206,7 +205,7 @@ class FlashMessageListener implements EventSubscriberInterface
     /**
      * @internal
      */
-    public function onUnregistrationCompleted()
+    public function onUnregistrationCompleted(): void
     {
         $this->addFlashMessage(FlashMessage::TYPE_SUCCESS, 'unregister.flash.success');
     }
@@ -214,7 +213,7 @@ class FlashMessageListener implements EventSubscriberInterface
     /**
      * @internal
      */
-    public function onRegistrationSuccess(FormEvent $event)
+    public function onRegistrationSuccess(FormEvent $event): void
     {
         $response = $event->getResponse();
         $user = $event->getForm()->getData();
@@ -228,7 +227,7 @@ class FlashMessageListener implements EventSubscriberInterface
     /**
      * @internal
      */
-    public function onConnectConfirmed(HwiOauthGetResponseUserEvent $event)
+    public function onConnectConfirmed(HwiOauthGetResponseUserEvent $event): void
     {
         if ($event->getResponse()->isRedirection()) {
             $this->addFlashMessage(
@@ -243,7 +242,7 @@ class FlashMessageListener implements EventSubscriberInterface
     /**
      * @internal
      */
-    public function onAccountDisconnected()
+    public function onAccountDisconnected(): void
     {
         $this->addFlashMessage(
             FlashMessage::TYPE_SUCCESS,
@@ -253,7 +252,7 @@ class FlashMessageListener implements EventSubscriberInterface
         );
     }
 
-    private function disconnectApiFlashBag(Request $request)
+    private function disconnectApiFlashBag(Request $request): void
     {
         if ($request->getRequestFormat() !== 'html') {
             $flashes = $this->session->getFlashBag()->peekAll();
@@ -272,7 +271,7 @@ class FlashMessageListener implements EventSubscriberInterface
         string $message,
         array $parameters = [],
         string $domain = 'FOSUserBundle'
-    ) {
+    ): void {
         $this->session->getFlashBag()->add($type, new FlashMessage($message, $parameters, $domain));
     }
 }

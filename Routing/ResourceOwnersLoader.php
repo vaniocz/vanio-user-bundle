@@ -45,9 +45,9 @@ class ResourceOwnersLoader implements LoaderInterface
         return $type === 'resource_owners';
     }
 
-    public function getResolver()
+    public function getResolver(): void
     {}
 
-    public function setResolver(LoaderResolverInterface $resolver)
+    public function setResolver(LoaderResolverInterface $resolver): void
     {}
 }

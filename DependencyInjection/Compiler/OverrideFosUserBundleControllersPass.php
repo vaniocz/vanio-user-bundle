@@ -12,7 +12,7 @@ use Vanio\UserBundle\Controller\SecurityController;
 
 class OverrideFosUserBundleControllersPass implements CompilerPassInterface
 {
-    public function process(ContainerBuilder $container)
+    public function process(ContainerBuilder $container): void
     {
         $controllers = [
             'fos_user.security.controller' => SecurityController::class,
