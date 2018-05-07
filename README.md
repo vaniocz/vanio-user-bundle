@@ -1,7 +1,7 @@
 # [<img alt="Vanio" src="http://www.vanio.cz/img/vanio-logo.png" width="130" align="top">](http://www.vanio.cz) User Bundle
 
 [![Build Status](https://travis-ci.org/vaniocz/vanio-user-bundle.svg?branch=master)](https://travis-ci.org/vaniocz/vanio-user-bundle)
-![PHP7](https://img.shields.io/badge/php-7-6B7EB9.svg)
+![PHP7.1](https://img.shields.io/badge/php-7.1-6B7EB9.svg)
 [![License](https://poser.pugx.org/vanio/vanio-user-bundle/license)](https://github.com/vaniocz/vanio-user-bundle/blob/master/LICENSE)
 
 A Symfony2 Bundle integrating FOSUserBundle and HWIOauthBundle with some additional features and sane defaults.
