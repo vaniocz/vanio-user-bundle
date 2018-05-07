@@ -118,7 +118,10 @@ class ApiResponseListener implements EventSubscriberInterface
     public function onResettingResetRequest(GetResponseUserEvent $event): void
     {
         if (!$event->getUser()->isAccountNonLocked()) {
-            //@TODO
+            $this->respondWithUnprocessableEntityResponse(
+                $event,
+                $this->translateErrorMessage('Account is locked.', [], 'security')
+            );
         }
     }
 
