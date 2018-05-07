@@ -1,7 +1,6 @@
 <?php
 namespace Vanio\UserBundle\Security;
 
-use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Security\Core\Exception\AuthenticationException;
@@ -20,7 +19,7 @@ class AuthenticationFailureHandler extends DefaultAuthenticationFailureHandler
     {
         $response = parent::onAuthenticationFailure($request, $exception);
 
-        if ($this->targetPathResolver && $response instanceof RedirectResponse) {
+        if ($this->targetPathResolver && $response->isRedirection()) {
             $this->passTargetPath($request, $response);
         }
 
@@ -32,10 +31,10 @@ class AuthenticationFailureHandler extends DefaultAuthenticationFailureHandler
         $this->targetPathResolver = $targetPathResolver;
     }
 
-    private function passTargetPath(Request $request, RedirectResponse $response)
+    private function passTargetPath(Request $request, Response $response)
     {
         if ($targetPath = $this->targetPathResolver->resolveTargetPathFromParameterValue($request)) {
-            $targetUri = (new Uri($response->getTargetUrl()))->withAppendedQuery([
+            $targetUri = (new Uri($response->headers->get('Location')))->withAppendedQuery([
                 $this->targetPathResolver->targetPathParameter() => $targetPath,
             ]);
             $response->setTargetUrl($targetUri->absoluteUri());

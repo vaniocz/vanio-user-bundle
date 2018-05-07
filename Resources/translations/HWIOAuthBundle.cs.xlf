@@ -70,13 +70,13 @@
                 <target>Přihlašování pomocí služby kterou jste přihlášeni nelze v případě nevyplněného hesla odpojit.</target>
             </trans-unit>
 
-            <trans-unit id="9573fa9a2b3af507440228486abf08bd" resname="connect.account_connected">
-                <source>connect.account_connected</source>
+            <trans-unit id="d53a158b03d74dae236442d6211c7c8a" resname="connect.flash.account_connected">
+                <source>connect.flash.account_connected</source>
                 <target>Váš účet byl úspěšně propojen.</target>
             </trans-unit>
 
-            <trans-unit id="c5b64a6dd6cfa2cc2d5b225cb3caa37e" resname="connect.account_disconnected">
-                <source>connect.account_disconnected</source>
+            <trans-unit id="7ec5a3ee9eec03a1f2942594509920cb" resname="connect.flash.account_disconnected">
+                <source>connect.flash.account_disconnected</source>
                 <target>Váš účet byl úspěšně odpojen.</target>
             </trans-unit>
 

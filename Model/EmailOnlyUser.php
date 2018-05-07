@@ -21,7 +21,7 @@ abstract class EmailOnlyUser extends User
     public function setEmail($email): self
     {
         parent::setEmail($email);
-        parent::setUsername($email);
+        parent::setUsername($email ?? 'username');
 
         return $this;
     }

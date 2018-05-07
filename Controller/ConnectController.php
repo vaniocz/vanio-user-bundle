@@ -7,7 +7,6 @@ use HWI\Bundle\OAuthBundle\Event\FilterUserResponseEvent;
 use HWI\Bundle\OAuthBundle\Security\Core\Authentication\Token\OAuthToken;
 use HWI\Bundle\OAuthBundle\Security\Core\Exception\AccountNotLinkedException;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
-use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
@@ -25,11 +24,11 @@ class ConnectController extends BaseConnectController
 {
     use RefererHelperTrait;
 
-    public function connectAction(Request $request): RedirectResponse
+    public function connectAction(Request $request): Response
     {
         $response = parent::connectAction($request);
 
-        return $response instanceof RedirectResponse ? $response : $this->redirectToRoute('fos_user_security_login');
+        return $response->isRedirection() ? $response : $this->redirectToRoute('fos_user_security_login');
     }
 
     /**

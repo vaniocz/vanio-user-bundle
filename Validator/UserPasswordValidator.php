@@ -30,10 +30,9 @@ class UserPasswordValidator extends ConstraintValidator
             return;
         }
 
-        $user = $constraint->user;
-        $encoder = $this->encoderFactory->getEncoder($user);
+        $encoder = $this->encoderFactory->getEncoder($constraint->user);
 
-        if (!$encoder->isPasswordValid($user->getPassword(), $password, $user->getSalt())) {
+        if (!$encoder->isPasswordValid($constraint->user->getPassword(), $password, $constraint->user->getSalt())) {
             $this->context->addViolation($constraint->message);
         }
     }

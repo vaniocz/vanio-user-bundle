@@ -2,17 +2,22 @@
 namespace Vanio\UserBundle\Controller;
 
 use FOS\UserBundle\Controller\RegistrationController as BaseRegistrationController;
+use FOS\UserBundle\Event\FilterUserResponseEvent;
 use FOS\UserBundle\Event\FormEvent;
+use FOS\UserBundle\Event\GetResponseNullableUserEvent;
+use FOS\UserBundle\FOSUserEvents;
 use FOS\UserBundle\Model\UserInterface;
 use FOS\UserBundle\Model\UserManagerInterface;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\Form\Extension\Core\Type\FormType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpKernel\Event\GetResponseEvent;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\HttpKernel\HttpKernel;
 use Symfony\Component\HttpKernel\HttpKernelInterface;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
+use Symfony\Component\Security\Http\Firewall\LogoutListener;
 use Symfony\Component\Security\Http\HttpUtils;
 use Vanio\UserBundle\VanioUserEvents;
 use Vanio\WebBundle\Request\RefererHelperTrait;
@@ -34,18 +39,23 @@ class RegistrationController extends BaseRegistrationController
         try {
             return parent::confirmAction($request, $token);
         } catch (NotFoundHttpException $e) {
-            $this->addFlashMessage(FlashMessage::TYPE_DANGER, 'registration.flash.confirmation_token_not_found');
+            $event = new GetResponseNullableUserEvent(null, $request);
+            $this->eventDispatcher()->dispatch(FOSUserEvents::REGISTRATION_CONFIRM, $event);
 
-            return $this->redirectToReferer();
+            return $event->getResponse() ?: $this->redirectToReferer();
         }
     }
 
     public function sendConfirmationAction(Request $request, string $email): Response
     {
-        if ($user = $this->userManager()->findUserByEmail($email)) {
-            if ($user->isEnabled()) {
-                $this->addFlashMessage(FlashMessage::TYPE_INFO, 'registration.flash.already_confirmed');
+        $user = $this->userManager()->findUserByEmail($email);
+        $event = new GetResponseNullableUserEvent($user, $request);
+        $this->eventDispatcher()->dispatch(VanioUserEvents::REGISTRATION_CONFIRMATION_REQUEST, $event);
 
+        if ($response = $event->getResponse()) {
+            return $response;
+        } elseif ($user) {
+            if ($user->isEnabled()) {
                 return $this->redirectToRoute('fos_user_security_login');
             }
 
@@ -63,8 +73,6 @@ class RegistrationController extends BaseRegistrationController
             return $response;
         }
 
-        $this->addFlashMessage(FlashMessage::TYPE_DANGER, 'registration.flash.user_not_found');
-
         return $this->redirectToReferer();
     }
 
@@ -72,24 +80,26 @@ class RegistrationController extends BaseRegistrationController
     {
         $user = $this->getUser();
 
-        if (!is_a($user, UserInterface::class)) {
+        if (!$user instanceof UserInterface) {
             throw new AccessDeniedException('This user does not have access to this section.');
         }
 
         if ($request->isMethod('POST')) {
-            $response = $this->httpKernel()->handle(
-                $this->httpUtils()->createRequest($request, 'fos_user_security_logout'),
-                HttpKernelInterface::MASTER_REQUEST
-            );
+            $requestType = $this->requestStack()->getParentRequest()
+                ? HttpKernelInterface::SUB_REQUEST
+                : HttpKernelInterface::MASTER_REQUEST;
+            $event = new GetResponseEvent($this->httpKernel(), $request, $requestType);
+            $this->logoutListener()->handle($event);
 
             if ($request->getSession()) {
                 $request->getSession()->getFlashBag()->clear();
             }
 
             $this->userManager()->deleteUser($user);
-            $this->addFlashMessage(FlashMessage::TYPE_SUCCESS, 'unregister.flash.success');
+            $event = new FilterUserResponseEvent($user, $request, $event->getResponse() ?: $this->redirect('/'));
+            $this->eventDispatcher()->dispatch(VanioUserEvents::UNREGISTRATION_COMPLETED, $event);
 
-            return $response;
+            return $event->getResponse();
         }
 
         return $this->render('@VanioUser/Registration/unregister.html.twig');
@@ -115,13 +125,18 @@ class RegistrationController extends BaseRegistrationController
         return $this->get('fos_user.user_manager');
     }
 
+    private function httpKernel(): HttpKernel
+    {
+        return $this->get('http_kernel');
+    }
+
     private function httpUtils(): HttpUtils
     {
         return $this->get('security.http_utils');
     }
 
-    private function httpKernel(): HttpKernel
+    private function logoutListener(): LogoutListener
     {
-        return $this->get('http_kernel');
+        return $this->get(sprintf('security.logout_listener.%s', $this->getParameter('vanio_user.firewall_name')));
     }
 }

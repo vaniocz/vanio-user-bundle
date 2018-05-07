@@ -7,10 +7,17 @@
         <parameter key="vanio_user.security.authentication_entry_point.class">Vanio\UserBundle\Security\AuthenticationEntryPoint</parameter>
         <parameter key="vanio_user.security.authentication_failure_handler.class">Vanio\UserBundle\Security\AuthenticationFailureHandler</parameter>
         <parameter key="vanio_user.security.authentication_success_handler.class">Vanio\UserBundle\Security\AuthenticationSuccessHandler</parameter>
-        <parameter key="vanio_user.security.email_change_confirmation_listener.class">Vanio\UserBundle\Security\EmailChangeConfirmationListener</parameter>
-        <parameter key="vanio_user.security.email_confirmation_listener.class">Vanio\UserBundle\Security\EmailConfirmationListener</parameter>
-        <parameter key="vanio_user.security.redirect_on_registration_success.class">Vanio\UserBundle\Security\RedirectOnRegistrationSuccess</parameter>
+        <parameter key="vanio_user.security.notifying_logout_success_handler.class">Vanio\UserBundle\Security\NotifyingLogoutSuccessHandler</parameter>
         <parameter key="vanio_user.security.target_path_resolver.class">Vanio\UserBundle\Security\TargetPathResolver</parameter>
+        <parameter key="vanio_user.listener.api_response_listener.class">Vanio\UserBundle\Listener\ApiResponseListener</parameter>
+        <parameter key="vanio_user.listener.email_change_confirmation_listener.class">Vanio\UserBundle\Listener\EmailChangeConfirmationListener</parameter>
+        <parameter key="vanio_user.listener.email_confirmation_listener.class">Vanio\UserBundle\Listener\EmailConfirmationListener</parameter>
+        <parameter key="vanio_user.listener.flash_message_listener.class">Vanio\UserBundle\Listener\FlashMessageListener</parameter>
+        <parameter key="vanio_user.listener.redirect_on_registration_success.class">Vanio\UserBundle\Listener\RedirectOnRegistrationSuccess</parameter>
+        <parameter key="vanio_user.form.registration_form_factory.class">Vanio\UserBundle\Form\FormFactory</parameter>
+        <parameter key="vanio_user.form.resetting_form_factory.class">Vanio\UserBundle\Form\FormFactory</parameter>
+        <parameter key="vanio_user.form.change_password_form_factory.class">Vanio\UserBundle\Form\FormFactory</parameter>
+        <parameter key="vanio_user.form.change_email_form_factory.class">FOS\UserBundle\Form\Factory\FormFactory</parameter>
         <parameter key="vanio_user.form.registration_form_type.class">Vanio\UserBundle\Form\RegistrationFormType</parameter>
         <parameter key="vanio_user.form.profile_form_type.class">Vanio\UserBundle\Form\ProfileFormType</parameter>
         <parameter key="vanio_user.routing.router.class">Vanio\UserBundle\Routing\Router</parameter>
@@ -20,6 +27,8 @@
     </parameters>
 
     <services>
+        <defaults public="false"/>
+
         <service id="hwi_oauth.registration.form.factory" class="%hwi_oauth.registration.form.factory.class%">
             <argument type="service" id="form.factory"/>
             <argument>%vanio_user.social_registration_form.name%</argument>
@@ -27,29 +36,69 @@
             <argument>%vanio_user.social_registration_form.validation_groups%</argument>
         </service>
 
-        <service id="vanio_user.security.authentication_entry_point" class="%vanio_user.security.authentication_entry_point.class%" abstract="true" public="false">
+        <service id="vanio_user.security.authentication_entry_point" class="%vanio_user.security.authentication_entry_point.class%" abstract="true" >
             <argument type="service" id="vanio_user.security.authentication_entry_point.inner"/>
             <argument type="service" id="vanio_user.security.target_path_resolver"/>
             <argument>%vanio_user%</argument>
         </service>
 
-        <service id="vanio_user.security.email_change_confirmation_listener" class="%vanio_user.security.email_change_confirmation_listener.class%" abstract="true">
-            <argument type="service" id="fos_user.util.token_generator"/>
-            <argument type="service" id="fos_user.mailer"/>
-            <argument type="service" id="session"/>
-        </service>
-
-        <service id="vanio_user.security.email_confirmation_listener" class="%vanio_user.security.email_confirmation_listener.class%" abstract="true"/>
-
-        <service id="vanio_user.security.redirect_on_registration_success" class="%vanio_user.security.redirect_on_registration_success.class%" abstract="true">
-            <argument type="service" id="security.http_utils"/>
-            <argument>%vanio_user.registration_target_path%</argument>
+        <service id="vanio_user.security.notifying_logout_success_handler" class="%vanio_user.security.notifying_logout_success_handler.class%" abstract="true">
+            <argument type="service" id="vanio_user.security.notifying_logout_success_handler.inner"/>
+            <argument>%vanio_user.firewall_name%</argument>
         </service>
 
         <service id="vanio_user.security.target_path_resolver" class="%vanio_user.security.target_path_resolver.class%">
             <argument type="service" id="router"/>
             <argument type="service" id="security.http_utils"/>
             <argument>%vanio_user.pass_target_path%</argument>
+        </service>
+
+        <service id="vanio_user.listener.api_response_listener" class="%vanio_user.listener.api_response_listener.class%">
+            <argument type="service" id="vanio_web.serializer.serializer"/>
+            <argument type="service" id="translator"/>
+            <argument>%fos_user.resetting.retry_ttl%</argument>
+            <argument>%vanio_user.email_only%</argument>
+            <tag name="kernel.event_subscriber"/>
+        </service>
+
+        <service id="vanio_user.listener.email_change_confirmation_listener" class="%vanio_user.listener.email_change_confirmation_listener.class%" abstract="true">
+            <argument type="service" id="fos_user.util.token_generator"/>
+            <argument type="service" id="fos_user.mailer"/>
+        </service>
+
+        <service id="vanio_user.listener.email_confirmation_listener" class="%vanio_user.listener.email_confirmation_listener.class%" abstract="true"/>
+
+        <service id="vanio_user.listener.flash_message_listener" class="%vanio_user.listener.flash_message_listener.class%" abstract="true">
+            <argument type="service" id="router"/>
+            <argument type="service" id="session"/>
+            <argument>%vanio_user.email_only%</argument>
+        </service>
+
+        <service id="vanio_user.listener.redirect_on_registration_success" class="%vanio_user.listener.redirect_on_registration_success.class%" abstract="true">
+            <argument type="service" id="security.http_utils"/>
+            <argument>%vanio_user.registration_target_path%</argument>
+        </service>
+
+        <service id="vanio_user.form.registration_form_factory" class="%vanio_user.form.registration_form_factory.class%" decorates="fos_user.registration.form.factory">
+            <argument type="service" id="vanio_user.form.registration_form_factory.inner"/>
+            <argument type="service" id="request_stack"/>
+        </service>
+
+        <service id="vanio_user.form.resetting_form_factory" class="%vanio_user.form.resetting_form_factory.class%" decorates="fos_user.resetting.form.factory">
+            <argument type="service" id="vanio_user.form.resetting_form_factory.inner"/>
+            <argument type="service" id="request_stack"/>
+        </service>
+
+        <service id="vanio_user.form.change_password_form_factory" class="%vanio_user.form.change_password_form_factory.class%" decorates="fos_user.change_password.form.factory">
+            <argument type="service" id="vanio_user.form.change_password_form_factory.inner"/>
+            <argument type="service" id="request_stack"/>
+        </service>
+
+        <service id="vanio_user.form.change_email_form_factory" class="%vanio_user.form.change_email_form_factory.class%" public="true">
+            <argument type="service" id="form.factory"/>
+            <argument>%vanio_user.change_email.form.name%</argument>
+            <argument>%vanio_user.change_email.form.type%</argument>
+            <argument>%vanio_user.change_email.form.validation_groups%</argument>
         </service>
 
         <service id="vanio_user.form.registration_form_type" class="%vanio_user.form.registration_form_type.class%">
@@ -62,7 +111,7 @@
             <tag name="form.type"/>
         </service>
 
-        <service id="vanio_user.routing.router" class="%vanio_user.routing.router.class%" abstract="true" public="false">
+        <service id="vanio_user.routing.router" class="%vanio_user.routing.router.class%" abstract="true" >
             <argument type="service" id="vanio_user.routing.router.inner"/>
             <argument type="service" id="request_stack"/>
 
@@ -71,7 +120,7 @@
             </call>
         </service>
 
-        <service id="vanio_user.templating.user_extension" class="%vanio_user.templating.user_extension.class%" public="false">
+        <service id="vanio_user.templating.user_extension" class="%vanio_user.templating.user_extension.class%" >
             <argument type="service" id="fos_user.user_manager"/>
             <argument type="service" id="vanio_user.security.target_path_resolver"/>
             <argument type="service" id="request_stack"/>
@@ -80,7 +129,7 @@
             <tag name="twig.extension"/>
         </service>
 
-        <service id="vanio_user.mailer.twig_swift" class="%vanio_user.mailer.twig_swift.class%" public="false">
+        <service id="vanio_user.mailer.twig_swift" class="%vanio_user.mailer.twig_swift.class%" >
             <argument type="service" id="mailer"/>
             <argument type="service" id="router"/>
             <argument type="service" id="twig"/>
@@ -101,7 +150,7 @@
             </argument>
         </service>
 
-        <service id="vanio_user.validator.user_password_validator" class="%vanio_user.validator.user_password_validator.class%" public="false">
+        <service id="vanio_user.validator.user_password_validator" class="%vanio_user.validator.user_password_validator.class%">
             <argument type="service" id="security.encoder_factory"/>
             <tag name="validator.constraint_validator" alias="vanio_user.validator.user_password"/>
         </service>

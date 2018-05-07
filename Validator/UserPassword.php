@@ -1,8 +1,8 @@
 <?php
 namespace Vanio\UserBundle\Validator;
 
+use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Validator\Constraint;
-use Vanio\UserBundle\Model\User;
 
 /**
  * @Annotation
@@ -16,7 +16,7 @@ class UserPassword extends Constraint
     /** @var string */
     public $service = 'vanio_user.validator.user_password';
 
-    /** @var User */
+    /** @var UserInterface */
     public $user;
 
     public function validatedBy(): string

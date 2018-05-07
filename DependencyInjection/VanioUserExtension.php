@@ -10,6 +10,7 @@ use Symfony\Component\HttpKernel\DependencyInjection\Extension;
 use Vanio\UserBundle\Form\ChangePasswordFormType;
 use Vanio\UserBundle\Form\ProfileFormType;
 use Vanio\UserBundle\Form\RegistrationFormType;
+use Vanio\UserBundle\Form\ResettingFormType;
 
 class VanioUserExtension extends Extension implements PrependExtensionInterface
 {
@@ -35,24 +36,20 @@ class VanioUserExtension extends Extension implements PrependExtensionInterface
         $container->setParameter('fos_user.storage', 'custom');
         $this->setContainerRecursiveParameter($container, 'vanio_user', $config);
 
-        if ($config['use_flash_notifications']) {
-            $loader->load('flash_notifications.xml');
-        }
-
         if ($config['social_authentication']) {
             $loader->load('social_authentication.xml');
         }
 
         if ($config['registration_target_path']) {
             $container
-                ->getDefinition('vanio_user.security.redirect_on_registration_success')
+                ->getDefinition('vanio_user.listener.redirect_on_registration_success')
                 ->setAbstract(false)
                 ->addTag('kernel.event_subscriber');
         }
 
         if ($confirmation['enabled']) {
             $container
-                ->getDefinition('vanio_user.security.email_change_confirmation_listener')
+                ->getDefinition('vanio_user.listener.email_change_confirmation_listener')
                 ->setAbstract(false)
                 ->addTag('kernel.event_subscriber');
         }
@@ -118,6 +115,7 @@ class VanioUserExtension extends Extension implements PrependExtensionInterface
                 'confirmation' => ['template' => 'VanioUserBundle:Registration:email.html.twig'],
             ],
             'resetting' => [
+                'form' => ['type' => ResettingFormType::class],
                 'email' => ['template' => 'VanioUserBundle:Resetting:email.html.twig'],
             ],
             'profile' => [

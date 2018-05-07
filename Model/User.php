@@ -54,10 +54,16 @@ abstract class User extends BaseUser implements \JsonSerializable
 
     public function jsonSerialize(): array
     {
-        return [
+        $data = [
             'id' => $this->id,
             'username' => $this->username,
             'email' => $this->email,
         ];
+
+        if (method_exists($this, 'getName')) {
+            $data['name'] = $this->getName();
+        }
+
+        return $data;
     }
 }

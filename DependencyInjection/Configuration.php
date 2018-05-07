@@ -21,6 +21,9 @@ class Configuration implements ConfigurationInterface
                 ->booleanNode('use_flash_notifications')->defaultTrue()->end()
                 ->scalarNode('registration_target_path')->defaultNull()->end()
                 ->booleanNode('social_authentication')->defaultNull()->end()
+                ->arrayNode('trusted_api_urls')
+                    ->prototype('scalar')->end()
+                ->end()
             ->end();
         $this
             ->addPassTargetPathSection($root)

@@ -1,0 +1,1 @@
+{{ (app.user is instance of('JsonSerializable') ? app.user.jsonSerialize : null)|serialize(app.request.requestFormat)|raw }}

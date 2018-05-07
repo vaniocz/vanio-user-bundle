@@ -5,6 +5,8 @@ use FOS\UserBundle\Model\UserInterface;
 use FOS\UserBundle\Model\UserManagerInterface;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\Security\Csrf\CsrfTokenManagerInterface;
+use Vanio\Stdlib\Strings;
+use Vanio\Stdlib\Uri;
 use Vanio\UserBundle\Security\TargetPathResolver;
 
 class UserExtension extends \Twig_Extension implements \Twig_Extension_GlobalsInterface
@@ -53,7 +55,8 @@ class UserExtension extends \Twig_Extension implements \Twig_Extension_GlobalsIn
         return [
             new \Twig_SimpleFunction('csrf_token', [$this, 'getCsrfToken']),
             new \Twig_SimpleFunction('find_user', [$this, 'findUser']),
-            new \Twig_SimpleFunction('target_path', [$this, 'resolveTargetPath']),
+            new \Twig_SimpleFunction('target_path', [$this, 'targetPath']),
+            new \Twig_SimpleFunction('is_trusted_api_url', [$this, 'isTrustedApiUrl']),
         ];
     }
 
@@ -91,10 +94,35 @@ class UserExtension extends \Twig_Extension implements \Twig_Extension_GlobalsIn
     /**
      * @return string|null
      */
-    public function resolveTargetPath()
+    public function targetPath()
     {
         $request = $this->requestStack->getCurrentRequest();
 
         return $request ? $this->targetPathResolver->resolveTargetPath($request) : null;
+    }
+
+    public function isTrustedApiUrl(string $url): bool
+    {
+        $url = new Uri($url);
+
+        foreach ($this->config['trusted_api_urls'] as $trustedApiUrl) {
+            $trustedApiUrl = new Uri($trustedApiUrl);
+
+            if (
+                $trustedApiUrl->scheme() && $trustedApiUrl->scheme() !== $url->scheme()
+                || $url->host() !== $trustedApiUrl->host()
+            ) {
+                continue;
+            }
+
+            $trustedApiUrlPath = rtrim($trustedApiUrl->path(), '/');
+            $urlPath = rtrim($url->path(), '/');
+
+            if ($urlPath === $trustedApiUrlPath || Strings::startsWith($urlPath, $trustedApiUrlPath . '/')) {
+                return true;
+            }
+        }
+
+        return false;
     }
 }

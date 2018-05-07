@@ -1,15 +1,15 @@
 <?php
-namespace Vanio\UserBundle\Security;
+namespace Vanio\UserBundle\Listener;
 
 use FOS\UserBundle\Event\FormEvent;
 use FOS\UserBundle\Event\GetResponseUserEvent;
 use FOS\UserBundle\FOSUserEvents;
 use FOS\UserBundle\Util\TokenGeneratorInterface;
+use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
-use Symfony\Component\HttpFoundation\Session\Session;
 use Vanio\UserBundle\Mailer\TwigSwiftMailer;
 use Vanio\UserBundle\Model\User;
-use Vanio\WebBundle\Translation\FlashMessage;
+use Vanio\UserBundle\VanioUserEvents;
 
 class EmailChangeConfirmationListener implements EventSubscriberInterface
 {
@@ -22,14 +22,10 @@ class EmailChangeConfirmationListener implements EventSubscriberInterface
     /** @var TwigSwiftMailer */
     private $mailer;
 
-    /** @var Session */
-    private $session;
-
-    public function __construct(TokenGeneratorInterface $tokenGenerator, TwigSwiftMailer $mailer, Session $session)
+    public function __construct(TokenGeneratorInterface $tokenGenerator, TwigSwiftMailer $mailer)
     {
         $this->tokenGenerator = $tokenGenerator;
         $this->mailer = $mailer;
-        $this->session = $session;
     }
 
     /**
@@ -53,8 +49,11 @@ class EmailChangeConfirmationListener implements EventSubscriberInterface
 
     /**
      * @internal
+     * @param FormEvent $event
+     * @param string $eventName
+     * @param EventDispatcherInterface $eventDispatcher
      */
-    public function onProfileEditSuccess(FormEvent $event)
+    public function onProfileEditSuccess(FormEvent $event, string $eventName, EventDispatcherInterface $eventDispatcher)
     {
         $user = $event->getForm()->getData();
 
@@ -65,14 +64,23 @@ class EmailChangeConfirmationListener implements EventSubscriberInterface
             ));
         }
 
-        if ($user->getEmail() !== $this->oldEmail) {
-            $user->requestNewEmail($user->getEmail(), $this->tokenGenerator->generateToken());
-            $user->setEmail($this->oldEmail);
+        if ($user->getEmail() === $this->oldEmail) {
+            return;
+        }
 
-            $this->mailer->sendChangeEmailConfirmationMessage($user);
+        $user->requestNewEmail($user->getEmail(), $this->tokenGenerator->generateToken());
+        $user->setEmail($this->oldEmail);
+        $this->mailer->sendChangeEmailConfirmationMessage($user);
+        $confirmationEvent = new GetResponseUserEvent($user, $event->getRequest());
 
-            $flashMessage = new FlashMessage('change_email.flash.confirmation_required', [], 'FOSUserBundle');
-            $this->session->getFlashBag()->add(FlashMessage::TYPE_WARNING, $flashMessage);
+        if ($response = $event->getResponse()) {
+            $confirmationEvent->setResponse($response);
+        }
+
+        $eventDispatcher->dispatch(VanioUserEvents::CHANGE_EMAIL_CONFIRMATION_SENT, $confirmationEvent);
+
+        if ($response = $confirmationEvent->getResponse()) {
+            $event->setResponse($response);
         }
     }
 }

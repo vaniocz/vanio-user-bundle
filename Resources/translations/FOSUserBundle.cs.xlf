@@ -116,18 +116,18 @@
                 <target>Váš účet byl úspěšně aktivován.</target>
             </trans-unit>
 
-            <trans-unit id="44e7a601f8d8bfde7c799399055bb11e" resname="registration.flash.confirmation_token_not_found">
-                <source>registration.flash.confirmation_token_not_found</source>
+            <trans-unit id="ed88e69686dcb23c972b3b4b49fdbaac" resname="registration.confirmation_token_not_found">
+                <source>registration.confirmation_token_not_found</source>
                 <target>Uživatel byl již pravděpodobně aktivován.</target>
             </trans-unit>
 
-            <trans-unit id="d93c59a44f869890bf12adbe2dc05e05" resname="registration.flash.already_confirmed">
-                <source>registration.flash.already_confirmed</source>
+            <trans-unit id="e81e444c2d0f13960545fb849d656399" resname="registration.already_confirmed">
+                <source>registration.already_confirmed</source>
                 <target>Váš účet je již aktivován.</target>
             </trans-unit>
 
-            <trans-unit id="a9d009552a51cc61de9137024e1e8c98" resname="registration.flash.user_not_found">
-                <source>registration.flash.user_not_found</source>
+            <trans-unit id="568ba5e0607fd19eff3b1f3dfacb8a45" resname="registration.user_not_found">
+                <source>registration.user_not_found</source>
                 <target>Uživatel s daným e-mailem neexistuje.</target>
             </trans-unit>
 
@@ -156,13 +156,18 @@
                 <target>E-mail</target>
             </trans-unit>
 
+            <trans-unit id="d4b3f2f6064d2d5ea3a55e8cff298191" resname="resetting.request.invalid_username">
+                <source>resetting.request.invalid_username</source>
+                <target>Uživatelské jméno "%username%" neexistuje.</target>
+            </trans-unit>
+
             <trans-unit id="2db4fe3a605402190b2c9055ea498dcc" resname="resetting.request.invalid_email">
                 <source>resetting.request.invalid_email</source>
                 <target>Uživatel s e-mailem "%email%" neexistuje.</target>
             </trans-unit>
 
-            <trans-unit id="c8b570e62a9c4cdabf72cbc2153bf53b" resname="resetting.flash.confirmation_token_not_found">
-                <source>resetting.flash.confirmation_token_not_found</source>
+            <trans-unit id="a2b799497d1b0b1126ff5357fe78d6b0" resname="resetting.confirmation_token_not_found">
+                <source>resetting.confirmation_token_not_found</source>
                 <target>Tento odkaz pro nastavení nového hesla byl již pravděpodobně použit.</target>
             </trans-unit>
 
@@ -251,18 +256,18 @@
                 </target>
             </trans-unit>
 
-            <trans-unit id="24fc0a17001a2b77bad25169f478c9eb" resname="change_email.flash.confirmation_required">
-                <source>change_email.flash.confirmation_required</source>
+            <trans-unit id="75f78a90c3e3e9ba8bfe48feee86fd8e" resname="change_email.flash.confirmation_sent">
+                <source>change_email.flash.confirmation_sent</source>
                 <target>Změnu e-mailu je nutné potvrdit odkazem, který jsme vám zaslali na nový e-mail. Dokud změnu nepotvrdíte, bude platit váš původní e-mail. Děkujeme za pochopení.</target>
             </trans-unit>
 
-            <trans-unit id="dde6715373995d67e12c88aba1d84765" resname="change_email.flash.confirmation_token_not_found">
-                <source>change_email.flash.confirmation_token_not_found</source>
+            <trans-unit id="28812956f6d371caeac2fffa74db4fea" resname="change_email.confirmation_token_not_found">
+                <source>change_email.confirmation_token_not_found</source>
                 <target>E-mail byl již pravděpodobně změněn nebo došlo k novému požadavku pro změnu e-mailu. V případě nového požadavku použijte odkaz z nového e-mailu.</target>
             </trans-unit>
 
-            <trans-unit id="43e72e358d7a967b86c4f3ff1dfdc695" resname="change_email.flash.email_already_used">
-                <source>change_email.flash.email_already_used</source>
+            <trans-unit id="6fb842e9e8d9ef39345d07fa445d40a9" resname="change_email.email_already_used">
+                <source>change_email.email_already_used</source>
                 <target>Tento e-mail jste si již nastavili u jiného uživatele.</target>
             </trans-unit>
 

@@ -27,7 +27,9 @@ class SocialRegistrationFormType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->remove('plainPassword');
+        $builder
+            ->remove('plainPassword')
+            ->remove('password');
 
         if ($options['email_confirmation']) {
             $builder

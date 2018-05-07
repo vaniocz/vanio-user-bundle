@@ -9,6 +9,7 @@
             <option name="groups">
                 <value>Registration</value>
                 <value>Profile</value>
+                <value>Email</value>
             </option>
         </constraint>
 

@@ -14,7 +14,7 @@ class EmailConfirmationPass implements CompilerPassInterface
         }
 
         $container
-            ->getDefinition('vanio_user.security.email_confirmation_listener')
+            ->getDefinition('vanio_user.listener.email_confirmation_listener')
             ->setAbstract(false)
             ->addTag('kernel.event_subscriber');
         $container

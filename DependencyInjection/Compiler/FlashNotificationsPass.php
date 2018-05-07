@@ -21,5 +21,10 @@ class FlashNotificationsPass implements CompilerPassInterface
                 ->setAbstract(false)
                 ->setDecoratedService((string) $logoutListenerDefinition->getArgument(2));
         }
+
+        $container
+            ->getDefinition('vanio_user.listener.flash_message_listener')
+            ->setAbstract(false)
+            ->addTag('kernel.event_subscriber');
     }
 }

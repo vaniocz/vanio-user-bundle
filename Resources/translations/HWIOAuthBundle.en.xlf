@@ -46,13 +46,13 @@
                 <target>Cannot disconnect %service% account you are currently logged in with in case of empty password.</target>
             </trans-unit>
 
-            <trans-unit id="9573fa9a2b3af507440228486abf08bd" resname="connect.account_connected">
-                <source>connect.account_connected</source>
+            <trans-unit id="d53a158b03d74dae236442d6211c7c8a" resname="connect.flash.account_connected">
+                <source>connect.flash.account_connected</source>
                 <target>Your account has been successfully connected.</target>
             </trans-unit>
 
-            <trans-unit id="c5b64a6dd6cfa2cc2d5b225cb3caa37e" resname="connect.account_disconnected">
-                <source>connect.account_disconnected</source>
+            <trans-unit id="7ec5a3ee9eec03a1f2942594509920cb" resname="connect.flash.account_disconnected">
+                <source>connect.flash.account_disconnected</source>
                 <target>Your account has been successfully disconnected.</target>
             </trans-unit>
 

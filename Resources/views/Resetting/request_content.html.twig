@@ -1,16 +1,5 @@
 {% trans_default_domain 'FOSUserBundle' %}
 
-{% block errorMessage %}
-    {% if invalid_username is defined %}
-        {% include '@VanioUser/partials/alert.html.twig' with {
-            type: 'danger',
-            message: vanio_user.email_only
-                ? 'resetting.request.invalid_email'|trans({'%email%': invalid_username})
-                : 'resetting.request.invalid_username'|trans({'%username%': invalid_username})
-        } %}
-    {% endif %}
-{% endblock %}
-
 {% block form %}
     <form action="{{ path('fos_user_resetting_send_email') }}" method="POST" {% block formAttributes %}class="fos_user_resetting_request" data-component-native-validation{% endblock %}>
         {% block formFields %}

@@ -2,16 +2,26 @@
 namespace Vanio\UserBundle\Controller;
 
 use FOS\UserBundle\Controller\ResettingController as BaseResettingController;
-use Symfony\Component\HttpFoundation\RedirectResponse;
+use FOS\UserBundle\Event\GetResponseNullableUserEvent;
+use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Vanio\UserBundle\VanioUserEvents;
 use Vanio\WebBundle\Request\RefererHelperTrait;
-use Vanio\WebBundle\Translation\FlashMessage;
 
 class ResettingController extends BaseResettingController
 {
+    use ResponseFormatTrait;
     use RefererHelperTrait;
+
+    public function sendEmailAction(Request $request): Response
+    {
+        if (!$request->request->has('username')) {
+            $request->request->set('username', $request->request->get('email'));
+        }
+
+        return parent::sendEmailAction($request);
+    }
 
     /**
      * @phpcsSuppress SlevomatCodingStandard.TypeHints.TypeHintDeclaration.MissingParameterTypeHint
@@ -21,27 +31,20 @@ class ResettingController extends BaseResettingController
      */
     public function resetAction(Request $request, $token): Response
     {
-        try {
-            $response = parent::resetAction($request, $token);
+        $response = parent::resetAction($request, $token);
 
-            if (
-                $response instanceof RedirectResponse
-                && $response->getTargetUrl() === $this->generateUrl('fos_user_security_login')
-            ) {
-                return $this->createConfirmationTokenNotFoundResponse();
-            }
-        } catch (NotFoundHttpException $e) {
-            return $this->createConfirmationTokenNotFoundResponse();
+        if ($response->isRedirect($this->generateUrl('fos_user_security_login'))) {
+            $event = new GetResponseNullableUserEvent(null, $request);
+            $this->eventDispatcher()->dispatch(VanioUserEvents::RESETTING_RESET_FAILURE, $event);
+
+            return $event->getResponse() ?: $this->redirectToReferer();
         }
 
         return $response;
     }
 
-    private function createConfirmationTokenNotFoundResponse(): RedirectResponse
+    private function eventDispatcher(): EventDispatcherInterface
     {
-        $flashMessage = new FlashMessage('resetting.flash.confirmation_token_not_found', [], 'FOSUserBundle');
-        $this->addFlash(FlashMessage::TYPE_DANGER, $flashMessage);
-
-        return $this->redirectToReferer();
+        return $this->get('event_dispatcher');
     }
 }

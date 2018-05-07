@@ -1,7 +1,6 @@
 <?php
 namespace Vanio\UserBundle\Security;
 
-use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Session\Session;
@@ -47,7 +46,7 @@ class AuthenticationEntryPoint implements AuthenticationEntryPointInterface
     {
         $response = $this->authenticationEntryPoint->start($request, $authenticationException);
 
-        if (($this->options['pass_target_path']['enabled'] ?? false) && $response instanceof RedirectResponse) {
+        if (($this->options['pass_target_path']['enabled'] ?? false) && $response->isRedirection()) {
             $this->passTargetPath($request, $response);
         }
 
@@ -58,10 +57,10 @@ class AuthenticationEntryPoint implements AuthenticationEntryPointInterface
         return $response;
     }
 
-    private function passTargetPath(Request $request, RedirectResponse $response)
+    private function passTargetPath(Request $request, Response $response)
     {
         if ($targetPath = $this->targetPathResolver->resolveTargetPath($request)) {
-            $targetUri = (new Uri($response->getTargetUrl()))->withAppendedQuery([
+            $targetUri = (new Uri($response->headers->get('Location')))->withAppendedQuery([
                 $this->targetPathResolver->targetPathParameter() => $targetPath,
             ]);
             $response->setTargetUrl($targetUri->absoluteUri());

@@ -1,0 +1,2 @@
+{{ response_status(406) }}
+{{ {code: 406, message: 'Not Acceptable'}|serialize(app.request.requestFormat)|raw }}
