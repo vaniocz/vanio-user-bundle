@@ -56,7 +56,7 @@ class UserExtension extends \Twig_Extension implements \Twig_Extension_GlobalsIn
             new \Twig_SimpleFunction('csrf_token', [$this, 'getCsrfToken']),
             new \Twig_SimpleFunction('find_user', [$this, 'findUser']),
             new \Twig_SimpleFunction('target_path', [$this, 'targetPath']),
-            new \Twig_SimpleFunction('is_trusted_api_url', [$this, 'isTrustedApiUrl']),
+            new \Twig_SimpleFunction('is_trusted_api_client_url', [$this, 'isTrustedApiClientUrl']),
         ];
     }
 
@@ -94,11 +94,14 @@ class UserExtension extends \Twig_Extension implements \Twig_Extension_GlobalsIn
         return $request ? $this->targetPathResolver->resolveTargetPath($request) : null;
     }
 
-    public function isTrustedApiUrl(string $url): bool
+    public function isTrustedApiClientUrl(string $url): bool
     {
         $url = new Uri($url);
 
-        foreach ($this->config['trusted_api_urls'] as $trustedApiUrl) {
+        foreach ($this->config['trusted_api_client_urls'] as $trustedApiUrl) {
+            $trustedApiUrl = Strings::contains($trustedApiUrl, '//')
+                ? $trustedApiUrl
+                : sprintf('//%s', $trustedApiUrl);
             $trustedApiUrl = new Uri($trustedApiUrl);
 
             if (

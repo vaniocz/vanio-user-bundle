@@ -45,7 +45,7 @@ class VanioUserExtensionTest extends KernelTestCase
                 ],
                 'target_path' => '/',
             ],
-            'trusted_api_urls' => [],
+            'trusted_api_client_urls' => [],
         ], $config);
     }
 }

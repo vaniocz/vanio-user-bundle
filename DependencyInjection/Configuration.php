@@ -21,8 +21,17 @@ class Configuration implements ConfigurationInterface
                 ->booleanNode('use_flash_notifications')->defaultTrue()->end()
                 ->scalarNode('registration_target_path')->defaultNull()->end()
                 ->booleanNode('social_authentication')->defaultNull()->end()
-                ->arrayNode('trusted_api_urls')
+                ->arrayNode('trusted_api_client_urls')
                     ->prototype('scalar')->end()
+                    ->defaultValue([])
+                    ->beforeNormalization()
+                        ->ifTrue(function ($value) {
+                            return !is_array($value);
+                        })
+                        ->then(function ($value) {
+                            return [$value];
+                        })
+                    ->end()
                 ->end()
             ->end();
         $this
