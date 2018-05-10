@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <routes xmlns="http://symfony.com/schema/routing" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/routing http://symfony.com/schema/routing/routing-1.0.xsd">
-    <route id="vanio_user_change_email_confirm" path="/my-profile/confirm-change-email/{token}" methods="GET POST">
+    <route id="vanio_user_change_email_confirm" path="/profile/confirm-change-email/{token}" methods="GET POST">
         <default key="_controller">VanioUserBundle:ChangeEmail:confirm</default>
     </route>
 </routes>
