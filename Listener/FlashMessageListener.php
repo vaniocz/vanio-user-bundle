@@ -53,7 +53,7 @@ class FlashMessageListener implements EventSubscriberInterface
     public static function getSubscribedEvents(): array
     {
         return [
-            KernelEvents::REQUEST => ['onKernelRequest', 10],
+            KernelEvents::REQUEST => ['onRequest', 10],
             SecurityEvents::INTERACTIVE_LOGIN => ['onInteractiveLogin', PHP_INT_MAX],
             FOSUserEvents::SECURITY_IMPLICIT_LOGIN => 'onImplicitLogin',
             FOSUserEvents::REGISTRATION_CONFIRM => 'onRegistrationConfirm',
@@ -75,7 +75,7 @@ class FlashMessageListener implements EventSubscriberInterface
     /**
      * @internal
      */
-    public function onKernelRequest(GetResponseEvent $event): void
+    public function onRequest(GetResponseEvent $event): void
     {
         $this->disconnectApiFlashBag($event->getRequest());
     }
