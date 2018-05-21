@@ -6,6 +6,6 @@
         <locale key="cs">/smazat-ucet</locale>
         <locale key="sk">/zmazat-ucet</locale>
         <locale key="ru">/udalit-akkaunt</locale>
-        <default key="_controller">VanioUserBundle:Registration:unregister</default>
+        <default key="_controller">fos_user.registration.controller:unregisterAction</default>
     </route>
 </routes>

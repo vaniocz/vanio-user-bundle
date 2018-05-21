@@ -16,5 +16,7 @@
         {% if vanio_user.social_authentication %}
             <a class="btn btn-default" href="{{ path('hwi_oauth_connections') }}">{{ 'profile.show.connect'|trans }}</a>
         {% endif %}
+
+        <a class="btn btn-danger" href="{{ path('vanio_user_unregister') }}">{{ 'profile.show.unregister'|trans }}</a>
     </p>
 {% endblock %}
