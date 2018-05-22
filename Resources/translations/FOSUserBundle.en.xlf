@@ -201,6 +201,11 @@
                 <target>Account connections</target>
             </trans-unit>
 
+            <trans-unit id="ba32dcc8ccfe9b2a67dad3e20f4f441b" resname="profile.show.unregister">
+                <source>profile.show.unregister</source>
+                <target>Unregister</target>
+            </trans-unit>
+
             <trans-unit id="ee3d884be66c934bd01359f85484d78d" resname="form.name">
                 <source>form.name</source>
                 <target>Name</target>

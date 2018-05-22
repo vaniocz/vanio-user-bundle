@@ -201,6 +201,11 @@
                 <target>Propojení účtu</target>
             </trans-unit>
 
+            <trans-unit id="ba32dcc8ccfe9b2a67dad3e20f4f441b" resname="profile.show.unregister">
+                <source>profile.show.unregister</source>
+                <target>Smazat účet</target>
+            </trans-unit>
+
             <trans-unit id="62dd5b80e69908635237bb1cac15470b" resname="profile.edit.submit">
                 <source>profile.edit.submit</source>
                 <target>Uložit</target>
