@@ -16,6 +16,11 @@ abstract class User extends BaseUser implements \JsonSerializable
     /** @var \DateTime|null */
     protected $newEmailRequestedAt;
 
+    public function isAdmin(): bool
+    {
+        return $this->isSuperAdmin() || $this->hasRole(static::ROLE_ADMIN);
+    }
+
     public function getNewEmail(): ?string
     {
         return $this->newEmail;
@@ -56,10 +61,5 @@ abstract class User extends BaseUser implements \JsonSerializable
         }
 
         return $data;
-    }
-
-    public function isAdmin(): bool
-    {
-        return $this->isSuperAdmin() || $this->hasRole(static::ROLE_ADMIN);
     }
 }
