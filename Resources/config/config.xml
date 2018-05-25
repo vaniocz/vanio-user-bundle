@@ -9,6 +9,7 @@
         <parameter key="vanio_user.security.authentication_success_handler.class">Vanio\UserBundle\Security\AuthenticationSuccessHandler</parameter>
         <parameter key="vanio_user.security.notifying_logout_success_handler.class">Vanio\UserBundle\Security\NotifyingLogoutSuccessHandler</parameter>
         <parameter key="vanio_user.security.target_path_resolver.class">Vanio\UserBundle\Security\TargetPathResolver</parameter>
+        <parameter key="vanio_user.security.login_manager.class">Vanio\UserBundle\Security\LoginManager</parameter>
         <parameter key="vanio_user.listener.api_response_listener.class">Vanio\UserBundle\Listener\ApiResponseListener</parameter>
         <parameter key="vanio_user.listener.email_change_confirmation_listener.class">Vanio\UserBundle\Listener\EmailChangeConfirmationListener</parameter>
         <parameter key="vanio_user.listener.email_confirmation_listener.class">Vanio\UserBundle\Listener\EmailConfirmationListener</parameter>
@@ -51,6 +52,15 @@
             <argument type="service" id="router"/>
             <argument type="service" id="security.http_utils"/>
             <argument>%vanio_user.pass_target_path%</argument>
+        </service>
+
+        <service id="vanio_user.security.login_manager" class="%vanio_user.security.login_manager.class%" decorates="fos_user.security.login_manager">
+            <argument type="service" id="vanio_user.security.login_manager.inner"/>
+            <argument type="service" id="security.token_storage"/>
+            <argument type="service" id="http_kernel"/>
+            <argument type="service" id="security.firewall.map"/>
+            <argument type="service" id="request_stack" />
+            <argument>%vanio_user.firewall_name%</argument>
         </service>
 
         <service id="vanio_user.listener.api_response_listener" class="%vanio_user.listener.api_response_listener.class%">

@@ -12,12 +12,9 @@ use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\Form\Extension\Core\Type\FormType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\HttpKernel\Event\GetResponseEvent;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
-use Symfony\Component\HttpKernel\HttpKernel;
-use Symfony\Component\HttpKernel\HttpKernelInterface;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
-use Symfony\Component\Security\Http\Firewall\LogoutListener;
+use Vanio\UserBundle\Security\LoginManager;
 use Vanio\UserBundle\VanioUserEvents;
 use Vanio\WebBundle\Request\RefererHelperTrait;
 
@@ -83,18 +80,14 @@ class RegistrationController extends BaseRegistrationController
         }
 
         if ($request->isMethod('POST')) {
-            $requestType = $this->requestStack()->getParentRequest()
-                ? HttpKernelInterface::SUB_REQUEST
-                : HttpKernelInterface::MASTER_REQUEST;
-            $event = new GetResponseEvent($this->httpKernel(), $request, $requestType);
-            $this->logoutListener()->handle($event);
+            $response = $this->loginManager()->logOutUser();
 
             if ($request->getSession()) {
                 $request->getSession()->getFlashBag()->clear();
             }
 
             $this->userManager()->deleteUser($user);
-            $event = new FilterUserResponseEvent($user, $request, $event->getResponse() ?: $this->redirect('/'));
+            $event = new FilterUserResponseEvent($user, $request, $response ?: $this->redirect('/'));
             $this->eventDispatcher()->dispatch(VanioUserEvents::UNREGISTRATION_COMPLETED, $event);
 
             return $event->getResponse();
@@ -113,13 +106,8 @@ class RegistrationController extends BaseRegistrationController
         return $this->get('fos_user.user_manager');
     }
 
-    private function httpKernel(): HttpKernel
+    private function loginManager(): LoginManager
     {
-        return $this->get('http_kernel');
-    }
-
-    private function logoutListener(): LogoutListener
-    {
-        return $this->get(sprintf('security.logout_listener.%s', $this->getParameter('vanio_user.firewall_name')));
+        return $this->get('fos_user.security.login_manager');
     }
 }
