@@ -4,12 +4,10 @@
     <h3>{{ 'unregister.heading'|trans }}</h3>
 {% endblock %}
 
-{% block alert %}
-    {% include '@VanioUser/partials/alert.html.twig' with {type: 'danger', message: 'unregister.warning'|trans} %}
+{% block info %}
+    <p><strong>{{ 'unregister.warning'|trans }}</strong></p>
 {% endblock %}
 
 {% block form %}
-    <form method="post">
-        <input type="submit" class="btn btn-primary" value="{{ 'unregister.button'|trans }}">
-    </form>
+    <form class="unregister-form" method="post"><input type="submit" class="btn btn-danger" value="{{ 'unregister.button'|trans }}"></form>
 {% endblock %}

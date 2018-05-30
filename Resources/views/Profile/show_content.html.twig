@@ -9,7 +9,7 @@
 {% endblock %}
 
 {% block links %}
-    <p class="profile-links">
+    <div class="profile-links">
         <a class="btn btn-primary" href="{{ path('fos_user_profile_edit') }}">{{ 'profile.show.edit'|trans }}</a>
         <a class="btn btn-default" href="{{ path('fos_user_change_password') }}">{{ 'profile.show.change_password'|trans }}</a>
 
@@ -18,5 +18,5 @@
         {% endif %}
 
         <a class="btn btn-danger" href="{{ path('vanio_user_unregister') }}">{{ 'profile.show.unregister'|trans }}</a>
-    </p>
+    </div>
 {% endblock %}
