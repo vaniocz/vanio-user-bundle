@@ -10,7 +10,7 @@
             {{ 'security.login.logged_in_as'|trans({'%username%': app.user.username, '%profileUrl%': path('fos_user_profile_show')})|raw }} |
             <a href="{{ path('fos_user_security_logout') }}">{{ 'layout.logout'|trans }}</a>
         {% else %}
-            {% if route_exists('fos_user_registration_register') %}
+            {% if registration ?? route_exists('fos_user_registration_register') %}
                 <a href="{{ path('fos_user_registration_register') }}">{{ 'layout.register'|trans }}</a> |
             {% endif %}
 

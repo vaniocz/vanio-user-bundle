@@ -22,6 +22,11 @@ trait ResponseFormatTrait
     protected function render($view, array $parameters = [], ?Response $response = null): Response
     {
         $format = $this->requestStack()->getCurrentRequest()->getRequestFormat();
+
+        if ($format === 'html') {
+            return parent::render($view, $parameters, $response);
+        }
+
         $view = str_replace('.html.twig', '', $view);
         $this->responseContext()->clear();
         $views = [sprintf('%s.%s.twig', $view, $format), sprintf('%s.twig', $view)];
