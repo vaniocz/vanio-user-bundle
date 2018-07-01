@@ -78,7 +78,10 @@ class VanioUserExtension extends Extension implements PrependExtensionInterface
             $this->processExtensionConfig($container, 'hwi_oauth')['fosub']['properties'] ?? []
         );
         $container->prependExtensionConfig('twig', [
-            'paths' => [sprintf('%s/../Resources/views', __DIR__) => 'HWIOAuth'],
+            'paths' => [
+                sprintf('%s/../Resources/views/', __DIR__) => '!VanioUser',
+                sprintf('%s/../Resources/views', __DIR__) => 'HWIOAuth',
+            ],
         ]);
     }
 
@@ -112,11 +115,11 @@ class VanioUserExtension extends Extension implements PrependExtensionInterface
             'use_flash_notifications' => $config['use_flash_notifications'],
             'registration' => [
                 'form' => ['type' => RegistrationFormType::class],
-                'confirmation' => ['template' => 'VanioUserBundle:Registration:email.html.twig'],
+                'confirmation' => ['template' => '@VanioUser/Registration/email.html.twig'],
             ],
             'resetting' => [
                 'form' => ['type' => ResettingFormType::class],
-                'email' => ['template' => 'VanioUserBundle:Resetting:email.html.twig'],
+                'email' => ['template' => '@VanioUser/Resetting/email.html.twig'],
             ],
             'profile' => [
                 'form' => ['type' => ProfileFormType::class],
@@ -124,7 +127,11 @@ class VanioUserExtension extends Extension implements PrependExtensionInterface
             'change_password' => [
                 'form' => ['type' => ChangePasswordFormType::class],
             ],
-            'service' => ['mailer' => 'vanio_user.mailer.twig_swift'],
+            'service' => [
+                'mailer' => $container->hasExtension('vanio_mailing')
+                    ? 'vanio_user.mailer.easy_mailer'
+                    : 'vanio_user.mailer.twig_swift_mailer',
+            ],
         ]);
     }
 

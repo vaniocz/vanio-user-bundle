@@ -5,7 +5,7 @@ use FOS\UserBundle\Mailer\TwigSwiftMailer as BaseTwigSwiftMailer;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Vanio\UserBundle\Model\User;
 
-class TwigSwiftMailer extends BaseTwigSwiftMailer
+class TwigSwiftMailer extends BaseTwigSwiftMailer implements Mailer
 {
     public function sendChangeEmailConfirmationMessage(User $user): void
     {

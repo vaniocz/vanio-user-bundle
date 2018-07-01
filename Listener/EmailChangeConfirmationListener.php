@@ -7,7 +7,7 @@ use FOS\UserBundle\FOSUserEvents;
 use FOS\UserBundle\Util\TokenGeneratorInterface;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
-use Vanio\UserBundle\Mailer\TwigSwiftMailer;
+use Vanio\UserBundle\Mailer\Mailer;
 use Vanio\UserBundle\Model\User;
 use Vanio\UserBundle\VanioUserEvents;
 
@@ -19,10 +19,10 @@ class EmailChangeConfirmationListener implements EventSubscriberInterface
     /** @var TokenGeneratorInterface */
     private $tokenGenerator;
 
-    /** @var TwigSwiftMailer */
+    /** @var Mailer */
     private $mailer;
 
-    public function __construct(TokenGeneratorInterface $tokenGenerator, TwigSwiftMailer $mailer)
+    public function __construct(TokenGeneratorInterface $tokenGenerator, Mailer $mailer)
     {
         $this->tokenGenerator = $tokenGenerator;
         $this->mailer = $mailer;

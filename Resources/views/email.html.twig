@@ -1,5 +1,11 @@
 {% block subject %}{% endblock %}
 
+{% block sender %}
+    {% for email, name in from %}
+        {{ name }} <{{ email }}>
+    {% endfor %}
+{% endblock %}
+
 {% block body_text %}
     {{ block('body_html')|html_to_text|raw }}
 {% endblock %}
