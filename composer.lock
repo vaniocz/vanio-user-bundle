@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "374533e2da1f0fbeb3d0d1cc42fafdcd",
+    "content-hash": "292632a47b0115a63014622cbcda5dcc",
     "packages": [
         {
             "name": "doctrine/annotations",
@@ -2374,20 +2374,20 @@
         },
         {
             "name": "symfony/templating",
-            "version": "v3.4.12",
+            "version": "v4.1.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/templating.git",
-                "reference": "199a4199e48d68d10ce8ccaa0ee1ab06ef65a6e8"
+                "reference": "c9731b5e11fc01a1363e0cf9b3c90faf619ea479"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/templating/zipball/199a4199e48d68d10ce8ccaa0ee1ab06ef65a6e8",
-                "reference": "199a4199e48d68d10ce8ccaa0ee1ab06ef65a6e8",
+                "url": "https://api.github.com/repos/symfony/templating/zipball/c9731b5e11fc01a1363e0cf9b3c90faf619ea479",
+                "reference": "c9731b5e11fc01a1363e0cf9b3c90faf619ea479",
                 "shasum": ""
             },
             "require": {
-                "php": "^5.5.9|>=7.0.8",
+                "php": "^7.1.3",
                 "symfony/polyfill-ctype": "~1.8"
             },
             "require-dev": {
@@ -2399,7 +2399,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "3.4-dev"
+                    "dev-master": "4.1-dev"
                 }
             },
             "autoload": {
@@ -2426,7 +2426,7 @@
             ],
             "description": "Symfony Templating Component",
             "homepage": "https://symfony.com",
-            "time": "2018-05-01T22:53:27+00:00"
+            "time": "2018-05-01T23:02:13+00:00"
         },
         {
             "name": "symfony/translation",
@@ -2588,50 +2588,50 @@
         },
         {
             "name": "symfony/twig-bundle",
-            "version": "v3.4.12",
+            "version": "v4.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/twig-bundle.git",
-                "reference": "1dbf7f7ee6ae56c8122273b53bacc731d1c732cd"
+                "reference": "158bf522a8df74b0a322421bbde14a1647197007"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/twig-bundle/zipball/1dbf7f7ee6ae56c8122273b53bacc731d1c732cd",
-                "reference": "1dbf7f7ee6ae56c8122273b53bacc731d1c732cd",
+                "url": "https://api.github.com/repos/symfony/twig-bundle/zipball/158bf522a8df74b0a322421bbde14a1647197007",
+                "reference": "158bf522a8df74b0a322421bbde14a1647197007",
                 "shasum": ""
             },
             "require": {
-                "php": "^5.5.9|>=7.0.8",
-                "symfony/config": "~3.2|~4.0",
-                "symfony/http-foundation": "~2.8|~3.0|~4.0",
-                "symfony/http-kernel": "^3.3|~4.0",
+                "php": "^7.1.3",
+                "symfony/config": "~3.4|~4.0",
+                "symfony/http-foundation": "~3.4|~4.0",
+                "symfony/http-kernel": "~3.4|~4.0",
                 "symfony/polyfill-ctype": "~1.8",
                 "symfony/twig-bridge": "^3.4.3|^4.0.3",
                 "twig/twig": "~1.34|~2.4"
             },
             "conflict": {
                 "symfony/dependency-injection": "<3.4",
-                "symfony/event-dispatcher": "<3.3.1"
+                "symfony/event-dispatcher": "<3.4"
             },
             "require-dev": {
                 "doctrine/annotations": "~1.0",
                 "doctrine/cache": "~1.0",
-                "symfony/asset": "~2.8|~3.0|~4.0",
+                "symfony/asset": "~3.4|~4.0",
                 "symfony/dependency-injection": "~3.4|~4.0",
-                "symfony/expression-language": "~2.8|~3.0|~4.0",
-                "symfony/finder": "~2.8|~3.0|~4.0",
-                "symfony/form": "~2.8|~3.0|~4.0",
-                "symfony/framework-bundle": "^3.3.11|~4.0",
-                "symfony/routing": "~2.8|~3.0|~4.0",
-                "symfony/stopwatch": "~2.8|~3.0|~4.0",
-                "symfony/templating": "~2.8|~3.0|~4.0",
-                "symfony/web-link": "~3.3|~4.0",
-                "symfony/yaml": "~2.8|~3.0|~4.0"
+                "symfony/expression-language": "~3.4|~4.0",
+                "symfony/finder": "~3.4|~4.0",
+                "symfony/form": "~3.4|~4.0",
+                "symfony/framework-bundle": "~3.4|~4.0",
+                "symfony/routing": "~3.4|~4.0",
+                "symfony/stopwatch": "~3.4|~4.0",
+                "symfony/templating": "~3.4|~4.0",
+                "symfony/web-link": "~3.4|~4.0",
+                "symfony/yaml": "~3.4|~4.0"
             },
             "type": "symfony-bundle",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "3.4-dev"
+                    "dev-master": "4.1-dev"
                 }
             },
             "autoload": {
@@ -2658,7 +2658,7 @@
             ],
             "description": "Symfony TwigBundle",
             "homepage": "https://symfony.com",
-            "time": "2018-06-25T11:07:14+00:00"
+            "time": "2018-05-16T14:41:07+00:00"
         },
         {
             "name": "symfony/validator",
@@ -3657,75 +3657,6 @@
                 "object graph"
             ],
             "time": "2018-06-11T23:09:50+00:00"
-        },
-        {
-            "name": "pelago/emogrifier",
-            "version": "v2.0.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/MyIntervals/emogrifier.git",
-                "reference": "8babf8ddbf348f26b29674e2f84db66ff7e3d95e"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/MyIntervals/emogrifier/zipball/8babf8ddbf348f26b29674e2f84db66ff7e3d95e",
-                "reference": "8babf8ddbf348f26b29674e2f84db66ff7e3d95e",
-                "shasum": ""
-            },
-            "require": {
-                "php": "^5.5.0 || ~7.0.0 || ~7.1.0 || ~7.2.0"
-            },
-            "require-dev": {
-                "phpunit/phpunit": "^4.8.0",
-                "squizlabs/php_codesniffer": "^3.1.0"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "2.1.x-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Pelago\\": "Classes/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "John Reeve",
-                    "email": "jreeve@pelagodesign.com"
-                },
-                {
-                    "name": "Cameron Brooks"
-                },
-                {
-                    "name": "Jaime Prado"
-                },
-                {
-                    "name": "Roman Ožana",
-                    "email": "ozana@omdesign.cz"
-                },
-                {
-                    "name": "Oliver Klee",
-                    "email": "github@oliverklee.de"
-                },
-                {
-                    "name": "Zoli Szabó",
-                    "email": "zoli.szabo+github@gmail.com"
-                }
-            ],
-            "description": "Converts CSS styles into inline style attributes in your HTML code",
-            "homepage": "https://www.myintervals.com/emogrifier.php",
-            "keywords": [
-                "css",
-                "email",
-                "pre-processing"
-            ],
-            "time": "2018-01-05T23:30:21+00:00"
         },
         {
             "name": "phar-io/manifest",
@@ -5957,120 +5888,6 @@
                 "conventions"
             ],
             "time": "2018-05-18T00:38:17+00:00"
-        },
-        {
-            "name": "vanio/easy-mailer",
-            "version": "dev-master",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/vaniocz/easy-mailer.git",
-                "reference": "b01a18b63484f68cca9d1c3b7ffdfb9856bbeaee"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/vaniocz/easy-mailer/zipball/b01a18b63484f68cca9d1c3b7ffdfb9856bbeaee",
-                "reference": "b01a18b63484f68cca9d1c3b7ffdfb9856bbeaee",
-                "shasum": ""
-            },
-            "require": {
-                "html2text/html2text": "^4.0",
-                "pelago/emogrifier": "^1.2 || ^2.0",
-                "php": "^7.0",
-                "swiftmailer/swiftmailer": "^5.4 || ^6.0",
-                "twig/twig": "^1.24 || ^2.0"
-            },
-            "require-dev": {
-                "phpunit/phpunit": "^5.5",
-                "vanio/coding-standards": "^0.1"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "0.1.x-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Vanio\\EasyMailer\\": "src/"
-                },
-                "exclude-from-classmap": [
-                    "/tests/"
-                ]
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Adam Hojka"
-                }
-            ],
-            "description": "Easy peasy e-mail sending from PHP applications.",
-            "homepage": "https://github.com/vaniocz/easy-mailer",
-            "keywords": [
-                "e-mail",
-                "e-mail sending"
-            ],
-            "time": "2018-07-01T16:19:31+00:00"
-        },
-        {
-            "name": "vanio/vanio-mailing-bundle",
-            "version": "dev-master",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/vaniocz/vanio-mailing-bundle.git",
-                "reference": "ce7dfbc2e8b678b03b592e70b364e73026660a46"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/vaniocz/vanio-mailing-bundle/zipball/ce7dfbc2e8b678b03b592e70b364e73026660a46",
-                "reference": "ce7dfbc2e8b678b03b592e70b364e73026660a46",
-                "shasum": ""
-            },
-            "require": {
-                "php": "^7.0",
-                "symfony/swiftmailer-bundle": "^2.4 || ^3.0",
-                "symfony/templating": "^3.3",
-                "symfony/twig-bundle": "^3.1",
-                "vanio/easy-mailer": "^0.1"
-            },
-            "require-dev": {
-                "phpunit/phpunit": "^5.5",
-                "symfony/framework-bundle": "^3.1",
-                "vanio/coding-standards": "^0.1"
-            },
-            "type": "symfony-bundle",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "0.1.x-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Vanio\\MailingBundle\\": ""
-                },
-                "exclude-from-classmap": [
-                    "/Tests/",
-                    "**/Tests/"
-                ]
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Adam Hojka"
-                }
-            ],
-            "description": "Easy peasy e-mail sending from Symfony applications.",
-            "homepage": "https://github.com/vaniocz/vanio-mailing-bundle",
-            "keywords": [
-                "e-mail",
-                "e-mail sending"
-            ],
-            "time": "2018-04-24T19:45:51+00:00"
         },
         {
             "name": "webmozart/assert",

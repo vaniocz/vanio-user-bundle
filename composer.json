@@ -24,7 +24,6 @@
         "doctrine/doctrine-bundle": "^1.6.4",
         "hwi/oauth-bundle": "^0.6.2",
         "php-http/mock-client": "^1.1",
-        "vanio/vanio-mailing-bundle": "^0.1",
         "vanio/coding-standards": "^0.3"
     },
     "suggest": {

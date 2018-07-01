@@ -6,6 +6,8 @@
     {% endfor %}
 {% endblock %}
 
+{% block from %}{{ block('sender') }}{% endblock %}
+
 {% block body_text %}
     {{ block('body_html')|html_to_text|raw }}
 {% endblock %}
