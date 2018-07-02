@@ -7,6 +7,8 @@
 {% endblock %}
 
 {% block from %}{{ block('sender') }}{% endblock %}
+{% block title %}{{ block('subject') }}{% endblock %}
+{% block content_type %}text/html{% endblock %}
 
 {% block body_text %}
     {{ block('body_html')|html_to_text|raw }}
