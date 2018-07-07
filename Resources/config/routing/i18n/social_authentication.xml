@@ -44,11 +44,11 @@
     </route>
 
     <route id="hwi_oauth_connections">
-        <locale key="en">/profile/account-connections</locale>
-        <locale key="de">/profil/verknupfte-konten</locale>
-        <locale key="cs">/profil/propojeni-uctu</locale>
-        <locale key="sk">/profil/prepojenie-uctu</locale>
-        <locale key="ru">/profilya/soyedinyat-schet</locale>
+        <locale key="en">/my-profile/account-connections</locale>
+        <locale key="de">/mein-profil/verknupfte-konten</locale>
+        <locale key="cs">/muj-profil/propojeni-uctu</locale>
+        <locale key="sk">/moj-profil/prepojenie-uctu</locale>
+        <locale key="ru">/moy-profayl/soyedinyat-schet</locale>
         <default key="_controller">VanioUserBundle:Connect:connections</default>
     </route>
 

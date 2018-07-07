@@ -9,7 +9,7 @@
                 <label class="control-label" for="resetLogin">{{ "resetting.request.#{property}.label"|trans }}</label>
 
                 {% if addon %}
-                    <div class="input-group"><span class="input-group-addon">{{ addon|raw }}</span>
+                    <div class="input-group"><label class="input-group-addon" for="resetLogin">{{ addon|raw }}</label>
                 {% endif %}
 
                 <input

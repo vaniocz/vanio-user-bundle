@@ -40,7 +40,7 @@
                 <label class="control-label" for="loginUsername">{{ "security.login.#{property}.label"|trans }}</label>
 
                 {% if addon %}
-                    <div class="input-group"><span class="input-group-addon">{{ addon|raw }}</span>
+                    <div class="input-group"><label class="input-group-addon" for="loginUsername">{{ addon|raw }}</label>
                 {% endif %}
 
                 <input
@@ -66,7 +66,7 @@
                 <label class="control-label" for="loginPassword">{{ 'security.login.password.label'|trans }}</label>
 
                 {% if addon %}
-                    <div class="input-group"><span class="input-group-addon">{{ addon|raw }}</span>
+                    <div class="input-group"><label class="input-group-addon" for="loginPassword">{{ addon|raw }}</label>
                 {% endif %}
 
                 <input
