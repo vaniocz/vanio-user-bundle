@@ -12,32 +12,43 @@ use Vanio\Stdlib\Uri;
  */
 class AuthenticationFailureHandler extends DefaultAuthenticationFailureHandler
 {
-    /** @var TargetPathResolver|null */
+    /** @var DefaultAuthenticationFailureHandler */
+    private $authenticationFailureHandler;
+
+    /** @var TargetPathResolver */
     private $targetPathResolver;
 
-    public function onAuthenticationFailure(Request $request, AuthenticationException $exception): Response
-    {
-        $response = parent::onAuthenticationFailure($request, $exception);
-
-        if ($this->targetPathResolver && $response->isRedirection()) {
-            $this->passTargetPath($request, $response);
-        }
-
-        return $response;
-    }
-
-    public function setTargetPathResolver(TargetPathResolver $targetPathResolver): void
-    {
+    public function __construct(
+        DefaultAuthenticationFailureHandler $authenticationFailureHandler,
+        TargetPathResolver $targetPathResolver
+    ) {
+        $this->authenticationFailureHandler = $authenticationFailureHandler;
         $this->targetPathResolver = $targetPathResolver;
     }
 
-    private function passTargetPath(Request $request, Response $response): void
+    public function getOptions(): array
     {
-        if ($targetPath = $this->targetPathResolver->resolveTargetPathFromParameterValue($request)) {
-            $targetUri = (new Uri($response->headers->get('Location')))->withAppendedQuery([
-                $this->targetPathResolver->targetPathParameter() => $targetPath,
-            ]);
-            $response->setTargetUrl($targetUri->absoluteUri());
+        return $this->authenticationFailureHandler->getOptions();
+    }
+
+    public function setOptions(array $options)
+    {
+        $this->authenticationFailureHandler->setOptions($options);
+    }
+
+    public function onAuthenticationFailure(Request $request, AuthenticationException $exception): Response
+    {
+        $response = $this->authenticationFailureHandler->onAuthenticationFailure($request, $exception);
+
+        if ($response->isRedirection()) {
+            if ($targetPath = $this->targetPathResolver->resolveTargetPathFromParameterValue($request)) {
+                $targetUri = (new Uri($response->headers->get('Location')))->withAppendedQuery([
+                    $this->targetPathResolver->targetPathParameter() => $targetPath,
+                ]);
+                $response->setTargetUrl($targetUri->absoluteUri());
+            }
         }
+
+        return $response;
     }
 }

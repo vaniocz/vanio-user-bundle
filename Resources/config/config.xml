@@ -44,6 +44,17 @@
             <argument>%vanio_user%</argument>
         </service>
 
+        <service id="vanio_user.security.authentication_failure_handler" class="%vanio_user.security.authentication_failure_handler.class%" abstract="true">
+            <argument type="service" id="vanio_user.security.authentication_failure_handler.inner"/>
+            <argument type="service" id="vanio_user.security.target_path_resolver"/>
+        </service>
+
+        <service id="vanio_user.security.authentication_success_handler" class="%vanio_user.security.authentication_success_handler.class%" abstract="true">
+            <argument type="service" id="vanio_user.security.authentication_success_handler.inner"/>
+            <argument type="service" id="security.http_utils"/>
+            <argument type="service" id="vanio_user.security.target_path_resolver"/>
+        </service>
+
         <service id="vanio_user.security.notifying_logout_success_handler" class="%vanio_user.security.notifying_logout_success_handler.class%" abstract="true">
             <argument type="service" id="vanio_user.security.notifying_logout_success_handler.inner"/>
             <argument>%vanio_user.firewall_name%</argument>
