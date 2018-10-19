@@ -17,13 +17,14 @@
         <locale key="ru">/proverit-avtorizovatsya</locale>
     </import>
 
-    <import resource="@HWIOAuthBundle/Resources/config/routing/redirect.xml">
-        <locale key="en">/login</locale>
-        <locale key="de">/einloggen</locale>
-        <locale key="cs">/prihlaseni</locale>
-        <locale key="sk">/prihlasenie</locale>
-        <locale key="ru">/avtorizovatsya</locale>
-    </import>
+    <route id="hwi_oauth_connect_registration">
+        <locale key="en">/login/{service}</locale>
+        <locale key="de">/einloggen/{service}</locale>
+        <locale key="cs">/prihlaseni/{service}</locale>
+        <locale key="sk">/prihlasenie/{service}</locale>
+        <locale key="ru">/avtorizovatsya/{service}</locale>
+        <default key="_controller">VanioUserBundle:Connect:redirectToService</default>
+    </route>
 
     <route id="hwi_oauth_connect_registration">
         <locale key="en">/registration/connect/{key}</locale>
