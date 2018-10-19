@@ -6,6 +6,7 @@ use HWI\Bundle\OAuthBundle\Controller\ConnectController as BaseConnectController
 use HWI\Bundle\OAuthBundle\Event\FilterUserResponseEvent;
 use HWI\Bundle\OAuthBundle\Security\Core\Authentication\Token\OAuthToken;
 use HWI\Bundle\OAuthBundle\Security\Core\Exception\AccountNotLinkedException;
+use HWI\Bundle\OAuthBundle\Security\OAuthUtils;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -18,6 +19,7 @@ use Symfony\Component\Security\Core\Security;
 use Vanio\UserBundle\Security\FosubUserProvider;
 use Vanio\UserBundle\VanioUserEvents;
 use Vanio\WebBundle\Request\RefererHelperTrait;
+use Vanio\WebBundle\Serializer\Serializer;
 use Vanio\WebBundle\Translation\FlashMessage;
 
 class ConnectController extends BaseConnectController
@@ -80,6 +82,36 @@ class ConnectController extends BaseConnectController
         }
 
         return $response;
+    }
+
+    /**
+     * @param Request $request
+     * @param string $service
+     * @return Response
+     */
+    public function redirectToServiceAction(Request $request, $service): Response
+    {
+        if ($request->getRequestFormat() === 'html') {
+            return parent::redirectToServiceAction($request, $service);
+        }
+
+        try {
+            $authorizationUrl = $this->oAuthUtils()->getAuthorizationUrl(
+                $request,
+                $service,
+                $request->get('redirectUrl')
+            );
+        } catch (\RuntimeException $e) {
+            throw $this->createNotFoundException($e->getMessage());
+        }
+
+        $data = [
+            'success' => true,
+            'authorizationUrl' => $authorizationUrl,
+            'redirectUrl' => $this->oAuthUtils()->getServiceAuthUrl($request, $this->getResourceOwnerByName($service)),
+        ];
+
+        return new Response($this->serializer()->serialize($data, $request->getRequestFormat()));
     }
 
     /**
@@ -173,5 +205,15 @@ class ConnectController extends BaseConnectController
     private function eventDispatcher(): EventDispatcherInterface
     {
         return $this->get('event_dispatcher');
+    }
+
+    private function oAuthUtils(): OAuthUtils
+    {
+        return $this->get('hwi_oauth.security.oauth_utils');
+    }
+
+    private function serializer(): Serializer
+    {
+        return $this->get('vanio_web.serializer.serializer');
     }
 }

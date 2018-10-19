@@ -25,5 +25,8 @@
     </route>
 
     <import resource="." type="resource_owners" prefix="login_check"/>
-    <import resource="@HWIOAuthBundle/Resources/config/routing/redirect.xml" prefix="/login"/>
+
+    <route id="hwi_oauth_service_redirect" path="/login/{service}">
+        <default key="_controller">VanioUserBundle:Connect:redirectToService</default>
+    </route>
 </routes>
