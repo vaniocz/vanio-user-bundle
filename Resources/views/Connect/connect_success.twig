@@ -1,0 +1,2 @@
+{% set data = app.user is instance of('JsonSerializable') ? app.user.jsonSerialize : {username: app.user.username} %}
+{{ data|serialize(app.request.requestFormat)|raw }}

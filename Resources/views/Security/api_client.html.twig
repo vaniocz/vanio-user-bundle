@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title></title>
+
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css">
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            font: 14px/1 "Open Sans", sans-serif;
+            margin: 0;
+        }
+
+        p {
+            margin: 0 0 15px;
+        }
+
+        p:last-child {
+            margin-bottom: 0;
+        }
+
+        input {
+            font: inherit;
+        }
+
+        .btn {
+            cursor: pointer;
+            padding: 10px 20px;
+            text-decoration: none;
+        }
+
+        .btn-primary {
+            border: 1px solid #BBB;
+        }
+
+        .form-group {
+            margin: 15px 0;
+        }
+
+        .form-group + .form-group:not(.form-buttons) {
+            margin-top: -16px;
+        }
+
+        .form-control {
+            border: 1px solid #BBB;
+            outline: none;
+            padding: 15px;
+            width: 100%;
+        }
+
+        .form-control:invalid {
+            box-shadow: none;
+        }
+
+        .input-group {
+            display: table;
+            width: 100%;
+        }
+
+        .input-group .input-group-addon  {
+            display: table-cell;
+            background-color: #EEE;
+            border: 1px solid #BBB;
+            border-right: none;
+            color: #666;
+            font-style: normal;
+            text-align: center;
+            width: 50px;
+        }
+
+        .input-group .form-control {
+            display: table-cell;
+        }
+
+        .checkbox label {
+            align-items: center;
+            cursor: pointer;
+            display: flex;
+        }
+
+        .checkbox input {
+            clip: rect(0, 0, 0, 0);
+            position: fixed;
+        }
+
+        .checkbox input ~ b {
+            color: #666;
+            font-family: "Font Awesome 5 Free";
+            font-size: 20px;
+            font-weight: normal;
+            margin-right: 5px;
+            order: -1;
+        }
+
+        .checkbox input ~ b::before {
+            content: "\F0C8";
+        }
+
+        .checkbox input:checked ~ b::before {
+            content: "\F14A";
+        }
+
+        .fa {
+            font-size: 16px;
+        }
+
+        .fa-envelope {
+            font-weight: normal;
+        }
+
+        .fa-facebook::before {
+            content: "\F39E";
+        }
+
+        .btn-facebook {
+            background-color: #5D82D1;
+        }
+
+        .btn-twitter {
+            background-color: #50BFF5;
+        }
+
+        .btn-google {
+            background-color: #EB5E4C;
+        }
+
+        .btn-dribbble {
+            background-color: #F7659C;
+        }
+
+        .btn-youtube {
+            background-color: #EF4E41;
+        }
+
+        .btn-flickr {
+            background-color: #0063DC;
+        }
+
+        .btn-yahoo {
+            background-color: #AB47AC;
+        }
+
+        .btn-linkedin {
+            background-color: #238CC8;
+        }
+
+        .btn-pinterest {
+            background-color: #E13138;
+        }
+
+        .btn-github {
+            background-color: #333;
+        }
+
+        .btn-tumblr {
+            background-color: #426D9B;
+        }
+
+        .header {
+            align-items: center;
+            background: #24272A;
+            color: white;
+            display: flex;
+            height: 60px;
+            padding: 13px 20px;
+        }
+
+        .header a {
+            color: white;
+        }
+
+        .header__logged-user {
+            flex-grow: 1;
+        }
+
+        .logo {
+            background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAALQAAAA8CAMAAAD48GC1AAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyFpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuNi1jMTQyIDc5LjE2MDkyNCwgMjAxNy8wNy8xMy0wMTowNjozOSAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENDIChXaW5kb3dzKSIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDoxRTBGNzdBNjUzQkMxMUU4QTBFRTgwQzgwRjNDNEEzNyIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDoxRTBGNzdBNzUzQkMxMUU4QTBFRTgwQzgwRjNDNEEzNyI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOjFFMEY3N0E0NTNCQzExRThBMEVFODBDODBGM0M0QTM3IiBzdFJlZjpkb2N1bWVudElEPSJ4bXAuZGlkOjFFMEY3N0E1NTNCQzExRThBMEVFODBDODBGM0M0QTM3Ii8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+MBezrgAAAwBQTFRFGh0gBgkMvr/A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');
+            background-size: cover;
+            display: inline-block;
+            margin-bottom: 4px;
+            width: 90px; height: 30px;
+        }
+
+        .content {
+            margin: 30px;
+            position: relative;
+        }
+
+        .fos_user_security_login, .social-registration {
+            margin: auto;
+            max-width: 350px;
+        }
+
+        .social-authentication {
+            max-width: 150px;
+            margin: auto;
+            text-align: center;
+        }
+
+        .social-authentication .btn {
+            color: white;
+            display: block;
+            margin-bottom: 5px;
+            padding: 15px 20px;
+        }
+
+        .social-authentication .fa {
+            font-family: "Font Awesome 5 Brands";
+            margin: -8px 3px -5px 0;
+            vertical-align: middle;
+        }
+
+        .content .control-label {
+            display: none;
+        }
+
+        .content .form-footer {
+            display: none;
+        }
+
+        #messages {
+            position: absolute; top: 0; right: 0;
+        }
+
+        .message {
+            background-color: #E2E3E5;
+            border: 1px solid #D6D8DB;
+            color: #383D41;
+            margin-bottom: 15px;
+            padding: 15px;
+        }
+
+        .message--success {
+            background-color: #D4EDDA;
+            border-color: #C3E6CB;
+            color: #155724;
+        }
+
+        .message--failure {
+            background-color: #f8d7da;
+            border-color: #f5c6cb;
+            color: #721c24;
+        }
+
+        .social-registration__title {
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <span id="loggedUser" class="header__logged-user" {% if not is_granted('IS_AUTHENTICATED_REMEMBERED') %}style="display: none"{% endif %}>
+            Logged in as <span id="loginUsername" class="login__username">{% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}{{ app.user.username }}{% endif %}</span><br>
+            <a id="logout" href="{{ path('fos_user_security_logout') }}">Log out</a>
+        </span>
+
+        <a class="logo" href="{{ path('vanio_user_api_client') }}"></a>
+    </div>
+
+    <div class="content">
+        {% include '@VanioUser/Security/login_content.html.twig' %}
+
+        <form id="socialRegistrationForm" class="social-registration" method="POST" style="display: none">
+            <p class="social-registration__title">Register</p>
+            <img id="socialRegistrationProfileImage" class="social-registration__profile-image" width="100" style="display: none">
+
+            <div class="form-group">
+                {% if vanio_user.email_only %}
+                    <label class="control-label" for="socialRegistrationEmail">E-mail</label>
+
+                    <div class="input-group"><label class="input-group-addon" for="socialRegistrationEmail"><i class="fa fa-envelope"></i></label>
+                        <input id="socialRegistrationEmail" class="form-control" type="email" name="email" placeholder="E-mail" required oninvalid="this.setCustomValidity(this.getAttribute('data-validation-message'))" oninput="this.setCustomValidity('')" data-validation-message="Please enter your email.">
+                    </div>
+                {% else %}
+                    <label class="control-label" for="socialRegistrationUsername">Login</label>
+
+                    <div class="input-group"><label class="input-group-addon" for="socialRegistrationUsername"><i class="fa fa-user"></i></label>
+                        <input id="socialRegistrationUsername" class="form-control" type="text" name="username" placeholder="Username" required oninvalid="this.setCustomValidity(this.getAttribute('data-validation-message'))" oninput="this.setCustomValidity('')" data-validation-message="Please enter your username.">
+                    </div>
+                {% endif %}
+            </div>
+
+            <div class="form-group">
+                <label class="control-label" for="socialRegistrationName">Name</label>
+
+                <div class="input-group"><label class="input-group-addon" for="socialRegistrationName"><i class="fa fa-user"></i></label>
+                    <input id="socialRegistrationName" class="form-control" type="text" name="name" placeholder="Name" required oninvalid="this.setCustomValidity(this.getAttribute('data-validation-message'))" oninput="this.setCustomValidity('')" data-validation-message="Please enter your name.">
+                </div>
+            </div>
+
+            <div class="form-buttons form-group">
+                <button class="btn btn-primary">Register</button>
+            </div>
+        </form>
+
+        <div id="messages"></div>
+    </div>
+
+    <script>
+        function require(url) {
+            var script = document.createElement('script');
+            script.src = url;
+            script.async = false;
+            document.querySelector('head').appendChild(script);
+        }
+
+        if (!window.Promise) {
+            require('https://cdn.jsdelivr.net/npm/promise-polyfill');
+        }
+
+        if (!window.fetch) {
+            require('https://cdn.jsdelivr.net/npm/whatwg-fetch');
+        }
+
+        var messages = document.getElementById('messages');
+
+        function displayMessage(html, type) {
+            var message = document.createElement('div');
+            message.className = 'message';
+
+            if (type) {
+                message.className += ' message--' + type;
+            }
+
+            message.innerHTML = html;
+            messages.appendChild(message);
+
+            setTimeout(function () {
+                messages.removeChild(message);
+            }, 5000);
+        }
+
+        var loggedUser = document.getElementById('loggedUser');
+        var loginUsername = document.getElementById('loginUsername');
+        var loginForm = document.querySelector('.fos_user_security_login');
+
+        loginForm.addEventListener('submit', function (event) {
+            event.preventDefault();
+            var request = {
+                method: loginForm.method || 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json'
+                },
+                body: {password: loginForm.elements._password.value}
+            };
+            var property = loginForm.elements._username.type === 'email' ? 'email' : 'username';
+            request.body[property] = loginForm.elements._username.value;
+
+            if (loginForm.elements._remember_me.checked) {
+                request.body._remember_me = '1';
+            }
+
+            request.body = JSON.stringify(request.body);
+
+            fetch(loginForm.action, request).then(function (response) {
+                response.json().then(function (result) {
+                    if (response.ok) {
+                        displayMessage('<p>You have been logged in.</p>', 'success');
+                        loginUsername.innerText = result.username || result.email;
+                        loggedUser.style.display = 'block';
+                    } else {
+                        displayMessage('<p>' + result.errors.join('</p><p>') + '</p>', 'failure');
+                    }
+                });
+            });
+        });
+
+        var logout = document.getElementById('logout');
+
+        logout.addEventListener('click', function (event) {
+            event.preventDefault();
+
+            fetch(event.target.href, {headers: {Accept: 'application/json'}}).then(function (response) {
+                displayMessage('<p>You have been logged out.</p>', 'success');
+                loggedUser.style.display = 'none';
+            });
+        });
+
+        var socialAuthentication = document.querySelector('.social-authentication');
+        var popupRequests = [];
+
+        socialAuthentication.addEventListener('click', function (event) {
+            if (!/\bbtn\b/.test(event.target.className)) {
+                return;
+            }
+
+            event.preventDefault();
+            var popup = window.open('', '', 'width=800, height=600');
+            var request = {};
+            popupRequests.unshift([popup, request]);
+            var url = event.target.href + '?redirectUrl=' + location.href;
+
+            fetch(url, {headers: {Accept: 'application/json'}}).then(function (response) {
+                response.json().then(function (result) {
+                    if (result.connectUrl) {
+                        request.method = 'POST';
+                        request.url = result.connectUrl;
+                        request.message = '<p>Your account has been connected.</p>';
+                    } else {
+                        request.method = 'GET';
+                        request.url = result.authenticationUrl;
+                        request.message = '<p>You have been logged in.</p>';
+                    }
+
+                    request.url += request.url.indexOf('?') === -1 ? '?' : '&';
+                    request.url += 'redirectUrl=' + location.href;
+                    popup.location.href = result.oAuthUrl;
+                });
+            });
+        });
+
+        var socialRegistrationForm = document.getElementById('socialRegistrationForm');
+        var socialRegistrationProfileImage = document.getElementById('socialRegistrationProfileImage');
+
+        function requestSocialAuthentication(method, url, message) {
+            fetch(url, {method: method, headers: {Accept: 'application/json'}}).then(function (response) {
+                response.json().then(function (result) {
+                    if (!response.ok) {
+                        displayMessage('<p>' + result.errors.join('</p><p>') + '</p>', 'failure');
+
+                        return;
+                    } else if (!result.redirectUrl) {
+                        displayMessage(message, 'success');
+                        loginUsername.innerText = result.username || result.email;
+                        loggedUser.style.display = 'block';
+
+                        return;
+                    }
+
+                    socialRegistrationForm.action = result.redirectUrl;
+                    socialRegistrationForm.action += result.redirectUrl.indexOf('?') === -1 ? '?' : '&';
+                    socialRegistrationForm.action += 'confirmationUrl=http://trusted-api-client.com/confirmation';
+                    loginForm.style.display = 'none';
+                    socialRegistrationForm.style.display = 'block';
+
+                    if (socialRegistrationForm.elements.username) {
+                        socialRegistrationForm.elements.username.value = result.nickname;
+                    }
+
+                    if (socialRegistrationForm.elements.email) {
+                        socialRegistrationForm.elements.email.value = result.email;
+                    }
+
+                    if (socialRegistrationForm.elements.name) {
+                        socialRegistrationForm.elements.name.value = result.realName;
+                    }
+
+                    socialRegistrationProfileImage.style.display = result.profilePicture ? 'block' : 'none';
+                    socialRegistrationProfileImage.src = result.profilePicture;
+                });
+            });
+        }
+
+        socialRegistrationForm.addEventListener('submit', function (event) {
+            event.preventDefault();
+            var request = {
+                method: socialRegistrationForm.method || 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json'
+                },
+                body: {}
+            };
+
+            if (socialRegistrationForm.elements.username) {
+                request.body.username = socialRegistrationForm.elements.username.value;
+            }
+
+            if (socialRegistrationForm.elements.email) {
+                request.body.email = socialRegistrationForm.elements.email.value;
+            }
+
+            if (socialRegistrationForm.elements.name) {
+                request.body.name = socialRegistrationForm.elements.name.value;
+            }
+
+            request.body = JSON.stringify(request.body);
+
+            fetch(socialRegistrationForm.action, request).then(function (response) {
+                response.json().then(function (result) {
+                    if (response.ok) {
+                        displayMessage('<p>You have been registered.</p>', 'success');
+                        socialRegistrationForm.style.display = 'none';
+                        loginForm.style.display = 'block';
+
+                        if (result.enabled) {
+                            loginUsername.innerText = result.username || result.email;
+                            loggedUser.style.display = 'block';
+                        } else {
+                            displayMessage("<p>You've been sent an email. It contains an activation link you must click on to activate your account.</p>");
+                        }
+                    } else {
+                        var errors = [];
+
+                        Object.keys(result.errors).forEach(function (field) {
+                            errors = errors.concat(result.errors[field]);
+                        });
+
+                        displayMessage('<p>' + errors.join('</p><p>') + '</p>', 'failure');
+                    }
+                });
+            });
+        });
+
+        if (window.opener && window.opener.popupRequests) {
+            window.opener.popupRequests.some(function (popupAndRequest, index) {
+                if (popupAndRequest[0] !== window) {
+                    return false;
+                }
+
+                var currentRequest = popupAndRequest[1];
+                var url = currentRequest.url;
+                url += location.href.slice(window.opener.location.href.length).replace('?', '&');
+                window.opener.popupRequests.splice(index, 1);
+                window.opener.requestSocialAuthentication(currentRequest.method, url, currentRequest.message);
+                window.close();
+
+                return true;
+            });
+        }
+    </script>
+</body>
+</html>

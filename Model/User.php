@@ -54,6 +54,7 @@ abstract class User extends BaseUser implements \JsonSerializable
             'id' => $this->id,
             'username' => $this->username,
             'email' => $this->email,
+            'enabled' => $this->enabled,
         ];
 
         if (method_exists($this, 'getName')) {

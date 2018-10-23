@@ -1,0 +1,15 @@
+{% set data = {} %}
+{% set authenticatedOwner = app.token.resourceOwnerName ?? null %}
+
+{% for owner, property in resourceOwnerProperties %}
+    {% set value = attribute(app.user, property) %}
+
+    {% if value %}
+        {% set url = owner == authenticatedOwner and not app.user.password ? null : path('hwi_oauth_disconnect', {service: owner}) %}
+        {% set data = data + {(owner): {connected: true, url: url}} %}
+    {% else %}
+        {% set data = data + {(owner): {connected: false, url: hwi_oauth_login_url(owner)}} %}
+    {% endif %}
+{% endfor %}
+
+{{ data|serialize(app.request.requestFormat)|raw }}

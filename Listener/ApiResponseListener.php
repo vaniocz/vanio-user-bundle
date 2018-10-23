@@ -8,6 +8,7 @@ use FOS\UserBundle\Event\GetResponseNullableUserEvent;
 use FOS\UserBundle\Event\GetResponseUserEvent;
 use FOS\UserBundle\Event\UserEvent;
 use FOS\UserBundle\FOSUserEvents;
+use FOS\UserBundle\Model\UserInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Translation\TranslatorInterface;
@@ -61,8 +62,8 @@ class ApiResponseListener implements EventSubscriberInterface
         ];
 
         return array_fill_keys($okEvents, ['respondWithOkResponse', -1024]) + [
-            FOSUserEvents::REGISTRATION_SUCCESS => ['respondWithCreatedResponse', -1024],
-            FOSUserEvents::GROUP_CREATE_SUCCESS => 'respondWithCreatedResponse',
+            FOSUserEvents::REGISTRATION_SUCCESS => ['onRegistrationSuccess', -1024],
+            FOSUserEvents::GROUP_CREATE_SUCCESS => 'onGroupCreate',
             FOSUserEvents::REGISTRATION_CONFIRM => 'onRegistrationConfirm',
             FOSUserEvents::RESETTING_SEND_EMAIL_INITIALIZE => 'onResettingSendEmailInitialize',
             FOSUserEvents::RESETTING_RESET_REQUEST => 'onResettingResetRequest',
@@ -72,6 +73,34 @@ class ApiResponseListener implements EventSubscriberInterface
             VanioUserEvents::CHANGE_EMAIL_INITIALIZE => 'onChangeEmailInitialize',
             VanioUserEvents::CHANGE_EMAIL_FAILURE => 'onChangeEmailFailure',
         ];
+    }
+
+    /**
+     * @internal
+     */
+    public function onRegistrationSuccess(FormEvent $event): void
+    {
+        $format = $event->getRequest()->getRequestFormat();
+
+        if ($format === 'html') {
+            return;
+        }
+
+        /** @var UserInterface $user */
+        $user = $event->getForm()->getData();
+        $data = [
+            'success' => true,
+            'enabled' => $user->isEnabled(),
+        ];
+        $event->setResponse(new Response($this->serializer->serialize($data, $format), 201));
+    }
+
+    /**
+     * @internal
+     */
+    public function onGroupCreate(GetResponseUserEvent $event): void
+    {
+        $this->respondWithSuccessResponse($event, 201);
     }
 
     /**
@@ -135,8 +164,8 @@ class ApiResponseListener implements EventSubscriberInterface
         $okResonse = $event->getResponse();
         $response
             ->setStatusCode($okResonse->getStatusCode())
-            ->setContent($okResonse->getContent())
-            ->headers->replace($okResonse->headers->all());
+            ->setContent($okResonse->getContent());
+        $response->headers->replace($okResonse->headers->all());
     }
 
     /**
@@ -196,15 +225,6 @@ class ApiResponseListener implements EventSubscriberInterface
     public function respondWithOkResponse($event): void
     {
         $this->respondWithSuccessResponse($event, 200);
-    }
-
-    /**
-     * @internal
-     * @param FormEvent|GetResponseUserEvent $event
-     */
-    public function respondWithCreatedResponse($event): void
-    {
-        $this->respondWithSuccessResponse($event, 201);
     }
 
     private function respondWithUnprocessableEntityResponse(GetResponseUserEvent $event, string $error): void

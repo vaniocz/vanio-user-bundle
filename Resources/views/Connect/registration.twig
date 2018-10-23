@@ -1,0 +1,22 @@
+{% if form.vars.submitted %}
+    {{ response_status(422) }}
+
+    {% set errors = form_error_messages(form) %}
+
+    {% if form.email.vars.errors.0.messageTemplate == 'fos_user.email.already_used' %}
+        {% set errors = {email: errors.email|slice(1)} + errors %}
+    {% endif %}
+
+    {{ {code: 422, message: 'Unprocessable Entity', errors: errors}|serialize(app.request.requestFormat)|raw }}
+{% else %}
+    {{ {
+        redirectUrl: url('hwi_oauth_connect_registration', {key: key}),
+        username: vanio_user.email_only ? userInformation.username : form.vars.data.username,
+        email: userInformation.email,
+        firstName: userInformation.firstName,
+        lastName: userInformation.lastName,
+        nickname: userInformation.nickname,
+        realName: userInformation.realName,
+        profilePicture: userInformation.profilePicture,
+    }|serialize(app.request.requestFormat)|raw }}
+{% endif %}
