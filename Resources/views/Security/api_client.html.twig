@@ -169,6 +169,7 @@
             background: #24272A;
             color: white;
             display: flex;
+            flex-direction: row-reverse;
             height: 60px;
             padding: 13px 20px;
         }
@@ -257,12 +258,12 @@
 </head>
 <body>
     <div class="header">
+        <a class="logo" href="{{ path('vanio_user_api_client') }}"></a>
+
         <span id="loggedUser" class="header__logged-user" {% if not is_granted('IS_AUTHENTICATED_REMEMBERED') %}style="display: none"{% endif %}>
             Logged in as <span id="loginUsername" class="login__username">{% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}{{ app.user.username }}{% endif %}</span><br>
             <a id="logout" href="{{ path('fos_user_security_logout') }}">Log out</a>
         </span>
-
-        <a class="logo" href="{{ path('vanio_user_api_client') }}"></a>
     </div>
 
     <div class="content">
