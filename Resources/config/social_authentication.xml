@@ -1,17 +1,40 @@
 <?xml version="1.0"?>
 <container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
     <parameters>
+        <parameter key="hwi_oauth.authentication.listener.oauth.class">Vanio\UserBundle\Security\SocialAuthenticationListener</parameter>
+        <parameter key="hwi_oauth.registration.form.factory.class">FOS\UserBundle\Form\Factory\FormFactory</parameter>
+        <parameter key="hwi_oauth.registration.form.handler.fosub_bridge.class">Vanio\UserBundle\Form\SocialRegistrationFormHandler</parameter>
+        <parameter key="hwi_oauth.user.provider.fosub_bridge.class">Vanio\UserBundle\Security\FosubUserProvider</parameter>
+        <parameter key="vanio_user.security.social_authentication_failure_handler.class">Vanio\UserBundle\Security\SocialAuthenticationFailureHandler</parameter>
         <parameter key="vanio_user.form.social_registration_form_type.class">Vanio\UserBundle\Form\SocialRegistrationFormType</parameter>
         <parameter key="vanio_user.routing.resource_owners_loader.class">Vanio\UserBundle\Routing\ResourceOwnersLoader</parameter>
     </parameters>
 
     <services>
+        <defaults public="false"/>
+
+        <service id="hwi_oauth.registration.form.factory" class="%hwi_oauth.registration.form.factory.class%" public="true">
+            <argument type="service" id="form.factory"/>
+            <argument>%vanio_user.social_registration_form.name%</argument>
+            <argument>%vanio_user.social_registration_form.type%</argument>
+            <argument>%vanio_user.social_registration_form.validation_groups%</argument>
+        </service>
+
+        <service id="vanio_user.security.social_authentication_failure_handler" class="%vanio_user.security.social_authentication_failure_handler.class%" abstract="true">
+            <argument type="service" id="vanio_user.security.social_authentication_failure_handler.inner"/>
+            <argument type="service" id="hwi_oauth.security.oauth_utils"/>
+            <argument type="service" id="router"/>
+            <argument type="service" id="http_kernel"/>
+            <argument type="service" id="security.token_storage"/>
+            <argument type="service" id="vanio_web.serializer.serializer"/>
+        </service>
+
         <service id="vanio_user.form.social_registration_form_type" class="%vanio_user.form.social_registration_form_type.class%">
             <argument>%fos_user.registration.confirmation.enabled%</argument>
             <tag name="form.type"/>
         </service>
 
-        <service id="vanio_user.routing.resource_owners_loader" class="%vanio_user.routing.resource_owners_loader.class%" public="false">
+        <service id="vanio_user.routing.resource_owners_loader" class="%vanio_user.routing.resource_owners_loader.class%">
             <argument>%hwi_oauth.resource_owners%</argument>
             <tag name="routing.loader"/>
         </service>

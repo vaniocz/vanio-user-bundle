@@ -7,6 +7,7 @@ use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\Security\Csrf\CsrfTokenManagerInterface;
 use Vanio\Stdlib\Strings;
 use Vanio\Stdlib\Uri;
+use Vanio\UserBundle\Security\ApiClientTrustResolver;
 use Vanio\UserBundle\Security\TargetPathResolver;
 
 class UserExtension extends \Twig_Extension implements \Twig_Extension_GlobalsInterface
@@ -20,6 +21,9 @@ class UserExtension extends \Twig_Extension implements \Twig_Extension_GlobalsIn
     /** @var RequestStack */
     private $requestStack;
 
+    /** @var ApiClientTrustResolver */
+    private $apiClientTrustResolver;
+
     /** @var CsrfTokenManagerInterface|null */
     private $csrfTokenManager;
 
@@ -30,6 +34,7 @@ class UserExtension extends \Twig_Extension implements \Twig_Extension_GlobalsIn
      * @param UserManagerInterface $userManager
      * @param TargetPathResolver $targetPathResolver
      * @param RequestStack $requestStack
+     * @param ApiClientTrustResolver $apiClientTrustResolver
      * @param CsrfTokenManagerInterface|null $tokenManager
      * @param mixed[] $config
      */
@@ -37,12 +42,14 @@ class UserExtension extends \Twig_Extension implements \Twig_Extension_GlobalsIn
         UserManagerInterface $userManager,
         TargetPathResolver $targetPathResolver,
         RequestStack $requestStack,
+        ApiClientTrustResolver $apiClientTrustResolver,
         ?CsrfTokenManagerInterface $tokenManager = null,
         array $config
     ) {
         $this->userManager = $userManager;
         $this->targetPathResolver = $targetPathResolver;
         $this->requestStack = $requestStack;
+        $this->apiClientTrustResolver = $apiClientTrustResolver;
         $this->csrfTokenManager = $tokenManager;
         $this->config = $config;
     }
@@ -96,29 +103,6 @@ class UserExtension extends \Twig_Extension implements \Twig_Extension_GlobalsIn
 
     public function isTrustedApiClientUrl(string $url): bool
     {
-        $url = new Uri($url);
-
-        foreach ($this->config['trusted_api_client_urls'] as $trustedApiUrl) {
-            $trustedApiUrl = Strings::contains($trustedApiUrl, '//')
-                ? $trustedApiUrl
-                : sprintf('//%s', $trustedApiUrl);
-            $trustedApiUrl = new Uri($trustedApiUrl);
-
-            if (
-                $trustedApiUrl->scheme() && $trustedApiUrl->scheme() !== $url->scheme()
-                || $url->host() !== $trustedApiUrl->host()
-            ) {
-                continue;
-            }
-
-            $trustedApiUrlPath = rtrim($trustedApiUrl->path(), '/');
-            $urlPath = rtrim($url->path(), '/');
-
-            if ($urlPath === $trustedApiUrlPath || Strings::startsWith($urlPath, $trustedApiUrlPath . '/')) {
-                return true;
-            }
-        }
-
-        return false;
+        return $this->apiClientTrustResolver->isTrustedApiClientUrl($url);
     }
 }

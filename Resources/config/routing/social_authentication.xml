@@ -16,10 +16,6 @@
         <default key="_controller">VanioUserBundle:Connect:registration</default>
     </route>
 
-    <route id="hwi_oauth_connect_registration" path="/registration/{key}">
-        <default key="_controller">VanioUserBundle:Connect:registration</default>
-    </route>
-
     <route id="hwi_oauth_connections" path="/profile/connections">
         <default key="_controller">VanioUserBundle:Connect:connections</default>
     </route>

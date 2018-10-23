@@ -4,7 +4,6 @@ namespace Vanio\UserBundle\Security;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
-use Symfony\Component\Security\Http\Authentication\AuthenticationSuccessHandlerInterface;
 use Symfony\Component\Security\Http\Authentication\DefaultAuthenticationSuccessHandler;
 use Symfony\Component\Security\Http\HttpUtils;
 
@@ -16,7 +15,7 @@ class AuthenticationSuccessHandler extends DefaultAuthenticationSuccessHandler
     /** @var HttpUtils */
     protected $httpUtils;
 
-    /** @var AuthenticationSuccessHandlerInterface */
+    /** @var DefaultAuthenticationSuccessHandler */
     private $authenticationSuccessHandler;
 
     /** @var TargetPathResolver */
@@ -27,7 +26,6 @@ class AuthenticationSuccessHandler extends DefaultAuthenticationSuccessHandler
         HttpUtils $httpUtils,
         TargetPathResolver $targetPathResolver
     ) {
-        $trace = debug_backtrace();
         $this->authenticationSuccessHandler = $authenticationSuccessHandler;
         $this->httpUtils = $httpUtils;
         $this->targetPathResolver = $targetPathResolver;

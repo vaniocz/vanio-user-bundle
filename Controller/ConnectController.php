@@ -6,7 +6,6 @@ use HWI\Bundle\OAuthBundle\Controller\ConnectController as BaseConnectController
 use HWI\Bundle\OAuthBundle\Event\FilterUserResponseEvent;
 use HWI\Bundle\OAuthBundle\Security\Core\Authentication\Token\OAuthToken;
 use HWI\Bundle\OAuthBundle\Security\Core\Exception\AccountNotLinkedException;
-use HWI\Bundle\OAuthBundle\Security\OAuthUtils;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -16,7 +15,11 @@ use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInt
 use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 use Symfony\Component\Security\Core\Security;
+use Symfony\Component\Security\Http\HttpUtils;
+use Symfony\Component\Translation\TranslatorInterface;
+use Vanio\UserBundle\Security\ApiClientTrustResolver;
 use Vanio\UserBundle\Security\FosubUserProvider;
+use Vanio\UserBundle\Security\OAuthUtils;
 use Vanio\UserBundle\VanioUserEvents;
 use Vanio\WebBundle\Request\RefererHelperTrait;
 use Vanio\WebBundle\Serializer\Serializer;
@@ -24,6 +27,7 @@ use Vanio\WebBundle\Translation\FlashMessage;
 
 class ConnectController extends BaseConnectController
 {
+    use ResponseFormatTrait;
     use RefererHelperTrait;
 
     public function connectAction(Request $request): Response
@@ -42,17 +46,43 @@ class ConnectController extends BaseConnectController
     public function registrationAction(Request $request, $key): Response
     {
         if (!$this->routeExists('fos_user_registration_register')) {
-            $error = $request->getSession()->get("_hwi_oauth.registration_error.$key");
+            $error = $request->getSession()->get("_hwi_oauth.registration_error.{$key}");
+            $message = 'connect.social_account_not_connected';
             $parameters = $error instanceof AccountNotLinkedException
                 ? ['%service%' => ucfirst($error->getResourceOwnerName())]
                 : [];
-            $this->addFlashMessage(FlashMessage::TYPE_DANGER, 'connect.social_account_not_connected', $parameters);
+
+            if ($request->getRequestFormat() === 'html') {
+                $this->addFlashMessage(FlashMessage::TYPE_DANGER, $message, $parameters);
+            } else {
+                $data = [
+                    'success' => false,
+                    'errors' => [$this->translator()->trans($message, $parameters, 'HWIOAuthBundle')],
+                ];
+
+                return new Response($this->serializer()->serialize($data, $request->getRequestFormat()), 401);
+            }
 
             return $this->redirectToReferer('fos_user_security_login');
         }
 
         return parent::registrationAction($request, $key);
     }
+
+    /**
+     * @param Request $request
+     * @param string $service
+     * @return Response
+     */
+    public function connectServiceAction(Request $request, $service): Response
+    {
+        if ($request->isMethod('POST') && $request->query->has('form')) {
+            $request->request->set('form', $request->query->get('form'));
+        }
+
+        return parent::connectServiceAction($request, $service);
+    }
+
 
     public function connectionsAction(): Response
     {
@@ -95,20 +125,22 @@ class ConnectController extends BaseConnectController
             return parent::redirectToServiceAction($request, $service);
         }
 
-        try {
-            $authorizationUrl = $this->oAuthUtils()->getAuthorizationUrl(
-                $request,
-                $service,
-                $request->get('redirectUrl')
-            );
-        } catch (\RuntimeException $e) {
-            throw $this->createNotFoundException($e->getMessage());
+        $oAuthUrl = $this->oAuthUtils()->getAuthorizationUrl($request, $service, $this->resolveRedirectUrl($request));
+
+        if ($this->getParameter('hwi_oauth.connect') && $this->isGranted($this->getParameter('hwi_oauth.grant_rule'))) {
+            $redirectUrl = $request->attributes->get('redirectUrl');
+            $request->attributes->set('redirectUrl', null);
+            $connectUrl = $this->oAuthUtils()->getServiceAuthUrl($request, $this->getResourceOwnerByName($service));
+            $data = ['connectUrl' => "{$connectUrl}?form"];
+            $request->attributes->set('redirectUrl', $redirectUrl);
+        } else {
+            $resourceOwnerCheckPath = $this->oAuthUtils()->getResourceOwnerCheckPath($service);
+            $data = ['authenticationUrl' => $this->httpUtils()->generateUri($request, $resourceOwnerCheckPath)];
         }
 
-        $data = [
+        $data += [
             'success' => true,
-            'authorizationUrl' => $authorizationUrl,
-            'redirectUrl' => $this->oAuthUtils()->getServiceAuthUrl($request, $this->getResourceOwnerByName($service)),
+            'oAuthUrl' => $oAuthUrl,
         ];
 
         return new Response($this->serializer()->serialize($data, $request->getRequestFormat()));
@@ -127,22 +159,6 @@ class ConnectController extends BaseConnectController
         }
 
         return $error;
-    }
-
-    /**
-     * @param string $view
-     * @param mixed[] $parameters
-     * @param Response|null $response
-     * @return Response
-     * @phpcsSuppress SlevomatCodingStandard.TypeHints.TypeHintDeclaration.MissingParameterTypeHint
-     */
-    protected function render($view, array $parameters = [], ?Response $response = null): Response
-    {
-        if (preg_match('~HWIOAuthBundle::?(.*\.html\.twig)$~', $view, $matches)) {
-            $view = sprintf('@HWIOAuth/%s', strtr($matches[1], ':', '/'));
-        }
-
-        return parent::render($view, $parameters, $response);
     }
 
     private function disconnect(Request $request, UserInterface $user, string $service): Response
@@ -192,6 +208,20 @@ class ConnectController extends BaseConnectController
         $this->addFlash($type, new FlashMessage($message, $parameters, 'HWIOAuthBundle'));
     }
 
+    private function resolveRedirectUrl(Request $request): ?string
+    {
+        $redirectUrl = $request->get('redirectUrl');
+
+        return $redirectUrl && $this->apiClientTrustResolver()->isTrustedApiClientUrl($redirectUrl)
+            ? $redirectUrl
+            : null;
+    }
+
+    private function translator(): TranslatorInterface
+    {
+        return $this->get('translator');
+    }
+
     private function fosubUserProvider(): FosubUserProvider
     {
         return $this->get('hwi_oauth.user.provider.fosub_bridge');
@@ -207,9 +237,19 @@ class ConnectController extends BaseConnectController
         return $this->get('event_dispatcher');
     }
 
+    private function apiClientTrustResolver(): ApiClientTrustResolver
+    {
+        return $this->get('vanio_user.security.api_client_trust_resolver');
+    }
+
     private function oAuthUtils(): OAuthUtils
     {
         return $this->get('hwi_oauth.security.oauth_utils');
+    }
+
+    private function httpUtils(): HttpUtils
+    {
+        return $this->get('security.http_utils');
     }
 
     private function serializer(): Serializer
