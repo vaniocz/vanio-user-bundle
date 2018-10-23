@@ -266,7 +266,14 @@
     </div>
 
     <div class="content">
-        {% include '@VanioUser/Security/login_content.html.twig' %}
+        {% include '@VanioUser/Security/login_content.html.twig' with {
+            usernamePlaceholder: 'Username',
+            usernameAddon: '<i class="fa fa-user"></i>',
+            emailPlaceholder: 'Email',
+            emailAddon: '<i class="fa fa-envelope"></i>',
+            passwordPlaceholder: 'Password',
+            passwordAddon: '<i class="fa fa-lock"></i>',
+        } %}
 
         <form id="socialRegistrationForm" class="social-registration" method="POST" style="display: none">
             <p class="social-registration__title">Register</p>

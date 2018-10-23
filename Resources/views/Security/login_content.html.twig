@@ -36,11 +36,27 @@
         {% block formFields %}
             <div class="form-group">
                 {% set property = vanio_user.email_only ? 'email' : 'username' %}
-                {% set addon = is_translated("security.login.#{property}.addon", 'FOSUserBundle') ? "security.login.#{property}.addon"|trans|raw : null %}
+
+                {% if property == 'username' and usernameAddon ?? null %}
+                    {% set addon = usernameAddon %}
+                {% elseif property == 'email' and emailAddon ?? null %}
+                    {% set addon = emailAddon %}
+                {% else %}
+                    {% set addon = is_translated("security.login.#{property}.addon", 'FOSUserBundle') ? "security.login.#{property}.addon"|trans|raw : null %}
+                {% endif %}
+
                 <label class="control-label" for="loginUsername">{{ "security.login.#{property}.label"|trans }}</label>
 
                 {% if addon %}
                     <div class="input-group"><label class="input-group-addon" for="loginUsername">{{ addon|raw }}</label>
+                {% endif %}
+
+                {% if property == 'username' and usernamePlaceholder ?? null %}
+                    {% set placeholder = usernamePlaceholder %}
+                {% elseif property == 'email' and emailPlaceholder ?? null %}
+                    {% set placeholder = emailPlaceholder %}
+                {% else %}
+                    {% set placeholder = is_translated("security.login.#{property}.placeholder", 'FOSUserBundle') ? "security.login.#{property}.placeholder"|trans : null %}
                 {% endif %}
 
                 <input
@@ -49,7 +65,7 @@
                     type="{{ vanio_user.email_only ? 'email' : 'text' }}"
                     name="_username"
                     value="{{ last_username ?? '' }}"
-                    {% if is_translated("security.login.#{property}.placeholder", 'FOSUserBundle') %} placeholder="{{ "security.login.#{property}.placeholder"|trans }}"{% endif %}
+                    {% if placeholder %} placeholder="{{ placeholder }}"{% endif %}
                     required
                     oninvalid="this.setCustomValidity(this.getAttribute('data-validation-message'))"
                     oninput="this.setCustomValidity('')"
@@ -62,11 +78,22 @@
             </div>
 
             <div class="form-group">
-                {% set addon = is_translated('security.login.password.addon', 'FOSUserBundle') ? 'security.login.password.addon'|trans|raw : null %}
+                {% if passwordAddon ?? null %}
+                    {% set addon = passwordAddon %}
+                {% else %}
+                    {% set addon = is_translated('security.login.password.addon', 'FOSUserBundle') ? 'security.login.password.addon'|trans|raw : null %}
+                {% endif %}
+
                 <label class="control-label" for="loginPassword">{{ 'security.login.password.label'|trans }}</label>
 
                 {% if addon %}
                     <div class="input-group"><label class="input-group-addon" for="loginPassword">{{ addon|raw }}</label>
+                {% endif %}
+
+                {% if passwordPlaceholder ?? null %}
+                    {% set placeholder = passwordPlaceholder %}
+                {% else %}
+                    {% set placeholder = is_translated('security.login.password.placeholder', 'FOSUserBundle') ? 'security.login.password.placeholder'|trans : null %}
                 {% endif %}
 
                 <input
@@ -74,7 +101,7 @@
                     class="form-control"
                     type="password"
                     name="_password"
-                    {% if is_translated('security.login.password.placeholder', 'FOSUserBundle') %} placeholder="{{ 'security.login.password.placeholder'|trans }}"{% endif %}
+                    {% if placeholder %} placeholder="{{ placeholder }}"{% endif %}
                     required
                     oninvalid="this.setCustomValidity(this.getAttribute('data-validation-message'))"
                     oninput="this.setCustomValidity('')"
