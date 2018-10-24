@@ -1,4 +1,4 @@
-{% set data = {} %}
+{% set connections = [] %}
 {% set authenticatedOwner = app.token.resourceOwnerName ?? null %}
 
 {% for owner, property in resourceOwnerProperties %}
@@ -6,10 +6,12 @@
 
     {% if value %}
         {% set url = owner == authenticatedOwner and not app.user.password ? null : path('hwi_oauth_disconnect', {service: owner}) %}
-        {% set data = data + {(owner): {connected: true, url: url}} %}
+        {% set connection = {name: owner, connected: true, disconnectUrl: url} %}
     {% else %}
-        {% set data = data + {(owner): {connected: false, url: hwi_oauth_login_url(owner)}} %}
+        {% set connection = {name: owner, connected: false, connectUrl: hwi_oauth_login_url(owner)} %}
     {% endif %}
+
+    {% set connections = connections|merge([connection]) %}
 {% endfor %}
 
-{{ data|serialize(app.request.requestFormat)|raw }}
+{{ connections|serialize(app.request.requestFormat)|raw }}
