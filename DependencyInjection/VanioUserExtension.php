@@ -72,7 +72,10 @@ class VanioUserExtension extends Extension implements PrependExtensionInterface
             return;
         }
 
-        $container->prependExtensionConfig('hwi_oauth', ['firewall_names' => [$config['firewall_name']]]);
+        $container->prependExtensionConfig('hwi_oauth', [
+            'firewall_names' => [$config['firewall_name']],
+            'failed_auth_path' => 'fos_user_security_login',
+        ]);
         $container->setParameter(
             'vanio_user.resource_owner_properties',
             $this->processExtensionConfig($container, 'hwi_oauth')['fosub']['properties'] ?? []

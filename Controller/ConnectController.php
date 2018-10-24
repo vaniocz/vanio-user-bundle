@@ -30,13 +30,6 @@ class ConnectController extends BaseConnectController
     use ResponseFormatTrait;
     use RefererHelperTrait;
 
-    public function connectAction(Request $request): Response
-    {
-        $response = parent::connectAction($request);
-
-        return $response->isRedirection() ? $response : $this->redirectToRoute('fos_user_security_login');
-    }
-
     /**
      * @param Request $request
      * @param string $key
@@ -76,11 +69,20 @@ class ConnectController extends BaseConnectController
      */
     public function connectServiceAction(Request $request, $service): Response
     {
-        if ($request->isMethod('POST') && $request->query->has('form')) {
-            $request->request->set('form', $request->query->get('form'));
+        $form = $request->request->get('form');
+
+        if ($request->getRequestFormat() !== 'html') {
+            $request->request->set('form', null);
         }
 
-        return parent::connectServiceAction($request, $service);
+        $response = parent::connectServiceAction($request, $service);
+        $request->request->set('form', $form);
+
+        if ($request->getRequestFormat() !== 'html' && $response->isRedirection()) {
+            throw new AccessDeniedException;
+        }
+
+        return $response;
     }
 
 
@@ -131,17 +133,14 @@ class ConnectController extends BaseConnectController
             $redirectUrl = $request->attributes->get('redirectUrl');
             $request->attributes->set('redirectUrl', null);
             $connectUrl = $this->oAuthUtils()->getServiceAuthUrl($request, $this->getResourceOwnerByName($service));
-            $data = ['connectUrl' => "{$connectUrl}?form"];
+            $data = ['connectUrl' => $connectUrl];
             $request->attributes->set('redirectUrl', $redirectUrl);
         } else {
             $resourceOwnerCheckPath = $this->oAuthUtils()->getResourceOwnerCheckPath($service);
             $data = ['authenticationUrl' => $this->httpUtils()->generateUri($request, $resourceOwnerCheckPath)];
         }
 
-        $data += [
-            'success' => true,
-            'oAuthUrl' => $oAuthUrl,
-        ];
+        $data += ['oAuthUrl' => $oAuthUrl];
 
         return new Response($this->serializer()->serialize($data, $request->getRequestFormat()));
     }
@@ -164,7 +163,10 @@ class ConnectController extends BaseConnectController
     private function disconnect(Request $request, UserInterface $user, string $service): Response
     {
         $token = $this->tokenStorage()->getToken();
-        $event = new FilterUserResponseEvent($user, $request, $this->redirectToReferer('fos_user_profile_show'));
+        $response = $request->getRequestFormat() === 'html'
+            ? $this->redirectToReferer('fos_user_profile_show')
+            : new Response($this->serializer()->serialize(['success' => true], $request->getRequestFormat()));
+        $event = new FilterUserResponseEvent($user, $request, $response);
 
         if ($token instanceof OAuthToken && $token->getResourceOwnerName() === $service) {
             if (!$user->getPassword()) {

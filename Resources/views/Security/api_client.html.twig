@@ -261,7 +261,7 @@
         <a class="logo" href="{{ path('vanio_user_api_client') }}"></a>
 
         <span id="loggedUser" class="header__logged-user" {% if not is_granted('IS_AUTHENTICATED_REMEMBERED') %}style="display: none"{% endif %}>
-            Logged in as <span id="loginUsername" class="login__username">{% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}{{ app.user.username }}{% endif %}</span><br>
+            Logged in as <span id="loggedUsername" class="header__logged-username">{% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}{{ app.user.username }}{% endif %}</span><br>
             <a id="logout" href="{{ path('fos_user_security_logout') }}">Log out</a>
         </span>
     </div>
@@ -341,19 +341,22 @@
             message.innerHTML = html;
             messages.appendChild(message);
 
-            setTimeout(function () {
-                messages.removeChild(message);
-            }, 5000);
+            setTimeout(
+                function () {
+                    messages.removeChild(message);
+                },
+                5000
+            );
         }
 
         var loggedUser = document.getElementById('loggedUser');
-        var loginUsername = document.getElementById('loginUsername');
+        var loggedUsername = document.getElementById('loggedUsername');
         var loginForm = document.querySelector('.fos_user_security_login');
 
         loginForm.addEventListener('submit', function (event) {
             event.preventDefault();
             var request = {
-                method: loginForm.method || 'GET',
+                method: loginForm.method,
                 headers: {
                     'Content-Type': 'application/json',
                     'Accept': 'application/json'
@@ -373,7 +376,7 @@
                 response.json().then(function (result) {
                     if (response.ok) {
                         displayMessage('<p>You have been logged in.</p>', 'success');
-                        loginUsername.innerText = result.username || result.email;
+                        loggedUsername.innerText = result.username || result.email;
                         loggedUser.style.display = 'block';
                     } else {
                         displayMessage('<p>' + result.errors.join('</p><p>') + '</p>', 'failure');
@@ -438,7 +441,7 @@
                         return;
                     } else if (!result.redirectUrl) {
                         displayMessage(message, 'success');
-                        loginUsername.innerText = result.username || result.email;
+                        loggedUsername.innerText = result.username || result.email;
                         loggedUser.style.display = 'block';
 
                         return;
@@ -501,7 +504,7 @@
                         loginForm.style.display = 'block';
 
                         if (result.enabled) {
-                            loginUsername.innerText = result.username || result.email;
+                            loggedUsername.innerText = result.username || result.email;
                             loggedUser.style.display = 'block';
                         } else {
                             displayMessage("<p>You've been sent an email. It contains an activation link you must click on to activate your account.</p>");
