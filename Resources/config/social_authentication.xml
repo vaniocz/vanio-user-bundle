@@ -22,11 +22,10 @@
 
         <service id="vanio_user.security.social_authentication_failure_handler" class="%vanio_user.security.social_authentication_failure_handler.class%" abstract="true">
             <argument type="service" id="vanio_user.security.social_authentication_failure_handler.inner"/>
-            <argument type="service" id="hwi_oauth.security.oauth_utils"/>
-            <argument type="service" id="router"/>
             <argument type="service" id="http_kernel"/>
+            <argument type="service" id="router"/>
             <argument type="service" id="security.token_storage"/>
-            <argument type="service" id="vanio_web.serializer.serializer"/>
+            <argument type="service" id="hwi_oauth.security.oauth_utils"/>
         </service>
 
         <service id="vanio_user.form.social_registration_form_type" class="%vanio_user.form.social_registration_form_type.class%">

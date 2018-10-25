@@ -474,7 +474,7 @@
         socialRegistrationForm.addEventListener('submit', function (event) {
             event.preventDefault();
             var request = {
-                method: socialRegistrationForm.method || 'GET',
+                method: socialRegistrationForm.method,
                 headers: {
                     'Content-Type': 'application/json',
                     'Accept': 'application/json'

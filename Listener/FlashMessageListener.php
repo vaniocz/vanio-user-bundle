@@ -215,7 +215,6 @@ class FlashMessageListener implements EventSubscriberInterface
      */
     public function onRegistrationSuccess(FormEvent $event): void
     {
-        $response = $event->getResponse();
         $user = $event->getForm()->getData();
 
         if ($user instanceof AdvancedUserInterface && $user->isEnabled()) {
