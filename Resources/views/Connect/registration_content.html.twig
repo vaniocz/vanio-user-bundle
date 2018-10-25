@@ -17,7 +17,7 @@
 
             <div class="form-buttons form-group">
                 <button class="btn btn-primary">{{ 'connect.registration.submit'|trans }}</button>
-                <a class="btn btn-default" href="{{ referer('hwi_oauth_connect') }}">{{ 'connect.registration.cancel'|trans }}</a>
+                <a class="btn btn-default" href="{{ referer('fos_user_security_login') }}">{{ 'connect.registration.cancel'|trans }}</a>
             </div>
         {% endblock %}
     {{ form_end(form) }}

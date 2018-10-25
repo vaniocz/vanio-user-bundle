@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <routes xmlns="http://besim.pl/schema/i18n_routing" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://besim.pl/schema/i18n_routing http://besim.pl/schema/i18n_routing/routing-1.0.xsd">
-    <route id="hwi_oauth_connect_registration">
+    <route id="hwi_oauth_service_redirect">
         <locale key="en">/login/redirect/{service}</locale>
         <locale key="de">/einloggen/umleiten/{service}</locale>
         <locale key="cs">/prihlaseni/presmerovat/{service}</locale>
@@ -46,10 +46,10 @@
     </route>
 
     <import resource="." type="resource_owners">
-        <locale key="en">/login-check</locale>
-        <locale key="de">/login-uberprufung</locale>
-        <locale key="cs">/kontrola-prihlaseni</locale>
-        <locale key="sk">/kontrola-prihlasenie</locale>
-        <locale key="ru">/proverit-avtorizovatsya</locale>
+        <locale key="en">/login</locale>
+        <locale key="de">/einloggen</locale>
+        <locale key="cs">/prihlaseni</locale>
+        <locale key="sk">/prihlasenie</locale>
+        <locale key="ru">/avtorizovatsya</locale>
     </import>
 </routes>

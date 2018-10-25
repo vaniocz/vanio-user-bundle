@@ -4,6 +4,7 @@ namespace Vanio\UserBundle\Security;
 use HWI\Bundle\OAuthBundle\Security\Core\Exception\AccountNotLinkedException;
 use HWI\Bundle\OAuthBundle\Security\OAuthUtils;
 use Ramsey\Uuid\Uuid;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\HttpKernelInterface;
@@ -18,30 +19,30 @@ class SocialAuthenticationFailureHandler extends DefaultAuthenticationFailureHan
     /** @var DefaultAuthenticationFailureHandler */
     private $authenticationFailureHandler;
 
-    /** @var OAuthUtils */
-    private $oAuthUtils;
+    /** @var HttpKernelInterface */
+    protected $httpKernel;
 
     /** @var UrlGeneratorInterface */
     private $urlGenerator;
 
-    /** @var HttpKernelInterface */
-    protected $httpKernel;
-
     /** @var TokenStorageInterface */
     private $tokenStorage;
 
+    /** @var OAuthUtils */
+    private $oAuthUtils;
+
     public function __construct(
         DefaultAuthenticationFailureHandler $authenticationFailureHandler,
-        OAuthUtils $oAuthUtils,
-        UrlGeneratorInterface $urlGenerator,
         HttpKernelInterface $httpKernel,
-        TokenStorageInterface $tokenStorage
+        UrlGeneratorInterface $urlGenerator,
+        TokenStorageInterface $tokenStorage,
+        OAuthUtils $oAuthUtils
     ) {
         $this->authenticationFailureHandler = $authenticationFailureHandler;
-        $this->oAuthUtils = $oAuthUtils;
-        $this->urlGenerator = $urlGenerator;
         $this->httpKernel = $httpKernel;
+        $this->urlGenerator = $urlGenerator;
         $this->tokenStorage = $tokenStorage;
+        $this->oAuthUtils = $oAuthUtils;
     }
 
     /**
@@ -59,12 +60,19 @@ class SocialAuthenticationFailureHandler extends DefaultAuthenticationFailureHan
 
     public function onAuthenticationFailure(Request $request, AuthenticationException $exception): Response
     {
-        if ($request->getRequestFormat() === 'html' || !$exception instanceof AccountNotLinkedException) {
+        if (!$exception instanceof AccountNotLinkedException) {
             return $this->authenticationFailureHandler->onAuthenticationFailure($request, $exception);
         }
 
         $key = (string) Uuid::uuid4();
         $request->getSession()->set("_hwi_oauth.registration_error.{$key}", $exception);
+
+        if ($request->getRequestFormat() === 'html') {
+            return new RedirectResponse($this->urlGenerator->generate('hwi_oauth_connect_registration', [
+                'key' => $key,
+            ]));
+        }
+
         $this->tokenStorage->setToken(new AnonymousToken('', 'anon.')); // is always null?
         $response = $this->httpKernel->handle(
             $request->duplicate([], [], ['_controller' => 'VanioUserBundle:Connect:registration', 'key' => $key]),
