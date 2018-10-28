@@ -27,9 +27,9 @@
     </parameters>
 
     <services>
-        <defaults public="false"/>
+        <service id="vanio_user.security.http_utils" alias="security.http_utils" public="true"/>
 
-        <service id="vanio_user.security.authentication_entry_point" class="%vanio_user.security.authentication_entry_point.class%" abstract="true" >
+        <service id="vanio_user.security.authentication_entry_point" class="%vanio_user.security.authentication_entry_point.class%" abstract="true">
             <argument type="service" id="vanio_user.security.authentication_entry_point.inner"/>
             <argument type="service" id="vanio_user.security.target_path_resolver"/>
             <argument>%vanio_user%</argument>
@@ -42,7 +42,7 @@
 
         <service id="vanio_user.security.authentication_success_handler" class="%vanio_user.security.authentication_success_handler.class%" abstract="true">
             <argument type="service" id="vanio_user.security.authentication_success_handler.inner"/>
-            <argument type="service" id="security.http_utils"/>
+            <argument type="service" id="vanio_user.security.http_utils"/>
             <argument type="service" id="vanio_user.security.target_path_resolver"/>
         </service>
 
@@ -53,7 +53,7 @@
 
         <service id="vanio_user.security.target_path_resolver" class="%vanio_user.security.target_path_resolver.class%">
             <argument type="service" id="router"/>
-            <argument type="service" id="security.http_utils"/>
+            <argument type="service" id="vanio_user.security.http_utils"/>
             <argument>%vanio_user.pass_target_path%</argument>
         </service>
 
@@ -66,7 +66,7 @@
             <argument>%vanio_user.firewall_name%</argument>
         </service>
 
-        <service id="vanio_user.security.api_client_trust_resolver" class="%vanio_user.security.api_client_trust_resolver.class%">
+        <service id="vanio_user.security.api_client_trust_resolver" class="%vanio_user.security.api_client_trust_resolver.class%" public="true">
             <argument>%vanio_user.trusted_api_client_urls%</argument>
         </service>
 
@@ -92,7 +92,7 @@
         </service>
 
         <service id="vanio_user.listener.redirect_on_registration_success" class="%vanio_user.listener.redirect_on_registration_success.class%" abstract="true">
-            <argument type="service" id="security.http_utils"/>
+            <argument type="service" id="vanio_user.security.http_utils"/>
             <argument>%vanio_user.registration_target_path%</argument>
         </service>
 

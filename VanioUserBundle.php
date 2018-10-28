@@ -30,9 +30,4 @@ class VanioUserBundle extends Bundle
             $container->addCompilerPass(DoctrineOrmMappingsPass::createXmlMappingDriver($namespaces));
         }
     }
-
-    public function getParent(): string
-    {
-        return 'FOSUserBundle';
-    }
 }
