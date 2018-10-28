@@ -251,7 +251,7 @@ class ConnectController extends BaseConnectController
 
     private function httpUtils(): HttpUtils
     {
-        return $this->get('security.http_utils');
+        return $this->get('vanio_user.security.http_utils');
     }
 
     private function serializer(): Serializer

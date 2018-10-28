@@ -82,7 +82,7 @@ class VanioUserExtension extends Extension implements PrependExtensionInterface
         );
         $container->prependExtensionConfig('twig', [
             'paths' => [
-                sprintf('%s/../Resources/views/', __DIR__) => '!VanioUser',
+                sprintf('%s/../Resources/views/', __DIR__) => 'FOSUser',
                 sprintf('%s/../Resources/views', __DIR__) => 'HWIOAuth',
             ],
         ]);
