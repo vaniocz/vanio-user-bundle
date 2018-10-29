@@ -15,7 +15,9 @@
         }
 
         body {
-            font: 14px/1 "Open Sans", sans-serif;
+            background-color: white;
+            color: black;
+            font: 14px/1.4 "Open Sans", sans-serif;
             margin: 0;
         }
 
@@ -246,9 +248,9 @@
         }
 
         .message--failure {
-            background-color: #f8d7da;
-            border-color: #f5c6cb;
-            color: #721c24;
+            background-color: #F8D7DA;
+            border-color: #F5C6CB;
+            color: #721C24;
         }
 
         .social-registration__title {
@@ -284,13 +286,15 @@
                 {% if vanio_user.email_only %}
                     <label class="control-label" for="socialRegistrationEmail">E-mail</label>
 
-                    <div class="input-group"><label class="input-group-addon" for="socialRegistrationEmail"><i class="fa fa-envelope"></i></label>
+                    <div class="input-group">
+                        <label class="input-group-addon" for="socialRegistrationEmail"><i class="fa fa-envelope"></i></label>
                         <input id="socialRegistrationEmail" class="form-control" type="email" name="email" placeholder="E-mail" required oninvalid="this.setCustomValidity(this.getAttribute('data-validation-message'))" oninput="this.setCustomValidity('')" data-validation-message="Please enter your email.">
                     </div>
                 {% else %}
                     <label class="control-label" for="socialRegistrationUsername">Login</label>
 
-                    <div class="input-group"><label class="input-group-addon" for="socialRegistrationUsername"><i class="fa fa-user"></i></label>
+                    <div class="input-group">
+                        <label class="input-group-addon" for="socialRegistrationUsername"><i class="fa fa-user"></i></label>
                         <input id="socialRegistrationUsername" class="form-control" type="text" name="username" placeholder="Username" required oninvalid="this.setCustomValidity(this.getAttribute('data-validation-message'))" oninput="this.setCustomValidity('')" data-validation-message="Please enter your username.">
                     </div>
                 {% endif %}
@@ -299,7 +303,8 @@
             <div class="form-group">
                 <label class="control-label" for="socialRegistrationName">Name</label>
 
-                <div class="input-group"><label class="input-group-addon" for="socialRegistrationName"><i class="fa fa-user"></i></label>
+                <div class="input-group">
+                    <label class="input-group-addon" for="socialRegistrationName"><i class="fa fa-user"></i></label>
                     <input id="socialRegistrationName" class="form-control" type="text" name="name" placeholder="Name" required oninvalid="this.setCustomValidity(this.getAttribute('data-validation-message'))" oninput="this.setCustomValidity('')" data-validation-message="Please enter your name.">
                 </div>
             </div>
