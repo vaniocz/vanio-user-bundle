@@ -1,6 +1,7 @@
 <?php
 namespace Vanio\UserBundle\DependencyInjection;
 
+use FOS\UserBundle\Doctrine\UserManager;
 use FOS\UserBundle\Model\UserInterface;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
@@ -52,6 +53,10 @@ class VanioUserExtension extends Extension implements PrependExtensionInterface
                 ->getDefinition('vanio_user.listener.email_change_confirmation_listener')
                 ->setAbstract(false)
                 ->addTag('kernel.event_subscriber');
+        }
+
+        if ($config['db_driver'] === 'orm') {
+            $container->setAlias(UserManager::class, 'fos_user.user_manager.default');
         }
     }
 
