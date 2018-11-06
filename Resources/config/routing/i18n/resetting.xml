@@ -1,33 +1,33 @@
 <?xml version="1.0"?>
-<routes xmlns="http://besim.pl/schema/i18n_routing" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://besim.pl/schema/i18n_routing http://besim.pl/schema/i18n_routing/routing-1.0.xsd">
+<routes xmlns="http://symfony.com/schema/routing" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/routing http://symfony.com/schema/routing/routing-1.0.xsd">
     <route id="fos_user_resetting_request" path="/" methods="GET">
         <default key="_controller">fos_user.resetting.controller:requestAction</default>
     </route>
 
     <route id="fos_user_resetting_send_email" methods="POST">
-        <locale key="en">/send-email</locale>
-        <locale key="de">/email-senden</locale>
-        <locale key="cs">/odeslat-email</locale>
-        <locale key="sk">/odoslat-email</locale>
-        <locale key="ru">/poslat-email</locale>
+        <path locale="en">/send-email</path>
+        <path locale="de">/email-senden</path>
+        <path locale="cs">/odeslat-email</path>
+        <path locale="sk">/odoslat-email</path>
+        <path locale="ru">/poslat-email</path>
         <default key="_controller">fos_user.resetting.controller:sendEmailAction</default>
     </route>
 
     <route id="fos_user_resetting_check_email" path="/check-email" methods="GET">
-        <locale key="en">/check-email</locale>
-        <locale key="de">/email-uberprufen</locale>
-        <locale key="cs">/kontrola-emailu</locale>
-        <locale key="sk">/kontrola-emailu</locale>
-        <locale key="ru">/proverit-email</locale>
+        <path locale="en">/check-email</path>
+        <path locale="de">/email-uberprufen</path>
+        <path locale="cs">/kontrola-emailu</path>
+        <path locale="sk">/kontrola-emailu</path>
+        <path locale="ru">/proverit-email</path>
         <default key="_controller">fos_user.resetting.controller:checkEmailAction</default>
     </route>
 
     <route id="fos_user_resetting_reset" path="/reset/{token}" methods="GET POST">
-        <locale key="en">/reset/{token}</locale>
-        <locale key="de">/zurucksetzen/{token}</locale>
-        <locale key="cs">/resetovat/{token}</locale>
-        <locale key="sk">/resetovat/{token}</locale>
-        <locale key="ru">/sbros/{token}</locale>
+        <path locale="en">/reset/{token}</path>
+        <path locale="de">/zurucksetzen/{token}</path>
+        <path locale="cs">/resetovat/{token}</path>
+        <path locale="sk">/resetovat/{token}</path>
+        <path locale="ru">/sbros/{token}</path>
         <default key="_controller">fos_user.resetting.controller:resetAction</default>
     </route>
 </routes>

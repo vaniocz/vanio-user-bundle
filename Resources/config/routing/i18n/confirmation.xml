@@ -1,11 +1,11 @@
 <?xml version="1.0"?>
-<routes xmlns="http://besim.pl/schema/i18n_routing" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://besim.pl/schema/i18n_routing http://besim.pl/schema/i18n_routing/routing-1.0.xsd">
+<routes xmlns="http://symfony.com/schema/routing" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/routing http://symfony.com/schema/routing/routing-1.0.xsd">
     <route id="fos_user_send_confirmation">
-        <locale key="en">/registration/send-confirmation/{email}</locale>
-        <locale key="de">/anmeldung/bestatigung/{email}</locale>
-        <locale key="cs">/registrace/overeni/{email}</locale>
-        <locale key="sk">/registracia/overenie/{email}</locale>
-        <locale key="ru">/registratsiya/proverit/{email}</locale>
+        <path locale="en">/registration/send-confirmation/{email}</path>
+        <path locale="de">/anmeldung/bestatigung/{email}</path>
+        <path locale="cs">/registrace/overeni/{email}</path>
+        <path locale="sk">/registracia/overenie/{email}</path>
+        <path locale="ru">/registratsiya/proverit/{email}</path>
         <default key="_controller">fos_user.registration.controller:sendConfirmationAction</default>
     </route>
 </routes>

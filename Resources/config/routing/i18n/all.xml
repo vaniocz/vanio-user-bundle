@@ -1,47 +1,47 @@
 <?xml version="1.0"?>
-<routes xmlns="http://besim.pl/schema/i18n_routing" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://besim.pl/schema/i18n_routing http://besim.pl/schema/i18n_routing/routing-1.0.xsd">
-    <import resource="@VanioUserBundle/Resources/config/routing/i18n/security.xml" type="be_simple_i18n"/>
+<routes xmlns="http://symfony.com/schema/routing" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/routing http://symfony.com/schema/routing/routing-1.0.xsd">
+    <import resource="@VanioUserBundle/Resources/config/routing/i18n/security.xml"/>
 
-    <import resource="@VanioUserBundle/Resources/config/routing/i18n/registration.xml" type="be_simple_i18n">
-        <locale key="en">/registration</locale>
-        <locale key="de">/anmeldung</locale>
-        <locale key="cs">/registrace</locale>
-        <locale key="sk">/registracia</locale>
-        <locale key="ru">/registratsiya</locale>
+    <import resource="@VanioUserBundle/Resources/config/routing/i18n/registration.xml">
+        <prefix locale="en">/registration</prefix>
+        <prefix locale="de">/anmeldung</prefix>
+        <prefix locale="cs">/registrace</prefix>
+        <prefix locale="sk">/registracia</prefix>
+        <prefix locale="ru">/registratsiya</prefix>
     </import>
 
-    <import resource="@VanioUserBundle/Resources/config/routing/i18n/unregister.xml" type="be_simple_i18n"/>
-    <import resource="@VanioUserBundle/Resources/config/routing/i18n/confirmation.xml" type="be_simple_i18n"/>
+    <import resource="@VanioUserBundle/Resources/config/routing/i18n/unregister.xml"/>
+    <import resource="@VanioUserBundle/Resources/config/routing/i18n/confirmation.xml"/>
 
-    <import resource="@VanioUserBundle/Resources/config/routing/i18n/resetting.xml" type="be_simple_i18n">
-        <locale key="en">/forgotten-password</locale>
-        <locale key="de">/passwort-vergessen</locale>
-        <locale key="cs">/zapomenute-heslo</locale>
-        <locale key="sk">/zabudnute-heslo</locale>
-        <locale key="ru">/zabyl-parol</locale>
+    <import resource="@VanioUserBundle/Resources/config/routing/i18n/resetting.xml">
+        <prefix locale="en">/forgotten-password</prefix>
+        <prefix locale="de">/passwort-vergessen</prefix>
+        <prefix locale="cs">/zapomenute-heslo</prefix>
+        <prefix locale="sk">/zabudnute-heslo</prefix>
+        <prefix locale="ru">/zabyl-parol</prefix>
     </import>
 
-    <import resource="@VanioUserBundle/Resources/config/routing/i18n/profile.xml" type="be_simple_i18n">
-        <locale key="en">/my-profile</locale>
-        <locale key="de">/mein-profil</locale>
-        <locale key="cs">/muj-profil</locale>
-        <locale key="sk">/moj-profil</locale>
-        <locale key="ru">/moy-profayl</locale>
+    <import resource="@VanioUserBundle/Resources/config/routing/i18n/profile.xml">
+        <prefix locale="en">/my-profile</prefix>
+        <prefix locale="de">/mein-profil</prefix>
+        <prefix locale="cs">/muj-profil</prefix>
+        <prefix locale="sk">/moj-profil</prefix>
+        <prefix locale="ru">/moy-profayl</prefix>
     </import>
 
-    <import resource="@VanioUserBundle/Resources/config/routing/i18n/change_password.xml" type="be_simple_i18n">
-        <locale key="en">/my-profile</locale>
-        <locale key="de">/mein-profil</locale>
-        <locale key="cs">/muj-profil</locale>
-        <locale key="sk">/moj-profil</locale>
-        <locale key="ru">/moy-profayl</locale>
+    <import resource="@VanioUserBundle/Resources/config/routing/i18n/change_password.xml">
+        <prefix locale="en">/my-profile</prefix>
+        <prefix locale="de">/mein-profil</prefix>
+        <prefix locale="cs">/muj-profil</prefix>
+        <prefix locale="sk">/moj-profil</prefix>
+        <prefix locale="ru">/moy-profayl</prefix>
     </import>
 
-    <import resource="@VanioUserBundle/Resources/config/routing/i18n/change_email.xml" type="be_simple_i18n">
-        <locale key="en">/my-profile</locale>
-        <locale key="de">/mein-profil</locale>
-        <locale key="cs">/muj-profil</locale>
-        <locale key="sk">/moj-profil</locale>
-        <locale key="ru">/moy-profayl</locale>
+    <import resource="@VanioUserBundle/Resources/config/routing/i18n/change_email.xml">
+        <prefix locale="en">/my-profile</prefix>
+        <prefix locale="de">/mein-profil</prefix>
+        <prefix locale="cs">/muj-profil</prefix>
+        <prefix locale="sk">/moj-profil</prefix>
+        <prefix locale="ru">/moy-profayl</prefix>
     </import>
 </routes>

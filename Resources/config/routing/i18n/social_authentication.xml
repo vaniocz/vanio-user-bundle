@@ -1,55 +1,55 @@
 <?xml version="1.0"?>
-<routes xmlns="http://besim.pl/schema/i18n_routing" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://besim.pl/schema/i18n_routing http://besim.pl/schema/i18n_routing/routing-1.0.xsd">
+<routes xmlns="http://symfony.com/schema/routing" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/routing http://symfony.com/schema/routing/routing-1.0.xsd">
     <route id="hwi_oauth_service_redirect">
-        <locale key="en">/login/redirect/{service}</locale>
-        <locale key="de">/einloggen/umleiten/{service}</locale>
-        <locale key="cs">/prihlaseni/presmerovat/{service}</locale>
-        <locale key="sk">/prihlasenie/presmerovat/{service}</locale>
-        <locale key="ru">/avtorizovatsya/pereadresovyvat/{service}</locale>
+        <path locale="en">/login/redirect/{service}</path>
+        <path locale="de">/einloggen/umleiten/{service}</path>
+        <path locale="cs">/prihlaseni/presmerovat/{service}</path>
+        <path locale="sk">/prihlasenie/presmerovat/{service}</path>
+        <path locale="ru">/avtorizovatsya/pereadresovyvat/{service}</path>
         <default key="_controller">VanioUserBundle:Connect:redirectToService</default>
     </route>
 
     <route id="hwi_oauth_connect_service">
-        <locale key="en">/login/connect/{service}</locale>
-        <locale key="de">/einloggen/verbinden/{service}</locale>
-        <locale key="cs">/prihlaseni/propojit/{service}</locale>
-        <locale key="sk">/prihlasenie/prepojit/{service}</locale>
-        <locale key="ru">/avtorizovatsya/soyedinyat/{service}</locale>
+        <path locale="en">/login/connect/{service}</path>
+        <path locale="de">/einloggen/verbinden/{service}</path>
+        <path locale="cs">/prihlaseni/propojit/{service}</path>
+        <path locale="sk">/prihlasenie/prepojit/{service}</path>
+        <path locale="ru">/avtorizovatsya/soyedinyat/{service}</path>
         <default key="_controller">VanioUserBundle:Connect:connectService</default>
     </route>
 
     <route id="hwi_oauth_disconnect">
-        <locale key="en">/login/disconnect/{service}</locale>
-        <locale key="de">/einloggen/trennen/{service}</locale>
-        <locale key="cs">/prihlaseni/odpojit/{service}</locale>
-        <locale key="sk">/prihlasenie/odpojit/{service}</locale>
-        <locale key="ru">/avtorizovatsya/otklyuchat/{service}</locale>
+        <path locale="en">/login/disconnect/{service}</path>
+        <path locale="de">/einloggen/trennen/{service}</path>
+        <path locale="cs">/prihlaseni/odpojit/{service}</path>
+        <path locale="sk">/prihlasenie/odpojit/{service}</path>
+        <path locale="ru">/avtorizovatsya/otklyuchat/{service}</path>
         <default key="_controller">VanioUserBundle:Connect:disconnect</default>
     </route>
 
     <route id="hwi_oauth_connect_registration">
-        <locale key="en">/registration/{key}</locale>
-        <locale key="de">/anmeldung/{key}</locale>
-        <locale key="cs">/registrace/{key}</locale>
-        <locale key="sk">/registracia/{key}</locale>
-        <locale key="ru">/registratsiya/{key}</locale>
+        <path locale="en">/registration/{key}</path>
+        <path locale="de">/anmeldung/{key}</path>
+        <path locale="cs">/registrace/{key}</path>
+        <path locale="sk">/registracia/{key}</path>
+        <path locale="ru">/registratsiya/{key}</path>
         <default key="_controller">VanioUserBundle:Connect:registration</default>
     </route>
 
     <route id="hwi_oauth_connections">
-        <locale key="en">/my-profile/account-connections</locale>
-        <locale key="de">/mein-profil/verknupfte-konten</locale>
-        <locale key="cs">/muj-profil/propojeni-uctu</locale>
-        <locale key="sk">/moj-profil/prepojenie-uctu</locale>
-        <locale key="ru">/moy-profayl/soyedinyat-schet</locale>
+        <path locale="en">/my-profile/account-connections</path>
+        <path locale="de">/mein-profil/verknupfte-konten</path>
+        <path locale="cs">/muj-profil/propojeni-uctu</path>
+        <path locale="sk">/moj-profil/prepojenie-uctu</path>
+        <path locale="ru">/moy-profayl/soyedinyat-schet</path>
         <default key="_controller">VanioUserBundle:Connect:connections</default>
     </route>
 
     <import resource="." type="resource_owners">
-        <locale key="en">/login</locale>
-        <locale key="de">/einloggen</locale>
-        <locale key="cs">/prihlaseni</locale>
-        <locale key="sk">/prihlasenie</locale>
-        <locale key="ru">/avtorizovatsya</locale>
+        <prefix locale="en">/login</prefix>
+        <prefix locale="de">/einloggen</prefix>
+        <prefix locale="cs">/prihlaseni</prefix>
+        <prefix locale="sk">/prihlasenie</prefix>
+        <prefix locale="ru">/avtorizovatsya</prefix>
     </import>
 </routes>

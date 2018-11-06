@@ -1,11 +1,11 @@
 <?xml version="1.0"?>
-<routes xmlns="http://besim.pl/schema/i18n_routing" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://besim.pl/schema/i18n_routing http://besim.pl/schema/i18n_routing/routing-1.0.xsd">
+<routes xmlns="http://symfony.com/schema/routing" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/routing http://symfony.com/schema/routing/routing-1.0.xsd">
     <route id="vanio_user_unregister" methods="GET POST">
-        <locale key="en">/unregister</locale>
-        <locale key="de">/registrierung-stornieren</locale>
-        <locale key="cs">/smazat-ucet</locale>
-        <locale key="sk">/zmazat-ucet</locale>
-        <locale key="ru">/udalit-akkaunt</locale>
+        <path locale="en">/unregister</path>
+        <path locale="de">/registrierung-stornieren</path>
+        <path locale="cs">/smazat-ucet</path>
+        <path locale="sk">/zmazat-ucet</path>
+        <path locale="ru">/udalit-akkaunt</path>
         <default key="_controller">fos_user.registration.controller:unregisterAction</default>
     </route>
 </routes>
