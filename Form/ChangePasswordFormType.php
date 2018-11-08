@@ -19,20 +19,23 @@ class ChangePasswordFormType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
+        $builder
+            ->remove('current_password')
+            ->add('currentPassword', PasswordType::class, [
+                'mapped' => false,
+                'label' => 'form.current_password',
+                'translation_domain' => 'FOSUserBundle',
+                'constraints' => new UserPassword([
+                    'message' => 'fos_user.current_password.invalid',
+                    'groups' => is_array($options['validation_groups']) && $options['validation_groups']
+                        ? reset($options['validation_groups'])
+                        : null,
+                ]),
+            ]);
+
         if ($options['format'] !== 'html') {
             $builder
-                ->remove('current_password')
                 ->remove('plainPassword')
-                ->add('currentPassword', PasswordType::class, [
-                    'mapped' => false,
-                    'translation_domain' => 'FOSUserBundle',
-                    'constraints' => new UserPassword([
-                        'message' => 'fos_user.current_password.invalid',
-                        'groups' => is_array($options['validation_groups']) && $options['validation_groups']
-                            ? reset($options['validation_groups'])
-                            : null,
-                    ]),
-                ])
                 ->add('newPassword', PasswordType::class, [
                     'property_path' => 'plainPassword',
                     'translation_domain' => 'FOSUserBundle',
