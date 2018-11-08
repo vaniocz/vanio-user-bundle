@@ -5,11 +5,11 @@
     </route>
 
     <route id="fos_user_profile_edit" methods="GET POST">
+        <default key="_controller">fos_user.profile.controller:editAction</default>
         <path locale="en">/edit</path>
         <path locale="de">/bearbeiten</path>
         <path locale="cs">/editace</path>
         <path locale="sk">/editacia</path>
         <path locale="ru">/redaktirovat</path>
-        <default key="_controller">fos_user.profile.controller:editAction</default>
     </route>
 </routes>

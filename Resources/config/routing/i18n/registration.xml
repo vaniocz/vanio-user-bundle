@@ -5,29 +5,29 @@
     </route>
 
     <route id="fos_user_registration_check_email" methods="GET">
+        <default key="_controller">fos_user.registration.controller:checkEmailAction</default>
         <path locale="en">/check-email</path>
         <path locale="de">/email-uberprufen</path>
         <path locale="cs">/kontrola-emailu</path>
         <path locale="sk">/kontrola-emailu</path>
         <path locale="ru">/proverit-email</path>
-        <default key="_controller">fos_user.registration.controller:checkEmailAction</default>
     </route>
 
     <route id="fos_user_registration_confirm" methods="GET">
+        <default key="_controller">fos_user.registration.controller:confirmAction</default>
         <path locale="en">/confirm/{token}</path>
         <path locale="de">/bestatigen/{token}</path>
         <path locale="cs">/potvrdit/{token}</path>
         <path locale="sk">/potvrdit/{token}</path>
         <path locale="ru">/podtverdit/{token}</path>
-        <default key="_controller">fos_user.registration.controller:confirmAction</default>
     </route>
 
     <route id="fos_user_registration_confirmed" methods="GET">
+        <default key="_controller">fos_user.registration.controller:confirmedAction</default>
         <path locale="en">/confirmed</path>
         <path locale="de">/bestatigt</path>
         <path locale="cs">/potvrzeno</path>
         <path locale="sk">/potvrdene</path>
         <path locale="ru">/podtverdil</path>
-        <default key="_controller">fos_user.registration.controller:confirmedAction</default>
     </route>
 </routes>

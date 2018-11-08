@@ -1,29 +1,29 @@
 <?xml version="1.0"?>
 <routes xmlns="http://symfony.com/schema/routing" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/routing http://symfony.com/schema/routing/routing-1.0.xsd">
     <route id="fos_user_security_login" methods="GET POST">
+        <default key="_controller">fos_user.security.controller:loginAction</default>
         <path locale="en">/login</path>
         <path locale="de">/einloggen</path>
         <path locale="cs">/prihlaseni</path>
         <path locale="sk">/prihlasenie</path>
         <path locale="ru">/avtorizovatsya</path>
-        <default key="_controller">fos_user.security.controller:loginAction</default>
     </route>
 
     <route id="fos_user_security_check" methods="POST">
+        <default key="_controller">fos_user.security.controller:checkAction</default>
         <path locale="en">/login-check</path>
         <path locale="de">/login-uberprufung</path>
         <path locale="cs">/kontrola-prihlaseni</path>
         <path locale="sk">/kontrola-prihlasenie</path>
         <path locale="ru">/proverit-avtorizovatsya</path>
-        <default key="_controller">fos_user.security.controller:checkAction</default>
     </route>
 
     <route id="fos_user_security_logout" methods="GET POST">
+        <default key="_controller">fos_user.security.controller:logoutAction</default>
         <path locale="en">/logout</path>
         <path locale="de">/abstimmen</path>
         <path locale="cs">/odhlasit</path>
         <path locale="sk">/odhlasit-sa</path>
         <path locale="ru">/vyyti</path>
-        <default key="_controller">fos_user.security.controller:logoutAction</default>
     </route>
 </routes>

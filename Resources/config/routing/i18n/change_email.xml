@@ -1,11 +1,11 @@
 <?xml version="1.0"?>
 <routes xmlns="http://symfony.com/schema/routing" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/routing http://symfony.com/schema/routing/routing-1.0.xsd">
     <route id="vanio_user_change_email_confirm" methods="GET POST">
+        <default key="_controller">VanioUserBundle:ChangeEmail:confirm</default>
         <path locale="en">/confirm-change-email/{token}</path>
         <path locale="de">/bestatigen-email-anderung/{token}</path>
         <path locale="cs">/potvrdit-zmenu-emailu/{token}</path>
         <path locale="sk">/potvrdit-zmenu-emailu/{token}</path>
         <path locale="ru">/podtverdit-izmeneniye-elektronnoy-pochty/{token}</path>
-        <default key="_controller">VanioUserBundle:ChangeEmail:confirm</default>
     </route>
 </routes>

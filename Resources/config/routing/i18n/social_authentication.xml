@@ -1,48 +1,48 @@
 <?xml version="1.0"?>
 <routes xmlns="http://symfony.com/schema/routing" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/routing http://symfony.com/schema/routing/routing-1.0.xsd">
     <route id="hwi_oauth_service_redirect">
+        <default key="_controller">VanioUserBundle:Connect:redirectToService</default>
         <path locale="en">/login/redirect/{service}</path>
         <path locale="de">/einloggen/umleiten/{service}</path>
         <path locale="cs">/prihlaseni/presmerovat/{service}</path>
         <path locale="sk">/prihlasenie/presmerovat/{service}</path>
         <path locale="ru">/avtorizovatsya/pereadresovyvat/{service}</path>
-        <default key="_controller">VanioUserBundle:Connect:redirectToService</default>
     </route>
 
     <route id="hwi_oauth_connect_service">
+        <default key="_controller">VanioUserBundle:Connect:connectService</default>
         <path locale="en">/login/connect/{service}</path>
         <path locale="de">/einloggen/verbinden/{service}</path>
         <path locale="cs">/prihlaseni/propojit/{service}</path>
         <path locale="sk">/prihlasenie/prepojit/{service}</path>
         <path locale="ru">/avtorizovatsya/soyedinyat/{service}</path>
-        <default key="_controller">VanioUserBundle:Connect:connectService</default>
     </route>
 
     <route id="hwi_oauth_disconnect">
+        <default key="_controller">VanioUserBundle:Connect:disconnect</default>
         <path locale="en">/login/disconnect/{service}</path>
         <path locale="de">/einloggen/trennen/{service}</path>
         <path locale="cs">/prihlaseni/odpojit/{service}</path>
         <path locale="sk">/prihlasenie/odpojit/{service}</path>
         <path locale="ru">/avtorizovatsya/otklyuchat/{service}</path>
-        <default key="_controller">VanioUserBundle:Connect:disconnect</default>
     </route>
 
     <route id="hwi_oauth_connect_registration">
+        <default key="_controller">VanioUserBundle:Connect:registration</default>
         <path locale="en">/registration/{key}</path>
         <path locale="de">/anmeldung/{key}</path>
         <path locale="cs">/registrace/{key}</path>
         <path locale="sk">/registracia/{key}</path>
         <path locale="ru">/registratsiya/{key}</path>
-        <default key="_controller">VanioUserBundle:Connect:registration</default>
     </route>
 
     <route id="hwi_oauth_connections">
+        <default key="_controller">VanioUserBundle:Connect:connections</default>
         <path locale="en">/my-profile/account-connections</path>
         <path locale="de">/mein-profil/verknupfte-konten</path>
         <path locale="cs">/muj-profil/propojeni-uctu</path>
         <path locale="sk">/moj-profil/prepojenie-uctu</path>
         <path locale="ru">/moy-profayl/soyedinyat-schet</path>
-        <default key="_controller">VanioUserBundle:Connect:connections</default>
     </route>
 
     <import resource="." type="resource_owners">
