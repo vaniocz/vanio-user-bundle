@@ -79,19 +79,24 @@ class TargetPathResolver
             $targetPath = substr($targetPath, strlen($absoluteBaseUrl));
         }
 
+        $method = $this->router->getContext()->getMethod();
+
         try {
             if (Strings::startsWith($targetPath, '/')) {
                 $path = parse_url($targetPath, PHP_URL_PATH);
 
                 if ($path !== false) {
+                    $this->router->getContext()->setMethod('GET');
                     $this->router->match($path);
                 }
             } else {
                 $this->router->generate($targetPath);
             }
         } catch (ExceptionInterface $e) {
-            return null;
+            $targetPath = null;
         }
+
+        $this->router->getContext()->setMethod($method);
 
         return $targetPath;
     }
