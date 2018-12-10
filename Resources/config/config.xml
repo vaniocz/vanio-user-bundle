@@ -31,7 +31,7 @@
     <services>
         <defaults public="false"/>
 
-        <service id="hwi_oauth.registration.form.factory" class="%hwi_oauth.registration.form.factory.class%">
+        <service id="hwi_oauth.registration.form.factory" class="%hwi_oauth.registration.form.factory.class%" public="true">
             <argument type="service" id="form.factory"/>
             <argument>%vanio_user.social_registration_form.name%</argument>
             <argument>%vanio_user.social_registration_form.type%</argument>
