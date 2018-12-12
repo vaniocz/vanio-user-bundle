@@ -30,7 +30,7 @@ class RedirectOnRegistrationSuccess implements EventSubscriberInterface
             FOSUserEvents::REGISTRATION_SUCCESS => ['onRegistrationSuccess', PHP_INT_MIN],
             FOSUserEvents::REGISTRATION_CONFIRM => ['onRegistrationSuccess', PHP_INT_MIN],
             'hwi_oauth.registration.success' => 'onRegistrationSuccess',
-            'hwi_oauth.connect.confirmed' => 'onRegistrationSuccess',
+            'hwi_oauth.connect.confirmed' => ['onRegistrationSuccess', 100],
         ];
     }
 

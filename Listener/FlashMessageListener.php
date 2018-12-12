@@ -122,7 +122,7 @@ class FlashMessageListener implements EventSubscriberInterface
      */
     public function onRegistrationConfirmed(FilterUserResponseEvent $event): void
     {
-        if (!$event->getResponse()->isRedirection($this->urlGenerator->generate('fos_user_registration_confirmed'))) {
+        if (!$event->getResponse()->isRedirect($this->urlGenerator->generate('fos_user_registration_confirmed'))) {
             $this->addFlashMessage(FlashMessage::TYPE_SUCCESS, 'registration.flash.confirmed');
         }
     }
@@ -229,7 +229,7 @@ class FlashMessageListener implements EventSubscriberInterface
      */
     public function onConnectConfirmed(HwiOauthGetResponseUserEvent $event): void
     {
-        if ($event->getResponse()->isRedirection()) {
+        if ($event->getResponse() && $event->getResponse()->isRedirection()) {
             $this->addFlashMessage(
                 FlashMessage::TYPE_SUCCESS,
                 'connect.flash.account_connected',
