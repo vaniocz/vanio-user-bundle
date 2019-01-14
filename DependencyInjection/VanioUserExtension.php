@@ -85,10 +85,14 @@ class VanioUserExtension extends Extension implements PrependExtensionInterface
             'vanio_user.resource_owner_properties',
             $this->processExtensionConfig($container, 'hwi_oauth')['fosub']['properties'] ?? []
         );
+
+        $fosUserBundlePath = $container->getParameter('kernel.bundles_metadata')['FOSUserBundle']['path'];
+
         $container->prependExtensionConfig('twig', [
             'paths' => [
                 sprintf('%s/../Resources/views/', __DIR__) => 'FOSUser',
                 sprintf('%s/../Resources/views', __DIR__) => 'HWIOAuth',
+                sprintf('%s/Resources/views', $fosUserBundlePath) => '!VanioUser',
             ],
         ]);
     }
