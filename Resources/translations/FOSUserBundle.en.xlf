@@ -177,6 +177,9 @@
                     <![CDATA[
                         <h1>Hello</h1>
                         <p>To reset your password - please visit <a href="%confirmationUrl%">this link</a>.</p>
+                        <p></p>
+						<p>If link above does not work, please copy link manualy into your internet broswer:</p>
+                        <p>%confirmationUrl%</p>
                     ]]>
                 </target>
             </trans-unit>
