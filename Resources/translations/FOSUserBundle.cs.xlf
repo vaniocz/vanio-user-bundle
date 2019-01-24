@@ -177,7 +177,7 @@
                     <![CDATA[
                         <h1>Dobrý den</h1>
                         <p>Pro nastavení nového hesla klikněte na <a href="%confirmationUrl%">tento odkaz</a>.</p>
-                        <br />
+                        <br>
                         <p>Pokud vám odkaz výše nefunguje, zkopírujte si prosím následující adresu do svého prohlížeče:</p>
                         <p>%confirmationUrl%</p>
                     ]]>
