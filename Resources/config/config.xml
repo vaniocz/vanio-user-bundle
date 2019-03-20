@@ -135,6 +135,10 @@
             <call method="setTargetPathResolver">
                 <argument type="service" id="vanio_user.security.target_path_resolver"/>
             </call>
+
+            <call method="setPassTargetPath">
+                <argument>%vanio_user.pass_target_path.enabled%</argument>
+            </call>
         </service>
 
         <service id="vanio_user.templating.user_extension" class="%vanio_user.templating.user_extension.class%" >
