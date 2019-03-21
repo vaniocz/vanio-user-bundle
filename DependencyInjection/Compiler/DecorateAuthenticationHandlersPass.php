@@ -8,22 +8,20 @@ class DecorateAuthenticationHandlersPass implements CompilerPassInterface
 {
     public function process(ContainerBuilder $container): void
     {
-        if ($container->getParameter('vanio_user.pass_target_path.enabled')) {
-            $container
-                ->getDefinition('vanio_user.routing.router')
-                ->setAbstract(false)
-                ->setDecoratedService('router');
-            $this->decorateAuthenticationHandler(
-                $container,
-                'vanio_user.security.authentication_failure_handler',
-                'security.authentication.failure_handler'
-            );
-            $this->decorateAuthenticationHandler(
-                $container,
-                'vanio_user.security.authentication_success_handler',
-                'security.authentication.success_handler'
-            );
-        }
+        $container
+            ->getDefinition('vanio_user.routing.router')
+            ->setAbstract(false)
+            ->setDecoratedService('router');
+        $this->decorateAuthenticationHandler(
+            $container,
+            'vanio_user.security.authentication_failure_handler',
+            'security.authentication.failure_handler'
+        );
+        $this->decorateAuthenticationHandler(
+            $container,
+            'vanio_user.security.authentication_success_handler',
+            'security.authentication.success_handler'
+        );
 
         if (
             $container->getParameter('vanio_user.social_authentication')
