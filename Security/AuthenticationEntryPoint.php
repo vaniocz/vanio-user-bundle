@@ -72,7 +72,7 @@ class AuthenticationEntryPoint implements AuthenticationEntryPointInterface
         $session = $request->getSession();
 
         if ($session instanceof Session) {
-            $flashMessage = new FlashMessage('security.flash.login_needed', [], 'FOSUserBundle');
+            $flashMessage = FlashMessage::warning('security.flash.login_needed', [], 'FOSUserBundle');
             $session->getFlashBag()->add(FlashMessage::TYPE_WARNING, $flashMessage);
         }
     }
