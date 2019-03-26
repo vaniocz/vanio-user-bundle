@@ -46,7 +46,7 @@ class ConnectController extends BaseConnectController
                 : [];
 
             if ($request->getRequestFormat() === 'html') {
-                $this->addFlashMessage(FlashMessage::TYPE_DANGER, $message, $parameters);
+                yield FlashMessage::danger($message, $parameters);
             } else {
                 $data = [
                     'success' => false,
@@ -198,16 +198,6 @@ class ConnectController extends BaseConnectController
         }
 
         return true;
-    }
-
-    /**
-     * @param string $type
-     * @param string $message
-     * @param mixed[] $parameters
-     */
-    private function addFlashMessage(string $type, string $message, array $parameters = []): void
-    {
-        $this->addFlash($type, new FlashMessage($message, $parameters, 'HWIOAuthBundle'));
     }
 
     private function resolveRedirectUrl(Request $request): ?string

@@ -271,6 +271,6 @@ class FlashMessageListener implements EventSubscriberInterface
         array $parameters = [],
         string $domain = 'FOSUserBundle'
     ): void {
-        $this->session->getFlashBag()->add($type, new FlashMessage($message, $parameters, $domain));
+        $this->session->getFlashBag()->add($type, new FlashMessage($type, $message, $parameters, $domain));
     }
 }

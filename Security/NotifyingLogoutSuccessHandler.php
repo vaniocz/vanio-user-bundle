@@ -33,7 +33,7 @@ class NotifyingLogoutSuccessHandler implements LogoutSuccessHandlerInterface
         $session = $request->getSession();
 
         if ($session instanceof Session) {
-            $flashMessage = new FlashMessage('security.flash.logged_out', [], 'FOSUserBundle');
+            $flashMessage = FlashMessage::success('security.flash.logged_out', [], 'FOSUserBundle');
             $session->getFlashBag()->add(FlashMessage::TYPE_SUCCESS, $flashMessage);
             $this->removeTargetPath($session, $this->providerKey);
         }
