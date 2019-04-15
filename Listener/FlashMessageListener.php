@@ -173,7 +173,7 @@ class FlashMessageListener implements EventSubscriberInterface
      */
     public function onChangeEmailConfirmationSent(): void
     {
-        $this->addFlashMessage(FlashMessage::TYPE_WARNING, 'change_email.flash.confirmation_required');
+        $this->addFlashMessage(FlashMessage::TYPE_WARNING, 'change_email.flash.confirmation_sent');
     }
 
     /**
