@@ -98,7 +98,7 @@ class ChangeEmailController extends Controller
 
     private function httpUtils(): HttpUtils
     {
-        return $this->get('security.http_utils');
+        return $this->get('vanio_user.security.http_utils');
     }
 
     private function validator(): ValidatorInterface
