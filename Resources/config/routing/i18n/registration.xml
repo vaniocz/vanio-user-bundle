@@ -11,6 +11,7 @@
         <path locale="cs">/kontrola-emailu</path>
         <path locale="sk">/kontrola-emailu</path>
         <path locale="ru">/proverit-email</path>
+        <path locale="pl">/kontrola-emaila</path>
     </route>
 
     <route id="fos_user_registration_confirm" methods="GET">
@@ -20,6 +21,7 @@
         <path locale="cs">/potvrdit/{token}</path>
         <path locale="sk">/potvrdit/{token}</path>
         <path locale="ru">/podtverdit/{token}</path>
+        <path locale="pl">/potwierdzic/{token}</path>
     </route>
 
     <route id="fos_user_registration_confirmed" methods="GET">
@@ -29,5 +31,6 @@
         <path locale="cs">/potvrzeno</path>
         <path locale="sk">/potvrdene</path>
         <path locale="ru">/podtverdil</path>
+        <path locale="pl">/potwierdzone</path>
     </route>
 </routes>

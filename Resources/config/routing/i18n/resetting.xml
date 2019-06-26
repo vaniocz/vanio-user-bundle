@@ -11,6 +11,7 @@
         <path locale="cs">/odeslat-email</path>
         <path locale="sk">/odoslat-email</path>
         <path locale="ru">/poslat-email</path>
+        <path locale="pl">/wyslac-email</path>
     </route>
 
     <route id="fos_user_resetting_check_email" methods="GET">
@@ -20,6 +21,7 @@
         <path locale="cs">/kontrola-emailu</path>
         <path locale="sk">/kontrola-emailu</path>
         <path locale="ru">/proverit-email</path>
+        <path locale="pl">/kontrola-emaila</path>
     </route>
 
     <route id="fos_user_resetting_reset" methods="GET POST">
@@ -29,5 +31,6 @@
         <path locale="cs">/resetovat/{token}</path>
         <path locale="sk">/resetovat/{token}</path>
         <path locale="ru">/sbros/{token}</path>
+        <path locale="pl">/resetowac/{token}</path>
     </route>
 </routes>

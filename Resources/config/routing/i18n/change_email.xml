@@ -7,5 +7,6 @@
         <path locale="cs">/potvrdit-zmenu-emailu/{token}</path>
         <path locale="sk">/potvrdit-zmenu-emailu/{token}</path>
         <path locale="ru">/podtverdit-izmeneniye-elektronnoy-pochty/{token}</path>
+        <path locale="pl">/potwierdzic-zmiane-emaila/{token}</path>
     </route>
 </routes>

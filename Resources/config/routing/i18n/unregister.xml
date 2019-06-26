@@ -7,5 +7,6 @@
         <path locale="cs">/smazat-ucet</path>
         <path locale="sk">/zmazat-ucet</path>
         <path locale="ru">/udalit-akkaunt</path>
+        <path locale="pl">/usunac-konto</path>
     </route>
 </routes>
