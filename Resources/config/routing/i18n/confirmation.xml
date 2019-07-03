@@ -7,5 +7,6 @@
         <path locale="cs">/registrace/overeni/{email}</path>
         <path locale="sk">/registracia/overenie/{email}</path>
         <path locale="ru">/registratsiya/proverit/{email}</path>
+        <path locale="pl">/rejestracja/kontrola/{email}</path>
     </route>
 </routes>
