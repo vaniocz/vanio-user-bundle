@@ -12,5 +12,6 @@
         <path locale="sk">/editacia</path>
         <path locale="ru">/redaktirovat</path>
         <path locale="pl">/edycja</path>
+        <path locale="hu">/szerkesztes</path>
     </route>
 </routes>

@@ -8,5 +8,6 @@
         <path locale="sk">/zmazat-ucet</path>
         <path locale="ru">/udalit-akkaunt</path>
         <path locale="pl">/usunac-konto</path>
+        <path locale="hu">/szamla-torolve</path>
     </route>
 </routes>

@@ -8,6 +8,7 @@
         <path locale="sk">/prihlasenie</path>
         <path locale="ru">/avtorizovatsya</path>
         <path locale="pl">/logowanie</path>
+        <path locale="hu">/bejelentkezes</path>
     </route>
 
     <route id="fos_user_security_check" methods="POST">
@@ -18,6 +19,7 @@
         <path locale="sk">/prihlasenie</path>
         <path locale="ru">/avtorizovatsya</path>
         <path locale="pl">/logowanie</path>
+        <path locale="hu">/bejelentkezes</path>
     </route>
 
     <route id="fos_user_security_logout" methods="GET POST">
@@ -28,5 +30,6 @@
         <path locale="sk">/odhlasit-sa</path>
         <path locale="ru">/vyyti</path>
         <path locale="pl">/wyloguj</path>
+        <path locale="hu">/leiratkozas</path>
     </route>
 </routes>

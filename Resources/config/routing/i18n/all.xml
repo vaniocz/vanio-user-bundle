@@ -9,6 +9,7 @@
         <prefix locale="sk">/registracia</prefix>
         <prefix locale="ru">/registratsiya</prefix>
         <prefix locale="pl">/registracja</prefix>
+        <prefix locale="hu">/registracio</prefix>
     </import>
 
     <import resource="@VanioUserBundle/Resources/config/routing/i18n/unregister.xml"/>
@@ -21,6 +22,7 @@
         <prefix locale="sk">/zabudnute-heslo</prefix>
         <prefix locale="ru">/zabyl-parol</prefix>
         <prefix locale="pl">/zapomniane-haslo</prefix>
+        <prefix locale="hu">/elfelejtett-jelszo</prefix>
     </import>
 
     <import resource="@VanioUserBundle/Resources/config/routing/i18n/profile.xml">
@@ -30,6 +32,7 @@
         <prefix locale="sk">/moj-profil</prefix>
         <prefix locale="ru">/moy-profayl</prefix>
         <prefix locale="pl">/moj-profil</prefix>
+        <prefix locale="hu">/profilom</prefix>
     </import>
 
     <import resource="@VanioUserBundle/Resources/config/routing/i18n/change_password.xml">
@@ -39,6 +42,7 @@
         <prefix locale="sk">/moj-profil</prefix>
         <prefix locale="ru">/moy-profayl</prefix>
         <prefix locale="pl">/moj-profil</prefix>
+        <prefix locale="hu">/profilom</prefix>
     </import>
 
     <import resource="@VanioUserBundle/Resources/config/routing/i18n/change_email.xml">
@@ -48,5 +52,6 @@
         <prefix locale="sk">/moj-profil</prefix>
         <prefix locale="ru">/moy-profayl</prefix>
         <prefix locale="pl">/moj-profil</prefix>
+        <prefix locale="hu">/profilom</prefix>
     </import>
 </routes>
