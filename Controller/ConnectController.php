@@ -23,7 +23,6 @@ use Vanio\UserBundle\Security\OAuthUtils;
 use Vanio\UserBundle\VanioUserEvents;
 use Vanio\WebBundle\Request\RefererHelperTrait;
 use Vanio\WebBundle\Serializer\Serializer;
-use Vanio\WebBundle\Translation\FlashMessage;
 
 class ConnectController extends BaseConnectController
 {
@@ -40,17 +39,21 @@ class ConnectController extends BaseConnectController
     {
         if (!$this->routeExists('fos_user_registration_register')) {
             $error = $request->getSession()->get("_hwi_oauth.registration_error.{$key}");
-            $message = 'connect.social_account_not_connected';
             $parameters = $error instanceof AccountNotLinkedException
                 ? ['%service%' => ucfirst($error->getResourceOwnerName())]
                 : [];
+            $message = $this->translator()->trans(
+                'connect.social_account_not_connected',
+                $parameters,
+                'HWIOAuthBundle'
+            );
 
             if ($request->getRequestFormat() === 'html') {
-                yield FlashMessage::danger($message, $parameters);
+                $this->addFlash('danger', $message);
             } else {
                 $data = [
                     'success' => false,
-                    'errors' => [$this->translator()->trans($message, $parameters, 'HWIOAuthBundle')],
+                    'errors' => [$message],
                 ];
 
                 return new Response($this->serializer()->serialize($data, $request->getRequestFormat()), 401);

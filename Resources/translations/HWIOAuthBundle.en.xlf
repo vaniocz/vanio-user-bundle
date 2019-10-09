@@ -18,7 +18,7 @@
 
             <trans-unit id="70e650d3610ffe0d067cf4f6b07bb686" resname="owner.google">
                 <source>owner.google</source>
-                <target>Google+</target>
+                <target>Google</target>
             </trans-unit>
 
             <trans-unit id="be6a499c4ff28d402b2f7e4524df0577" resname="owner.twitter">
