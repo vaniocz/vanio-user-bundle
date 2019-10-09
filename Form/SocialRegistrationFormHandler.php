@@ -14,7 +14,11 @@ class SocialRegistrationFormHandler extends FOSUBRegistrationFormHandler
         $accessor = PropertyAccess::createPropertyAccessor();
 
         if ($accessor->isWritable($user, 'name')) {
-            $accessor->setValue($user, 'name', $userInformation->getRealName());
+            $name = $userInformation->getRealName();
+
+            if ($name !== null) {
+                $accessor->setValue($user, 'name', $name);
+            }
         }
 
         return $user;
