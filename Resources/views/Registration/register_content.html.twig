@@ -25,7 +25,7 @@
 {% block form %}
     {{ form_start(form, {attr: formAttributes ?? {class: 'fos_user_registration_register'}}) }}
         {% block socialAuthentication %}
-            {% if vanio_user.social_authentication %}
+            {% if socialAuthentication ?? vanio_user.social_authentication %}
                 <div class="social-authentication form-header">
                     <p>{{ 'registration.social_authentication'|trans }}</p>
                     {% include '@VanioUser/Security/social_authentication.html.twig' %}
