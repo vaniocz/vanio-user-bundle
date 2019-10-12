@@ -66,7 +66,7 @@ class ChangePasswordFormType extends AbstractType
         $user = $event->getData();
 
         if ($user && !$user->getPassword()) {
-            $event->getForm()->remove('current_password');
+            $event->getForm()->remove('currentPassword');
         }
     }
 }
