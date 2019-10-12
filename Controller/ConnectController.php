@@ -185,7 +185,7 @@ class ConnectController extends BaseConnectController
             $this->tokenStorage()->setToken($token);
         }
 
-        if ($this->fosubUserProvider()->disconnectService($user, $service)) {
+        if ($this->accountConnector()->disconnectService($user, $service)) {
             $this->eventDispatcher()->dispatch(VanioUserEvents::ACCOUNT_DISCONNECTED, $event);
         }
 
@@ -217,9 +217,9 @@ class ConnectController extends BaseConnectController
         return $this->get('translator');
     }
 
-    private function fosubUserProvider(): FosubUserProvider
+    private function accountConnector(): FosubUserProvider
     {
-        return $this->get('hwi_oauth.user.provider.fosub_bridge');
+        return $this->get('hwi_oauth.account.connector');
     }
 
     private function tokenStorage(): TokenStorageInterface
