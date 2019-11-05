@@ -7,6 +7,8 @@
         <path locale="cs">/prihlaseni/presmerovat/{service}</path>
         <path locale="sk">/prihlasenie/presmerovat/{service}</path>
         <path locale="ru">/avtorizovatsya/pereadresovyvat/{service}</path>
+        <path locale="pl">/login/przekierowanie/{service}</path>
+        <path locale="hu">/bejelentkezes/atiranyitani/{service}</path>
     </route>
 
     <route id="hwi_oauth_connect_service">
@@ -16,6 +18,8 @@
         <path locale="cs">/prihlaseni/propojit/{service}</path>
         <path locale="sk">/prihlasenie/prepojit/{service}</path>
         <path locale="ru">/avtorizovatsya/soyedinyat/{service}</path>
+        <path locale="pl">/login/link/{service}</path>
+        <path locale="hu">/bejelentkezes/bekapcsolni/{service}</path>
     </route>
 
     <route id="hwi_oauth_disconnect">
@@ -25,6 +29,8 @@
         <path locale="cs">/prihlaseni/odpojit/{service}</path>
         <path locale="sk">/prihlasenie/odpojit/{service}</path>
         <path locale="ru">/avtorizovatsya/otklyuchat/{service}</path>
+        <path locale="pl">/login/rozlacz/{service}</path>
+        <path locale="hu">/bejelentkezes/bezarni/{service}</path>
     </route>
 
     <route id="hwi_oauth_connect_registration">
@@ -34,6 +40,8 @@
         <path locale="cs">/registrace/{key}</path>
         <path locale="sk">/registracia/{key}</path>
         <path locale="ru">/registratsiya/{key}</path>
+        <path locale="pl">/registracja/{key}</path>
+        <path locale="hu">/registracio/{key}</path>
     </route>
 
     <route id="hwi_oauth_connections">
@@ -43,6 +51,8 @@
         <path locale="cs">/muj-profil/propojeni-uctu</path>
         <path locale="sk">/moj-profil/prepojenie-uctu</path>
         <path locale="ru">/moy-profayl/soyedinyat-schet</path>
+        <path locale="pl">/moj-profil/link-do-konta</path>
+        <path locale="hu">/profilom/a-fiok-bekapcsolasa</path>
     </route>
 
     <import resource="." type="resource_owners">
@@ -51,5 +61,7 @@
         <prefix locale="cs">/prihlaseni</prefix>
         <prefix locale="sk">/prihlasenie</prefix>
         <prefix locale="ru">/avtorizovatsya</prefix>
+        <prefix locale="pl">/logowanie</prefix>
+        <prefix locale="hu">/bejelentkezes</prefix>
     </import>
 </routes>
