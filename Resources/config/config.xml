@@ -57,7 +57,7 @@
             <argument>%vanio_user.pass_target_path%</argument>
         </service>
 
-        <service id="vanio_user.security.login_manager" class="%vanio_user.security.login_manager.class%" decorates="fos_user.security.login_manager">
+        <service id="vanio_user.security.login_manager" class="%vanio_user.security.login_manager.class%" decorates="fos_user.security.login_manager" public="true">
             <argument type="service" id="vanio_user.security.login_manager.inner"/>
             <argument type="service" id="security.token_storage"/>
             <argument type="service" id="http_kernel"/>

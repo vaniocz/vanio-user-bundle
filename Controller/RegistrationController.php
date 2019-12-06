@@ -108,6 +108,6 @@ class RegistrationController extends BaseRegistrationController
 
     private function loginManager(): LoginManager
     {
-        return $this->get('fos_user.security.login_manager');
+        return $this->get('vanio_user.security.login_manager');
     }
 }
