@@ -8,8 +8,8 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Event\GetResponseEvent;
 use Symfony\Component\HttpKernel\HttpKernelInterface;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
-use Symfony\Component\Security\Http\Firewall\LogoutListener;
 use Symfony\Component\Security\Http\FirewallMapInterface;
+use Vanio\UserBundle\Listener\LogoutListener;
 
 class LoginManager implements LoginManagerInterface
 {
@@ -75,7 +75,7 @@ class LoginManager implements LoginManagerInterface
                 ? HttpKernelInterface::SUB_REQUEST
                 : HttpKernelInterface::MASTER_REQUEST;
             $event = new GetResponseEvent($this->httpKernel, $request, $requestType);
-            $logoutListener->handle($event);
+            $logoutListener->handleWithoutCheck($event);
 
             return $event->getResponse();
         }
