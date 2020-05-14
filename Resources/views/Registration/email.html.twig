@@ -4,7 +4,7 @@
 
 {% block subject %}{{ 'registration.email.subject'|trans({'%username%': user.username}) }}{% endblock %}
 
-{% block content %}
+{% block body %}
     {% set apiConfirmationUrl = app.request.get('confirmationUrl') %}
 
     {% if apiConfirmationUrl and is_trusted_api_client_url(apiConfirmationUrl) %}

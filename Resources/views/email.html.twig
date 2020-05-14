@@ -15,5 +15,8 @@
 {% endblock %}
 
 {% block body_html %}
-    {% block content %}{% endblock %}
+    {% block content %}
+        {% block header %}{% endblock %}
+        {% block body %}{% endblock %}
+    {% endblock %}
 {% endblock %}
